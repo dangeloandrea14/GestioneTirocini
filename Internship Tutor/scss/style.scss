@@ -1,0 +1,121 @@
+// Menu Colours
+$text-color: #eee;
+$menu-bg: #333;
+$menu-hover: #444;
+$menu-border: #555;
+
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
+  background-color: $text-color;
+  background-image: url('http://i.cubeupload.com/NjsJx8.png');
+  margin: 0;
+}
+
+h1 {
+	font-size: 4em;
+	font-family: 'PT Sans Narrow', sans-serif;
+	line-height: 1.1;
+  text-align: center;
+  padding: 10px;
+}
+
+p {
+  font-size: 1.2em;
+  text-align: center;
+  padding: 10px;
+}
+
+nav {
+  //top: 0; // Fix the menu to the top
+  //position: fixed; // Fix the menu to the top
+  height: 40px;
+	width: 100%;
+  background-color: $menu-bg;
+  color: $text-color;
+
+  ul {
+    padding: 0;
+	  margin: 0;
+  }
+
+  li {
+    display: inline;
+    float: left;
+  }
+
+  a {
+  	display: inline-block;
+	  width: 100px;
+	  text-align: center;
+	  text-decoration: none;
+	  padding: 10px 0;
+    color: $text-color;
+    text-decoration:none;  
+  }
+
+  li:hover {
+    background-color: $menu-hover;
+  }
+
+  a#openup {
+	  display: none;
+  }
+} //nav
+
+@media screen and (max-width: 480px) {
+  h1 {
+	  font-size: 2.8em;
+  }
+
+  nav {
+		height: auto;
+		border-bottom: 0;
+	
+	  ul {
+		  display: none;
+		  height: auto;
+	  }	
+	
+	  li {
+		  width: 100%;
+		  float: left;
+		  position: relative;
+    }
+
+  	a {
+	  	text-align: left;
+	  	width: 100%;
+	  	text-indent: 25px;
+			background: $menu-bg;	 
+      border-bottom: 1px solid $menu-border;
+  	}  	
+	
+  	 a:hover {
+	  	background: $menu-hover;
+  	}
+
+	  a#openup:after {
+		  content:"|||";
+      transform:rotate(-90deg);
+      -ms-transform:rotate(-90deg); /* IE 9 */
+      -webkit-transform:rotate(-90deg); /* Safari and Chrome */
+		  width: 30px;
+		  height: 30px;
+		  display: inline-block;
+		  position: absolute;
+		  right: 5px;
+		  top: 20px;
+	  }
+  	  		
+	  a#openup {
+		  display: block;
+		  background-color: $menu-bg;
+		  width: 100%;
+		  position: relative;
+	  }
+  } //nav
+} // media
+
+.cf:before, .cf:after { content:""; display:table; }
+.cf:after { clear:both; }
+.cf { zoom:1; } /* For IE 6/7 (trigger hasLayout) */

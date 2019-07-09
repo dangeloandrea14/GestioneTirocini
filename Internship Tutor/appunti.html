@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<!-- definisce che il documento è in html 5-->
+<html lang="it">
+    <!-- definire l'attributo lang qui permette di scegliere un linguaggio di default 
+    che erediteranno tutti gli elementi che sono all'interno dell'elemento in cui è inserito
+    il tag, che in questo caso è l'elemento root-->
+<head>
+    <!-- in questo tag dobbiamo mettere tutte le informazioni riguardo i dati 
+    che sono presenti nella pagina web-->
+    <meta charset="UTF-8">
+    <!-- il charset  definisce quale codifica di caratteri andremo ad utilizzare 
+    all'interno della pagina web-->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- informazione riguardante l'area di visualizzazione della pagina(viewport)
+    questo attributo ci permette di rendere la visualizzazione della pagina web 
+    cross device--> 
+    <meta name="keywords" content="Intership, Tutor, Tirocinio, Studenti, Student">
+    <!-- definisce le keywords che possono essere utilizzate nella ricerca della pagina 
+    web nei motori di ricerca-->
+    <meta name="description" content="Servizio web per la gestione di tirocinii per studenti e aziende">
+    <!-- definisce una descrizione del contenuto della pagina-->
+    <meta name="author" content="Andrea D'angelo, Carlo Antonio Venditti, Zappacosta Francesco">
+    <!-- definisce l'autore/i della pagina web-->
+    <title>Intership Tutor - Home </title>
+    <!-- il title rappresenta il titolo che sarà presente sul tab del browser,
+    la stringa che apparirà in caso di ricerca, -->      
+    
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!--aggiungo il css di bootstrap nel progetto-->
+</head>
+<body>
+    <!-- in questo tag sarà presente il contenuto vero e proprio della pagina web-->
+    <header> 
+    <!-- parte superiore della pagina web -->    
+    <div class="navbar">
+        <!--l'attributo title serve per far visualizzare, con cursore fermo, una finestra con un contenuto,
+                 primo livello di intestazioni che possono essere presenti in un elemento di una pagina html-->
+        <a href="index.html" title="Home"> <h1>Internship Tutor</h1></a>
+                  <nav  role="navigation">
+        
+            <!-- definiamo un elemento per la navigazione all'interno delle pagine-->
+            <ul>
+                <li>
+                    <a href="./index.html">Home</a>
+                    <!-- l'elemento a serve per immettere dentro la pagina un collegamento ipertestuale 
+                    un "link" ad un'altra pagina web-->
+                </li>
+                    <li>
+                    <a href="#">Aziende</a>
+                    </li>
+                        <li>
+                            <a href="#">Offerte Tirocinio</a>
+                        </li>
+                                                        
+                        </ul>  
+                        <a href='#' id='openup'>MENU</a>
+          </nav>
+        
+    </div>
+    
+
+    
+    </header>
+     
+    
+    <section id="vetrina">
+        <div>
+            <!-- conteiner fluid è la classe bootstrap che permette al conteiner di essere al 
+            100% dello spessore della pagina-->
+        <img src="img/showcase image.jpg" alt="un individuo mentre studia">
+        <!-- usando il tag img è possibile inserire un immagine nella pagina html, specificando 
+        la uri dell'imagine e un testo alternativo in caso di non caricamento dell'immagine-->
+            <h2>Titolo vetrina pagina</h2>
+            <p>piccola discrezione della pagina web</p>
+        </div>    
+    </section>
+ 
+
+        
+
+
+    <section id="lista tirocinii">
+        <div>
+            <box>
+                <h2>Aziende</h2>
+                <p>in questo tirocinio ci saranno le seguenti cose...</p>
+                <a href="tirocini.html/risorsa1">Mostra dettagli</a>
+            </box>
+                <box>
+                    <h2>Tirocini</h2>
+                    <p>in questo tirocinio ci saranno le seguenti cose...</p>
+                    <a href="tirocini.html/risorsa1">Mostra dettagli</a>
+                </box>
+                    <box>
+                        <h2>Mostra tutti i tirocini...</h2>
+                        <p >Vai alla pagina tirocini</p>
+                        <a href="tirocini.html ">Mostra dettagli</a>
+                     </box>
+        </div>
+    </section>
+
+
+
+
+
+
+
+
+   <footer>
+       <p>Pagina di gestione di tirocini tra azienda e studente</p>
+   </footer> 
+    
+
+
+   <!-- utility e tag per inserire jquery e bootstrap-->
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+   <script src="script/bootstrap.min.js"></script>
+   
+</body>
+</html>
