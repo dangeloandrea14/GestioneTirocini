@@ -12,6 +12,10 @@ import com.univaq.tirocini.vo.IVA;
  * @author carlo
  */
 public interface Azienda {
+    
+    int getKey();
+    
+    void setKey(int key);
        
     public String getNome();
 
