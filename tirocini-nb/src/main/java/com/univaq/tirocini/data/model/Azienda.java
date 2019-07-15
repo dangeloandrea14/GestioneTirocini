@@ -56,6 +56,14 @@ public interface Azienda {
     public int getVoto();
 
     public void setVoto(int voto);
+    
+    public String getPassword();
+    
+    public void setPassword(String pass);
+    
+    public String getPath();
+    
+    public void setPath(String path);
 
     public boolean isConvenzionata();
 

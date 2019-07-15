@@ -24,6 +24,8 @@ public class AziendaImpl implements Azienda {
     String emailResponsabile;
     String nomeCognomeLegale;
     int voto;
+    String password;
+    String pathDocumento;
     boolean Convenzionata;
     
     @Override
@@ -141,6 +143,26 @@ public class AziendaImpl implements Azienda {
         return Convenzionata;
     }
 
+    @Override
+    public String getPassword() {
+        return password;
+    }
+    
+    @Override
+    public void setPassword(String pass){
+        this.password=pass;
+    }
+    
+    @Override
+    public String getPath(){
+        return this.pathDocumento;
+    }
+    
+    @Override
+    public void setPath(String path) {
+        this.pathDocumento = path;
+    }
+    
     @Override
     public void setConvenzionata(boolean Convenzionata) {
         this.Convenzionata = Convenzionata;

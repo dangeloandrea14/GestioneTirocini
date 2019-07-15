@@ -12,6 +12,10 @@ package com.univaq.tirocini.vo;
 public class IVA {
     String numero = null;
 
+    public IVA(String numero){
+        this.numero = numero;
+    }
+    
     public String get() {
         return numero;
     }
