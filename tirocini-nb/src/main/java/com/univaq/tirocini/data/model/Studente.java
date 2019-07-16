@@ -5,6 +5,8 @@
  */
 package com.univaq.tirocini.data.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Andrea
@@ -23,9 +25,9 @@ public interface Studente {
    
    void setCognome(String cognome);
    
-   String getDataNascita();
+   Date getDataNascita();
    
-   void setDataNascita(String data);
+   void setDataNascita(Date data);
    
    String getLuogoNascita();
    

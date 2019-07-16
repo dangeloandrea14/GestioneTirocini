@@ -1,6 +1,7 @@
 package com.univaq.tirocini.data.impl;
 
 import com.univaq.tirocini.data.model.Studente;
+import java.sql.Date;
 
 /**
  *
@@ -11,7 +12,7 @@ public class StudenteImpl implements Studente {
     int key;
     String nome;
     String cognome;
-    String dataDiNascita;
+    Date dataDiNascita;
     String luogoDiNascita;
     String CF;
     Boolean handicap;
@@ -57,12 +58,12 @@ public class StudenteImpl implements Studente {
    }
    
    @Override
-   public String getDataNascita(){
+   public Date getDataNascita(){
        return this.dataDiNascita;
    }
    
    @Override
-   public void setDataNascita(String data){
+   public void setDataNascita(Date data){
        this.dataDiNascita = data;
    }
    

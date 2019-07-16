@@ -10,6 +10,15 @@ package com.univaq.tirocini.data.model;
  * @author carlo
  */
 public interface Offerta {
+    
+    public int getKey();
+    
+    public void setKey(int key);
+    
+    public Azienda getAzienda();
+    
+    public void setAzienda(Azienda azienda);
+    
     public String getLuogo();
 
     public void setLuogo(String luogo);

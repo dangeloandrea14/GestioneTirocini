@@ -3,6 +3,7 @@ package com.univaq.tirocini.data.proxy;
 
 import com.univaq.tirocini.data.impl.StudenteImpl;
 import com.univaq.tirocini.framework.data.DataLayer;
+import java.sql.Date;
 
 /**
  *
@@ -39,7 +40,7 @@ public class StudenteProxy extends StudenteImpl {
       }
     
       @Override
-      public void setDataNascita(String data){
+      public void setDataNascita(Date data){
           super.setDataNascita(data);
           this.dirty = true;
       }

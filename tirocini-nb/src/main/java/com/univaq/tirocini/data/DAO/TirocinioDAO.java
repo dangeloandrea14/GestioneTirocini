@@ -30,6 +30,6 @@ public interface TirocinioDAO {
     
     List<Tirocinio> getTirocini() throws DataException;
     
-    void storeTirocinio() throws DataException;
+    void storeTirocinio(Tirocinio tirocinio) throws DataException;
     
 }

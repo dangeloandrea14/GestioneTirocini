@@ -6,6 +6,7 @@
 package com.univaq.tirocini.data.proxy;
 
 import com.univaq.tirocini.data.impl.OffertaImpl;
+import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataLayer;
 
 /**
@@ -22,6 +23,18 @@ public class OffertaProxy extends OffertaImpl {
         
         this.dataLayer=d;
         this.dirty=true;
+    }
+    
+    @Override
+    public void setKey(int key){
+        super.setKey(key);
+        this.dirty = true;
+    }
+    
+    @Override
+    public void setAzienda(Azienda azienda){
+        super.setAzienda(azienda);
+        this.dirty = true;
     }
     
     

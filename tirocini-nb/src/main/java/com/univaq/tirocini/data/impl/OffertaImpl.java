@@ -5,6 +5,7 @@
  */
 package com.univaq.tirocini.data.impl;
 
+import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Offerta;
 
 /**
@@ -12,6 +13,8 @@ import com.univaq.tirocini.data.model.Offerta;
  * @author carlo
  */
 public class OffertaImpl implements Offerta {
+    int key;
+    Azienda azienda;
     String luogo;
     String orari;
     String durata;
@@ -20,6 +23,26 @@ public class OffertaImpl implements Offerta {
     String rimborsoSpese;
     boolean attiva;
 
+    @Override
+    public int getKey(){
+        return key;
+    }
+    
+    @Override
+    public void setKey(int key){
+        this.key=key;
+    }
+    
+    @Override
+    public Azienda getAzienda(){
+        return azienda;
+    }
+    
+    @Override
+    public void setAzienda(Azienda azienda){
+        this.azienda = azienda;
+    }
+    
     @Override
     public String getLuogo() {
         return luogo;

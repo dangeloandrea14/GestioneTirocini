@@ -5,6 +5,8 @@
  */
 package com.univaq.tirocini.data.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author Andrea
@@ -23,13 +25,13 @@ public interface Tirocinio {
     
     void setStudente(Studente studente);
     
-    String getInizio();
+    Date getInizio();
     
-    void setInizio(String inizio);
+    void setInizio(Date inizio);
     
-    String getFine();
+    Date getFine();
     
-    void setFine(String fine);
+    void setFine(Date fine);
     
     String getSettoreInserimento();
     

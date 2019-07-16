@@ -1,13 +1,9 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.univaq.tirocini.data.impl;
 
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Tirocinio;
+import java.sql.Date;
 
 /**
  *
@@ -21,9 +17,9 @@ public class TirocinioImpl implements Tirocinio {
     
     Studente studente;
     
-    String inizio;
+    Date inizio;
     
-    String fine;
+    Date fine;
     
     String settoreInserimento;
     
@@ -70,22 +66,22 @@ public class TirocinioImpl implements Tirocinio {
     }
     
     @Override
-    public String getInizio(){
+    public Date getInizio(){
         return inizio;
     }
     
     @Override
-    public void setInizio(String inizio){
+    public void setInizio(Date inizio){
         this.inizio=inizio;
     }
     
     @Override
-    public String getFine(){
+    public Date getFine(){
         return fine;
     }
     
     @Override
-    public void setFine(String fine){
+    public void setFine(Date fine){
         this.fine=fine;
     }
     
