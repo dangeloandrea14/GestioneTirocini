@@ -5,9 +5,13 @@
  */
 package com.univaq.tirocini.data.proxy;
 
+import com.univaq.tirocini.data.DAO.AziendaDAO;
 import com.univaq.tirocini.data.impl.OffertaImpl;
 import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.data.DataLayer;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,12 +19,14 @@ import com.univaq.tirocini.framework.data.DataLayer;
  */
 public class OffertaProxy extends OffertaImpl {
     
+    int azienda_key = 0;
     protected boolean dirty;
     protected DataLayer dataLayer;
     
     public OffertaProxy(DataLayer d){
         super();
         
+        this.azienda_key = 0;
         this.dataLayer=d;
         this.dirty=true;
     }
@@ -29,6 +35,26 @@ public class OffertaProxy extends OffertaImpl {
     public void setKey(int key){
         super.setKey(key);
         this.dirty = true;
+    }
+    
+    
+    @Override
+    public Azienda getAzienda() {
+        //notare come l'autore in relazione venga caricato solo su richiesta
+        
+        if (super.getAzienda() == null && azienda_key > 0) {
+            try {
+                super.setAzienda(((AziendaDAO) dataLayer.getDAO(Azienda.class)).getAzienda(azienda_key));
+            } catch (DataException ex) {
+                Logger.getLogger(TirocinioProxy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        //attenzione: l'autore caricato viene lagato all'oggetto in modo da non 
+        //dover venir ricaricato alle richieste successive, tuttavia, questo
+        //puo' rende i dati potenzialmente disallineati: se l'autore viene modificato
+        //nel DB, qui rimarrà la sua "vecchia" versione
+       
+        return super.getAzienda();
     }
     
     @Override
@@ -91,4 +117,9 @@ public class OffertaProxy extends OffertaImpl {
         return dirty;
     }
 
+     public void setAziendakey(int azienda_key) {
+        this.azienda_key = azienda_key;
+        //resettiamo la cache dell'autore
+        super.setAzienda(null);
+    }
 }

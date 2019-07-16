@@ -83,6 +83,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
         OffertaProxy a = createOfferta();
             try {
                 a.setKey(rs.getInt("ID"));
+                a.setAziendakey(rs.getInt("IDAzienda"));
                 a.setLuogo(rs.getString("Luogo"));
                 a.setOrari(rs.getString("Orari"));
                 a.setDurata(rs.getString("Durata"));
@@ -181,7 +182,6 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
                 
             }
             else { //insert
- iOfferta = connection.prepareStatement("INSERT INTO offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese) VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
                 if(offerta.getAzienda() != null)
                 iOfferta.setInt(1, offerta.getAzienda().getKey());

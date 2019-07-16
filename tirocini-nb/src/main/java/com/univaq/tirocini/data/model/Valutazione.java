@@ -15,6 +15,10 @@ public interface Valutazione {
     
     void setKey(int key);
     
+    int getStelle();
+    
+    void setStelle(int stelle);
+    
     String getCommento();
     
     void setCommento(String comment);

@@ -8,6 +8,7 @@ package com.univaq.tirocini.data.DAO;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Valutazione;
+import com.univaq.tirocini.framework.data.DataException;
 import java.sql.ResultSet;
 import java.util.List;
 
@@ -19,16 +20,16 @@ public interface ValutazioneDAO {
     
     Valutazione createValutazione();
     
-    Valutazione createValutazione(ResultSet rs);
+    Valutazione createValutazione(ResultSet rs) throws DataException;
     
-    Valutazione getValutazione(int valutazione_key);
+    Valutazione getValutazione(int valutazione_key) throws DataException;
     
-    List<Valutazione> getValutazioni(Studente studente);
+    List<Valutazione> getValutazioni(Studente studente) throws DataException;
     
-    List<Valutazione> getValutazioni(Azienda azienda);
+    List<Valutazione> getValutazioni(Azienda azienda) throws DataException;
     
-    List<Valutazione> getValutazioni();
+    List<Valutazione> getValutazioni() throws DataException;
     
-    void storeValutazione(Valutazione val);
+    void storeValutazione(Valutazione val) throws DataException;
     
 }

@@ -162,7 +162,6 @@ public class TirocinioProxy extends TirocinioImpl {
      public void setAziendakey(int azienda_key) {
         this.azienda_key = azienda_key;
         //resettiamo la cache dell'autore
-        //reset author cache
         super.setAzienda(null);
     }
 

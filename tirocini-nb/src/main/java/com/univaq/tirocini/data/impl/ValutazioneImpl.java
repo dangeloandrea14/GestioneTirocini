@@ -16,6 +16,7 @@ import com.univaq.tirocini.data.model.Valutazione;
 public class ValutazioneImpl implements Valutazione {
     
     int key;
+    int stelle;
     String commento;
     Studente studente;
     Azienda azienda;
@@ -28,6 +29,16 @@ public class ValutazioneImpl implements Valutazione {
     @Override
     public void setKey(int key){
         this.key = key;
+    }
+    
+    @Override
+    public int getStelle(){
+        return this.stelle;
+    }
+    
+    @Override
+    public void setStelle(int stelle){
+        this.stelle = stelle;
     }
     
     @Override
