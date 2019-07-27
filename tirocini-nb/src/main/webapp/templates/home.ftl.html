@@ -1,0 +1,58 @@
+<div id="body" class="col-md-9 col-sm-12">
+    <h1 class="text-dark" id="tirocini">Tirocini disponibili</h1>
+    <hr>
+    <#list tirocini as tirocinio>
+    <div class="col-md col-sm-12 ">
+        <div class="card text-white  mb-3 bg-primary">
+            <div class="card-header bg-altro">
+                <h2 class="card-title">Tirocinio</h2>
+            </div>
+            <div class="card-body">
+                <h3 class="card-title">${tirocinio.azienda}</h3>
+                <p class="card-text">${tirocinio.azienda.descrizione}</p>
+                <hr>
+                <h3 class="card-title">Descrizione</h3>
+                <p class="cardtext">${tirocinio.descrizione}</p>
+                <a class="text-light cardtext text-right" href="tirocinio">Mostra dettagli</a>
+            </div>
+
+        </div>
+    </div>
+    </#list>
+
+    <hr>
+
+    <div class="row ">
+        <div>
+            <h1 class="text-dark" id="aziende">Lista Aziende</h1>
+            <hr>
+            <div>
+                <h1>azienda1</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates dolorem sapiente omnis eaque
+                    molestiae maiores placeat officiis temporibus numquam pariatur reprehenderit esse rerum reiciendis
+                    soluta, doloremque quos autem eos. Inventore!</p>
+            </div>
+            <div>
+                <h1>azienda1</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates dolorem sapiente omnis eaque
+                    molestiae maiores placeat officiis temporibus numquam pariatur reprehenderit esse rerum reiciendis
+                    soluta, doloremque quos autem eos. Inventore!</p>
+            </div>
+            <div>
+                <h1>azienda1</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates dolorem sapiente omnis eaque
+                    molestiae maiores placeat officiis temporibus numquam pariatur reprehenderit esse rerum reiciendis
+                    soluta, doloremque quos autem eos. Inventore!</p>
+            </div>
+            <div>
+                <h1>azienda1</h1>
+                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptates dolorem sapiente omnis eaque
+                    molestiae maiores placeat officiis temporibus numquam pariatur reprehenderit esse rerum reiciendis
+                    soluta, doloremque quos autem eos. Inventore!</p>
+            </div>
+
+        </div>
+    </div>
+
+
+</div><!-- col md 9 finish-->

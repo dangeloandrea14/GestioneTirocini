@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+
+<html lang="it">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="keywords" content="Intership, Tutor, Tirocinio, Studenti, Student">
+        <meta name="description" content="Servizio web per la gestione di tirocinii per studenti e aziende">
+        <meta name="author" content="Andrea D'angelo, Carlo Antonio Venditti, Zappacosta Francesco">
+        <title>Intership Tutor - Home </title>
+
+
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+              integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+                integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+        </script>
+        <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+          integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
+        </script>
+       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+          integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+        </script>-->
+        <link rel="stylesheet" href="style/style.css">
+
+
+    </head>
+
+    <body>
+
+        <#include "header.ftl.html">
+
+        <!--
+          <div class="container-fluid pl-0 pr-0">
+           <section id="showcase">
+             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos hic eaque modi pariatur ad. Deserunt id nihil, iste ipsum totam corrupti velit sapiente explicabo, fugit ipsam nobis non quidem repellat.</p>
+           </section> 
+          </div>
+        -->
+
+
+        <div id="navContainer" class="container-fluid">
+            <div class="row">
+                <div class="col-md-3 pull-right border-right">
+
+                    <ul class="nav nav-pills flex-column-reverse d-none  d-md-block ">
+                        <li class="nav-item ">
+                            <a class="nav-link active" href="#tirocini">Homepage</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="#aziende">Aziende convenzionate</a>
+                        </li>
+                        <li class="nav-item ">
+                            <a class="nav-link " href="">Offerte Tirocinio</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <#include content_tpl>
+
+            </div>
+        </div>
+
+        <#include "footer.ftl.html">
+
+    </body>
+
+</html>
