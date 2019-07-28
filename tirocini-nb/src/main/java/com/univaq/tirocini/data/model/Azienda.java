@@ -20,6 +20,10 @@ public interface Azienda {
     public String getNome();
 
     public void setNome(String nome);
+    
+    public String getDescrizione();
+    
+    public void setDescrizione(String descrizione);
 
     public String getSede();
 

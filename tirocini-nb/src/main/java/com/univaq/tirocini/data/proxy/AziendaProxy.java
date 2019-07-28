@@ -38,6 +38,12 @@ public class AziendaProxy extends AziendaImpl {
     }
     
     @Override
+    public void setDescrizione(String descrizione){
+        super.setDescrizione(descrizione);
+        this.dirty = true;
+    }
+    
+    @Override
     public void setSede(String cognome){
         super.setSede(cognome);
         this.dirty = true;

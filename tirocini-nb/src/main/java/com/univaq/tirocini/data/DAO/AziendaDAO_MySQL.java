@@ -44,8 +44,8 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
             
             //Precompiliamo le altre query
-            iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Voto,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uAzienda = connection.prepareStatement("UPDATE Azienda SET Nome=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Voto=?,Password=?,PathDocumento=?,Convenzionata=? WHERE ID=?");
+            iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Voto,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uAzienda = connection.prepareStatement("UPDATE Azienda SET Nome=?,Descrizione=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Voto=?,Password=?,PathDocumento=?,Convenzionata=? WHERE ID=?");
             dAzienda = connection.prepareStatement("DELETE FROM Azienda WHERE ID=?");
       
         } catch (SQLException ex) {
@@ -82,14 +82,15 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
         AziendaProxy a = createAzienda();
         try {
             a.setKey(rs.getInt("ID"));
-            a.setNome(rs.getString("nome"));
+            a.setNome(rs.getString("Nome"));
+            a.setDescrizione(rs.getString("Descrizione"));
             a.setSede(rs.getString("sede"));
             a.setIva(new IVA(rs.getString("IVA")));
             a.setForoCompetenza(rs.getString("ForoCompetenza"));
             a.setNomeResponsabile(rs.getString("NomeResponsabile"));
             a.setCognomeResponsabile(rs.getString("CognomeResponsabile"));
             a.setTelefonoResponsabile(rs.getString("TelefonoResponsabile"));
-            a.setEmailResponsabile(rs.getString("EmailResponsabile"));
+            a.setEmailResponsabile(rs.getString("emailResponsabile"));
             a.setNomeCognomeLegale(rs.getString("NomeCognomeLegale"));
             a.setVoto(rs.getInt("Voto"));
             a.setPassword(rs.getString("Password"));
@@ -147,44 +148,48 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                 //Altrimenti aggiorniamo
                 uAzienda.setString(1, azienda.getNome());
                 
+                uAzienda.setString(2, azienda.getDescrizione());
+                
                 if(azienda.getSede() != null)
-                uAzienda.setString(2, azienda.getSede());
+                uAzienda.setString(3, azienda.getSede());
                 
-                uAzienda.setString(3, azienda.getIva().get());
+                uAzienda.setString(4, azienda.getIva().get());
               
-                uAzienda.setString(4, azienda.getForoCompetenza());
+                uAzienda.setString(5, azienda.getForoCompetenza());
                 
-                uAzienda.setString(5, azienda.getNomeResponsabile());
+                uAzienda.setString(6, azienda.getNomeResponsabile());
                 
-                uAzienda.setString(6, azienda.getCognomeResponsabile());
+                uAzienda.setString(7, azienda.getCognomeResponsabile());
                 
-                uAzienda.setString(7, azienda.getTelefonoResponsabile());
+                uAzienda.setString(8, azienda.getTelefonoResponsabile());
 
-                uAzienda.setString(8, azienda.getEmailResponsabile());
+                uAzienda.setString(9, azienda.getEmailResponsabile());
             
-                uAzienda.setString(9, azienda.getNomeCognomeLegale());  
+                uAzienda.setString(10, azienda.getNomeCognomeLegale());  
                  
                 if (azienda.getVoto() != 0)
-                 uAzienda.setInt(10, azienda.getVoto()); 
+                 uAzienda.setInt(11, azienda.getVoto()); 
                 else {
-                    uAzienda.setNull(3, java.sql.Types.INTEGER);
+                    uAzienda.setNull(11, java.sql.Types.INTEGER);
                 }
                
-                uAzienda.setString(11, azienda.getPassword());
+                uAzienda.setString(12, azienda.getPassword());
                 
-                uAzienda.setString(12, azienda.getPath());
+                uAzienda.setString(13, azienda.getPath());
                 
                 if(azienda.isConvenzionata() != false)
-                    uAzienda.setBoolean(13, azienda.isConvenzionata());
+                    uAzienda.setBoolean(14, azienda.isConvenzionata());
                    
-                uAzienda.setInt(14, azienda.getKey());
+                uAzienda.setInt(15, azienda.getKey());
                 
                 uAzienda.executeUpdate();
                 
                 
             } else { //facciamo la insert.
                 
-                iAzienda.setString(2, azienda.getNome());
+                iAzienda.setString(1, azienda.getNome());
+                
+                iAzienda.setString(2, azienda.getDescrizione());
                 
                 if(azienda.getSede() != null)
                 iAzienda.setString(3, azienda.getSede());

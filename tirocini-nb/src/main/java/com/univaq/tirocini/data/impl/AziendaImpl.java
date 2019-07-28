@@ -15,6 +15,7 @@ import com.univaq.tirocini.vo.IVA;
 public class AziendaImpl implements Azienda {
     int key;
     String nome;
+    String descrizione;
     String sede;
     IVA iva;
     String foroCompetenza;
@@ -46,6 +47,14 @@ public class AziendaImpl implements Azienda {
     @Override
     public void setNome(String nome) {
         this.nome = nome;
+    }
+    
+    public String getDescrizione() {
+        return descrizione;
+    }
+    
+    public void setDescrizione(String descrizione){
+        this.descrizione = descrizione;
     }
 
     @Override
