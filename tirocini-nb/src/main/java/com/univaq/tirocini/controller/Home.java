@@ -5,6 +5,7 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -31,15 +32,15 @@ public class Home extends TirociniBaseController {
     }
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
-        //try {
+        try {
             TemplateResult res = new TemplateResult(getServletContext());
             request.setAttribute("page_title", "Home");
-            //request.setAttribute("tirocini", ((NewspaperDataLayer)request.getAttribute("datalayer")).getIssueDAO().getIssues());
+            request.setAttribute("offerte", ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferte());
             res.activate("home.ftl.html", request, response);
-        /*} catch (DataException ex) {
+        } catch (DataException ex) {
             request.setAttribute("message", "Data access exception: " + ex.getMessage());
             action_error(request, response);
-        }*/
+        }
     }
 
     @Override
