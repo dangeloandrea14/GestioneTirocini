@@ -34,15 +34,15 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
       try{
           super.init();
       
-        sOffertaByID = connection.prepareStatement("SELECT * FROM offerta WHERE ID=?");
-        sOfferteByAzienda = connection.prepareStatement("SELECT ID AS offertaID FROM offerta WHERE IDAzienda=?");
-        sOfferte = connection.prepareStatement("SELECT ID AS offertaID FROM offerta");
+        sOffertaByID = connection.prepareStatement("SELECT * FROM Offerta WHERE ID=?");
+        sOfferteByAzienda = connection.prepareStatement("SELECT ID AS OffertaID FROM Offerta WHERE IDAzienda=?");
+        sOfferte = connection.prepareStatement("SELECT ID AS OffertaID FROM Offerta");
        
         //Ora precompiliamo insert, update, delete
         
-        iOfferta = connection.prepareStatement("INSERT INTO offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese) VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-        uOfferta = connection.prepareStatement("UPDATE offerta SET IDAzienda=?,Luogo=?, Orari=?, Durata=?, Obiettivi=?, Modalità, RimborsoSpese WHERE ID=?");
-        dOfferta = connection.prepareStatement("DELETE FROM offerta WHERE ID=?");
+        iOfferta = connection.prepareStatement("INSERT INTO Offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese) VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        uOfferta = connection.prepareStatement("UPDATE Offerta SET IDAzienda=?,Luogo=?, Orari=?, Durata=?, Obiettivi=?, Modalità, RimborsoSpese WHERE ID=?");
+        dOfferta = connection.prepareStatement("DELETE FROM Offerta WHERE ID=?");
 
       }
       catch(SQLException ex){
@@ -126,7 +126,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
             sOfferteByAzienda.setInt(1, azienda.getKey());
             try (ResultSet rs = sOfferteByAzienda.executeQuery()) {
                 while (rs.next()) {
-                    result.add((Offerta) getOfferta(rs.getInt("offertaID")));
+                    result.add((Offerta) getOfferta(rs.getInt("OffertaID")));
                 }
             }
         } catch (SQLException ex) {
@@ -141,7 +141,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
 
         try (ResultSet rs = sOfferte.executeQuery()) {
             while (rs.next()) {
-                result.add((Offerta) getOfferta(rs.getInt("offertaID")));
+                result.add((Offerta) getOfferta(rs.getInt("OffertaID")));
             }
         } catch (SQLException ex) {
             throw new DataException("Impossibile caricare le offerte.", ex);

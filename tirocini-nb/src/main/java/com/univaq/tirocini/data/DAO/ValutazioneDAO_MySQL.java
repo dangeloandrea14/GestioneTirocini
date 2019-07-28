@@ -33,19 +33,19 @@ public class ValutazioneDAO_MySQL extends DAO implements ValutazioneDAO {
         try {
             super.init();
             
-            sValutazioneByID = connection.prepareStatement("SELECT * FROM valutazione WHERE ID=?");
-            sValutazioniByStudente = connection.prepareStatement("SELECT ID AS valutazioneID FROM valutazione WHERE IDStudente=?");
-            sValutazioniByAzienda = connection.prepareStatement("SELECT ID AS valutazioneID FROM valutazione WHERE IDAzienda=?");
-            sValutazioni = connection.prepareStatement("SELECT ID AS valutazioneID FROM valutazione");
+            sValutazioneByID = connection.prepareStatement("SELECT * FROM Valutazione WHERE ID=?");
+            sValutazioniByStudente = connection.prepareStatement("SELECT ID AS ValutazioneID FROM Valutazione WHERE IDStudente=?");
+            sValutazioniByAzienda = connection.prepareStatement("SELECT ID AS ValutazioneID FROM Valutazione WHERE IDAzienda=?");
+            sValutazioni = connection.prepareStatement("SELECT ID AS ValutazioneID FROM Valutazione");
 
             //notare l'ultimo paametro extra di questa chiamata a
             //prepareStatement: lo usiamo per assicurarci che il JDBC
             //restituisca la chiave generata automaticamente per il
             //record inserito
           
-            iValutazione = connection.prepareStatement("INSERT INTO valutazione (Stelle,Commento,IDStudente,IDAzienda) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uValutazione = connection.prepareStatement("UPDATE valutazione SET Stelle=?,Commento=?,IDStudente=?,IDAzienda=? WHERE ID=?");
-            dValutazione = connection.prepareStatement("DELETE FROM valutazione WHERE ID=?");
+            iValutazione = connection.prepareStatement("INSERT INTO Valutazione (Stelle,Commento,IDStudente,IDAzienda) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uValutazione = connection.prepareStatement("UPDATE Valutazione SET Stelle=?,Commento=?,IDStudente=?,IDAzienda=? WHERE ID=?");
+            dValutazione = connection.prepareStatement("DELETE FROM Valutazione WHERE ID=?");
 
         } catch (SQLException ex) {
             throw new DataException("Error initializing newspaper data layer", ex);
@@ -124,7 +124,7 @@ public class ValutazioneDAO_MySQL extends DAO implements ValutazioneDAO {
             sValutazioniByAzienda.setInt(1, azienda.getKey());
             try (ResultSet rs = sValutazioniByAzienda.executeQuery()) {
                 while (rs.next()) {
-                    result.add((Valutazione) getValutazione(rs.getInt("valutazioneID")));
+                    result.add((Valutazione) getValutazione(rs.getInt("ValutazioneID")));
                 }
             }
         } catch (SQLException ex) {
@@ -141,7 +141,7 @@ public class ValutazioneDAO_MySQL extends DAO implements ValutazioneDAO {
             sValutazioniByStudente.setInt(1, studente.getKey());
             try (ResultSet rs = sValutazioniByStudente.executeQuery()) {
                 while (rs.next()) {
-                    result.add((Valutazione) getValutazione(rs.getInt("valutazioneID")));
+                    result.add((Valutazione) getValutazione(rs.getInt("ValutazioneID")));
                 }
             }
         } catch (SQLException ex) {
@@ -156,7 +156,7 @@ public class ValutazioneDAO_MySQL extends DAO implements ValutazioneDAO {
 
         try (ResultSet rs = sValutazioni.executeQuery()) {
             while (rs.next()) {
-                result.add((Valutazione) getValutazione(rs.getInt("valutazioneID")));
+                result.add((Valutazione) getValutazione(rs.getInt("ValutazioneID")));
             }
         } catch (SQLException ex) {
             throw new DataException("Impossibile caricare gli articoli.", ex);
@@ -196,7 +196,7 @@ public class ValutazioneDAO_MySQL extends DAO implements ValutazioneDAO {
                 
             } else { //insert
                 
-iValutazione = connection.prepareStatement("INSERT INTO valutazione (Stelle,Commento,IDStudente,IDAzienda) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+iValutazione = connection.prepareStatement("INSERT INTO Valutazione (Stelle,Commento,IDStudente,IDAzienda) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
                 iValutazione.setInt(1, valutazione.getStelle());
                 iValutazione.setString(2, valutazione.getCommento());

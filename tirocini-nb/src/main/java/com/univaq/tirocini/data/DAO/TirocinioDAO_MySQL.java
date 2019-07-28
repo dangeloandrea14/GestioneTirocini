@@ -37,12 +37,12 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
             super.init();
 
             //precompiliamo tutte le query utilizzate nella classe
-            sTirocinioByID = connection.prepareStatement("SELECT * FROM tirocinio WHERE ID=?");
-            sTirocini = connection.prepareStatement("SELECT ID AS tirocinioID FROM tirocinio");
+            sTirocinioByID = connection.prepareStatement("SELECT * FROM Tirocinio WHERE ID=?");
+            sTirocini = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio");
 
-            iTirocinio = connection.prepareStatement("INSERT INTO tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento) VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uTirocinio = connection.prepareStatement("UPDATE tirocinio SET IDAzienda=?,IDStudente=?,Inizio=?,Fine=?, SettoreInserimento=?, TempoDiAccesso=?, NumeroOre=?, TutoreUniversitario=?, TutoreAziendale=?, Attivo=?, PathDocumento=? WHERE ID=?");
-            dTirocinio = connection.prepareStatement("DELETE FROM tirocinio WHERE ID=?");
+            iTirocinio = connection.prepareStatement("INSERT INTO Tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento) VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uTirocinio = connection.prepareStatement("UPDATE Tirocinio SET IDAzienda=?,IDStudente=?,Inizio=?,Fine=?, SettoreInserimento=?, TempoDiAccesso=?, NumeroOre=?, TutoreUniversitario=?, TutoreAziendale=?, Attivo=?, PathDocumento=? WHERE ID=?");
+            dTirocinio = connection.prepareStatement("DELETE FROM Tirocinio WHERE ID=?");
 
         } catch (SQLException ex) {
             throw new DataException("Errore durante l'inizializzazione del DataLayer di Tirocinio.", ex);
@@ -110,7 +110,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
             sTirociniByAzienda.setInt(1, azienda.getKey());
             try (ResultSet rs = sTirociniByAzienda.executeQuery()) {
                 while (rs.next()) {
-                    result.add((Tirocinio) getTirocinio(rs.getInt("tirocinioID")));
+                    result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
                 }
             }
         } catch (SQLException ex) {
@@ -127,7 +127,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
             sTirociniByStudente.setInt(1, studente.getKey());
             try (ResultSet rs = sTirociniByStudente.executeQuery()) {
                 while (rs.next()) {
-                    result.add((Tirocinio) getTirocinio(rs.getInt("tirocinioID")));
+                    result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
                 }
             }
         } catch (SQLException ex) {
@@ -142,7 +142,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
 
         try (ResultSet rs = sTirocini.executeQuery()) {
             while (rs.next()) {
-                result.add((Tirocinio) getTirocinio(rs.getInt("tirocinioID")));
+                result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
             }
         } catch (SQLException ex) {
             throw new DataException("Impossibile caricare i tirocini.", ex);
@@ -199,7 +199,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
                 
                 
             } else { //insert
-iTirocinio = connection.prepareStatement("INSERT INTO tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento) VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+iTirocinio = connection.prepareStatement("INSERT INTO Tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento) VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 
 
                 if(tirocinio.getAzienda() != null)

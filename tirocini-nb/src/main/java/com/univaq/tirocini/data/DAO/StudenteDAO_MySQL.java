@@ -38,12 +38,12 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
             super.init();
 
             //precompiliamo tutte le query utilizzate nella classe
-            sStudenteByID = connection.prepareStatement("SELECT * FROM studente WHERE ID=?");
-            sStudenti = connection.prepareStatement("SELECT ID AS studenteID FROM studente");
+            sStudenteByID = connection.prepareStatement("SELECT * FROM Studente WHERE ID=?");
+            sStudenti = connection.prepareStatement("SELECT ID AS StudenteID FROM Studente");
 
-            iStudente = connection.prepareStatement("INSERT INTO studente (Nome,Cognome,DataNascita,LuogoNascita,CF,Handicap,Email,Ruolo,Residenza,CorsoLaurea,NumeroCFU,Telefono,Diploma,Laurea,Specializzazione,Password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uStudente = connection.prepareStatement("UPDATE studente SET Nome=?,Cognome=?,DataNascita=?,LuogoNascita=?, CF=?, Handicap=?, Email=?, Ruolo=?, Residenza=?, CorsoLaurea=?, NumeroCFU=?, Telefono=?, Diploma=?, Laurea=?, Specializzazione=?, Password=? WHERE ID=?");
-            dStudente = connection.prepareStatement("DELETE FROM studente WHERE ID=?");
+            iStudente = connection.prepareStatement("INSERT INTO Studente (Nome,Cognome,DataNascita,LuogoNascita,CF,Handicap,Email,Ruolo,Residenza,CorsoLaurea,NumeroCFU,Telefono,Diploma,Laurea,Specializzazione,Password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uStudente = connection.prepareStatement("UPDATE Studente SET Nome=?,Cognome=?,DataNascita=?,LuogoNascita=?, CF=?, Handicap=?, Email=?, Ruolo=?, Residenza=?, CorsoLaurea=?, NumeroCFU=?, Telefono=?, Diploma=?, Laurea=?, Specializzazione=?, Password=? WHERE ID=?");
+            dStudente = connection.prepareStatement("DELETE FROM Studente WHERE ID=?");
 
         } catch (SQLException ex) {
             throw new DataException("Errore durante l'inizializzazione del DataLayer di Studente.", ex);
@@ -153,7 +153,7 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
                 
             } else { //insert
                 
-iStudente = connection.prepareStatement("INSERT INTO studente (Nome,Cognome,DataNascita,LuogoNascita,CF,Handicap,Email,Ruolo,Residenza,CorsoLaurea,NumeroCFU,Telefono,Diploma,Laurea,Specializzazione,Password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+iStudente = connection.prepareStatement("INSERT INTO Studente (Nome,Cognome,DataNascita,LuogoNascita,CF,Handicap,Email,Ruolo,Residenza,CorsoLaurea,NumeroCFU,Telefono,Diploma,Laurea,Specializzazione,Password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
                 
                 iStudente.setString(1, studente.getNome());
                 iStudente.setString(2, studente.getCognome());

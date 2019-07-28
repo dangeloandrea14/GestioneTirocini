@@ -40,13 +40,13 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             super.init();
             
             //Precompiliamo le select di Azienda
-            sAziendaByID = connection.prepareStatement("SELECT * from azienda where ID=?");
-            sAziende = connection.prepareStatement("SELECT ID as aziendaID from azienda");
+            sAziendaByID = connection.prepareStatement("SELECT * from Azienda where ID=?");
+            sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
             
             //Precompiliamo le altre query
-            iAzienda = connection.prepareStatement("INSERT INTO azienda (Nome,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Voto,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uAzienda = connection.prepareStatement("UPDATE azienda SET Nome=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Voto=?,Password=?,PathDocumento=?,Convenzionata=? WHERE ID=?");
-            dAzienda = connection.prepareStatement("DELETE FROM azienda WHERE ID=?");
+            iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Voto,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uAzienda = connection.prepareStatement("UPDATE Azienda SET Nome=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Voto=?,Password=?,PathDocumento=?,Convenzionata=? WHERE ID=?");
+            dAzienda = connection.prepareStatement("DELETE FROM Azienda WHERE ID=?");
       
         } catch (SQLException ex) {
             throw new DataException("Error initializing newspaper data layer", ex);
@@ -125,7 +125,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
         try (ResultSet rs = sAziende.executeQuery()) {
             while (rs.next()) {
-                result.add((Azienda) getAzienda(rs.getInt("aziendaID")));
+                result.add((Azienda) getAzienda(rs.getInt("AziendaID")));
             }
         } catch (SQLException ex) {
             throw new DataException("Impossibile caricare le aziende.", ex);
