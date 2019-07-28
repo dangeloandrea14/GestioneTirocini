@@ -40,8 +40,8 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
        
         //Ora precompiliamo insert, update, delete
         
-        iOfferta = connection.prepareStatement("INSERT INTO Offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese) VALUES(?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-        uOfferta = connection.prepareStatement("UPDATE Offerta SET IDAzienda=?,Luogo=?, Orari=?, Durata=?, Obiettivi=?, Modalità, RimborsoSpese WHERE ID=?");
+        iOfferta = connection.prepareStatement("INSERT INTO Offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese,Attiva) VALUES(?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        uOfferta = connection.prepareStatement("UPDATE Offerta SET IDAzienda=?,Luogo=?, Orari=?, Durata=?, Obiettivi=?, Modalità=?, RimborsoSpese=?, Attiva=? WHERE ID=?");
         dOfferta = connection.prepareStatement("DELETE FROM Offerta WHERE ID=?");
 
       }
@@ -177,7 +177,9 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
                 
                 uOfferta.setString(7, offerta.getRimborsoSpese());
                 
-                uOfferta.setInt(8, offerta.getKey());
+                uOfferta.setBoolean(8, offerta.isAttiva());
+                
+                uOfferta.setInt(9, offerta.getKey());
                 uOfferta.executeUpdate();
                 
             }
@@ -200,6 +202,8 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
                 iOfferta.setString(6, offerta.getModalità());
                 
                 iOfferta.setString(7, offerta.getRimborsoSpese());
+                
+                iOfferta.setBoolean(8, offerta.isAttiva());
                 
                 if (iOfferta.executeUpdate() == 1) {
                     

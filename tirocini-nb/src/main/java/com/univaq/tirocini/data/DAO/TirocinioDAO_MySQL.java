@@ -198,9 +198,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
                 uTirocinio.executeUpdate();
                 
                 
-            } else { //insert
-iTirocinio = connection.prepareStatement("INSERT INTO Tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento) VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-                
+            } else { //insert                
 
                 if(tirocinio.getAzienda() != null)
                 iTirocinio.setInt(1, tirocinio.getAzienda().getKey());

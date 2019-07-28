@@ -70,7 +70,7 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
             a.setRuolo(rs.getInt("Ruolo"));
             a.setResidenza(rs.getString("Residenza"));
             a.setCorsoLaurea(rs.getString("Laurea"));
-            a.setCFU(rs.getInt("CFU"));
+            a.setCFU(rs.getInt("NumeroCFU"));
             a.setTelefono(rs.getString("Telefono"));
             a.setDiploma(rs.getString("Diploma"));
             a.setLaurea(rs.getString("Laurea"));
@@ -152,9 +152,7 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
                 
                 
             } else { //insert
-                
-iStudente = connection.prepareStatement("INSERT INTO Studente (Nome,Cognome,DataNascita,LuogoNascita,CF,Handicap,Email,Ruolo,Residenza,CorsoLaurea,NumeroCFU,Telefono,Diploma,Laurea,Specializzazione,Password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-                
+                                
                 iStudente.setString(1, studente.getNome());
                 iStudente.setString(2, studente.getCognome());
                 iStudente.setDate(3, studente.getDataNascita());
