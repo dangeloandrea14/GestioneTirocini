@@ -51,4 +51,9 @@
         <res-auth>Container</res-auth>
         <res-sharing-scope>Shareable</res-sharing-scope>
     </resource-ref>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/notFound.html</location>
+    </error-page>
+    <res-ref-name>jdbc/webdb2</res-ref-name>
 </web-app>
