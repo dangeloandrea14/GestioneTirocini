@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Context path="/tirocini">
-      <Resource auth="Container" driverClassName="org.mariadb.jdbc.Driver" maxActive="10" maxIdle="5" maxWait="10000" name="jdbc/webdb2" password="libriantichi" type="javax.sql.DataSource" url="jdbc:mariadb://localhost/Tirocinio?serverTimezone=UTC" username="bibliotecario"/>
+      <Resource auth="Container" driverClassName="org.mariadb.jdbc.Driver" maxActive="10" maxIdle="5" maxWait="10000" name="jdbc/webdb2" password="panzerottoGbR4LR" type="javax.sql.DataSource" url="jdbc:mariadb://207.180.252.160/Tirocinio?serverTimezone=UTC" username="root"/>
       <!--
       <Resource auth="Container" driverClassName="com.mysql.cj.jdbc.Driver" maxActive="10" maxIdle="5" maxWait="10000" name="jdbc/webdb2" password="webpass" type="javax.sql.DataSource" url="jdbc:mysql://localhost/webdb2?serverTimezone=UTC" username="website"/>
       -->      
