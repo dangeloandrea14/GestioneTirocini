@@ -33,10 +33,12 @@ public class Home extends TirociniBaseController {
 
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         try {
-            TemplateResult res = new TemplateResult(getServletContext());
             request.setAttribute("page_title", "Home");
             request.setAttribute("offerte", ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferte());
             request.setAttribute("aziende", ((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAziende());
+            
+            TemplateResult res = new TemplateResult(getServletContext());
+
             res.activate("home.ftl.html", request, response);
         } catch (DataException ex) {
             request.setAttribute("message", "Data access exception: " + ex.getMessage());

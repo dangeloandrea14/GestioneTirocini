@@ -40,7 +40,6 @@ public class OffertaProxy extends OffertaImpl {
     
     @Override
     public Azienda getAzienda() {
-        //notare come l'autore in relazione venga caricato solo su richiesta
         
         if (super.getAzienda() == null && azienda_key > 0) {
             try {
@@ -49,7 +48,7 @@ public class OffertaProxy extends OffertaImpl {
                 Logger.getLogger(TirocinioProxy.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        //attenzione: l'autore caricato viene lagato all'oggetto in modo da non 
+        //attenzione: l'azienda caricata viene legato all'oggetto in modo da non 
         //dover venir ricaricato alle richieste successive, tuttavia, questo
         //puo' rende i dati potenzialmente disallineati: se l'autore viene modificato
         //nel DB, qui rimarrà la sua "vecchia" versione
