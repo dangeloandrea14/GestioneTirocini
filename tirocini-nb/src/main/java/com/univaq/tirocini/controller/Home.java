@@ -34,7 +34,7 @@ public class Home extends TirociniBaseController {
     private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         try {
             request.setAttribute("page_title", "Home");
-            request.setAttribute("offerte", ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferte());
+            request.setAttribute("offerte", ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
             request.setAttribute("aziende", ((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAziende());
             
             TemplateResult res = new TemplateResult(getServletContext());

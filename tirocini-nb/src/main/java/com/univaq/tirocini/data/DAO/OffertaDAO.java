@@ -23,6 +23,8 @@ public interface OffertaDAO {
     
     List<Offerta> getOfferte() throws DataException;
     
+    List<Offerta> getOfferteAttive() throws DataException;
+    
     void storeOfferta(Offerta offerta) throws DataException;
     
 }
