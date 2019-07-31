@@ -15,6 +15,7 @@
  */
 package com.univaq.tirocini.framework.result;
 
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import freemarker.core.HTMLOutputFormat;
 import freemarker.core.JSONOutputFormat;
 import freemarker.core.XMLOutputFormat;
@@ -243,6 +244,8 @@ public class TemplateResult {
     //this acivate method extracts the data model from the request attributes
     public void activate(String tplname, HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         Map datamodel = getRequestDataModel(request);
+        if(SecurityLayer.checkSession(request) != null)
+            datamodel.put("username", (String)request.getSession().getAttribute("username"));
         activate(tplname, datamodel, response);
     }
 

@@ -28,12 +28,8 @@
     </head>
 
     <body>
-        
-        <#if ! hideHeader??>
 
         <#include "header.ftl.html">
-
-        </#if>
         <!--
           <div class="container-fluid pl-0 pr-0">
            <section id="showcase">
@@ -49,13 +45,13 @@
 
                     <ul class="nav nav-pills flex-column-reverse d-none  d-md-block ">
                         <li class="nav-item ">
-                            <a class="nav-link active" href="#tirocini">Homepage</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link " href="#aziende">Aziende convenzionate</a>
+                            <a class="nav-link active" href="Home">Homepage</a>
                         </li>
                         <li class="nav-item ">
-                            <a class="nav-link " href="">Offerte Tirocinio</a>
+                            <a class="nav-link " href="Home#tirocini">Offerte Tirocinio</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " href="Home#aziende">Aziende convenzionate</a>
                         </li>
                     </ul>
 

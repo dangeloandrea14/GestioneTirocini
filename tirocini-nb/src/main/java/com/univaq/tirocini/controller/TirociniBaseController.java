@@ -55,5 +55,13 @@ public abstract class TirociniBaseController extends HttpServlet {
             throws ServletException, IOException {
         processBaseRequest(request, response);
     }
+    
+    protected void goBack(HttpServletRequest request, HttpServletResponse response) throws IOException{
+        if (request.getParameter("referrer") != null) {
+            response.sendRedirect(request.getParameter("referrer"));
+        } else {
+            response.sendRedirect("Home");
+        }
+    }
 
 }
