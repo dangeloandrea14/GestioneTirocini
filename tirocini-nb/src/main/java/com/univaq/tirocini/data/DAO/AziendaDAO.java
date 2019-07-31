@@ -20,6 +20,8 @@ Azienda getAzienda(int azienda_key) throws DataException;
 
 List<Azienda> getAziende() throws DataException;
 
+String getPasswordFromEmail(String email) throws DataException;
+
 void storeAzienda(Azienda azienda) throws DataException;
     
 }

@@ -20,6 +20,8 @@ Studente getStudente(int studente_key) throws DataException;
 
 List<Studente> getStudenti() throws DataException;
 
+String getPasswordFromEmail(String email) throws DataException;
+
 void storeStudente(Studente studente) throws DataException;
     
 }

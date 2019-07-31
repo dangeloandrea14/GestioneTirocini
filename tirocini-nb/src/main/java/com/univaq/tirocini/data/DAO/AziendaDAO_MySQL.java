@@ -27,7 +27,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
     
     //Nota: le lettere (s,i,u,d) che precedono i nomi stanno per Select, Insert, Update e Delete.
     private PreparedStatement sAziendaByID;
-    private PreparedStatement sAziende;
+    private PreparedStatement sAziende,sPassword;
     private PreparedStatement iAzienda, uAzienda, dAzienda;
 
     public AziendaDAO_MySQL(DataLayer d) {
@@ -42,6 +42,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             //Precompiliamo le select di Azienda
             sAziendaByID = connection.prepareStatement("SELECT * from Azienda where ID=?");
             sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
+            sPassword = connection.prepareStatement("SELECT Password FROM Azienda where emailResponsabile=?");
             
             //Precompiliamo le altre query
             iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Voto,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -134,6 +135,22 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
         return result;
     }
 
+    @Override
+    public String getPasswordFromEmail(String email) throws DataException{
+        try{ 
+        sPassword.setString(1,email);
+            try (ResultSet rs= sPassword.executeQuery()){
+                if(rs.next()){
+                    return rs.getString("Password");
+                }
+            }
+        }
+        catch (SQLException ex) {
+            throw new DataException("Impossibile trovare l'azienda.", ex);
+    }
+        return null;
+    }
+    
     @Override
     public void storeAzienda(Azienda azienda) throws DataException {
         int key = azienda.getKey();
