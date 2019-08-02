@@ -2,8 +2,8 @@
     <div id="navContainer" class="container"></div>
     <nav class=" navbar navbar-expand-lg navbar-expand-md navbar-dark bg-scuro">
 
-        <a href="#" class="navbar-brand  text-light">
-            <img class="navbar-brand" id="logo" src="img/logo.png" width="60" height="60"
+        <a href="#" class="navbar-brand text-light">
+            <img class="navbar-brand" id="logo" src="img/logo.png" width="54" height="54"
                  alt="logo">
             Internship Tutor</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -14,9 +14,16 @@
         <div class="collapse navbar-collapse " id="navbarSupportedContent">
             <#if username??>
             <ul class="navbar-nav ml-auto ">
-                <li class="nav-item mr-4 ml-4 text-light">
-                    ${username}
-                    <a href="Logout" class="nav-link text-light">Logout</a>
+                <li class="dropdown navbar-nav ml-auto">
+                        <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            ${username}
+                        </a>
+                        <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenu">
+                            <a class="dropdown-item" href="#">Profilo</a>
+                            <a class="dropdown-item" href="#">Boh</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Logout">Logout</a>
+                        </div>
                 </li>
             </ul>
             <#else>
