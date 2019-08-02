@@ -119,7 +119,7 @@ public class StudenteProxy extends StudenteImpl {
       
       @Override
       public void setPassword(String pass){
-          this.setPassword(pass);
+          super.setPassword(pass);
           this.dirty = true;
       }
       
