@@ -1,0 +1,99 @@
+<h1>Registrazione studente:</h1>
+
+<form id="regForm">
+
+  <div class="container pt-3 pb-3">
+
+    <h3>Credenziali di accesso:</h3>
+    <div class="row" id="credenziali">
+
+      <div id="inputmail"class="col-lg">
+        <div class="form-group">
+          <label for="inputmail">Indirizzo Email:</label>
+          <input type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email"
+            required="required">
+        </div>
+
+      </div>
+      <div class="col-lg">
+        <div class="form-group">
+          <label>Password:</label>
+          <input placeholder="Password..." class="form-control" name="pword" type="password"
+            required="required">
+        </div>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container pt-3 pb-3">
+
+
+    <h3>Anagrafica:</h3>
+    <div class="form-group mt-4">
+      <label>Nome:</label>
+      <input type="text" placeholder="Inserisci il tuo Nome..." class="form-control" required="required">
+    </div>
+    <div class="form-group">
+      <label>Cognome:</label>
+      <input type="text" placeholder="Inserisci il tuo Cognome..." class="form-control" required="required">
+    </div>
+    <div class="form-group">
+      <label>Data di nascita:</label>
+      <input type="date" class="form-control" min="1900-01-01" max="2020-12-31" required="required" />
+    </div>
+    <div class="form-group">
+      <label>Luogo di nascita:</label>
+      <input placeholder="Inserisci il tuo Luogo di nascita..." class="form-control" required="required">
+    </div>
+    <div class="form-group">
+      <label>Codice Fiscale:</label>
+      <input placeholder="Inserisci Codice Fiscale..." class="form-control" required="required">
+
+    </div>
+    <div class="form-group">
+      <label>Residenza:</label>
+      <input placeholder="Inserisci la tua Residenza..." class="form-control" required="required">
+    </div>
+    <div class="form-group">
+      <label>Numero di telefono:</label>
+      <input type="tel" placeholder="Inserisci il tuo numero di telefono" class="form-control" required="required">
+    </div>
+
+    <div class="form-group row">
+      <div class="ml-3">Sei portatore di handicap?</div>
+      <div class="ml-3 custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input" id="customCheck1">
+        <label class="custom-control-label" for="customCheck1"></label>
+      </div>
+    </div>
+    <hr>
+  </div>
+  <div class="container pt-3 pb-3">
+    <h3>Dettagli studio:</h3>
+    <div class="form-group mt-4">
+      <label>Diploma:</label>
+      <input type="text" placeholder="Inserisci il tuo diploma" class="form-control" required="required">
+    </div>
+    <div class="form-group">
+      <label>Corso di Laurea:</label>
+      <input type="text" placeholder="Inserisci il tuo Corso di Laurea" class="form-control"
+        required="required">
+    </div>
+    <div class="form-group">
+      <label>Specializzazione:</label>
+      <input type="text" placeholder="Inserisci la tua Specializzazione" class="form-control"
+        required="required">
+    </div>
+    <div class="form-group">
+      <label>Numero cfu acquisiti:</label>
+      <input type="number" name="i8" min="0" max="160" class="form-control" required="required" />
+    </div>
+    <div class="mt-5 mb-5 p-3">
+      <button class="btn btn-primary float-left">Annulla</button>
+
+      <button type="submit" class="btn btn-primary float-right">Submit</button>
+    </div>
+  </div>
+</div>
+</form>
+
