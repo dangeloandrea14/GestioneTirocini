@@ -18,6 +18,8 @@ Azienda createAzienda(ResultSet rs) throws DataException;
 
 Azienda getAzienda(int azienda_key) throws DataException;
 
+Azienda getAziendaFromEmail(String email) throws DataException;
+
 List<Azienda> getAziende() throws DataException;
 
 String getPasswordFromEmail(String email) throws DataException;

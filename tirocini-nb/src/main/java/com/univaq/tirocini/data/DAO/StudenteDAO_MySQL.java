@@ -24,7 +24,7 @@ import java.util.List;
  */
 public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
     
-    private PreparedStatement sStudenteByID;
+    private PreparedStatement sStudenteByID,sStudenteByEmail;
     private PreparedStatement sStudenti,sPassword;
     private PreparedStatement iStudente, uStudente, dStudente;
     
@@ -41,6 +41,7 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
             sStudenteByID = connection.prepareStatement("SELECT * FROM Studente WHERE ID=?");
             sStudenti = connection.prepareStatement("SELECT ID AS StudenteID FROM Studente");
             sPassword = connection.prepareStatement("Select Password FROM Studente where email=?");
+            sStudenteByEmail = connection.prepareStatement("SELECT * FROM Studente WHERE email=?");
 
             iStudente = connection.prepareStatement("INSERT INTO Studente (Nome,Cognome,DataNascita,LuogoNascita,CF,Handicap,Email,Ruolo,Residenza,CorsoLaurea,NumeroCFU,Telefono,Diploma,Laurea,Specializzazione,Password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             uStudente = connection.prepareStatement("UPDATE Studente SET Nome=?,Cognome=?,DataNascita=?,LuogoNascita=?, CF=?, Handicap=?, Email=?, Ruolo=?, Residenza=?, CorsoLaurea=?, NumeroCFU=?, Telefono=?, Diploma=?, Laurea=?, Specializzazione=?, Password=? WHERE ID=?");
@@ -116,6 +117,24 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
         return result;
     }
 
+    
+    @Override
+    public Studente getStudenteFromEmail(String email) throws DataException{
+     
+    try {
+            sStudenteByEmail.setString(1, email);
+            try (ResultSet rs = sStudenteByEmail.executeQuery()) {
+                if (rs.next()) {
+                    return createStudente(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare lo studente a partire dall'email.", ex);
+        }
+
+        return null;
+    }
+    
     @Override
     public String getPasswordFromEmail(String email) throws DataException{
         try{ 

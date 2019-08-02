@@ -26,7 +26,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
     
     
     //Nota: le lettere (s,i,u,d) che precedono i nomi stanno per Select, Insert, Update e Delete.
-    private PreparedStatement sAziendaByID;
+    private PreparedStatement sAziendaByID,sAziendaByEmail;
     private PreparedStatement sAziende,sPassword;
     private PreparedStatement iAzienda, uAzienda, dAzienda;
 
@@ -43,6 +43,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             sAziendaByID = connection.prepareStatement("SELECT * from Azienda where ID=?");
             sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
             sPassword = connection.prepareStatement("SELECT Password FROM Azienda where emailResponsabile=?");
+            sAziendaByEmail = connection.prepareStatement("SELECT * FROM Azienda where emailResponsabile=?");
             
             //Precompiliamo le altre query
             iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Voto,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -135,6 +136,23 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
         return result;
     }
 
+    @Override
+    public Azienda getAziendaFromEmail(String email) throws DataException{
+     
+    try {
+            sAziendaByEmail.setString(1, email);
+            try (ResultSet rs = sAziendaByEmail.executeQuery()) {
+                if (rs.next()) {
+                    return createAzienda(rs);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare l'azienda a partire dall'email.", ex);
+        }
+
+        return null;
+    }
+    
     @Override
     public String getPasswordFromEmail(String email) throws DataException{
         try{ 
