@@ -29,6 +29,11 @@ public class IVA {
         return false;
     }
     
+    @Override
+    public String toString() {
+        return numero;
+    }
+    
     /*public boolean test () {
          return (!set("1234567890")&&
          !set("123456789012")&&

@@ -244,8 +244,11 @@ public class TemplateResult {
     //this acivate method extracts the data model from the request attributes
     public void activate(String tplname, HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         Map datamodel = getRequestDataModel(request);
-        if(SecurityLayer.checkSession(request) != null)
+        if(SecurityLayer.checkSession(request) != null) {
             datamodel.put("username", (String)request.getSession().getAttribute("username"));
+            datamodel.put("studente", request.getSession().getAttribute("studente"));
+            datamodel.put("azienda", request.getSession().getAttribute("azienda"));
+        }
         activate(tplname, datamodel, response);
     }
 

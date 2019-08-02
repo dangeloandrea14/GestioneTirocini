@@ -6,6 +6,8 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
+import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -20,6 +22,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -53,34 +56,44 @@ public class Login extends TirociniBaseController {
     private void action_login(HttpServletRequest request, HttpServletResponse response) throws IOException {
         String username = request.getParameter("u");
         String password = request.getParameter("p");
+        
         //... VALIDAZIONE IDENTITA'...
         //... IDENTITY CHECKS ...
-
         if (username.isEmpty() || password.isEmpty()) {
             login_failed(request, response);
             return;
         }
 
+        int userid = 1;
+        
         String loginType = "";
         String passwordHash = null;
+        
+        Studente s = null;
+        Azienda a = null;
 
         try {
 
             //provo a caricare dagli studenti
-            passwordHash = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getPasswordFromEmail(username);
+            s = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenteFromEmail(username);
 
-            if (passwordHash != null) { //trovato studenti
+            if (s != null) { //trovato studenti
                 loginType = "studente";
+                userid = s.getKey();
+                passwordHash = s.getPassword();
             } else {
 
                 //se non trovo uno studente provo con un'azienda
-                passwordHash = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getPasswordFromEmail(username);
-                loginType = "azienda";
+                a = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail(username);
 
-                if (passwordHash == null) { //se ancora null, login invalido
+                if (a == null) { //se ancora null, login invalido
                     login_failed(request, response);
                     return;
                 }
+                
+                loginType = "azienda";
+                userid = a.getKey();
+                passwordHash = a.getPassword();
             }
 
         } catch (DataException ex) {
@@ -94,8 +107,13 @@ public class Login extends TirociniBaseController {
         }
 
         //creiamo la sessione
-        int userid = 1;
-        SecurityLayer.createSession(request, username, userid, loginType);
+        HttpSession session = SecurityLayer.createSession(request, username, userid, loginType);
+        if(loginType.equals("studente")) {
+            session.setAttribute("studente", s);
+        } else {
+            session.setAttribute("azienda", a);
+        }
+        
         //se è stato trasmesso un URL di origine, torniamo a quell'indirizzo
         //if an origin URL has been transmitted, return to it
         goBack(request, response);
