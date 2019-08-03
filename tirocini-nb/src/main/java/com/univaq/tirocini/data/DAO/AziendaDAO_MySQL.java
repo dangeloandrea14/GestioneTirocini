@@ -202,14 +202,14 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             
                 uAzienda.setString(10, azienda.getNomeCognomeLegale());  
                
-                uAzienda.setString(12, azienda.getPassword());
+                uAzienda.setString(11, azienda.getPassword());
                 
-                uAzienda.setString(13, azienda.getPath());
+                uAzienda.setString(12, azienda.getPath());
                 
                 if(azienda.isConvenzionata() != false)
-                    uAzienda.setBoolean(14, azienda.isConvenzionata());
+                    uAzienda.setBoolean(13, azienda.isConvenzionata());
                    
-                uAzienda.setInt(15, azienda.getKey());
+                uAzienda.setInt(14, azienda.getKey());
                 
                 uAzienda.executeUpdate();
                 
@@ -247,13 +247,13 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                     iAzienda.setString(10, azienda.getNomeCognomeLegale());  
                 
                 if (azienda.getPassword() != null)
-                    iAzienda.setString(12, azienda.getPassword());
+                    iAzienda.setString(11, azienda.getPassword());
                 
                 if(azienda.getPath() != null)
-                    iAzienda.setString(13, azienda.getPath());
+                    iAzienda.setString(12, azienda.getPath());
                 
                 if(azienda.isConvenzionata() != false)
-                    iAzienda.setBoolean(14, azienda.isConvenzionata());
+                    iAzienda.setBoolean(13, azienda.isConvenzionata());
                    
                 if (iAzienda.executeUpdate() == 1) {
                     //per leggere la chiave generata dal database
