@@ -46,8 +46,8 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             sAziendaByEmail = connection.prepareStatement("SELECT * FROM Azienda where emailResponsabile=?");
             
             //Precompiliamo le altre query
-            iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Voto,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uAzienda = connection.prepareStatement("UPDATE Azienda SET Nome=?,Descrizione=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Voto=?,Password=?,PathDocumento=?,Convenzionata=? WHERE ID=?");
+            iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uAzienda = connection.prepareStatement("UPDATE Azienda SET Nome=?,Descrizione=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Password=?,PathDocumento=?,Convenzionata=? WHERE ID=?");
             dAzienda = connection.prepareStatement("DELETE FROM Azienda WHERE ID=?");
       
         } catch (SQLException ex) {
@@ -201,12 +201,6 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                 uAzienda.setString(9, azienda.getEmailResponsabile());
             
                 uAzienda.setString(10, azienda.getNomeCognomeLegale());  
-                 
-                if (azienda.getVoto() != 0)
-                 uAzienda.setInt(11, azienda.getVoto()); 
-                else {
-                    uAzienda.setNull(11, java.sql.Types.INTEGER);
-                }
                
                 uAzienda.setString(12, azienda.getPassword());
                 
@@ -251,9 +245,6 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                   
                 if (azienda.getNomeCognomeLegale() != null)
                     iAzienda.setString(10, azienda.getNomeCognomeLegale());  
-                 
-                if (azienda.getVoto() != 0)
-                 iAzienda.setInt(11, azienda.getVoto()); 
                 
                 if (azienda.getPassword() != null)
                     iAzienda.setString(12, azienda.getPassword());
