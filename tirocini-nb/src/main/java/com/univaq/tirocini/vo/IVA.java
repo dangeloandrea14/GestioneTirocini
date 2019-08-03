@@ -40,4 +40,8 @@ public class IVA {
          !set("1234567890a")&&
          set("12345678901"));
     }*/
+    
+    public static boolean checkFormat(String s) {
+        return (s.matches("\\d{11}"));
+    }
 }

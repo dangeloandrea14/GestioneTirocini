@@ -17,6 +17,8 @@ import com.univaq.tirocini.vo.IVA;
 import com.univaq.tirocini.vo.IvaConverter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -61,74 +63,48 @@ public class Registration extends TirociniBaseController {
 
     //TODO
     //Mancano controlli sui campi (lunghezza password, validità part. Iva, ecc.)
-    private void registerNewStudent(HttpServletRequest request, HttpServletResponse response) {
+    private void registerNewStudent(HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, InvocationTargetException, DataException {
         if (!checkParameter(request, "s", "studente")) {
             registrationFailure(request, response);
             return;
         }
 
         StudenteImpl s = new StudenteImpl();
-        try {
-            //i paramentri corrispndono (si spera), quindi possiamo
-            //popolare gli oggetti automaticamente
-            BeanUtils.populate(s, request.getParameterMap());
-
-        } catch (IllegalAccessException | InvocationTargetException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-            return;
-        }
+        //i paramentri corrispndono (si spera), quindi possiamo
+        //popolare gli oggetti automaticamente
+        BeanUtils.populate(s, request.getParameterMap());
 
         s.setPassword(Password.hash(s.getPassword()));
 
-        try {
-            ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
-        } catch (DataException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-            return;
-        }
-        
+        ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
+
         registrationSuccess(request, response);
     }
 
-    private void registerNewCompany(HttpServletRequest request, HttpServletResponse response) {
+    private void registerNewCompany(HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, InvocationTargetException, DataException {
         if (!checkParameter(request, "s", "azienda")) {
             registrationFailure(request, response);
             return;
         }
 
         AziendaImpl a = new AziendaImpl();
-        try {
-            
-            //registriamo il convertitore per la classe IVA
-            ConvertUtils.register(new IvaConverter(), IVA.class);
 
-            
-            //i paramentri corrispndono (si spera), quindi possiamo
-            //popolare gli oggetti automaticamente
-            BeanUtils.populate(a, request.getParameterMap());
+        //registriamo il convertitore per la classe IVA
+        ConvertUtils.register(new IvaConverter(), IVA.class);
 
-        } catch (IllegalAccessException | InvocationTargetException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-            return;
-        }
+        //i paramentri corrispndono (si spera), quindi possiamo
+        //popolare gli oggetti automaticamente
+        BeanUtils.populate(a, request.getParameterMap());
 
         a.setPassword(Password.hash(a.getPassword()));
 
-        try {
-            ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(a);
-        } catch (DataException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-            return;
-        }
-        
+        ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(a);
+
         registrationSuccess(request, response);
     }
 
-    private void registerNewUser(HttpServletRequest request, HttpServletResponse response) {
+    private void registerNewUser(HttpServletRequest request, HttpServletResponse response) 
+            throws IllegalAccessException, InvocationTargetException, DataException {
         String p = request.getParameter("s");
         if (p == null) {
             registrationFailure(request, response);
@@ -177,7 +153,9 @@ public class Registration extends TirociniBaseController {
                 action_default(request, response);
             }
 
-        } catch (IOException | TemplateManagerException ex) {
+        } catch (IOException | TemplateManagerException | 
+                IllegalAccessException | InvocationTargetException | 
+                DataException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
 

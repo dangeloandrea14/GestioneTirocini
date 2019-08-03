@@ -52,6 +52,14 @@
         <servlet-name>Registration</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.Registration</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>DettagliAzienda</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.DettagliAzienda</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>DettagliOfferta</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.DettagliOfferta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -71,6 +79,14 @@
     <servlet-mapping>
         <servlet-name>Registration</servlet-name>
         <url-pattern>/Registration</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DettagliAzienda</servlet-name>
+        <url-pattern>/DettagliAzienda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>DettagliOfferta</servlet-name>
+        <url-pattern>/DettagliOfferta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

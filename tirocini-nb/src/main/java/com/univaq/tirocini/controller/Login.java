@@ -15,8 +15,6 @@ import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.Password;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -40,7 +38,7 @@ public class Login extends TirociniBaseController {
         if (SecurityLayer.checkSession(request) == null) {
             request.setAttribute("page_title", "Login");
             request.setAttribute("outline_tpl", "outline_alt.ftl.html");
-            
+
             TemplateResult res = new TemplateResult(getServletContext());
 
             res.activate("login.ftl.html", request, response);
@@ -51,10 +49,10 @@ public class Login extends TirociniBaseController {
 
     //controlla username e password e se validi crea una sessione
     //  non pulitissimo ma per ora ci accontentiamo
-    private void action_login(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    private void action_login(HttpServletRequest request, HttpServletResponse response) throws IOException, DataException {
         String username = request.getParameter("u");
         String password = request.getParameter("p");
-        
+
         //... VALIDAZIONE IDENTITA'...
         //... IDENTITY CHECKS ...
         if (username.isEmpty() || password.isEmpty()) {
@@ -63,39 +61,33 @@ public class Login extends TirociniBaseController {
         }
 
         int userid = 1;
-        
+
         String loginType = "";
         String passwordHash = null;
-        
+
         Studente s = null;
         Azienda a = null;
 
-        try {
+        //provo a caricare dagli studenti
+        s = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenteFromEmail(username);
 
-            //provo a caricare dagli studenti
-            s = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenteFromEmail(username);
+        if (s != null) { //trovato studenti
+            loginType = "studente";
+            userid = s.getKey();
+            passwordHash = s.getPassword();
+        } else {
 
-            if (s != null) { //trovato studenti
-                loginType = "studente";
-                userid = s.getKey();
-                passwordHash = s.getPassword();
-            } else {
+            //se non trovo uno studente provo con un'azienda
+            a = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail(username);
 
-                //se non trovo uno studente provo con un'azienda
-                a = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail(username);
-
-                if (a == null) { //se ancora null, login invalido
-                    login_failed(request, response);
-                    return;
-                }
-                
-                loginType = "azienda";
-                userid = a.getKey();
-                passwordHash = a.getPassword();
+            if (a == null) { //se ancora null, login invalido
+                login_failed(request, response);
+                return;
             }
 
-        } catch (DataException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            loginType = "azienda";
+            userid = a.getKey();
+            passwordHash = a.getPassword();
         }
 
         //verifichiamo la password
@@ -106,12 +98,12 @@ public class Login extends TirociniBaseController {
 
         //creiamo la sessione
         HttpSession session = SecurityLayer.createSession(request, username, userid, loginType);
-        if(loginType.equals("studente")) {
+        if (loginType.equals("studente")) {
             session.setAttribute("studente", s);
         } else {
             session.setAttribute("azienda", a);
         }
-        
+
         //se è stato trasmesso un URL di origine, torniamo a quell'indirizzo
         //if an origin URL has been transmitted, return to it
         goBack(request, response);
@@ -133,11 +125,7 @@ public class Login extends TirociniBaseController {
                 action_default(request, response);
             }
 
-        } catch (IOException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-
-        } catch (TemplateManagerException ex) {
+        } catch (IOException | TemplateManagerException | DataException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
 

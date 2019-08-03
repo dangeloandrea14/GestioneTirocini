@@ -1,0 +1,15 @@
+<div>
+<#if azienda??>
+<p>
+    ${azienda.nome} <br>
+    ${azienda.descrizione} <br>
+    ${azienda.sede}  <br>
+    ${azienda.nomeResponsabile} ${azienda.cognomeResponsabile} <br>
+    ${azienda.telefonoResponsabile}
+</p>
+<#else>
+<p>
+    Quale azienda?
+</p>
+</#if>
+</div>
