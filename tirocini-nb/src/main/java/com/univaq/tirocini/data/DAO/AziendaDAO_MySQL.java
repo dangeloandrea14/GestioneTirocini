@@ -220,42 +220,28 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                 
                 iAzienda.setString(2, azienda.getDescrizione());
                 
-                if(azienda.getSede() != null)
                 iAzienda.setString(3, azienda.getSede());
                 
-                if (azienda.getIva() != null) {
-                    iAzienda.setString(4, azienda.getIva().get());
-                } 
+                iAzienda.setString(4, azienda.getIva().get());
                 
-                if (azienda.getForoCompetenza() != null) {
-                    iAzienda.setString(5, azienda.getForoCompetenza());
-                }
+                iAzienda.setString(5, azienda.getForoCompetenza());
                 
-                if (azienda.getNomeResponsabile() != null)
-                 iAzienda.setString(6, azienda.getNomeResponsabile());
+                iAzienda.setString(6, azienda.getNomeResponsabile());
                 
-                if (azienda.getCognomeResponsabile() != null)
-                    iAzienda.setString(7, azienda.getCognomeResponsabile());
+                iAzienda.setString(7, azienda.getCognomeResponsabile());
                 
-                if (azienda.getTelefonoResponsabile() != null)
-                    iAzienda.setString(8, azienda.getTelefonoResponsabile());
-                 
-                if (azienda.getEmailResponsabile() != null)
-                    iAzienda.setString(9, azienda.getEmailResponsabile());
+                iAzienda.setString(8, azienda.getTelefonoResponsabile());
+
+                iAzienda.setString(9, azienda.getEmailResponsabile());
                   
-                if (azienda.getNomeCognomeLegale() != null)
-                    iAzienda.setString(10, azienda.getNomeCognomeLegale());  
+                iAzienda.setString(10, azienda.getNomeCognomeLegale());  
                 
-                if (azienda.getPassword() != null)
-                    iAzienda.setString(11, azienda.getPassword());
+                iAzienda.setString(11, azienda.getPassword());
                 
-                if(azienda.getPath() != null)
-                    iAzienda.setString(12, azienda.getPath());
-                else iAzienda.setString(12, "Non convenzionata");
+                iAzienda.setString(12, azienda.getPath());
                 
-                if(azienda.isConvenzionata() != false)
-                    iAzienda.setBoolean(13, azienda.isConvenzionata());
-                else iAzienda.setBoolean(13, false);
+                iAzienda.setBoolean(13, azienda.isConvenzionata());
+
                    
                 if (iAzienda.executeUpdate() == 1) {
                     //per leggere la chiave generata dal database
