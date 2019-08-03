@@ -5,16 +5,23 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
+import com.univaq.tirocini.data.impl.AziendaImpl;
+import com.univaq.tirocini.data.impl.StudenteImpl;
+import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
-import com.univaq.tirocini.framework.security.SecurityLayer;
+import com.univaq.tirocini.framework.security.Password;
+import com.univaq.tirocini.vo.IVA;
+import com.univaq.tirocini.vo.IvaConverter;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.lang.reflect.InvocationTargetException;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.ConvertUtils;
 
 /**
  *
@@ -40,46 +47,137 @@ public class Registration extends TirociniBaseController {
         //nel template il parametro s indica il tipo di registrazione desiderata
         //se non è ancora stato impostato (o non è valido), facciamo scegliere
         //il tipo di registrazione che si vuole effetturare
-        
+
         if (p == null) {
             res.activate("registrationChooser.ftl.html", request, response);
-        }
-        else if (p.equals("studente")) {
+        } else if (p.equals("studente")) {
             res.activate("registrazioneStudente.ftl.html", request, response);
-        }
-        else if (p.equals("azienda")) {
+        } else if (p.equals("azienda")) {
             res.activate("registrazioneAzienda.ftl.html", request, response);
-        }
-        else {
+        } else {
             res.activate("registrationChooser.ftl.html", request, response);
         }
     }
-    
-    private void registerNewStudent (HttpServletRequest request, HttpServletResponse response) {
+
+    //TODO
+    //Mancano controlli sui campi (lunghezza password, validità part. Iva, ecc.)
+    private void registerNewStudent(HttpServletRequest request, HttpServletResponse response) {
+        if (!checkParameter(request, "s", "studente")) {
+            registrationFailure(request, response);
+            return;
+        }
+
+        StudenteImpl s = new StudenteImpl();
+        try {
+            //i paramentri corrispndono (si spera), quindi possiamo
+            //popolare gli oggetti automaticamente
+            BeanUtils.populate(s, request.getParameterMap());
+
+        } catch (IllegalAccessException | InvocationTargetException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+            return;
+        }
+
+        s.setPassword(Password.hash(s.getPassword()));
+
+        try {
+            ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
+        } catch (DataException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+            return;
+        }
         
+        registrationSuccess(request, response);
     }
-    
-    private void registrationSuccess () {
+
+    private void registerNewCompany(HttpServletRequest request, HttpServletResponse response) {
+        if (!checkParameter(request, "s", "azienda")) {
+            registrationFailure(request, response);
+            return;
+        }
+
+        AziendaImpl a = new AziendaImpl();
+        try {
+            
+            //registriamo il convertitore per la classe IVA
+            ConvertUtils.register(new IvaConverter(), IVA.class);
+
+            
+            //i paramentri corrispndono (si spera), quindi possiamo
+            //popolare gli oggetti automaticamente
+            BeanUtils.populate(a, request.getParameterMap());
+
+        } catch (IllegalAccessException | InvocationTargetException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+            return;
+        }
+
+        a.setPassword(Password.hash(a.getPassword()));
+
+        try {
+            ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(a);
+        } catch (DataException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+            return;
+        }
         
+        registrationSuccess(request, response);
     }
-    
-    private void registrationFailure () {
-        
+
+    private void registerNewUser(HttpServletRequest request, HttpServletResponse response) {
+        String p = request.getParameter("s");
+        if (p == null) {
+            registrationFailure(request, response);
+        } else if (p.equals("studente")) {
+            registerNewStudent(request, response);
+        } else if (p.equals("azienda")) {
+            registerNewCompany(request, response);
+        } else {
+            registrationFailure(request, response);
+        }
     }
-    
+
+    //controlla la presenza di un parametro con un valore dato
+    private boolean checkParameter(HttpServletRequest request, String name, String expected) {
+        String par = request.getParameter(name);
+        return !(par == null || !par.equals(expected));
+    }
+
+    private void registrationSuccess(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("page_title", "Registration complete");
+        request.setAttribute("outline_tpl", "outline_alt.ftl.html");
+
+        TemplateResult res = new TemplateResult(getServletContext());
+
+        try {
+            res.activate("registrationCompleted.ftl.html", request, response);
+        } catch (TemplateManagerException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+        }
+    }
+
+    private void registrationFailure(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("exception", "Registration failed.");
+        action_error(request, response);
+    }
 
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException {
 
         try {
-            action_default(request, response);
+            if (request.getMethod().equals("POST")) {
+                registerNewUser(request, response);
+            } else {
+                action_default(request, response);
+            }
 
-        } catch (IOException ex) {
-            request.setAttribute("exception", ex);
-            action_error(request, response);
-
-        } catch (TemplateManagerException ex) {
+        } catch (IOException | TemplateManagerException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
 
