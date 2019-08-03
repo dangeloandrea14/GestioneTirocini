@@ -49,11 +49,11 @@ public class DettagliOfferta extends TirociniBaseController {
         }
 
         request.setAttribute("page_title", "Dettagli offerta tirocinio");
-        request.setAttribute("azienda", offerta);
+        request.setAttribute("offerta", offerta);
 
         TemplateResult res = new TemplateResult(getServletContext());
 
-        res.activate("dettagliAzienda.ftl.html", request, response);
+        res.activate("dettagliOfferta.ftl.html", request, response);
     }
 
     private void notFound(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
