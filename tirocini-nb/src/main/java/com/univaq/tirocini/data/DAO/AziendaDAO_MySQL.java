@@ -251,9 +251,11 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                 
                 if(azienda.getPath() != null)
                     iAzienda.setString(12, azienda.getPath());
+                else iAzienda.setString(12, "Non convenzionata");
                 
                 if(azienda.isConvenzionata() != false)
                     iAzienda.setBoolean(13, azienda.isConvenzionata());
+                else iAzienda.setBoolean(13, false);
                    
                 if (iAzienda.executeUpdate() == 1) {
                     //per leggere la chiave generata dal database
