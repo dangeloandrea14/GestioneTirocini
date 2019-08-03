@@ -170,7 +170,11 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
                 uStudente.setDate(3,studente.getDataNascita());
                 uStudente.setString(4,studente.getLuogoNascita());
                 uStudente.setString(5,studente.getCF());
+                
+                if (studente.isHandicapped() != null)
                 uStudente.setBoolean(6, studente.isHandicapped());
+                else uStudente.setBoolean(6, false);
+                
                 uStudente.setString(7, studente.getEmail());
                 uStudente.setInt(8, studente.getRuolo());
                 uStudente.setString(9, studente.getResidenza());
@@ -193,7 +197,11 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
                 iStudente.setDate(3, studente.getDataNascita());
                 iStudente.setString(4, studente.getLuogoNascita());
                 iStudente.setString(5, studente.getCF());
+                
+                if (studente.isHandicapped() != null)
                 iStudente.setBoolean(6, studente.isHandicapped());
+                else iStudente.setBoolean(6, false);
+                
                 iStudente.setString(7, studente.getEmail());
                 iStudente.setInt(8, studente.getRuolo());
                 iStudente.setString(9, studente.getResidenza());
