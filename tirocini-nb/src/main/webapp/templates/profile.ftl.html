@@ -4,11 +4,33 @@ Nome: ${studente.nome} <br>
 Cognome: ${studente.cognome}<br>
 Data di Nascita: ${studente.dataNascita}<br>
 </p>
-<#elseif azienda??>
+
+
+<div>
+        <h1 class="text-dark" id="aziende">Tirocini Attivi</h1>
+        <hr>
+
+    <#if tirocini?? && tirocini?size != 0>
+        <#list tirocini as tirocinio>
+        <div class="col-md col-sm-12 ">
+            <div class="card text-white  mb-3 bg-primary">
+                <div class="card-body">
+                    <h2 class="card-title">Tirocinio con ${tirocinio.azienda.nome}</h2>
+                    <hr>
+                    <p class="card-text">Iniziato il ${tirocinio.inizio}</p>
+                </div>
+            </div>
+        </div>
+        </#list>
+    </#if>
+</div>
+</#if>
+
+
+
+<#if azienda??>
 <p>
 Nome: ${azienda.nome}<br>
 Partita IVA: ${azienda.iva}<br>
 <p>
-<#else>
-???
 </#if>
