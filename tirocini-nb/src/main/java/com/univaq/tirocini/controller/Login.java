@@ -9,7 +9,6 @@ import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
-import com.univaq.tirocini.framework.result.FailureResult;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.Password;
@@ -26,15 +25,8 @@ import javax.servlet.http.HttpSession;
  */
 public class Login extends TirociniBaseController {
 
-    private void action_error(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getAttribute("exception") != null) {
-            (new FailureResult(getServletContext())).activate((Exception) request.getAttribute("exception"), request, response);
-        } else {
-            (new FailureResult(getServletContext())).activate((String) request.getAttribute("message"), request, response);
-        }
-    }
-
-    private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
+    @Override
+    protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         if (SecurityLayer.checkSession(request) == null) {
             request.setAttribute("page_title", "Login");
             request.setAttribute("outline_tpl", "outline_alt.ftl.html");
@@ -131,15 +123,5 @@ public class Login extends TirociniBaseController {
 
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Login servlet";
-    }// </editor-fold>
 
 }

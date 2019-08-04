@@ -39,7 +39,7 @@ public class FailureResult {
     public void activate(Exception exception, HttpServletRequest request, HttpServletResponse response) {
         String message;
         if (exception != null && exception.getMessage() != null) {
-            message = exception.getMessage();
+            message = exception.getClass().getName() + "\n: " + exception.getMessage();
         } else if (exception != null) {
             message = exception.getClass().getName();
         } else {

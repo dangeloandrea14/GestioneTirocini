@@ -9,7 +9,6 @@ import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.AziendaImpl;
 import com.univaq.tirocini.data.impl.StudenteImpl;
 import com.univaq.tirocini.framework.data.DataException;
-import com.univaq.tirocini.framework.result.FailureResult;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.Password;
@@ -17,8 +16,6 @@ import com.univaq.tirocini.vo.IVA;
 import com.univaq.tirocini.vo.IvaConverter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -31,15 +28,8 @@ import org.apache.commons.beanutils.ConvertUtils;
  */
 public class Registration extends TirociniBaseController {
 
-    private void action_error(HttpServletRequest request, HttpServletResponse response) {
-        if (request.getAttribute("exception") != null) {
-            (new FailureResult(getServletContext())).activate((Exception) request.getAttribute("exception"), request, response);
-        } else {
-            (new FailureResult(getServletContext())).activate((String) request.getAttribute("message"), request, response);
-        }
-    }
-
-    private void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
+    @Override
+    protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         request.setAttribute("page_title", "Registration");
         request.setAttribute("outline_tpl", "outline_alt.ftl.html");
 
@@ -51,13 +41,13 @@ public class Registration extends TirociniBaseController {
         //il tipo di registrazione che si vuole effetturare
 
         if (p == null) {
-            res.activate("registrationChooser.ftl.html", request, response);
+            res.activate("registrationChooser(versione da adattare).ftl.html", request, response);
         } else if (p.equals("studente")) {
             res.activate("registrazioneStudente.ftl.html", request, response);
         } else if (p.equals("azienda")) {
             res.activate("registrazioneAzienda.ftl.html", request, response);
         } else {
-            res.activate("registrationChooser.ftl.html", request, response);
+            res.activate("registrationChooser(versione da adattare).ftl.html", request, response);
         }
     }
 
@@ -161,15 +151,4 @@ public class Registration extends TirociniBaseController {
 
         }
     }
-
-    /**
-     * Returns a short description of the servlet.
-     *
-     * @return a String containing servlet description
-     */
-    @Override
-    public String getServletInfo() {
-        return "Registration servlet";
-    }// </editor-fold>
-
 }
