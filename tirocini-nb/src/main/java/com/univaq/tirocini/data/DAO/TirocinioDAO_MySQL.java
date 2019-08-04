@@ -39,6 +39,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
             //precompiliamo tutte le query utilizzate nella classe
             sTirocinioByID = connection.prepareStatement("SELECT * FROM Tirocinio WHERE ID=?");
             sTirocini = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio");
+            sTirociniByStudente = connection.prepareStatement("SELECT ID AS TirocinioID From Tirocinio where IDStudente=?");
 
             iTirocinio = connection.prepareStatement("INSERT INTO Tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento) VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             uTirocinio = connection.prepareStatement("UPDATE Tirocinio SET IDAzienda=?,IDStudente=?,Inizio=?,Fine=?, SettoreInserimento=?, TempoDiAccesso=?, NumeroOre=?, TutoreUniversitario=?, TutoreAziendale=?, Attivo=?, PathDocumento=? WHERE ID=?");

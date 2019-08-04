@@ -31,14 +31,14 @@ public class Profile extends TirociniBaseController {
             
             TemplateResult res = new TemplateResult(getServletContext());
             
-            try {
+            try {                
                 request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocini((Studente) request.getSession().getAttribute("studente")));
-            
+                res.activate("profile.ftl.html", request, response);
             } catch (DataException ex) {
             request.setAttribute("message", "Data access exception: " + ex.getMessage());
             action_error(request, response);
         }
             
-            res.activate("profile.ftl.html", request, response);
+         
     }
 }
