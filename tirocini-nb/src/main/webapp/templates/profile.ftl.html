@@ -30,8 +30,45 @@ Data di Nascita: ${studente.dataNascita}<br>
 
 
 <#if azienda??>
+<div>
 <p>
 Nome: ${azienda.nome}<br>
 Partita IVA: ${azienda.iva}<br>
 <p>
+</div>
+
+<div>
+    <h1 class="text-dark" id="aziende">Offerte attive</h1>    
+    <#if offerte?? && offerte?size != 0>
+        <#list offerte as offerta>
+        <div class="col-md col-sm-12 ">
+            <div class="card text-white  mb-3 bg-primary">
+                <div class="card-body">
+                    <h2 class="card-title">Offerta a ${offerta.luogo}</h2>
+                    <hr>
+                    <p class="card-text">${offerta.obiettivi}</p>
+                </div>
+            </div>
+        </div>
+        </#list>
+    </#if>
+    
+    <h1 class="text-dark" id="aziende">Tirocini attivi</h1>    
+    <#if tirociniazienda?? && tirociniazienda?size != 0>
+        <#list tirociniazienda as ta>
+        <div class="col-md col-sm-12 ">
+            <div class="card text-white  mb-3 bg-primary">
+                <div class="card-body">
+                    <h2 class="card-title">Tirocinio con ${ta.studente.nome} ${ta.studente.cognome}</h2>
+                    <hr>
+                    <p class="card-text">${ta.settoreInserimento}</p>
+                </div>
+            </div>
+        </div>
+        </#list>
+    </#if>
+    
+    
+</div>
+    
 </#if>

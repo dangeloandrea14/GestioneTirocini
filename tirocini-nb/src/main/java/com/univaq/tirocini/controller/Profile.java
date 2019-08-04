@@ -6,6 +6,7 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
+import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -31,8 +32,16 @@ public class Profile extends TirociniBaseController {
             
             TemplateResult res = new TemplateResult(getServletContext());
             
-            try {                
+            try {        
+                if(request.getSession().getAttribute("studente") != null){
                 request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocini((Studente) request.getSession().getAttribute("studente")));
+                }
+                
+                else if(request.getSession().getAttribute("azienda") != null){
+                request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferte((Azienda) request.getSession().getAttribute("azienda")));
+                request.setAttribute("tirociniazienda", ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirocini((Azienda) request.getSession().getAttribute("azienda")));
+                }
+                
                 res.activate("profile.ftl.html", request, response);
             } catch (DataException ex) {
             request.setAttribute("message", "Data access exception: " + ex.getMessage());
