@@ -22,6 +22,8 @@ Azienda getAziendaFromEmail(String email) throws DataException;
 
 List<Azienda> getAziende() throws DataException;
 
+List<Azienda> getAziendeConvenzionate() throws DataException;
+
 String getPasswordFromEmail(String email) throws DataException;
 
 void storeAzienda(Azienda azienda) throws DataException;

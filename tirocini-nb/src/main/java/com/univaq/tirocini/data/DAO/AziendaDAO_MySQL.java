@@ -27,7 +27,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
     
     //Nota: le lettere (s,i,u,d) che precedono i nomi stanno per Select, Insert, Update e Delete.
     private PreparedStatement sAziendaByID,sAziendaByEmail;
-    private PreparedStatement sAziende,sPassword;
+    private PreparedStatement sAziende,sPassword,sAziendeConvenzionate;
     private PreparedStatement iAzienda, uAzienda, dAzienda;
 
     public AziendaDAO_MySQL(DataLayer d) {
@@ -42,8 +42,10 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             //Precompiliamo le select di Azienda
             sAziendaByID = connection.prepareStatement("SELECT * from Azienda where ID=?");
             sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
+            sAziendeConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=1");
             sPassword = connection.prepareStatement("SELECT Password FROM Azienda where emailResponsabile=?");
             sAziendaByEmail = connection.prepareStatement("SELECT * FROM Azienda where emailResponsabile=?");
+            
             
             //Precompiliamo le altre query
             iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -136,6 +138,22 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
         return result;
     }
 
+    @Override
+    public List<Azienda> getAziendeConvenzionate() throws DataException {
+        List<Azienda> result = new ArrayList();
+        
+        try (ResultSet rs = sAziendeConvenzionate.executeQuery()){
+            while (rs.next()) {
+                result.add( (Azienda) getAzienda(rs.getInt("AziendaID")));
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare le aziende convenzionate", ex);
+        }
+        return result;
+        
+    }
+    
+    
     @Override
     public Azienda getAziendaFromEmail(String email) throws DataException{
      

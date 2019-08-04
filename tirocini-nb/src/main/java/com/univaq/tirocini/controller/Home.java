@@ -33,7 +33,7 @@ public class Home extends TirociniBaseController {
         try {
             request.setAttribute("page_title", "Home");
             request.setAttribute("offerte", ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
-            request.setAttribute("aziende", ((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAziende());
+            request.setAttribute("aziende", ((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAziendeConvenzionate());
             
             TemplateResult res = new TemplateResult(getServletContext());
 
