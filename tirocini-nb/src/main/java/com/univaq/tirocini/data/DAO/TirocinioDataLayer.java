@@ -6,6 +6,7 @@
 package com.univaq.tirocini.data.DAO;
 
 import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Candidatura;
 import com.univaq.tirocini.data.model.Offerta;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Tirocinio;
@@ -34,6 +35,7 @@ public class TirocinioDataLayer extends DataLayer {
         registerDAO(Studente.class, new StudenteDAO_MySQL(this));
         registerDAO(Tirocinio.class, new TirocinioDAO_MySQL(this));
         registerDAO(Valutazione.class, new ValutazioneDAO_MySQL(this));  
+        registerDAO(Candidatura.class, new CandidaturaDAO_MySQL(this));
     }
     
     //Definiamo gli helpers
@@ -58,4 +60,7 @@ public class TirocinioDataLayer extends DataLayer {
         return (ValutazioneDAO) getDAO(Valutazione.class);
     }
     
+    public CandidaturaDAO getCandidaturaDAO(){
+        return (CandidaturaDAO) getDAO(Candidatura.class);
+    }
 }

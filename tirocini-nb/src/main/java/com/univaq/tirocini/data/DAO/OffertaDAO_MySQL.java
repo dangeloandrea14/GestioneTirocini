@@ -62,6 +62,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
 
             sOfferteByAzienda.close();
             sOfferte.close();
+            sOfferteAttive.close();
 
             iOfferta.close();
             uOfferta.close();
@@ -203,7 +204,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
                 if(offerta.getAzienda() != null)
                 iOfferta.setInt(1, offerta.getAzienda().getKey());
                 else {
-                    iOfferta.setNull(3, java.sql.Types.INTEGER);
+                    iOfferta.setNull(1, java.sql.Types.INTEGER);
                 }
                 
                 iOfferta.setString(2, offerta.getLuogo());

@@ -4,10 +4,15 @@
 Nome: ${studente.nome} <br>
 Cognome: ${studente.cognome}<br>
 Data di Nascita: ${studente.dataNascita}<br>
+<#list candidature as candidatura>
+   ${candidatura.studente.nome} ${candidatura.studente.cognome} si è candidato per ${candidatura.offerta.luogo}
+ </#list>
 </p>
+
 </div>
 
-<div>
+   
+  <div>
         <h1 class="text-dark" id="aziende">Tirocini Attivi</h1>
         <hr>
 
