@@ -6,11 +6,8 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
-import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
-import com.univaq.tirocini.framework.result.TemplateManagerException;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,7 +26,7 @@ public abstract class TirociniBaseController extends HttpServlet {
     private DataSource ds;
 
     protected abstract void action_default(HttpServletRequest request, HttpServletResponse response)
-            throws IOException, ServletException, TemplateManagerException, DataException, IllegalAccessException, InvocationTargetException;
+            throws Exception;
 
     protected void action_error(HttpServletRequest request, HttpServletResponse response) {
         if (request.getAttribute("exception") != null) {
@@ -62,9 +59,7 @@ public abstract class TirociniBaseController extends HttpServlet {
 
         try {
             action_default(request, response);
-        } catch (IOException | TemplateManagerException
-                | IllegalAccessException | InvocationTargetException
-                | DataException | NullPointerException ex) {
+        } catch (Exception ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
         }
@@ -74,6 +69,14 @@ public abstract class TirociniBaseController extends HttpServlet {
     protected void notFound(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         RequestDispatcher view = request.getRequestDispatcher("notFound.html");
         view.forward(request, response);
+    }
+
+    protected void goBack(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        if (request.getParameter("referrer") != null) {
+            response.sendRedirect(request.getParameter("referrer"));
+        } else {
+            response.sendRedirect("Home");
+        }
     }
 
     ////////////////////////////////////////////////////////////////////////////
@@ -87,14 +90,6 @@ public abstract class TirociniBaseController extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         processBaseRequest(request, response);
-    }
-
-    protected void goBack(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        if (request.getParameter("referrer") != null) {
-            response.sendRedirect(request.getParameter("referrer"));
-        } else {
-            response.sendRedirect("Home");
-        }
     }
 
     /**

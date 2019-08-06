@@ -1,33 +1,33 @@
 <div>
     <#if studente??>
-<p>
-Nome: ${studente.nome} <br>
-Cognome: ${studente.cognome}<br>
-Data di Nascita: ${studente.dataNascita}<br>
-<#list candidature as candidatura>
-   ${candidatura.studente.nome} ${candidatura.studente.cognome} si è candidato per ${candidatura.offerta.luogo}
- </#list>
-</p>
+    <p>
+        Nome: ${studente.nome} <br>
+        Cognome: ${studente.cognome}<br>
+        Data di Nascita: ${studente.dataNascita}<br>
+        <#list candidature as candidatura>
+        ${candidatura.studente.nome} ${candidatura.studente.cognome} si è candidato per ${candidatura.offerta.luogo}
+        </#list>
+    </p>
 
 </div>
 
-   
-  <div>
-        <h1 class="text-dark" id="aziende">Tirocini Attivi</h1>
-        <hr>
+
+<div>
+    <h1 class="text-dark" id="aziende">Tirocini Attivi</h1>
+    <hr>
 
     <#if tirocini?? && tirocini?size != 0>
-        <#list tirocini as tirocinio>
-        <div class="col-md col-sm-12 ">
-            <div class="card text-white  mb-3 bg-primary">
-                <div class="card-body">
-                    <h2 class="card-title">Tirocinio con ${tirocinio.azienda.nome}</h2>
-                    <hr>
-                    <p class="card-text">Iniziato il ${tirocinio.inizio}</p>
-                </div>
+    <#list tirocini as tirocinio>
+    <div class="col-md col-sm-12 ">
+        <div class="card text-white  mb-3 bg-primary">
+            <div class="card-body">
+                <h2 class="card-title">Tirocinio con ${tirocinio.azienda.nome}</h2>
+                <hr>
+                <p class="card-text">Iniziato il ${tirocinio.inizio}</p>
             </div>
         </div>
-        </#list>
+    </div>
+    </#list>
     </#if>
 </div>
 </#if>
@@ -36,44 +36,45 @@ Data di Nascita: ${studente.dataNascita}<br>
 
 <#if azienda??>
 <div>
-<p>
-Nome: ${azienda.nome}<br>
-Partita IVA: ${azienda.iva}<br>
-<p>
+    <p>
+        Nome: ${azienda.nome}<br>
+        Partita IVA: ${azienda.iva}<br>
+    <p>
 </div>
 
 <div>
-    <h1 class="text-dark" id="aziende">Offerte attive</h1>    
+    <h1 class="text-dark" id="aziende">Offerte attive 
+        <a href="newOffer" class="btn btn-primary">Nuova</a></h1>
     <#if offerte?? && offerte?size != 0>
-        <#list offerte as offerta>
-        <div class="col-md col-sm-12 ">
-            <div class="card text-white  mb-3 bg-primary">
-                <div class="card-body">
-                    <h2 class="card-title">Offerta a ${offerta.luogo}</h2>
-                    <hr>
-                    <p class="card-text">${offerta.obiettivi}</p>
-                </div>
+    <#list offerte as offerta>
+    <div class="col-md col-sm-12 ">
+        <div class="card text-white  mb-3 bg-primary">
+            <div class="card-body">
+                <h2 class="card-title">Offerta a ${offerta.luogo}</h2>
+                <hr>
+                <p class="card-text">${offerta.obiettivi}</p>
             </div>
         </div>
-        </#list>
+    </div>
+    </#list>
     </#if>
-    
+
     <h1 class="text-dark" id="aziende">Tirocini attivi</h1>    
     <#if tirociniazienda?? && tirociniazienda?size != 0>
-        <#list tirociniazienda as ta>
-        <div class="col-md col-sm-12 ">
-            <div class="card text-white  mb-3 bg-primary">
-                <div class="card-body">
-                    <h2 class="card-title">Tirocinio con ${ta.studente.nome} ${ta.studente.cognome}</h2>
-                    <hr>
-                    <p class="card-text">${ta.settoreInserimento}</p>
-                </div>
+    <#list tirociniazienda as ta>
+    <div class="col-md col-sm-12 ">
+        <div class="card text-white  mb-3 bg-primary">
+            <div class="card-body">
+                <h2 class="card-title">Tirocinio con ${ta.studente.nome} ${ta.studente.cognome}</h2>
+                <hr>
+                <p class="card-text">${ta.settoreInserimento}</p>
             </div>
         </div>
-        </#list>
+    </div>
+    </#list>
     </#if>
-    
-    
+
+
 </div>
-    
+
 </#if>

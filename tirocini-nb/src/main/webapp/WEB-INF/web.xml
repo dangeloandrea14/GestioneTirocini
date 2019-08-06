@@ -60,6 +60,10 @@
         <servlet-name>DettagliOfferta</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.DettagliOfferta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>newOffer</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.newOffer</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -87,6 +91,10 @@
     <servlet-mapping>
         <servlet-name>DettagliOfferta</servlet-name>
         <url-pattern>/DettagliOfferta</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>newOffer</servlet-name>
+        <url-pattern>/newOffer</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
