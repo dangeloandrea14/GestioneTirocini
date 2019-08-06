@@ -18,18 +18,17 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author carlo
  */
-public class Home extends TirociniBaseController {
+public class Companies extends TirociniBaseController {
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
         
-        request.setAttribute("page_title", "Home");
-        request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
+        request.setAttribute("page_title", "Aziende");
         request.setAttribute("aziende", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendeConvenzionate());
-
+        
         TemplateResult res = new TemplateResult(getServletContext());
 
-        res.activate("home.ftl.html", request, response);
+        res.activate("companies.ftl.html", request, response);
     }
 }
