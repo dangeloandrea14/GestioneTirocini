@@ -1,26 +1,27 @@
 <header class="fixed-top  m-0 p-0">
     <div id="navContainer" class="container"></div>
     <nav class=" navbar navbar-expand-lg navbar-expand-md navbar-dark bg-scuro p-2">
-                <a href="Home" class="navbar-brand text-light">
-                    <img class="navbar-brand" id="logo" src="img/logo.png" width="50" height="50"
-                         alt="logo">
-                    Internship Tutor
-                </a>
-        <ul class="navbar-nav mr-auto p-2">
-            <li class="nav-item <#if class == 'Offers'> active</#if>">
-                <a class="nav-link" href="Offers">Offerte</a>                
-            </li>
+        <a href="Home" class="navbar-brand text-light">
+            <img class="navbar-brand" id="logo" src="img/logo.png" width="50" height="50"
+                 alt="logo">
+            Internship Tutor
+        </a>
 
-            <li class="nav-item <#if class == 'Companies'> active</#if>">
-                <a class="nav-link" href="Companies">Aziende</a>
-            </li>
-        </ul>
         <button class="navbar-toggler  m-0 p-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse m-0 p-0" id="navbarSupportedContent">
+        <div class="collapse navbar-collapse m-0 p-0" id="navbarSupportedContent"> 
+            <ul class="navbar-nav navbar-collapse mr-auto p-2">
+                <li class="nav-item <#if class == 'Offers'> active</#if>">
+                    <a class="nav-link" href="Offers">Offerte</a>                
+                </li>
+
+                <li class="nav-item <#if class == 'Companies'> active</#if>">
+                    <a class="nav-link" href="Companies">Aziende</a>
+                </li>
+            </ul>
             <#if username??>
             <ul class="navbar-nav ml-auto m-0 p-0">
                 <li class="dropdown navbar-nav ml-auto  m-0 p-0">
