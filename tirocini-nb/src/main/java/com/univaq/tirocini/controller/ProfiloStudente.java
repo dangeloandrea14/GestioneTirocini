@@ -31,7 +31,9 @@ public class ProfiloStudente extends TirociniBaseController {
 
         request.setAttribute("page_title", "Profilo test");
         
-        request.setAttribute("studente", ((TirocinioDataLayer)request.getAttribute("datalayer")).getStudenteDAO().getStudente(id));
+        Studente studente = (Studente) ((TirocinioDataLayer)request.getAttribute("datalayer")).getStudenteDAO().getStudente(id);
+        request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocini(studente));
+        request.setAttribute("studentep", studente);
          
      
          TemplateResult res = new TemplateResult(getServletContext());       
