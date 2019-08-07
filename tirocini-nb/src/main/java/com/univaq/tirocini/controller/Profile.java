@@ -35,14 +35,14 @@ public class Profile extends TirociniBaseController {
             try {        
                 if(request.getSession().getAttribute("studente") != null){
 
-                request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocini((Studente) request.getSession().getAttribute("studente")));
+                request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi((Studente) request.getSession().getAttribute("studente")));
                 request.setAttribute("candidature",((TirocinioDataLayer)request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature((Studente) request.getSession().getAttribute("studente")));
 
                 }
                 
                 else if(request.getSession().getAttribute("azienda") != null){
                 request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferte((Azienda) request.getSession().getAttribute("azienda")));
-                request.setAttribute("tirociniazienda", ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirocini((Azienda) request.getSession().getAttribute("azienda")));
+                request.setAttribute("tirociniazienda", ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi((Azienda) request.getSession().getAttribute("azienda")));
                 }
                 
                 res.activate("profile.ftl.html", request, response);

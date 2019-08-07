@@ -47,7 +47,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
             sTirociniAttiviByAzienda = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDAzienda=? AND Attivo=1");
             sTirociniAttiviByStudente = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDStudente=? AND Attivo=1");
             sTirociniInattiviByAzienda = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDAzienda=? AND Attivo=0");
-            sTirociniAttiviByAzienda = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDStudente=? AND Attivo=0");
+            sTirociniInattiviByStudente = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDStudente=? AND Attivo=0");
             sTirociniAttivi = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio WHERE Attivo=1");
             sTirociniInattivi = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio WHERE Attivo=0");
             
