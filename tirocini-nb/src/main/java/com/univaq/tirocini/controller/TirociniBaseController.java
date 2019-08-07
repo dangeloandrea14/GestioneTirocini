@@ -45,6 +45,9 @@ public abstract class TirociniBaseController extends HttpServlet {
         try (TirocinioDataLayer datalayer = new TirocinioDataLayer(ds)) {
             datalayer.init();
             request.setAttribute("datalayer", datalayer);
+            
+            request.setAttribute("class", this.getClass().getSimpleName());
+            
             processRequest(request, response);
         } catch (Exception ex) {
             ex.printStackTrace(); //for debugging only

@@ -1,20 +1,37 @@
-<div>
-        <h1 class="text-dark" id="aziende">Aziende convenzionate</h1>
-        <hr>
+<div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-3">
+    
+    <h1 class="text-dark" id="tirocini">Aziende convenzionate</h1>
+    <hr>
+    
+    <#assign x=0>
 
+    <div class="row">
         <#if aziende?? && aziende?size != 0>
         <#list aziende as azienda>
+
         <div class="col-md col-sm-12 ">
             <div class="card text-white  mb-3 bg-primary">
+                <!--<div class="card-header bg-altro">
+                    <h2 class="card-title">Tirocinio</h2>
+                </div>-->
                 <div class="card-body">
-                    <h2 class="card-title">${azienda.nome}</h2>
-                    <hr>
+                    <h3 class="card-title">${azienda.nome}</h3>
                     <p class="card-text">${azienda.descrizione}</p>
+                    <p class="card-text">${azienda.sede}</p>
+                    <hr>
                 </div>
                 <a class="card-footer text-light cardtext btn bg-altro" href="DettagliAzienda?a=${azienda.key}">Mostra dettagli</a>
             </div>
         </div>
-    </#list>
+        <#assign x++>
+        <#if x==3>
+    </div>
+    <div class="row">
+        <#assign x=0>
+        </#if>
+        </#list>
     </div>
     <#else>Nessuna azienda convenzionata
     </#if>
+    
+</div>

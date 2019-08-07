@@ -1,14 +1,17 @@
 <#ftl encoding='UTF-8'>
-<div>
+<div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-3">
 <#if offerta??>
-<p>
-    ${offerta.azienda.nome} <br>
+<h1 class="text-dark" id="tirocini">
+    <small class="text-muted">offerta di tirocinio presso <br></small>${offerta.azienda.nome}</h1>
+    <hr>
+<div>
     ${offerta.luogo} <br>
     ${offerta.obiettivi} <br>
-    ${offerta.durata}  <br>
+    <hr>
     ${offerta.modalità}  <br>
+    ${offerta.durata}  <br>
     ${offerta.orari}  <br>
-</p>
+</div>
 <#else>
 <p>
     Quale offerta?
