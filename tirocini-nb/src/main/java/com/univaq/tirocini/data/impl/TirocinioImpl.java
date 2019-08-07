@@ -1,6 +1,7 @@
 package com.univaq.tirocini.data.impl;
 
 import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Offerta;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Tirocinio;
 import java.sql.Date;
@@ -34,6 +35,8 @@ public class TirocinioImpl implements Tirocinio {
     Boolean attivo;
     
     String pathDocumento;
+    
+    Offerta offerta;
     
     @Override
     public int getKey(){
@@ -153,5 +156,15 @@ public class TirocinioImpl implements Tirocinio {
     @Override
     public void setPathDocumento(String path){
         this.pathDocumento=path;
+    }
+    
+    @Override
+    public Offerta getOfferta(){
+        return this.offerta;
+    }
+    
+    @Override
+    public void setOfferta(Offerta offerta){
+        this.offerta = offerta;
     }
 }

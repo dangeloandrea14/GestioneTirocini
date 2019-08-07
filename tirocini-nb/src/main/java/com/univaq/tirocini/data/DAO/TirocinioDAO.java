@@ -6,6 +6,7 @@
 package com.univaq.tirocini.data.DAO;
 
 import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Offerta;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
@@ -27,6 +28,8 @@ public interface TirocinioDAO {
     List<Tirocinio> getTirocini(Azienda azienda) throws DataException;
     
     List<Tirocinio> getTirocini(Studente studente) throws DataException;
+    
+    List<Tirocinio> getTirocini(Offerta offerta) throws DataException;
     
     List<Tirocinio> getTirocini() throws DataException;
     

@@ -61,4 +61,7 @@ public interface Tirocinio {
     
     void setPathDocumento(String path);
     
+    Offerta getOfferta();
+    
+    void setOfferta(Offerta offerta);
 }

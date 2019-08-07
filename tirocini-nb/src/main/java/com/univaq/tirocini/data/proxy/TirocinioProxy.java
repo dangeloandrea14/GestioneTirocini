@@ -6,9 +6,11 @@
 package com.univaq.tirocini.data.proxy;
 
 import com.univaq.tirocini.data.DAO.AziendaDAO;
+import com.univaq.tirocini.data.DAO.OffertaDAO;
 import com.univaq.tirocini.data.DAO.StudenteDAO;
 import com.univaq.tirocini.data.impl.TirocinioImpl;
 import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Offerta;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.data.DataLayer;
@@ -25,6 +27,7 @@ public class TirocinioProxy extends TirocinioImpl {
   
     protected int azienda_key = 0;
     protected int studente_key = 0;
+    protected int offerta_key = 0;
     protected boolean dirty;
     protected DataLayer dataLayer;
     
@@ -65,7 +68,6 @@ public class TirocinioProxy extends TirocinioImpl {
 
     @Override
     public Studente getStudente() {
-        //notare come l'autore in relazione venga caricato solo su richiesta
         
         if (super.getStudente() == null && studente_key > 0) {
             try {
@@ -80,6 +82,20 @@ public class TirocinioProxy extends TirocinioImpl {
         //nel DB, qui rimarrà la sua "vecchia" versione
        
         return super.getStudente();
+    }
+    
+    @Override
+    public Offerta getOfferta() {
+        
+        if (super.getOfferta() == null && offerta_key > 0) {
+            try {
+                super.setOfferta(((OffertaDAO) dataLayer.getDAO(Offerta.class)).getOfferta(offerta_key));
+            } catch (DataException ex) {
+                Logger.getLogger(TirocinioProxy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        
+        return super.getOfferta();
     }
     
     @Override
@@ -148,6 +164,12 @@ public class TirocinioProxy extends TirocinioImpl {
         this.dirty = true;
     }
     
+    @Override
+    public void setOfferta(Offerta offerta){
+        super.setOfferta(offerta);
+        this.dirty = true;
+    }
+    
     
     //Questi sono i metodi del proxy.
             
@@ -168,5 +190,10 @@ public class TirocinioProxy extends TirocinioImpl {
     public void setStudentekey(int studente_key) {
         this.studente_key = studente_key;
         super.setStudente(null);
+    }
+    
+    public void setOffertakey(int offerta_key){
+        this.offerta_key = offerta_key;
+        super.setOfferta(null);
     }
 }

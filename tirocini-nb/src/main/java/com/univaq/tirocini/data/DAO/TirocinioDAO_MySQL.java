@@ -1,6 +1,7 @@
 package com.univaq.tirocini.data.DAO;
 
 import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Offerta;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.data.proxy.StudenteProxy;
@@ -22,7 +23,7 @@ import java.util.List;
 public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
     
     private PreparedStatement sTirocinioByID;
-    private PreparedStatement sTirocini,sTirociniByAzienda,sTirociniByStudente;
+    private PreparedStatement sTirocini,sTirociniByAzienda,sTirociniByStudente,sTirociniByOfferta;
     private PreparedStatement iTirocinio, uTirocinio, dTirocinio;
     
     
@@ -41,9 +42,10 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
             sTirocini = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio");
             sTirociniByStudente = connection.prepareStatement("SELECT ID AS TirocinioID From Tirocinio where IDStudente=?");
             sTirociniByAzienda = connection.prepareStatement("SELECT ID AS TirocinioID From Tirocinio where IDAzienda=?");
+            sTirociniByOfferta = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDOfferta=?");
             
-            iTirocinio = connection.prepareStatement("INSERT INTO Tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento) VALUES(?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uTirocinio = connection.prepareStatement("UPDATE Tirocinio SET IDAzienda=?,IDStudente=?,Inizio=?,Fine=?, SettoreInserimento=?, TempoDiAccesso=?, NumeroOre=?, TutoreUniversitario=?, TutoreAziendale=?, Attivo=?, PathDocumento=? WHERE ID=?");
+            iTirocinio = connection.prepareStatement("INSERT INTO Tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento,IDOfferta) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uTirocinio = connection.prepareStatement("UPDATE Tirocinio SET IDAzienda=?,IDStudente=?,Inizio=?,Fine=?, SettoreInserimento=?, TempoDiAccesso=?, NumeroOre=?, TutoreUniversitario=?, TutoreAziendale=?, Attivo=?, PathDocumento=?, IDOfferta=? WHERE ID=?");
             dTirocinio = connection.prepareStatement("DELETE FROM Tirocinio WHERE ID=?");
 
         } catch (SQLException ex) {
@@ -76,6 +78,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
             a.setTutoreAziendale(rs.getString("TutoreAziendale"));
             a.setAttivo(rs.getBoolean("Attivo"));
             a.setPathDocumento(rs.getString("PathDocumento"));
+            a.setOffertakey(rs.getInt("IDOfferta"));
             
             
             
@@ -138,6 +141,23 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
         return result;
     }
     
+      @Override
+    public List<Tirocinio> getTirocini(Offerta offerta) throws DataException {
+        List<Tirocinio> result = new ArrayList();
+
+        try {
+            sTirociniByOfferta.setInt(1, offerta.getKey());
+            try (ResultSet rs = sTirociniByOfferta.executeQuery()) {
+                while (rs.next()) {
+                    result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare i tirocini dell'offerta.", ex);
+        }
+        return result;
+    }
+    
     @Override
     public List<Tirocinio> getTirocini() throws DataException {
         List<Tirocinio> result = new ArrayList();
@@ -152,6 +172,7 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
         return result;
     }
     
+
     @Override
     public void storeTirocinio(Tirocinio tirocinio) throws DataException {
         int key = tirocinio.getKey();
@@ -194,8 +215,13 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
                 
                 uTirocinio.setString(11, tirocinio.getPathDocumento());
                 
+                if(tirocinio.getOfferta() != null)
+                uTirocinio.setInt(12, tirocinio.getOfferta().getKey());
+                else {
+                    uTirocinio.setNull(12, java.sql.Types.INTEGER);
+                }
                 
-                uTirocinio.setInt(12, tirocinio.getKey());
+                uTirocinio.setInt(13, tirocinio.getKey());
                
                 uTirocinio.executeUpdate();
                 
@@ -231,6 +257,12 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
                 iTirocinio.setBoolean(10, tirocinio.isAttivo());
                 
                 iTirocinio.setString(11, tirocinio.getPathDocumento());
+                
+                if(tirocinio.getOfferta() != null)
+                uTirocinio.setInt(12, tirocinio.getOfferta().getKey());
+                else {
+                    uTirocinio.setNull(12, java.sql.Types.INTEGER);
+                }
                 
                 if (iTirocinio.executeUpdate() == 1) {
                     try (ResultSet keys = iTirocinio.getGeneratedKeys()) {

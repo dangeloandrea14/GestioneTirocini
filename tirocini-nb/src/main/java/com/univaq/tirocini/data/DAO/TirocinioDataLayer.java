@@ -63,4 +63,5 @@ public class TirocinioDataLayer extends DataLayer {
     public CandidaturaDAO getCandidaturaDAO(){
         return (CandidaturaDAO) getDAO(Candidatura.class);
     }
+    
 }
