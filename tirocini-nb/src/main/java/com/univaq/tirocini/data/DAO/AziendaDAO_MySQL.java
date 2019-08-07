@@ -27,7 +27,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
     
     //Nota: le lettere (s,i,u,d) che precedono i nomi stanno per Select, Insert, Update e Delete.
     private PreparedStatement sAziendaByID,sAziendaByEmail;
-    private PreparedStatement sAziende,sPassword,sAziendeConvenzionate;
+    private PreparedStatement sAziende,sPassword,sAziendeConvenzionate,sAziendeNonConvenzionate;
     private PreparedStatement iAzienda, uAzienda, dAzienda;
 
     public AziendaDAO_MySQL(DataLayer d) {
@@ -43,6 +43,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             sAziendaByID = connection.prepareStatement("SELECT * from Azienda where ID=?");
             sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
             sAziendeConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=1");
+            sAziendeNonConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=0");
             sPassword = connection.prepareStatement("SELECT Password FROM Azienda where emailResponsabile=?");
             sAziendaByEmail = connection.prepareStatement("SELECT * FROM Azienda where emailResponsabile=?");
             
@@ -153,6 +154,20 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
         
     }
     
+    @Override
+    public List<Azienda> getAziendeNonConvenzionate() throws DataException {
+        List<Azienda> result = new ArrayList();
+        
+        try (ResultSet rs = sAziendeNonConvenzionate.executeQuery()){
+            while (rs.next()) {
+                result.add( (Azienda) getAzienda(rs.getInt("AziendaID")));
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare le aziende non convenzionate", ex);
+        }
+        return result;
+        
+    }
     
     @Override
     public Azienda getAziendaFromEmail(String email) throws DataException{
