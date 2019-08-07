@@ -66,6 +66,7 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
             a.setNome(rs.getString("Nome"));
             a.setCognome(rs.getString("Cognome"));
             a.setDataNascita(rs.getDate("DataNascita"));
+            a.setLuogoNascita(rs.getString("LuogoNascita"));
             a.setCF(rs.getString("CF"));
             a.setHandicap(rs.getBoolean("Handicap"));
             a.setEmail(rs.getString("Email"));
