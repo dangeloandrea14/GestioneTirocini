@@ -23,7 +23,8 @@ import java.util.List;
 public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
     
     private PreparedStatement sTirocinioByID;
-    private PreparedStatement sTirocini,sTirociniByAzienda,sTirociniByStudente,sTirociniByOfferta;
+    private PreparedStatement sTirocini,sTirociniByAzienda,sTirociniByStudente,sTirociniByOfferta,sTirociniAttivi,sTirociniInattivi;
+    private PreparedStatement sTirociniAttiviByAzienda, sTirociniInattiviByAzienda, sTirociniAttiviByStudente, sTirociniInattiviByStudente;
     private PreparedStatement iTirocinio, uTirocinio, dTirocinio;
     
     
@@ -43,6 +44,12 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
             sTirociniByStudente = connection.prepareStatement("SELECT ID AS TirocinioID From Tirocinio where IDStudente=?");
             sTirociniByAzienda = connection.prepareStatement("SELECT ID AS TirocinioID From Tirocinio where IDAzienda=?");
             sTirociniByOfferta = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDOfferta=?");
+            sTirociniAttiviByAzienda = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDAzienda=? AND Attivo=1");
+            sTirociniAttiviByStudente = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDStudente=? AND Attivo=1");
+            sTirociniInattiviByAzienda = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDAzienda=? AND Attivo=0");
+            sTirociniAttiviByAzienda = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio where IDStudente=? AND Attivo=0");
+            sTirociniAttivi = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio WHERE Attivo=1");
+            sTirociniInattivi = connection.prepareStatement("SELECT ID AS TirocinioID FROM Tirocinio WHERE Attivo=0");
             
             iTirocinio = connection.prepareStatement("INSERT INTO Tirocinio (IDAzienda, IDStudente, Inizio, Fine, SettoreInserimento, TempoDiAccesso, NumeroOre, TutoreUniversitario, TutoreAziendale, Attivo, PathDocumento,IDOfferta) VALUES(?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             uTirocinio = connection.prepareStatement("UPDATE Tirocinio SET IDAzienda=?,IDStudente=?,Inizio=?,Fine=?, SettoreInserimento=?, TempoDiAccesso=?, NumeroOre=?, TutoreUniversitario=?, TutoreAziendale=?, Attivo=?, PathDocumento=?, IDOfferta=? WHERE ID=?");
@@ -172,7 +179,103 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
         return result;
     }
     
+       @Override
+    public List<Tirocinio> getTirociniAttivi(Azienda azienda) throws DataException {
+        List<Tirocinio> result = new ArrayList();
 
+        try {
+            sTirociniAttiviByAzienda.setInt(1, azienda.getKey());
+            try (ResultSet rs = sTirociniAttiviByAzienda.executeQuery()) {
+                while (rs.next()) {
+                    result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare i tirocini attivi dell'azienda.", ex);
+        }
+        return result;
+    }
+    
+       @Override
+    public List<Tirocinio> getTirociniAttivi(Studente studente) throws DataException {
+        List<Tirocinio> result = new ArrayList();
+
+        try {
+            sTirociniAttiviByStudente.setInt(1, studente.getKey());
+            try (ResultSet rs = sTirociniAttiviByStudente.executeQuery()) {
+                while (rs.next()) {
+                    result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare i tirocini attivi dello studente.", ex);
+        }
+        return result;
+    }
+
+       @Override
+    public List<Tirocinio> getTirociniInattivi(Azienda azienda) throws DataException {
+        List<Tirocinio> result = new ArrayList();
+
+        try {
+            sTirociniInattiviByAzienda.setInt(1, azienda.getKey());
+            try (ResultSet rs = sTirociniInattiviByAzienda.executeQuery()) {
+                while (rs.next()) {
+                    result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare i tirocini inattivi dell'azienda.", ex);
+        }
+        return result;
+    }
+    
+       @Override
+    public List<Tirocinio> getTirociniInattivi(Studente studente) throws DataException {
+        List<Tirocinio> result = new ArrayList();
+
+        try {
+            sTirociniInattiviByStudente.setInt(1, studente.getKey());
+            try (ResultSet rs = sTirociniInattiviByStudente.executeQuery()) {
+                while (rs.next()) {
+                    result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare i tirocini inattivi dello studente.", ex);
+        }
+        return result;
+    }
+    
+    @Override
+    public List<Tirocinio> getTirociniAttivi() throws DataException {
+        List<Tirocinio> result = new ArrayList();
+
+        try (ResultSet rs = sTirociniAttivi.executeQuery()) {
+            while (rs.next()) {
+                result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare i tirocini attivi.", ex);
+        }
+        return result;
+    }
+    
+     @Override
+    public List<Tirocinio> getTirociniInattivi() throws DataException {
+        List<Tirocinio> result = new ArrayList();
+
+        try (ResultSet rs = sTirociniInattivi.executeQuery()) {
+            while (rs.next()) {
+                result.add((Tirocinio) getTirocinio(rs.getInt("TirocinioID")));
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare i tirocini inattivi.", ex);
+        }
+        return result;
+    }
+    
+    
     @Override
     public void storeTirocinio(Tirocinio tirocinio) throws DataException {
         int key = tirocinio.getKey();

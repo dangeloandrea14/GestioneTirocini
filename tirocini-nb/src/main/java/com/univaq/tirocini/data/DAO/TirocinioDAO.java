@@ -31,6 +31,18 @@ public interface TirocinioDAO {
     
     List<Tirocinio> getTirocini(Offerta offerta) throws DataException;
     
+    List<Tirocinio> getTirociniAttivi(Azienda azienda) throws DataException;
+    
+    List<Tirocinio> getTirociniAttivi(Studente studente) throws DataException;
+    
+    List<Tirocinio> getTirociniInattivi(Azienda azienda) throws DataException;
+    
+    List<Tirocinio> getTirociniInattivi(Studente studente) throws DataException;
+    
+    List<Tirocinio> getTirociniAttivi() throws DataException;
+    
+    List<Tirocinio> getTirociniInattivi() throws DataException;
+    
     List<Tirocinio> getTirocini() throws DataException;
     
     void storeTirocinio(Tirocinio tirocinio) throws DataException;
