@@ -6,6 +6,7 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
+import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
 import java.io.IOException;
 import javax.annotation.Resource;
@@ -36,23 +37,49 @@ public abstract class TirociniBaseController extends HttpServlet {
         }
     }
 
-    private void processBaseRequest(HttpServletRequest request, HttpServletResponse response) {
+    private void prepareDataLayer(HttpServletRequest request, HttpServletResponse response, TirocinioDataLayer datalayer) throws DataException {
         //WARNING: never declare DB-related objects including references to Connection and Statement (as our data layer)
         //as class variables of a servlet. Since servlet instances are reused, concurrent requests may conflict on such
         //variables leading to unexpected results. To always have different connections and statements on a per-request
         //(i.e., per-thread) basis, declare them in the doGet, doPost etc. (or in methods called by them) and 
         //(possibly) pass such variables through the request.
+        datalayer.init();
+        request.setAttribute("datalayer", datalayer);
+
+        request.setAttribute("class", this.getClass().getSimpleName());
+    }
+
+    private void processBaseRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try (TirocinioDataLayer datalayer = new TirocinioDataLayer(ds)) {
-            datalayer.init();
-            request.setAttribute("datalayer", datalayer);
-            
-            request.setAttribute("class", this.getClass().getSimpleName());
-            
+            prepareDataLayer(request, response, datalayer);
             processRequest(request, response);
         } catch (Exception ex) {
             ex.printStackTrace(); //for debugging only
             (new FailureResult(getServletContext())).activate(
                     (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
+        }
+    }
+
+    private void processBasePost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+        try (TirocinioDataLayer datalayer = new TirocinioDataLayer(ds)) {
+            prepareDataLayer(request, response, datalayer);
+            processPostRequest(request, response);
+        } catch (Exception ex) {
+            ex.printStackTrace(); //for debugging only
+            (new FailureResult(getServletContext())).activate(
+                    (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
+        }
+    }
+
+    //a base mathod that just calls action_default and handles exceptions
+    protected void processPostRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException {
+
+        try {
+            action_default(request, response);
+        } catch (Exception ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
         }
     }
 
@@ -92,7 +119,7 @@ public abstract class TirociniBaseController extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processBaseRequest(request, response);
+        processBasePost(request, response);
     }
 
     /**
@@ -102,6 +129,6 @@ public abstract class TirociniBaseController extends HttpServlet {
      */
     @Override
     public String getServletInfo() {
-        return this.getClass().getName() + " servlet";
+        return this.getClass().getSimpleName() + " servlet";
     }// </editor-fold>
 }

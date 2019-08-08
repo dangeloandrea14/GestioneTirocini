@@ -133,22 +133,29 @@ public class Registration extends TirociniBaseController {
     }
 
     @Override
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            if (request.getMethod().equals("POST")) {
-                registerNewUser(request, response);
-            } else {
                 action_default(request, response);
-            }
 
-        } catch (IOException | TemplateManagerException | 
-                IllegalAccessException | InvocationTargetException | 
-                DataException ex) {
+        } catch (IOException | TemplateManagerException | ServletException  ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
 
         }
     }
+    
+    @Override
+    protected void processPostRequest(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+                registerNewUser(request, response);
+
+        } catch (IllegalAccessException | InvocationTargetException | 
+                DataException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+        }
+    }
+    
 }

@@ -64,9 +64,13 @@ public class Login extends TirociniBaseController {
         s = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenteFromEmail(username);
 
         if (s != null) { //trovato studenti
-            loginType = "studente";
             userid = s.getKey();
             passwordHash = s.getPassword();
+            if (s.getRuolo() == 1) { //usiamo come admin gli studenti con ruolo 1
+                loginType = "admin";
+            } else {
+                loginType = "studente";
+            }
         } else {
 
             //se non trovo uno studente provo con un'azienda
@@ -90,15 +94,19 @@ public class Login extends TirociniBaseController {
 
         //creiamo la sessione
         HttpSession session = SecurityLayer.createSession(request, username, userid, loginType);
-        if (loginType.equals("studente")) {
-            session.setAttribute("studente", s);
-        } else {
+        if (loginType.equals("azienda")) {
             session.setAttribute("azienda", a);
+        } else { //se studente o admin carichiamo lo studente
+            session.setAttribute("studente", s);
         }
 
-        //se è stato trasmesso un URL di origine, torniamo a quell'indirizzo
-        //if an origin URL has been transmitted, return to it
-        goBack(request, response);
+        if (loginType.equals("admin")) {
+            response.sendRedirect("Admin");
+        } else {
+            //se è stato trasmesso un URL di origine, torniamo a quell'indirizzo
+            //if an origin URL has been transmitted, return to it
+            goBack(request, response);
+        }
     }
 
     private void login_failed(HttpServletRequest request, HttpServletResponse response) {
@@ -107,20 +115,27 @@ public class Login extends TirociniBaseController {
     }
 
     @Override
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            if (request.getMethod().equals("POST")) {
-                action_login(request, response);
-            } else {
-                action_default(request, response);
-            }
+            action_default(request, response);
 
-        } catch (IOException | TemplateManagerException | DataException ex) {
+        } catch (Exception ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
 
+        }
+    }
+
+    @Override
+    protected void processPostRequest(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+            action_login(request, response);
+
+        } catch (Exception ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
         }
     }
 

@@ -80,6 +80,10 @@
         <servlet-name>NotFound</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.NotFound</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Admin</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.Admin</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -127,6 +131,10 @@
     <servlet-mapping>
         <servlet-name>NotFound</servlet-name>
         <url-pattern>/NotFound</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Admin</servlet-name>
+        <url-pattern>/Admin</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

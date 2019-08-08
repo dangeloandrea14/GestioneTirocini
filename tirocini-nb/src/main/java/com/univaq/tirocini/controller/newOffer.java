@@ -64,22 +64,29 @@ public class newOffer extends TirociniBaseController {
         request.setAttribute("exception", new Exception("Creation failed"));
         action_error(request, response);
     }
-
+    
     @Override
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException {
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-            if (request.getMethod().equals("POST")) {
-                action_create(request, response);
-            } else {
                 action_default(request, response);
-            }
+
+        } catch (Exception  ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+
+        }
+    }
+    
+    @Override
+    protected void processPostRequest(HttpServletRequest request, HttpServletResponse response) {
+
+        try {
+                action_create(request, response);
 
         } catch (Exception ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
-
         }
     }
 }
