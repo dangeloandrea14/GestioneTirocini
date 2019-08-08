@@ -5,6 +5,8 @@
  */
 package com.univaq.tirocini.data.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author carlo
@@ -46,6 +48,10 @@ public interface Offerta {
     public int getCFU();
     
     public void setCFU(int cfu);
+    
+    public Date getDataInserimento();
+    
+    public void setDataInserimento(Date date);
 
     public boolean isAttiva();
 

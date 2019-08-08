@@ -92,6 +92,10 @@
         <servlet-name>CandidaturaServlet</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.CandidaturaServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Gestioneofferta</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.Gestioneofferta</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -151,6 +155,10 @@
     <servlet-mapping>
         <servlet-name>CandidaturaServlet</servlet-name>
         <url-pattern>/Candidatura</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Gestioneofferta</servlet-name>
+        <url-pattern>/Gestioneofferta</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

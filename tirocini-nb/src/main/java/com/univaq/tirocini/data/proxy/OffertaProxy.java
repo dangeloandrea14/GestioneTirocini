@@ -10,6 +10,7 @@ import com.univaq.tirocini.data.impl.OffertaImpl;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.data.DataLayer;
+import java.sql.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -96,6 +97,18 @@ public class OffertaProxy extends OffertaImpl {
     @Override
     public void setRimborsoSpese(String rimborso){
         super.setRimborsoSpese(rimborso);
+        this.dirty = true;
+    }
+    
+    @Override
+    public void setCFU(int cfu){
+        super.setCFU(cfu);
+        this.dirty = true;
+    }
+    
+    @Override
+    public void setDataInserimento(Date data){
+        super.setDataInserimento(data);
         this.dirty = true;
     }
     

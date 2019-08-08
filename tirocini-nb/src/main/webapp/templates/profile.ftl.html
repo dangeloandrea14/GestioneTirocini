@@ -86,7 +86,12 @@
                     <h3 class="card-title">Descrizione</h3>
                     <p class="cardtext">${offerta.obiettivi}</p>
                     <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${offerta.key}">Mostra dettagli</a>
+         <form action="Gestioneofferta" id="gestioneofferta">
+        <input type="hidden" id="oid" name="oid" value="${offerta.key}">
+        <button form="gestioneofferta" type="submit"> Gestisci </button> <br>
+        </form>
                  </div>
+                 <hr>
             </div>
         </div>
     </#list>

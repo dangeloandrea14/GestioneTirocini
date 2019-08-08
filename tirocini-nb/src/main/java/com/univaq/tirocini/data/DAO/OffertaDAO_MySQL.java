@@ -94,6 +94,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
                 a.setRimborsoSpese(rs.getString("RimborsoSpese"));
                 a.setCFU(rs.getInt("CFU"));
                 a.setAttiva(rs.getBoolean("Attiva"));
+                a.setDataInserimento(rs.getDate("DataInserimento"));
                 
             } catch (SQLException ex) {
                 throw new DataException("Impossibile creare l'offerta dal ResultSet", ex);

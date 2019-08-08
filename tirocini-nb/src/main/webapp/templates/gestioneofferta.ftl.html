@@ -1,0 +1,28 @@
+<h2> Informazioni sull'offerta </h2>
+
+Questa offerta &egrave; stata pubblicata il ${offerta.dataInserimento} da ${offerta.azienda.nomeResponsabile} ${offerta.azienda.cognomeResponsabile}. <br>
+La durata &egrave; di ${offerta.durata}, negli orari ${offerta.orari}.<br>
+Per controllare come questa offerta appare pubblicamente, <a href='/tirocini/DettagliOfferta?o=${offerta.key}'>clicca qui.</a>
+
+<hr>
+
+<strong>Rimborso spese: </strong> ${offerta.rimborsoSpese} <br>
+
+<hr>
+
+<#if candidature??>
+    
+<h5> Gli studenti che si sono candidati a questa offerta sono: </h5>
+
+<#list candidature as candidatura>
+
+${candidatura.studente.nome} ${candidatura.studente.cognome} 
+<a href='/tirocini/student?id=${candidatura.studente.key}'> Vedi Profilo </a>
+<button type="button" class="btn btn-outline-success">Accetta</button>
+<button type="button" class="btn btn-outline-danger">Rifiuta</button>
+<hr>
+
+</#list>
+
+
+</#if>

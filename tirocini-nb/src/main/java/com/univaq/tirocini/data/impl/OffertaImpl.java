@@ -7,6 +7,7 @@ package com.univaq.tirocini.data.impl;
 
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Offerta;
+import java.sql.Date;
 
 /**
  *
@@ -23,6 +24,7 @@ public class OffertaImpl implements Offerta {
     String rimborsoSpese;
     int cfu;
     boolean attiva;
+    Date datainserimento;
 
     @Override
     public int getKey(){
@@ -113,7 +115,17 @@ public class OffertaImpl implements Offerta {
     public void setCFU(int cfu){
         this.cfu = cfu;
     }
+    
+    @Override
+    public Date getDataInserimento(){
+        return this.datainserimento;
+    }
 
+    @Override
+    public void setDataInserimento(Date data){
+        this.datainserimento = data;
+    }
+    
     @Override
     public boolean isAttiva() {
         return attiva;
