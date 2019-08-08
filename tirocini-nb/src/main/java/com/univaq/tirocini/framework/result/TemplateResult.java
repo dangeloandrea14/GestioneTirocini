@@ -246,6 +246,7 @@ public class TemplateResult {
         Map datamodel = getRequestDataModel(request);
         if(SecurityLayer.checkSession(request) != null) {
             datamodel.put("username", (String)request.getSession().getAttribute("username"));
+            datamodel.put("type", (String)request.getSession().getAttribute("type"));
             datamodel.put("studente", request.getSession().getAttribute("studente"));
             datamodel.put("azienda", request.getSession().getAttribute("azienda"));
         }

@@ -8,13 +8,16 @@ package com.univaq.tirocini.controller;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
+import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 
 /**
@@ -50,6 +53,18 @@ public abstract class TirociniBaseController extends HttpServlet {
     }
 
     private void processBaseRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
+
+        if (!checkAllowed(request)) {
+            try {
+                goToDefault(request, response);
+            } catch (IOException ex) {
+                ex.printStackTrace(); //for debugging only
+                (new FailureResult(getServletContext())).activate(
+                        (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
+            }
+            return;
+        }
+
         try (TirocinioDataLayer datalayer = new TirocinioDataLayer(ds)) {
             prepareDataLayer(request, response, datalayer);
             processRequest(request, response);
@@ -107,6 +122,41 @@ public abstract class TirociniBaseController extends HttpServlet {
         } else {
             response.sendRedirect("Home");
         }
+    }
+
+    protected void goToDefault(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        HttpSession session = SecurityLayer.checkSession(request);
+        if (session != null && session.getAttribute("DefaultPage") != null) {
+            response.sendRedirect((String) session.getAttribute("DefaultPage"));
+        } else {
+            response.sendRedirect("Home");
+        }
+    }
+
+    /**
+     * Controlla che l'utente possa visualizzare la pagine
+     *
+     */
+    private boolean checkAllowed(HttpServletRequest request) {
+        HttpSession session = SecurityLayer.checkSession(request);
+        String requested = request.getServletPath();
+        System.out.println(requested);
+        if (session == null)
+        {
+            //ogni servlet dovrebbe reindirizzare
+            //le richieste senza sessione
+            //si può migliorare
+            return true;
+        }
+
+        List<String> forbidden = (List<String>) session.getAttribute("ForbiddenPages");
+        if (forbidden != null && forbidden.contains(requested)) {
+            return false;
+        }
+
+        List<String> allowed = (List<String>) session.getAttribute("AllowedPages");
+        //se non impostato AllowedPages permettiamo tutto
+        return (allowed == null || allowed.contains(requested));
     }
 
     ////////////////////////////////////////////////////////////////////////////

@@ -14,6 +14,8 @@ import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.Password;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,9 @@ import javax.servlet.http.HttpSession;
  * @author carlo
  */
 public class Login extends TirociniBaseController {
+    
+    private static final List<String> adminAllowed = Arrays.asList("/Logout","/Admin","/DettagliAzienda");
+    private static final List<String> adminForbidden = Arrays.asList("/Profile");
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
@@ -101,6 +106,9 @@ public class Login extends TirociniBaseController {
         }
 
         if (loginType.equals("admin")) {
+            session.setAttribute("AllowedPages", null);
+            session.setAttribute("DefaultPage", "Admin");
+            session.setAttribute("ForbiddenPages", adminForbidden);
             response.sendRedirect("Admin");
         } else {
             //se è stato trasmesso un URL di origine, torniamo a quell'indirizzo

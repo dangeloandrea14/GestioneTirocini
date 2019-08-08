@@ -30,7 +30,9 @@
                     </a>
                     <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenu">
                         <a class="dropdown-item" href="Profile">Profilo</a>
-                        <a class="dropdown-item" href="#">Boh</a>
+                        <#if type = "admin">
+                        <a class="dropdown-item" href="Admin">Pannello amministratore</a>
+                        </#if>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="Logout">Logout</a>
                     </div>
