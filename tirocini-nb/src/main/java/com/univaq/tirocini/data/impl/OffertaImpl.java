@@ -21,6 +21,7 @@ public class OffertaImpl implements Offerta {
     String obiettivi;
     String modalità;
     String rimborsoSpese;
+    int cfu;
     boolean attiva;
 
     @Override
@@ -101,6 +102,16 @@ public class OffertaImpl implements Offerta {
     @Override
     public void setRimborsoSpese(String rimborsoSpese) {
         this.rimborsoSpese = rimborsoSpese;
+    }
+    
+    @Override
+    public int getCFU(){
+        return this.cfu;
+    }
+    
+    @Override
+    public void setCFU(int cfu){
+        this.cfu = cfu;
     }
 
     @Override

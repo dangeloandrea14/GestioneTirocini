@@ -41,8 +41,8 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
        
         //Ora precompiliamo insert, update, delete
         
-        iOfferta = connection.prepareStatement("INSERT INTO Offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese,Attiva) VALUES(?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-        uOfferta = connection.prepareStatement("UPDATE Offerta SET IDAzienda=?,Luogo=?, Orari=?, Durata=?, Obiettivi=?, Modalità=?, RimborsoSpese=?, Attiva=? WHERE ID=?");
+        iOfferta = connection.prepareStatement("INSERT INTO Offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese,CFU,Attiva) VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        uOfferta = connection.prepareStatement("UPDATE Offerta SET IDAzienda=?,Luogo=?, Orari=?, Durata=?, Obiettivi=?, Modalità=?, RimborsoSpese=?, CFU=?, Attiva=? WHERE ID=?");
         dOfferta = connection.prepareStatement("DELETE FROM Offerta WHERE ID=?");
 
       }
@@ -92,6 +92,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
                 a.setObiettivi(rs.getString("Obiettivi"));
                 a.setModalità(rs.getString("Modalità"));
                 a.setRimborsoSpese(rs.getString("RimborsoSpese"));
+                a.setCFU(rs.getInt("CFU"));
                 a.setAttiva(rs.getBoolean("Attiva"));
                 
             } catch (SQLException ex) {
@@ -193,9 +194,11 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
                 
                 uOfferta.setString(7, offerta.getRimborsoSpese());
                 
-                uOfferta.setBoolean(8, offerta.isAttiva());
+                uOfferta.setInt(8, offerta.getCFU());
                 
-                uOfferta.setInt(9, offerta.getKey());
+                uOfferta.setBoolean(9, offerta.isAttiva());
+                
+                uOfferta.setInt(10, offerta.getKey());
                 uOfferta.executeUpdate();
                 
             }
@@ -219,7 +222,9 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
                 
                 iOfferta.setString(7, offerta.getRimborsoSpese());
                 
-                iOfferta.setBoolean(8, offerta.isAttiva());
+                iOfferta.setInt(8, offerta.getCFU());
+                
+                iOfferta.setBoolean(9, offerta.isAttiva());
                 
                 if (iOfferta.executeUpdate() == 1) {
                     

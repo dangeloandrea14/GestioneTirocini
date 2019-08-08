@@ -42,6 +42,10 @@ public interface Offerta {
     public String getRimborsoSpese();
 
     public void setRimborsoSpese(String rimborsoSpese);
+    
+    public int getCFU();
+    
+    public void setCFU(int cfu);
 
     public boolean isAttiva();
 
