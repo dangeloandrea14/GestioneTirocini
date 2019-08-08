@@ -16,10 +16,13 @@
 }
 
 .bg-scuro{
-   background-color:  #0059b3;
+    background-color:  #0059b3;
 }
 .bg-altro{
     background-color:#0071e4;
+}
+.bg-footer{
+    background-color:#e8e8e8;
 }
 
 html,body{
@@ -27,7 +30,6 @@ html,body{
     padding: 0;
     margin: 0;
     background-color: var(--background);
-
 }
 
 section{
@@ -35,7 +37,6 @@ section{
 }
 body{
     padding-top:93px;
-   
 }
 
 
@@ -53,16 +54,16 @@ body{
 }
 
 .navbar {
-	position: relative;
-	display: -ms-flexbox;
-	display: flex;
-	-ms-flex-wrap: wrap;
-	flex-wrap: wrap;
-	-ms-flex-align: center;
-	align-items: center;
-	-ms-flex-pack: justify;
-	justify-content: space-between;
-	padding: 1rem 1rem;
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding: 1rem 1rem;
 }
 #logo{
     border:solid 1px;
@@ -71,12 +72,7 @@ body{
     padding:4px;
     font-size: 1.5rem;
 }
-footer {	
-    
-	color: white;	
-	
-	padding: 10px;
-}
+
 #credits{
     text-align: right;
 }
@@ -86,20 +82,20 @@ footer {
 }
 
 
-    .navbar-brand {
-        display: inline-block;
-        padding-top: .3125rem;
-        padding-bottom: .3125rem;
-        margin-right: 1rem;
-        font-size: 1.8rem;
-        line-height: inherit;
-        white-space: nowrap;
+.navbar-brand {
+    display: inline-block;
+    padding-top: .3125rem;
+    padding-bottom: .3125rem;
+    margin-right: 1rem;
+    font-size: 1.8rem;
+    line-height: inherit;
+    white-space: nowrap;
+}
+@media only screen and (max-width: 768px) { 
+    .navbar-brand{
+        font-size:1.6rem;
     }
-    @media only screen and (max-width: 768px) { 
-        .navbar-brand{
-            font-size:1.6rem;
-        }
-    }
+}
 
 .nav-link{
     font-size:20px;
@@ -120,11 +116,14 @@ footer {
 #body{
     padding: 30px;
 }
+
 .offerte{
-   max-width: 25rem;
+    max-width: 25rem;
 }
- 
+
 footer{
+    color: white;
+    padding: 10px;
     margin:0;
     padding:0;
 }

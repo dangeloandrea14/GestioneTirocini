@@ -70,7 +70,7 @@ public abstract class TirociniBaseController extends HttpServlet {
 
     /* Utility methods */
     protected void notFound(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        RequestDispatcher view = request.getRequestDispatcher("notFound.html");
+        RequestDispatcher view = request.getRequestDispatcher("NotFound");
         view.forward(request, response);
     }
 

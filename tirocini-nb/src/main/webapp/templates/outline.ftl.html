@@ -23,24 +23,28 @@
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
         </script>
 
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
+
         <link rel="stylesheet" href="style/style.css">
 
 
     </head>
 
-    <body>
+    <body class="d-flex flex-column h-100">
+        <!-- Begin page content -->
+        <main role="main" class="flex-shrink-0">
 
-        <#include "header.ftl.html">
-        <!--
-          <div class="container-fluid pl-0 pr-0">
-           <section id="showcase">
-             <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos hic eaque modi pariatur ad. Deserunt id nihil, iste ipsum totam corrupti velit sapiente explicabo, fugit ipsam nobis non quidem repellat.</p>
-           </section> 
-          </div>
-        -->
+            <#include "header.ftl.html">
+            <!--
+              <div class="container-fluid pl-0 pr-0">
+               <section id="showcase">
+                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos hic eaque modi pariatur ad. Deserunt id nihil, iste ipsum totam corrupti velit sapiente explicabo, fugit ipsam nobis non quidem repellat.</p>
+               </section> 
+              </div>
+            -->
 
-        <#include content_tpl>
-
+            <#include content_tpl>
+        </main>
 
         <#include "footer.ftl.html">
 

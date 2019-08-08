@@ -72,9 +72,13 @@
         <servlet-name>Companies</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.Companies</servlet-class>
     </servlet>
-     <servlet>
+    <servlet>
         <servlet-name>student</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.ProfiloStudente</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>NotFound</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.NotFound</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -120,6 +124,10 @@
         <servlet-name>student</servlet-name>
         <url-pattern>/student</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>NotFound</servlet-name>
+        <url-pattern>/NotFound</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -133,7 +141,7 @@
     </resource-ref>
     <error-page>
         <error-code>404</error-code>
-        <location>/notFound.html</location>
+        <location>/NotFound</location>
     </error-page>
     <res-ref-name>jdbc/webdb2</res-ref-name>
 </web-app>
