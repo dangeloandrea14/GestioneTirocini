@@ -127,3 +127,8 @@ footer{
     margin:0;
     padding:0;
 }
+
+.dropdown-menu >  a:hover, .dropdown-menu  > a:focus {
+    background-color: #0059b3;
+    color:white;
+}
