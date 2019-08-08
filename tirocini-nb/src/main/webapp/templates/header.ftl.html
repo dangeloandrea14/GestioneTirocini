@@ -24,20 +24,26 @@
             </ul>
             <#if username??>
             <ul class="navbar-nav ml-auto m-0 p-0">
-                <li class="dropdown navbar-nav ml-auto  m-0 p-0">
-                    <a class="btn btn-primary dropdown-toggle" href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        ${username}
-                    </a>
-                    <div class="dropdown-menu bg-light" aria-labelledby="dropdownMenu">
-                        <a class="dropdown-item" href="Profile">Profilo</a>
-                        <#if type = "admin">
-                        <a class="dropdown-item" href="Admin">Pannello amministratore</a>
-                        </#if>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Logout">Logout</a>
-                    </div>
-                </li>
-            </ul>
+                    <li class="dropdown navbar-nav ml-auto m-0 p-0">
+                        <a class="btn border-white dropdown-toggle btn-primary bg-scuro"  href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                           <img class="mr-1" alt="impostazioni" src="img/settings.png" >
+                           
+                        </a> 
+                        
+                        <div class="dropdown-menu bg-light dropdown-menu-right" aria-labelledby="dropdownMenu">
+                            <h6 class="dropdown-header">Registrato come:
+                                <b>${username}</b>
+                              </h6>
+                        <div class="dropdown-divider">  </div>      
+                          <a class="dropdown-item" href="Profile">Profilo</a>
+                            <a class="dropdown-item" href="#">Boh</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="Logout">Logout</a>
+                        </div>
+                 
+                
+                      </li>
+                    </ul>  
             <#else>
             <ul class="navbar-nav ml-auto ">
                 <li class="nav-item mx-2 text-center">
