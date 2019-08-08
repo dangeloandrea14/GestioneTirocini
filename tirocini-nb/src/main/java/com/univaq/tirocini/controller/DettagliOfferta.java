@@ -6,11 +6,15 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
+import com.univaq.tirocini.data.model.Candidatura;
 import com.univaq.tirocini.data.model.Offerta;
+import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +43,22 @@ public class DettagliOfferta extends TirociniBaseController {
             return;
         }
 
+        //Controlliamo che l'utente non si sia già candidato
+        if(request.getSession().getAttribute("studente") != null){ 
+       List<Candidatura> list = ((TirocinioDataLayer)request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature((Studente) request.getSession().getAttribute("studente"));
+       Iterator it=list.iterator();
+       Boolean already=false;
+       request.setAttribute("already",false);
+       
+       //Controlliamo che non sia già presente
+         while(it.hasNext()){
+           if(( (Candidatura)it.next()).getOfferta().getKey() == offerta.getKey()){
+               already=true;
+               request.setAttribute("already",true);
+           }
+             }    
+        }
+        
         request.setAttribute("page_title", "Dettagli offerta tirocinio");
         request.setAttribute("offerta", offerta);
 

@@ -84,6 +84,14 @@
         <servlet-name>Admin</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.Admin</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Convenzione</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.Convenzione</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>CandidaturaServlet</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.CandidaturaServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -135,6 +143,14 @@
     <servlet-mapping>
         <servlet-name>Admin</servlet-name>
         <url-pattern>/Admin</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Convenzione</servlet-name>
+        <url-pattern>/Convenzione</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CandidaturaServlet</servlet-name>
+        <url-pattern>/Candidatura</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

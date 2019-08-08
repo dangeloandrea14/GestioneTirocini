@@ -11,6 +11,26 @@
     ${offerta.modalità}  <br>
     ${offerta.durata}  <br>
     ${offerta.orari}  <br>
+    
+    <hr>
+    
+    <#if studente??>
+        <#if already==false>
+        <form action="Candidatura" id="candidatura">
+        <input type="hidden" id="oid" name="oid" value="${offerta.key}">
+        <button form="candidatura" type="submit"> Candidati </button> <br>
+        </form>
+        <small>
+        Attenzione: Ti ricordiamo che la tua candidatura verrà segnalata all'azienda ${offerta.azienda.nome}. <br>
+        L'esito ti verrà comunicato dal sistema.
+        </small>
+        <#else>
+        Ti sei già candidato per questa offerta.
+        </#if>
+    <#else>
+    Devi aver effettuato il login come Studente per poterti candidare.
+    </#if>
+    
 </div>
 <#else>
 <p>
