@@ -1,0 +1,59 @@
+<h1> Generazione File Tirocinio </h1>
+
+Studente: <a href="student?id=${studenteT.key}"> ${studenteT.nome} ${studenteT.cognome}</a> <br>
+Offerta: <a href="DettagliOfferta?o=${offerta.key}"> Offerta a ${offerta.luogo} </a>
+
+
+
+<form method="POST">
+    <input type="hidden" id="sid" name="sid" value="${studenteT.key}">
+    <input type="hidden" id="aid" name="aid" value="${aziendaT.key}">
+    <input type="hidden" id="oid" name="oid" value="${offerta.key}">
+
+            <div class="container pt-3 pb-3">
+                <h3 class="text-center">Crea nuovo tirocinio</h3>
+                <div class="form-group mt-4 ">
+                    <label for="inizio"> Inizio </label>
+                    <input id="inizio" name="inizio" type="date" class="form-control text-center" required="required" autofocus>
+                </div>
+
+                <div class="form-group">
+                     <label for="fine"> Fine </label>
+                    <input id="fine" name="fine" type="date" class="form-control text-center" required="required"/>
+                </div>
+                
+                <div class="form-group">
+                    <input id="settoreinserimento" name="settoreinserimento" placeholder="Settore Inserimento" class="form-control text-center" required="required">
+                </div>
+
+                <div class="form-group">
+                    <input id="tempodiaccesso" name="tempodiaccecsso"  type="text" placeholder="Tempo di Accesso" class="form-control text-center" required="required">
+                </div>
+                
+                <div class="form-group ">
+                    <input id="numeroore" name="numeroore"  type="text" placeholder="Numero ore" class="form-control text-center" required="required">
+                </div>
+                
+                <div class="form-group ">
+                    <textarea id="tutoreuniversitario" name="tutoreuniversitario" placeholder="Tutore Universitario" class="form-control text-center" required="required"></textarea>
+                </div>
+                
+                <div class="form-group ">
+                    <input id="tutoreaziendale" name="tutoreaziendale"  type="text" placeholder="Tutore Aziendale" class="form-control text-center" required="required">
+                </div>
+                
+                Nota: qui deve venire generato il pdf del tirocinio formativo con tutte le informazioni appena inserite.
+            <button type="submit" class="btn btn-block btn-primary text-uppercase">Crea Tirocinio </button>
+            </div>
+</form>
+
+<hr>
+
+<h1> Creazione Tirocinio </h1>
+
+<form name="uploadtirocinio" id="uploadtirocinio" action="" method="post">
+    <label for="utirocinio">Carica modulo firmato: </label> <br>
+    <input type="file" id="utirocinio" name="utirocinio" /> <br>
+    <button class="btn btn-block btn-primary text-uppercase" type="submit" form="uploadtirocinio"> Inizia Tirocinio </button>
+</form>
+<br>

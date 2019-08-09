@@ -96,6 +96,10 @@
         <servlet-name>Gestioneofferta</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.Gestioneofferta</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>CreazioneTirocinio</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.CreazioneTirocinio</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -160,6 +164,10 @@
         <servlet-name>Gestioneofferta</servlet-name>
         <url-pattern>/Gestioneofferta</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>CreazioneTirocinio</servlet-name>
+        <url-pattern>/CreazioneTirocinio</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -176,8 +184,4 @@
         <location>/NotFound</location>
     </error-page>
     <res-ref-name>jdbc/webdb2</res-ref-name>
-    <welcome-file-list>
-        <welcome-file>Home</welcome-file>
-    </welcome-file-list>
-
 </web-app>

@@ -43,10 +43,4 @@ public class ProfiloStudente extends TirociniBaseController {
     }
     
     
- 
-    public void doPost(HttpServletRequest req, HttpServletResponse res) throws IOException {
-       
-    }
-    
-    
 }

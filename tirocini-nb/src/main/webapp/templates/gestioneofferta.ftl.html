@@ -18,9 +18,13 @@ Per controllare come questa offerta appare pubblicamente, <a href='/tirocini/Det
 
 ${candidatura.studente.nome} ${candidatura.studente.cognome} 
 <a href='/tirocini/student?id=${candidatura.studente.key}'> Vedi Profilo </a>
-<button type="button" class="btn btn-outline-success">Accetta</button>
-<button type="button" class="btn btn-outline-danger">Rifiuta</button>
-<hr>
+<form action="CreazioneTirocinio" id="creazionetirocinio">
+    <input type="hidden" id="uid" name="uid" value="${candidatura.studente.key}">
+    <input type="hidden" id="oid" name="oid" value="${candidatura.offerta.key}">
+    <button form="creazionetirocinio" type="submit" class="btn btn-outline-success">Accetta</button>
+</form>
+
+
 
 </#list>
 
