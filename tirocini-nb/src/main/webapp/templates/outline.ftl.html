@@ -23,6 +23,47 @@
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
         </script>
 
+        <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous"></script>
+
+        <script>
+                    $(document).ready(function () {
+                        $('.nav-link, .navbar-brand').on('click', function (e) {
+                            e.preventDefault();
+                            var dataURL = "http://localhost:8080/tirocini/"+$(this).attr('href');
+                            
+                            history.pushState(undefined, '', dataURL);
+                            $.ajax({
+                                type: "GET",
+                                url: dataURL,
+                                data: {"dyn": ""},
+                                beforeSend: function () {
+                                    //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
+                                    $("#body").fadeOut(10);
+                                    $(".footer").fadeOut(10);
+                                    $('.nav-item').removeClass('active');
+                                    $(this).parent('.nav-item').addClass('active');
+                                },
+                                success: function (response) {
+                                    $("#body").html(response);
+                                    $("#body").fadeIn(500);
+                                    $(".footer").fadeIn(500);
+                                    //$(".post_submitting").fadeOut(1000);
+                                    
+                                },
+                                error: function (jqXHR, exception) {
+                                    // Note: Often ie will give no error msg. Aren't they helpful?
+                                    console.log('ERROR: jqXHR, exception', jqXHR, exception);
+                                }
+                            });
+                            e.preventDefault();
+                        });
+                    });
+        </script>
+
+
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 
         <link rel="stylesheet" href="style/style.css">

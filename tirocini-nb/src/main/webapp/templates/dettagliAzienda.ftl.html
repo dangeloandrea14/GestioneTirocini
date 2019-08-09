@@ -1,13 +1,13 @@
 <div id="body" class="container col-lg-10 p-auto mx-auto mt-0 pt-3">
-<#if azienda??>
-<h1 class="text-dark" id="tirocini">${azienda.nome}</h1>
+<#if aziendap??>
+<h1 class="text-dark" id="tirocini">${aziendap.nome}</h1>
     <hr>
 <div>
-    ${azienda.descrizione} <br>
+    ${aziendap.descrizione} <br>
     <hr>
-    ${azienda.sede}  <br>
-    ${azienda.nomeResponsabile} ${azienda.cognomeResponsabile} <br>
-    ${azienda.telefonoResponsabile}
+    ${aziendap.sede}  <br>
+    ${aziendap.nomeResponsabile} ${aziendap.cognomeResponsabile} <br>
+    ${aziendap.telefonoResponsabile}
 </div>
 <#else>
 <p>

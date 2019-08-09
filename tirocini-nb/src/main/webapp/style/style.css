@@ -21,6 +21,9 @@
 .bg-altro{
     background-color:#0071e4;
 }
+.bg-altro:hover{
+    background-color:#0066d9;
+}
 .bg-footer{
     background-color:#e8e8e8;
 }

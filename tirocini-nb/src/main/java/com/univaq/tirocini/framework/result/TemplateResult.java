@@ -250,6 +250,11 @@ public class TemplateResult {
             datamodel.put("studente", request.getSession().getAttribute("studente"));
             datamodel.put("azienda", request.getSession().getAttribute("azienda"));
         }
+        
+        //se la richiesta è dinamica non inviamo l'outline nella risposta
+        if(request.getParameter("dyn") != null)
+            datamodel.put("outline_tpl","");
+        
         activate(tplname, datamodel, response);
     }
 

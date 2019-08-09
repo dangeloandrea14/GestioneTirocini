@@ -39,7 +39,7 @@ public class DettagliAzienda extends TirociniBaseController {
         }
 
         request.setAttribute("page_title", "Dettagli " + azienda.getNome());
-        request.setAttribute("azienda", azienda);
+        request.setAttribute("aziendap", azienda);
 
         TemplateResult res = new TemplateResult(getServletContext());
 

@@ -140,14 +140,16 @@ public abstract class TirociniBaseController extends HttpServlet {
     private boolean checkAllowed(HttpServletRequest request) {
         HttpSession session = SecurityLayer.checkSession(request);
         String requested = request.getServletPath();
-        System.out.println(requested);
         if (session == null)
         {
             //ogni servlet dovrebbe reindirizzare
             //le richieste senza sessione
             //si può migliorare
+            
+            //System.out.println("[] -> " + requested);
             return true;
         }
+        //System.out.println(session.getAttribute("username") + "->" + requested);
 
         List<String> forbidden = (List<String>) session.getAttribute("ForbiddenPages");
         if (forbidden != null && forbidden.contains(requested)) {
