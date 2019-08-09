@@ -1,10 +1,10 @@
 <#ftl encoding='UTF-8'>
 <div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-3">
-<#if offerta??>
-<h1 class="text-dark" id="tirocini">
-    <small class="text-muted">offerta di tirocinio presso <br></small>
+    <#if offerta??>
+    <h1 class="text-dark details-title" id="tirocini">
+        <small class="text-muted">offerta di tirocinio presso <br></small>
         <a href='DettagliAzienda?a=${offerta.azienda.key}'>${offerta.azienda.nome}</h1> </a>
-    <hr>
+<hr>
 <div>
     ${offerta.luogo} <br>
     ${offerta.obiettivi} <br>
@@ -12,26 +12,33 @@
     ${offerta.modalità}  <br>
     ${offerta.durata}  <br>
     ${offerta.orari}  <br>
-    
+
     <hr>
-    
+
     <#if studente??>
-        <#if already==false>
-        <form action="Candidatura" id="candidatura">
+    <#if already==false>
+    <form action="Candidatura" id="candidatura">
         <input type="hidden" id="oid" name="oid" value="${offerta.key}">
         <button form="candidatura" type="submit"> Candidati </button> <br>
-        </form>
-        <small>
+    </form>
+    <small>
         Attenzione: Ti ricordiamo che la tua candidatura verrà segnalata all'azienda ${offerta.azienda.nome}. <br>
         L'esito ti verrà comunicato dal sistema.
-        </small>
-        <#else>
-        Ti sei già candidato per questa offerta.
-        </#if>
+    </small>
     <#else>
-    Devi aver effettuato il login come Studente per poterti candidare.
+    Ti sei già candidato per questa offerta.
     </#if>
-    
+    <#else>
+    <div class="card">
+        <div class="card-body text-center bg-light">
+            <p class="card-text text-muted">
+                Devi aver effettuato il login come Studente per poterti candidare. 
+            </p>
+            <a href="Login" class="btn btn-outline-primary text-right">Accedi</a>
+        </div>
+    </div>
+    </#if>
+
 </div>
 <#else>
 <p>

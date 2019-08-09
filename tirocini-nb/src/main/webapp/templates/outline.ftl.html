@@ -28,62 +28,71 @@
         </script>
 
         <script>
-                    var baseURL = "http://localhost:8080/tirocini/";
-                    $(document).ready(function () {
-                        $('.nav-link, .navbar-brand').on('click', function (e) {
-                            e.preventDefault();
-                            var dataURL = baseURL + $(this).attr('href');
-                            history.pushState(undefined, '', dataURL);
-                            $.ajax({
-                                type: "GET",
-                                url: dataURL,
-                                data: {"dyn": ""},
-                                beforeSend: function () {
-                                    //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
-                                    $("#body").fadeOut(10);
-                                    $(".footer").fadeOut(10);
-                                    $('.nav-item').removeClass('active');
-                                    $(this).parent('.nav-item').addClass('active');
-                                },
-                                success: function (response) {
-                                    $("#body").html(response);
-                                    $("#body").fadeIn(500);
-                                    $(".footer").fadeIn(500);
-                                    //$(".post_submitting").fadeOut(1000);
+            var baseURL = "http://localhost:8080/tirocini/";
 
-                                },
-                                error: function (jqXHR, exception) {
-                                    // Note: Often ie will give no error msg. Aren't they helpful?
-                                    console.log('ERROR: jqXHR, exception', jqXHR, exception);
-                                }
-                            });
-                            e.preventDefault();
-                        });
-                        $('.details').on('click', function (e) {
-                            e.preventDefault();
-                            var dataURL = baseURL + $(this).attr('href');
-                            $.ajax({
-                                type: "GET",
-                                url: dataURL,
-                                data: {"dyn": ""},
-                                beforeSend: function () {
-                                    //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
-                                },
-                                success: function (response) {
-                                    //$(".post_submitting").fadeOut(1000);
-                                    $("#detailsModalBody").html(response);
-                                    $('#detailsModal').modal('show');
-                                },
-                                error: function (jqXHR, exception) {
-                                    // Note: Often ie will give no error msg. Aren't they helpful?
-                                    console.log('ERROR: jqXHR, exception', jqXHR, exception);
-                                }
-                            });
-                            e.preventDefault();
-                        });
+            function setModalsEvents() {
+                $('.details').on('click', function (e) {
+                    e.preventDefault();
+                    var dataURL = baseURL + $(this).attr('href');
+                    $.ajax({
+                        type: "GET",
+                        url: dataURL,
+                        data: {"dyn": ""},
+                        beforeSend: function () {
+                            //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
+                        },
+                        success: function (response) {
+                            //$(".post_submitting").fadeOut(1000);
+                            $("#detailsModalBody").html(response);
+                            $('#detailsModal').modal('show');
+                            //$('.modal-title').replaceWith($('.details-title'));
+                        },
+                        error: function (jqXHR, exception) {
+                            // Note: Often ie will give no error msg. Aren't they helpful?
+                            console.log('ERROR: jqXHR, exception', jqXHR, exception);
+                        }
                     });
-        </script>
+                    e.preventDefault();
+                });
+            }
+            ;
 
+            $(document).ready(function () {
+
+                setModalsEvents();
+
+                $('.nav-link, .navbar-brand').on('click', function (e) {
+                    e.preventDefault();
+                    var dataURL = baseURL + $(this).attr('href');
+                    history.pushState(undefined, '', dataURL);
+                    $.ajax({
+                        type: "GET",
+                        url: dataURL,
+                        data: {"dyn": ""},
+                        beforeSend: function () {
+                            //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
+                            $("#body").fadeOut(10);
+                            $(".footer").fadeOut(10);
+                            $('.nav-item').removeClass('active');
+                            $(this).parent('.nav-item').addClass('active');
+                        },
+                        success: function (response) {
+                            $("#body").html(response);
+                            $("#body").fadeIn(500);
+                            $(".footer").fadeIn(500);
+                            setModalsEvents();
+                            //$(".post_submitting").fadeOut(1000);
+
+                        },
+                        error: function (jqXHR, exception) {
+                            // Note: Often ie will give no error msg. Aren't they helpful?
+                            console.log('ERROR: jqXHR, exception', jqXHR, exception);
+                        }
+                    });
+                    e.preventDefault();
+                });
+            });
+        </script>
 
         <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet"/>
 
@@ -104,8 +113,10 @@
                </section> 
               </div>
             -->
+            <div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-0">
+                <#include content_tpl>
+            </div>
 
-            <#include content_tpl>
         </main>
 
 
@@ -114,19 +125,19 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="detailsModalLabel"><!--Modal title--></h5>
+                        <h5 class="modal-title" id="detailsModalLabel"></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div id="detailsModalBody" class="modal-body">
                     </div>
-                        <!--
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                      <button type="button" class="btn btn-primary">Save changes</button>
-                    </div>
-                        -->
+                    <!--
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+                    -->
                 </div>
             </div>
         </div>
