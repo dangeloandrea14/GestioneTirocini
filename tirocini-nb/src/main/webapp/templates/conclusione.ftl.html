@@ -1,0 +1,49 @@
+  <div class="container pt-3 pb-3">
+      
+      //Va messo il form. 
+                <h3 class="text-center">Genera Documento</h3>
+                
+                 <input type="hidden" id="nomeazienda" name="nomeazienda" value="${tirocinio.azienda.nome}">
+                 <input type="hidden" id="IVA" name="IVA" value="${tirocinio.azienda.iva}">
+                 <input type="hidden" id="IVA" name="cognomestudente" value="${tirocinio.studente.cognome}">
+                 <input type="hidden" id="IVA" name="nomestudente" value="${tirocinio.studente.nome}">
+                 <input type="hidden" id="IVA" name="inizio" value="${tirocinio.inizio}">
+                 <input type="hidden" id="IVA" name="fine" value="${tirocinio.fine}">
+                 
+                 
+                <div class="form-group mt-4 ">
+                    <label for="ore"> Ore effettive di tirocinio </label>
+                    <input id="ore" name="ore" type="text" class="form-control text-center" required="required" autofocus>
+                </div>
+
+                <div class="form-group">
+                     <label for="sede"> Sede svolgimento tirocinio </label>
+                    <input id="sede" name="sede" type="text" class="form-control text-center" required="required"/>
+                </div>
+                
+                <div class="form-group">
+                     <label for="sede"> Descrizione attivit&agrave; svolta </label>
+                    <input id="attività" name="attività" type="text" class="form-control text-center" required="required"/>
+                </div>
+                
+                
+               <div class="form-group">
+                     <label for="sede"> Risultati ottenuti </label>
+                    <input id="risultato" name="risultato" type="text" class="form-control text-center" required="required"/>
+                </div>
+                
+                
+                
+                Nota: qui deve venire generato il pdf del tirocinio formativo con tutte le informazioni appena inserite.
+            <button type="submit" class="btn btn-block btn-primary text-uppercase">Genera Documento </button>
+ </div>
+
+<div>
+    <form name="Uploadconvenzione" action="" method="post">
+    <label for="Convenzione">Carica documento firmato: </label> <br>
+<input type="file" id="Convenzione" name="Convenzione" />
+
+<button type="submit" form="Uploadconvenzione"  class="btn btn-block btn-primary text-uppercase"> Concludi tirocinio </button>
+</form>
+<br>
+</div>
