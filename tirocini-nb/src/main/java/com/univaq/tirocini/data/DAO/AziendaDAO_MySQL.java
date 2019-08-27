@@ -279,7 +279,6 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                 iAzienda.setBoolean(13, azienda.isConvenzionata());
                 
                 iAzienda.setString(14, azienda.getCorsoRiferimento());
-
                    
                 if (iAzienda.executeUpdate() == 1) {
                     //per leggere la chiave generata dal database
