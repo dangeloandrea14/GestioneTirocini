@@ -116,6 +116,12 @@ public class AziendaProxy extends AziendaImpl {
         super.setPath(path);
         this.dirty = true;
     }
+    
+    @Override
+    public void setCorsoRiferimento(String corso){
+        super.setCorsoRiferimento(corso);
+        this.dirty = true;
+    }
      //Questi sono i metodi del proxy.
             
     public void setDirty(boolean dirty) {

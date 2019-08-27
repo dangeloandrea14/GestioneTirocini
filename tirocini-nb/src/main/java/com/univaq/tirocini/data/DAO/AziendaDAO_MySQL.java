@@ -49,8 +49,8 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             
             
             //Precompiliamo le altre query
-            iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Password,PathDocumento,Convenzionata) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uAzienda = connection.prepareStatement("UPDATE Azienda SET Nome=?,Descrizione=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Password=?,PathDocumento=?,Convenzionata=? WHERE ID=?");
+            iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Password,PathDocumento,Convenzionata,CorsoRiferimento) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uAzienda = connection.prepareStatement("UPDATE Azienda SET Nome=?,Descrizione=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Password=?,PathDocumento=?,Convenzionata=?,CorsoRiferimento=? WHERE ID=?");
             dAzienda = connection.prepareStatement("DELETE FROM Azienda WHERE ID=?");
       
         } catch (SQLException ex) {
@@ -101,6 +101,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             a.setPassword(rs.getString("Password"));
             a.setPath(rs.getString("PathDocumento"));
             a.setConvenzionata(rs.getBoolean("Convenzionata"));
+            a.setCorsoRiferimento(rs.getString("CorsoRiferimento"));
             
         } catch (SQLException ex) {
             throw new DataException("Impossibile creare l'azienda da questo ResultSet.", ex);
@@ -241,8 +242,10 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                 
                 if(azienda.isConvenzionata() != false)
                     uAzienda.setBoolean(13, azienda.isConvenzionata());
+                
+                uAzienda.setString(14,azienda.getCorsoRiferimento());
                    
-                uAzienda.setInt(14, azienda.getKey());
+                uAzienda.setInt(15, azienda.getKey());
                 
                 uAzienda.executeUpdate();
                 
@@ -274,6 +277,8 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
                 iAzienda.setString(12, azienda.getPath());
                 
                 iAzienda.setBoolean(13, azienda.isConvenzionata());
+                
+                iAzienda.setString(14, azienda.getCorsoRiferimento());
 
                    
                 if (iAzienda.executeUpdate() == 1) {
