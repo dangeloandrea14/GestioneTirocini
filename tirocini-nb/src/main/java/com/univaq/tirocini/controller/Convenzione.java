@@ -14,6 +14,10 @@ import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -41,8 +45,16 @@ public class Convenzione extends TirociniBaseController {
 
 
             request.setAttribute("aziendac",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id));
-
-                
+               
+           Map<String, String> filling = new HashMap<String,String>();
+           filling.put("ente",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getNome());
+           filling.put("sedeLegale",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getSede());
+           filling.put("cf",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getIva().get());
+           filling.put("rappresentante",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getNomeResponsabile());
+           filling.put("descrizioneAzienda",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getDescrizione());
+           filling.put("corsiStudio",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getCorsoRiferimento());
+           
+           
             res.activate("convenzione.ftl.html", request, response);
                 
             } catch (DataException ex) {
@@ -52,6 +64,7 @@ public class Convenzione extends TirociniBaseController {
             
          
     } 
+
     
-    
+   
 }
