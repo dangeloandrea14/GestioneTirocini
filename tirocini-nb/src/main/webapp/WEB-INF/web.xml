@@ -184,4 +184,8 @@
         <location>/NotFound</location>
     </error-page>
     <res-ref-name>jdbc/webdb2</res-ref-name>
+    
+    <welcome-file-list>
+                <welcome-file>Home</welcome-file>
+        </welcome-file-list> 
 </web-app>
