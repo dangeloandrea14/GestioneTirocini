@@ -28,6 +28,7 @@ public class AziendaImpl implements Azienda {
     String password;
     String pathDocumento;
     boolean Convenzionata;
+    String corsoRiferimento;
     
     @Override
     public int getKey(){
@@ -177,5 +178,14 @@ public class AziendaImpl implements Azienda {
         this.Convenzionata = Convenzionata;
     }
 
+    @Override
+    public String getCorsoRiferimento(){
+        return this.corsoRiferimento;
+    }
+    
+    @Override
+    public void setCorsoRiferimento(String corso){
+        this.corsoRiferimento = corso;
+    }
     
 }

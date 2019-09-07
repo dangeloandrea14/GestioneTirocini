@@ -72,4 +72,8 @@ public interface Azienda {
     public boolean isConvenzionata();
 
     public void setConvenzionata(boolean Convenzionata);
+
+    public String getCorsoRiferimento();
+    
+    public void setCorsoRiferimento(String corso);
 }
