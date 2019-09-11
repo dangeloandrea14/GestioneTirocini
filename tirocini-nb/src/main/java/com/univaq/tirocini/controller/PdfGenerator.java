@@ -7,6 +7,7 @@ package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
+import com.univaq.tirocini.framework.result.StreamResult;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
@@ -17,6 +18,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import com.univaq.tirocini.pdf.Compile;
 import static com.univaq.tirocini.pdf.Compile.compile;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.io.File;
+import java.nio.file.Files;
 /**
  *
  * @author Francesco Zappacosta
@@ -29,7 +34,7 @@ public class PdfGenerator extends TirociniBaseController{
         request.setAttribute("page_title", "Home");
         TemplateResult res = new TemplateResult(getServletContext());
         
-        res.activate("pdf.ftl.html", request, response);
+        //res.activate("pdf.ftl.html", request, response);
     String param = request.getParameter("a");
     int id = Integer.parseInt(param);
            Map<String, String> filling = new HashMap<String,String>();
@@ -40,9 +45,15 @@ public class PdfGenerator extends TirociniBaseController{
            filling.put("descrizioneAzienda",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getDescrizione());
            filling.put("corsiStudio",((TirocinioDataLayer)request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getCorsoRiferimento());
         
-        compile("/templates/pdf/Formativo.pdf","/Formativo1.pdf",filling);
+        Path tempDir = Files.createTempDirectory("temp");
+        compile(getServletContext().getRealPath("templates/pdf/Convenzione.pdf"),tempDir.toAbsolutePath() + "/Convenzione1.pdf",filling);
         
-          
+        StreamResult sr = new StreamResult(getServletContext());       
+        sr.activate(new File(tempDir.toAbsolutePath() + "/Convenzione1.pdf"), request, response);
+        
+        tempDir.toFile().delete();
+        
+
     }
     
     
