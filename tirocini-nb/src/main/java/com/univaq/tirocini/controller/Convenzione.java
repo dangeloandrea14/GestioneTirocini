@@ -65,14 +65,14 @@ public class Convenzione extends TirociniBaseController {
          
     } 
 
-    @Override
+    /*@Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         
         if(request.getParameter("pdf")){
            System.out.print("cerchiamo di far funzionare questa servelet");
         }else{
         super.processRequest(request, response);} //To change body of generated methods, choose Tools | Templates.
-    }
+    }*/
 }
     
    

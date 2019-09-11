@@ -9,6 +9,37 @@
     ${aziendap.nomeResponsabile} ${aziendap.cognomeResponsabile} <br>
     ${aziendap.telefonoResponsabile}
 </div>
+<hr>
+
+    <#if offerte?? && offerte?size != 0>
+    
+    <h4 class="text-center text-secondary">
+        Offerte di tirocinio presso questa azienda:
+    </h4>
+    <br>
+    
+    <#list offerte as offerta>
+
+    <div class="col-md col-sm-12 ">
+        <div class="card mb-3 border border-primary shadow">
+            <!--<div class="card-header bg-altro">
+                <h2 class="card-title">Tirocinio</h2>
+            </div>-->
+            <div class="card-body">
+                <p class="card-text">
+                    ${offerta.orari},
+                    <strong>${offerta.luogo}</strong>
+                </p>
+                <hr>
+                <p class="cardtext">${offerta.obiettivi}</p>
+            </div>
+            <a class="card-footer text-white cardtext btn details bg-altro" 
+               href="DettagliOfferta?o=${offerta.key}">Mostra dettagli</a>
+        </div>
+    </div>
+    </#list>
+</#if>
+
 <#else>
 <p>
     Quale azienda?

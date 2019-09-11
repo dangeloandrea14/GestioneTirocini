@@ -135,3 +135,10 @@ footer{
     background-color: #0059b3;
     color:white;
 }
+
+.card {
+  transition: transform .2s ease;
+}
+.card:hover:not(.still) {
+  transform: scale(1.02);
+}

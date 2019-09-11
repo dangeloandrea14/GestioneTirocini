@@ -40,6 +40,7 @@ public class DettagliAzienda extends TirociniBaseController {
 
         request.setAttribute("page_title", "Dettagli " + azienda.getNome());
         request.setAttribute("aziendap", azienda);
+        request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferte(azienda));
 
         TemplateResult res = new TemplateResult(getServletContext());
 

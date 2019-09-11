@@ -24,7 +24,7 @@ public class Offers extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
         
-        request.setAttribute("page_title", "Tirocini");
+        request.setAttribute("page_title", "Offerte di tirocinio");
         request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
         
         TemplateResult res = new TemplateResult(getServletContext());
