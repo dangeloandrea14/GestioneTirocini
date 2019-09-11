@@ -30,4 +30,5 @@ String getPasswordFromEmail(String email) throws DataException;
 
 void storeAzienda(Azienda azienda) throws DataException;
     
+List<Azienda> searchAzienda(String queryString) throws DataException;
 }

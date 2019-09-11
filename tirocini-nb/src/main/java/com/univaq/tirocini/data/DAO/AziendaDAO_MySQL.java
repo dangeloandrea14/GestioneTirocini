@@ -28,6 +28,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
     //Nota: le lettere (s,i,u,d) che precedono i nomi stanno per Select, Insert, Update e Delete.
     private PreparedStatement sAziendaByID,sAziendaByEmail;
     private PreparedStatement sAziende,sPassword,sAziendeConvenzionate,sAziendeNonConvenzionate;
+    private PreparedStatement sAziendaSearch;
     private PreparedStatement iAzienda, uAzienda, dAzienda;
 
     public AziendaDAO_MySQL(DataLayer d) {
@@ -46,7 +47,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             sAziendeNonConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=0");
             sPassword = connection.prepareStatement("SELECT Password FROM Azienda where emailResponsabile=?");
             sAziendaByEmail = connection.prepareStatement("SELECT * FROM Azienda where emailResponsabile=?");
-            
+            sAziendaSearch = connection.prepareStatement("SELECT * FROM Azienda WHERE MATCH (Nome,Descrizione,Sede,IVA,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile) AGAINST (\'?\');");
             
             //Precompiliamo le altre query
             iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Password,PathDocumento,Convenzionata,CorsoRiferimento) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -315,6 +316,25 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
         } catch (SQLException ex) {
             throw new DataException("Impossibile memorizzare l'azienda.", ex);
         }
+    }
+    
+    @Override
+    public List<Azienda> searchAzienda(String queryString) throws DataException {
+        List<Azienda> risultato = new ArrayList<Azienda>();
+        
+         
+    try {
+            sAziendaByEmail.setString(1, queryString);
+            try (ResultSet rs = sAziendaByEmail.executeQuery()) {
+                while (rs.next()) {
+                    risultato.add(createAzienda(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare l'azienda a partire dall'email.", ex);
+        }
+
+        return risultato;
     }
     
 }
