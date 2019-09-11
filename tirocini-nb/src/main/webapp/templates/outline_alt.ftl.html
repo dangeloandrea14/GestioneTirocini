@@ -21,6 +21,8 @@
                 integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
         </script>
 
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+
 
         <link rel="stylesheet" href="style/login.css">
         <link rel="stylesheet" href="style/regChoose.css">
@@ -31,26 +33,26 @@
     <body>
 
         <div class="container-fluid h-100">
-        <div class="row ">
-            <aside class="col-lg-3 col-md-3 col-flex  d-none d-md-block">
-                <div class=" navbar-brand ml-2 mt-4 mr-4">
-                    <a href="Home" class="brand text-decoration-none text-light" id="logo">
-                        <img class="image-fluid mr-3 " src="img/logo.png" width="60" height="60" alt="logo internship">
-                        Internship Tutor</a> 
-                </div>
+            <div class="row ">
+                <aside class="col-lg-3 col-md-3 col-flex  d-none d-md-block animated slideInLeft fast">
+                    <div class=" navbar-brand ml-2 mt-4 mr-4">
+                        <a href="Home" class="brand text-decoration-none text-light" id="logo">
+                            <img class="image-fluid mr-3 " src="img/logo.png" width="60" height="60" alt="logo internship">
+                            Internship Tutor</a> 
+                    </div>
 
-            </aside>
-
-
+                </aside>
 
 
-            <main class="col-lg-9  col-md-9 d-flex col-sm-12">
-                
-                <#include content_tpl>
 
-            </main>
 
-        </div>
+                <main id="body" class="col-lg-9  col-md-9 d-flex col-sm-12">
+
+                    <#include content_tpl>
+
+                </main>
+
+            </div>
         </div>
     </body>
 

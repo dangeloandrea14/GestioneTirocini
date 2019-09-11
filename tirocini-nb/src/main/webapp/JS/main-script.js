@@ -37,6 +37,7 @@ $(document).ready(function () {
 
     setModalsEvents();
 
+    /*
     $('.nav-link, .navbar-brand').on('click', function (e) {
         e.preventDefault();
         var dataURL = baseURL + $(this).attr('href');
@@ -56,6 +57,35 @@ $(document).ready(function () {
                 $("#body").html(response);
                 $("#body").fadeIn(500);
                 $(".footer").fadeIn(500);
+                setModalsEvents();
+                //$(".post_submitting").fadeOut(1000);
+
+            },
+            error: function (jqXHR, exception) {
+                // Note: Often ie will give no error msg. Aren't they helpful?
+                console.log('ERROR: jqXHR, exception', jqXHR, exception);
+            }
+        });
+        e.preventDefault();
+    });
+     */
+    
+    $('.dynalink').on('click', function (e) {
+        e.preventDefault();
+        var dataURL = baseURL + $(this).attr('href');
+        history.pushState(undefined, '', dataURL);
+        $.ajax({
+            type: "GET",
+            url: dataURL,
+            data: {"dyn": ""},
+            beforeSend: function () {
+                //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
+                $("#body").addClass('fadeOut faster');
+                $('.nav-item').removeClass('active');
+            },
+            success: function (response) {
+                $("#body").removeClass('fadeOut faster');
+                $("#body").html(response);
                 setModalsEvents();
                 //$(".post_submitting").fadeOut(1000);
 

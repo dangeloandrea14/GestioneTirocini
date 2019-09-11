@@ -37,7 +37,7 @@
         </#if>
         </#list>
     </div>
-    <a class="btn btn-block btn-info p-3 mb-4" href="Offers">Mostra tutte le offerte</a>
+    <a class="btn btn-block btn-outline-success p-3 mb-4" href="Offers">Mostra tutte le offerte</a>
     <#else>Nessun tirocinio disponibile
     </#if>
 
@@ -55,14 +55,14 @@
                     <hr>
                     <p class="card-text text-secondary">${azienda.descrizione}</p>
                 </div>
-                <a class="card-footer text-secondary cardtext btn details" 
+                <a class="card-footer text-secondary cardtext btn btn-light bnt-outline-primary details" 
                    href="DettagliAzienda?a=${azienda.key}">Mostra dettagli</a>
             </div>
         </div>
         </#list>
     </div>
 
-    <a class="btn btn-block btn-info p-3 mb-4" href="Companies">
+    <a class="btn btn-block btn-outline-success p-3 mb-4" href="Companies">
         Mostra tutte le aziende</a>
     <#else>Nessuna azienda convenzionata
     </#if>
