@@ -104,6 +104,10 @@
         <servlet-name>ConclusioneTirocinio</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.ConclusioneTirocinio</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PdfGenerator</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.PdfGenerator</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -175,6 +179,10 @@
     <servlet-mapping>
         <servlet-name>ConclusioneTirocinio</servlet-name>
         <url-pattern>/Conclusione</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PdfGenerator</servlet-name>
+        <url-pattern>/PdfGenerator</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
