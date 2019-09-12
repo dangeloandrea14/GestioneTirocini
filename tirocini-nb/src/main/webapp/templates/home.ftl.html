@@ -3,16 +3,14 @@
     <hr>
 
     <#assign x=0>
-
+ <div class="container">
     <div class="row">
         <#if offerte?? && offerte?size != 0>
         <#list offerte as offerta>
 
-        <div class="col-md col-sm-12 ">
-            <div class="card  mb-3 border border-primary shadow">
-                <!--<div class="card-header bg-altro">
-                    <h2 class="card-title">Tirocinio</h2>
-                </div>-->
+        <div class="col-md col-sm-12 py-2 ">
+            <div class="card h-100 mb-3 border border-primary shadow">
+              
                 <div class="card-body">
                     <h5 class="card-title">
                         <small class="text-secondary">presso</small>
@@ -40,12 +38,15 @@
     <a class="btn btn-block btn-outline-success p-3 mb-4" href="Offers">Mostra tutte le offerte</a>
     <#else>Nessun tirocinio disponibile
     </#if>
-
+ </div>
     <br class="p-2">
-
+   
     <div class="mb-5">
         <h1 class="text-secondary" id="aziende">Aziende convenzionate</h1>
+        
         <hr>
+        <div class="container">
+
         <#if aziende?? && aziende?size != 0>
         <#list aziende as azienda>
         <div class="col-md col-sm-12 ">
@@ -60,9 +61,13 @@
             </div>
         </div>
         </#list>
-    </div>
 
+            
+    
     <a class="btn btn-block btn-outline-success p-3 mb-4" href="Companies">
         Mostra tutte le aziende</a>
+        </div>
     <#else>Nessuna azienda convenzionata
     </#if>
+    
+    </div>
