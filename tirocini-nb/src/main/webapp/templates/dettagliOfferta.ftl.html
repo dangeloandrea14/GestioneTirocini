@@ -21,7 +21,7 @@
 
     <div class="card still">
         <div class="card-body text-center bg-light">
-            <#if studente??>
+            <#if userObject.studente??>
             <#if already==false>
             <form action="Candidatura" id="candidatura">
                 <input type="hidden" id="oid" name="oid" value="${offerta.key}">
@@ -46,7 +46,7 @@
                 Ti sei già candidato per questa offerta.
             </p>
             </#if>
-            <#elseif !azienda??>
+            <#elseif !userObject.azienda??>
             <!--    
                     Non mostriamo nulla se è un'azienda 
                     Forse potremmo aggiungere dettagli sull'offerta (?)

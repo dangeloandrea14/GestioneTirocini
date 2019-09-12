@@ -22,11 +22,12 @@ import javax.servlet.http.Part;
  */
 public class Upload {
 
-    public File uploadFile(String uploadingName,
+    public static File uploadFile(String uploadingName,
             String serverFilename,
             HttpServletRequest request, 
             HttpServletResponse response)
             throws ServletException, java.io.IOException, NoSuchAlgorithmException {
+        
         Part file_to_upload = request.getPart(uploadingName);
 
         //we want the sha-1 file digest of the uploaded file
@@ -34,8 +35,10 @@ public class Upload {
         MessageDigest md = MessageDigest.getInstance("SHA-1");
         //create a file (with a unique name) and copy the uploaded file to it
         //creiamo un nuovo file (con nome univoco) e copiamoci il file scaricato
-        File uploaded_file = File.createTempFile(serverFilename, "",
-                new File(request.getServletContext().getInitParameter("uploads.directory")));
+        
+        File directory = new File(request.getServletContext().getInitParameter("uploads.directory"));
+        File uploaded_file = File.createTempFile(serverFilename, "",directory);
+        
         try (InputStream is = file_to_upload.getInputStream();
                 OutputStream os = new FileOutputStream(uploaded_file)) {
             byte[] buffer = new byte[1024];

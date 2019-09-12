@@ -7,27 +7,8 @@
         <#if offerte?? && offerte?size != 0>
         <#list offerte as offerta>
 
-        <div class="col-md col-sm-12 ">
-            <div class="card  mb-3 border border-primary shadow">
-                <!--<div class="card-header bg-altro">
-                    <h2 class="card-title">Tirocinio</h2>
-                </div>-->
-                <div class="card-body">
-                    <h5 class="card-title">
-                        <small class="text-secondary">presso</small>
-                        <a class="text-dark"
-                           href="DettagliAzienda?a=${offerta.azienda.key}">
-                            ${offerta.azienda.nome}</a></h5>
-                    <p class="card-text">
-                        ${offerta.orari}, 
-                        <strong>${offerta.luogo}</strong></p>
-                    <hr>
-                    <p class="cardtext">${offerta.obiettivi}</p>
-                </div>
-                <a class="card-footer text-white cardtext btn bg-primary details"
-                   href="DettagliOfferta?o=${offerta.key}">Mostra dettagli</a>
-            </div>
-        </div>
+        <#include "fragments/offerCard.ftl.html">
+        
         <#assign x++>
         <#if x==3>
     </div>
@@ -47,17 +28,9 @@
         <h1 class="text-secondary pb-4 text-center" id="aziende">Aziende convenzionate</h1>
         <#if aziende?? && aziende?size != 0>
         <#list aziende as azienda>
-        <div class="col-md col-sm-12 mt-4">
-            <div class="card mb-3 shadow">
-                <div class="card-body">
-                    <h2 class="card-title text-primary">${azienda.nome}</h2>
-                    <hr>
-                    <p class="card-text text-secondary">${azienda.descrizione}</p>
-                </div>
-                <a class="card-footer text-secondary cardtext btn btn-light bnt-outline-primary" 
-                   href="DettagliAzienda?a=${azienda.key}">Mostra dettagli</a>
-            </div>
-        </div>
+        
+        <#include "fragments/companyCard.ftl.html">
+        
         </#list>
     </div>
 

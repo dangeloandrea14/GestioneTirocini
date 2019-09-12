@@ -8,6 +8,7 @@ package com.univaq.tirocini.controller;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
+import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import javax.annotation.Resource;
@@ -51,16 +52,21 @@ public abstract class TirociniBaseController extends HttpServlet {
         request.setAttribute("class", this.getClass().getSimpleName());
     }
 
+    private void notAllowed(HttpServletRequest request, HttpServletResponse response) {
+        try {
+            goToDefault(request, response);
+        } catch (IOException ex) {
+            ex.printStackTrace(); //for debugging only
+            (new FailureResult(getServletContext())).activate(
+                    (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
+        }
+    }
+
     private void processBaseRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
+        //first check if user can perform the request
         if (!checkAllowed(request)) {
-            try {
-                goToDefault(request, response);
-            } catch (IOException ex) {
-                ex.printStackTrace(); //for debugging only
-                (new FailureResult(getServletContext())).activate(
-                        (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
-            }
+            notAllowed(request, response);
             return;
         }
 
@@ -126,10 +132,11 @@ public abstract class TirociniBaseController extends HttpServlet {
     @Deprecated
     protected void goToDefault(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = SecurityLayer.checkSession(request);
-        if (session != null && session.getAttribute("DefaultPage") != null) {
-            response.sendRedirect((String) session.getAttribute("DefaultPage"));
+        if (session != null) {
+            //potrebbe essere null. È necessario il controllo?
+            response.sendRedirect(((UserRole) session.getAttribute("userRole")).getPermissions().getDefaultPage());
         } else {
-            response.sendRedirect("Home");
+            response.sendRedirect("/Home");
         }
     }
 

@@ -30,7 +30,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -40,8 +39,6 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.beanutils.DynaBean;
 
 /**
  *
@@ -250,15 +247,15 @@ public class TemplateResult {
 
         //!!!! FIXME !!!!
         if (SecurityLayer.checkSession(request) != null) {
-                //BeanUtils.populate(request.getSession().getAttribute("userRoleObject"), datamodel);
-
-                DynaBean userRoleObject = (DynaBean) request.getSession().getAttribute("userRoleObject");
-                datamodel.put("username", userRoleObject.get("username"));
-                datamodel.put("role", userRoleObject.get("role"));
-                if(userRoleObject.contains("studente", "studente"))
-                    datamodel.put("studente", userRoleObject.get("studente"));
-                else
-                    datamodel.put("azienda", userRoleObject.get("azienda"));
+                UserRole userRole = (UserRole) request.getSession().getAttribute("userRole");
+                datamodel.put("username", userRole.getUsername());
+                datamodel.put("role", userRole.getRole());
+                datamodel.put("userObject", userRole.getUserObject());
+        }
+        else {
+            // FIXME
+            //per non cambiare completamente tutti gli ftl
+            datamodel.put("userObject", new Object()); //dummy data-model.
         }
 
         //se la richiesta è dinamica non inviamo l'outline nella risposta

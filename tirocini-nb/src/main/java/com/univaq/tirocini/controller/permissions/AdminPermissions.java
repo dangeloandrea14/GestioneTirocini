@@ -17,8 +17,8 @@ public class AdminPermissions extends BasePermissions {
     public AdminPermissions() {
         
         ForbiddenPages = new HashSet<>(Arrays.asList("/Profile"));
-        AllowedPages = new HashSet<>(Arrays.asList("/Logout", "/Admin", "/DettagliAzienda"));
-        DefaultPage = "/Admin";
+        AllowedPages = new HashSet<>(Arrays.asList("/Logout", "/Admin", "/DettagliAzienda", "/Convenzione"));
+        DefaultPage = "Admin";
         
     }
 }

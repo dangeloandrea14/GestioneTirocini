@@ -8,25 +8,24 @@ package com.univaq.tirocini.controller.permissions;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.result.UserRole;
-import org.apache.commons.beanutils.DynaBean;
 
 /**
  *
  * @author carlo
  */
 public class Roles {
-    public static DynaBean genStudenteBean (Studente studente) throws Exception {
-        return UserRole.createUserRoleBean(new StudentePermissions(), 
-                studente.getEmail(), "studente", studente);
+    public static UserRole genStudenteBean (Studente studente) throws Exception {
+        return new UserRole(new StudentePermissions(), 
+                studente.getEmail(), "studente", new UserObject(studente));
     }
     
-    public static DynaBean genAziendaBean (Azienda azienda) throws Exception {
-        return UserRole.createUserRoleBean(new AziendaPermissions(), 
-                azienda.getEmailResponsabile(), "azienda", azienda);
+    public static UserRole genAziendaBean (Azienda azienda) throws Exception {
+        return new UserRole(new AziendaPermissions(), 
+                azienda.getEmailResponsabile(), "azienda", new UserObject(azienda));
     }
     
-    public static DynaBean genAdminBean (Studente studente) throws Exception {
-        return UserRole.createUserRoleBean(new AdminPermissions(), 
-                studente.getEmail(), "admin", studente);
+    public static UserRole genAdminBean (Studente studente) throws Exception {
+        return new UserRole(new AdminPermissions(), 
+                studente.getEmail(), "admin", new UserObject(studente));
     }
 }

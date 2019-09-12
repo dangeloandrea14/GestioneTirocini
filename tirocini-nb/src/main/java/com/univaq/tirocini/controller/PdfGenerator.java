@@ -7,23 +7,14 @@ package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
-import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.StreamResult;
 import com.univaq.tirocini.framework.result.TemplateResult;
-import com.univaq.tirocini.framework.security.SecurityLayer;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import com.univaq.tirocini.pdf.Compile;
 import static com.univaq.tirocini.pdf.Compile.compile;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.File;
-import java.nio.file.Files;
-import org.apache.commons.beanutils.BeanUtils;
 
 /**
  *

@@ -1,10 +1,10 @@
 <div>
     <h2 class="text-dark" id="dettagli"> Informazioni </h2>
-    <#if studente??>
+    <#if userObject.studente??>
     <p>
-        Nome: ${studente.nome} <br>
-        Cognome: ${studente.cognome}<br>
-        Data di Nascita: ${studente.dataNascita}<br>
+        Nome: ${userObject.studente.nome} <br>
+        Cognome: ${userObject.studente.cognome}<br>
+        Data di Nascita: ${userObject.studente.dataNascita}<br>
     </p>
 
 </div>
@@ -61,11 +61,11 @@
 
 
 
-<#if azienda??>
+<#if userObject.azienda??>
 <div>
     <p>
-        Nome: ${azienda.nome}<br>
-        Partita IVA: ${azienda.iva}<br>
+        Nome: ${userObject.azienda.nome}<br>
+        Partita IVA: ${userObject.azienda.iva}<br>
     <p>
 </div>
 

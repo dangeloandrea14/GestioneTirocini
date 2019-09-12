@@ -1,12 +1,12 @@
 package com.univaq.tirocini.framework.security;
 
+import com.univaq.tirocini.framework.result.UserRole;
 import java.io.IOException;
 import java.util.Calendar;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import org.apache.commons.beanutils.DynaBean;
 
 public class SecurityLayer {
 
@@ -175,11 +175,11 @@ public class SecurityLayer {
 
         //per ora restituisci true se l'utente non ha effettuato l'accesso
         if (request.getSession() == null
-                || (request.getSession().getAttribute("userRoleObject")) == null
-                || ((UserPermissions) ((DynaBean) request.getSession().getAttribute("userRoleObject")).get("permissions")) == null) {
+                || (request.getSession().getAttribute("userRole")) == null
+                || ((UserPermissions) ((UserRole) request.getSession().getAttribute("userRole")).getPermissions()) == null) {
             return true;
         }
 
-        return ((UserPermissions) ((DynaBean) request.getSession().getAttribute("userRoleObject")).get("permissions")).authorized(request);
+        return ((UserPermissions) ((UserRole) request.getSession().getAttribute("userRole")).getPermissions()).authorized(request);
     }
 }

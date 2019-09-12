@@ -58,7 +58,7 @@ public class Login extends TirociniBaseController {
 
         int userid = 1;
 
-        DynaBean userRoleObject = null;
+        UserRole userRole = null;
 
         String loginType = "";
         String passwordHash = null;
@@ -103,17 +103,17 @@ public class Login extends TirociniBaseController {
         try {
             switch (loginType) {
                 case "azienda": {
-                    userRoleObject = Roles.genAziendaBean(a);
+                    userRole = Roles.genAziendaBean(a);
                 }
                 break;
 
                 case "studente":
                     //se studente o admin carichiamo lo studente
-                    userRoleObject = Roles.genStudenteBean(s);
+                    userRole = Roles.genStudenteBean(s);
                     break;
                 case "admin":
                     //se studente o admin carichiamo lo studente
-                    userRoleObject = Roles.genAdminBean(s);
+                    userRole = Roles.genAdminBean(s);
                     break;
                 default:
                     request.setAttribute("exception", new Exception("Login error"));
@@ -126,7 +126,7 @@ public class Login extends TirociniBaseController {
             return;
         }
 
-        session.setAttribute("userRoleObject", userRoleObject);
+        session.setAttribute("userRole", userRole);
 
         if (loginType.equals("admin")) {
             response.sendRedirect("Admin");
