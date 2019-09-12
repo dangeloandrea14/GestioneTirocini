@@ -5,6 +5,7 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.data.DAO.AziendaDAO;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -23,10 +24,20 @@ public class Companies extends TirociniBaseController {
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
+
+
+        AziendaDAO aziendaDAO = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO();
         
-        request.setAttribute("page_title", "Aziende");
-        request.setAttribute("aziende", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendeConvenzionate());
-        
+        String searchString = request.getParameter("q");
+        if (searchString != null) {
+            request.setAttribute("page_title", "Aziende" + " - " + "\"" + searchString + "\"");
+            request.setAttribute("aziende", (aziendaDAO.searchAzienda(searchString)));
+            request.setAttribute("searchString", searchString);
+        } else {
+            request.setAttribute("page_title", "Aziende");
+            request.setAttribute("aziende", (aziendaDAO.getAziendeConvenzionate()));
+        }
+
         TemplateResult res = new TemplateResult(getServletContext());
 
         res.activate("companies.ftl.html", request, response);

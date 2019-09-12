@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-/*
+ /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
@@ -52,13 +52,30 @@ public class Compile {
     public static void compile(String input_filename, String output_filename,
             Map<String, String> filling) {
         try {
-        openDocument(input_filename);
+            openDocument(input_filename);
 
-        compile(filling);
-        saveDocument(output_filename);
-        }catch (IOException e) {
+            compile(filling);
+            saveDocument(output_filename);
+        } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    /*
+     * Return a filled File instead of writing to filename
+    */
+    public static File compile(File inputFile, Map<String, String> filling) {
+        File outputFile = null;
+        try {
+            outputFile = File.createTempFile("filled", ".pdf");
+            openDocument(inputFile);
+
+            compile(filling);
+            saveDocument(outputFile);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return outputFile;
     }
 
     protected static void compile(Map<String, String> filling) throws IOException {
@@ -71,8 +88,17 @@ public class Compile {
         _pdfDocument = PDDocument.load(new File(filename));
     }
 
+    protected static void openDocument(File file) throws IOException {
+        _pdfDocument = PDDocument.load(file);
+    }
+
     protected static void saveDocument(String filename) throws IOException {
         _pdfDocument.save(filename);
+        _pdfDocument.close();
+    }
+
+    protected static void saveDocument(File file) throws IOException {
+        _pdfDocument.save(file);
         _pdfDocument.close();
     }
 

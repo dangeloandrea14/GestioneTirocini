@@ -10,7 +10,6 @@ import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
-import java.util.List;
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -124,6 +123,7 @@ public abstract class TirociniBaseController extends HttpServlet {
         }
     }
 
+    @Deprecated
     protected void goToDefault(HttpServletRequest request, HttpServletResponse response) throws IOException {
         HttpSession session = SecurityLayer.checkSession(request);
         if (session != null && session.getAttribute("DefaultPage") != null) {
@@ -137,28 +137,9 @@ public abstract class TirociniBaseController extends HttpServlet {
      * Controlla che l'utente possa visualizzare la pagine
      *
      */
+    @Deprecated
     private boolean checkAllowed(HttpServletRequest request) {
-        HttpSession session = SecurityLayer.checkSession(request);
-        String requested = request.getServletPath();
-        if (session == null)
-        {
-            //ogni servlet dovrebbe reindirizzare
-            //le richieste senza sessione
-            //si può migliorare
-            
-            //System.out.println("[] -> " + requested);
-            return true;
-        }
-        //System.out.println(session.getAttribute("username") + "->" + requested);
-
-        List<String> forbidden = (List<String>) session.getAttribute("ForbiddenPages");
-        if (forbidden != null && forbidden.contains(requested)) {
-            return false;
-        }
-
-        List<String> allowed = (List<String>) session.getAttribute("AllowedPages");
-        //se non impostato AllowedPages permettiamo tutto
-        return (allowed == null || allowed.contains(requested));
+        return SecurityLayer.authorized(request);
     }
 
     ////////////////////////////////////////////////////////////////////////////

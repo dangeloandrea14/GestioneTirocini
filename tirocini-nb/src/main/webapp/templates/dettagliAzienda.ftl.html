@@ -1,7 +1,7 @@
 <div id="body" class="container col-lg-10 p-auto mx-auto mt-0 pt-3">
 <#if aziendap??>
-<h1 class="text-dark details-title" id="tirocini">${aziendap.nome}</h1>
-    <hr>
+<h1 class="text-dark" id="details-title">${aziendap.nome}</h1>
+    <hr id='hr1'>
 <div>
     ${aziendap.descrizione} <br>
     <hr>
@@ -9,6 +9,7 @@
     ${aziendap.nomeResponsabile} ${aziendap.cognomeResponsabile} <br>
     ${aziendap.telefonoResponsabile}
 </div>
+    
 <hr>
 
     <#if offerte?? && offerte?size != 0>
@@ -33,7 +34,7 @@
                 <hr>
                 <p class="cardtext">${offerta.obiettivi}</p>
             </div>
-            <a class="card-footer text-white cardtext btn details bg-altro" 
+            <a class="card-footer text-white cardtext btn details bg-altro details" 
                href="DettagliOfferta?o=${offerta.key}">Mostra dettagli</a>
         </div>
     </div>

@@ -1,7 +1,7 @@
 <header class="fixed-top  m-0 p-0">
-    <nav class=" navbar navbar-expand-lg navbar-expand-md navbar-dark bg-scuro p-1 shadow">
-        <a href="Home" class="navbar-brand text-light p-0 ml-2">
-            <img class="navbar-brand dynalink" id="logo" src="img/logo.png" width="50" height="50"
+    <nav class=" navbar navbar-expand-lg navbar-expand-md navbar-dark bg-altro p-1 shadow">
+        <a href="Home" class="navbar-brand text-light p-0 ml-2 dynalink">
+            <img class="navbar-brand" id="logo" src="img/logo.png" width="50" height="50"
                  alt="logo">
             Internship Tutor
         </a>
@@ -13,29 +13,29 @@
 
         <div class="collapse navbar-collapse m-0 p-0" id="navbarSupportedContent"> 
             <ul class="navbar-nav navbar-collapse mr-auto p-2">
-                <li class="nav-item <#if class == 'Offers'> active</#if>">
+                <li class="nav-item <#if class == 'Offers'>active</#if>">
                     <a class="nav-link dynalink" href="Offers">Offerte</a>      
                 </li>
 
-                <li class="nav-item <#if class == 'Companies'> active</#if>">
+                <li class="nav-item <#if class == 'Companies'>active</#if>">
                     <a class="nav-link dynalink" href="Companies">Aziende</a>
                 </li>
             </ul>
             <#if username??>
             <ul class="navbar-nav ml-auto m-0 p-0">
                 <li class="dropdown navbar-nav ml-auto m-0 p-0">
-                    <a class="btn border-white dropdown-toggle btn-primary bg-scuro"  href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="btn border-white dropdown-toggle btn-altro"  href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="mr-1" alt="impostazioni" src="img/settings.png" >
 
                     </a> 
 
-                    <div class="dropdown-menu bg-light dropdown-menu-right" aria-labelledby="dropdownMenu">
+                    <div class="dropdown-menu bg-light dropdown-menu-right shadow" aria-labelledby="dropdownMenu">
                         <h6 class="dropdown-header">Registrato come:
                             <b>${username}</b>
                         </h6>
                         <div class="dropdown-divider">  </div>
                         <a class="dropdown-item" href="Profile">Profilo</a>
-                        <#if type?? && type == "admin">
+                        <#if role?? && role == "admin">
                         <a class="dropdown-item" href="Admin">Pannello amministratore</a>
                         </#if>
                         <div class="dropdown-divider"></div>

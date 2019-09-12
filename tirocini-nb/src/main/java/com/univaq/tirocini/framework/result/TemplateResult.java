@@ -30,6 +30,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Calendar;
 import java.util.Enumeration;
 import java.util.HashMap;
@@ -39,6 +40,8 @@ import java.util.logging.Logger;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.apache.commons.beanutils.BeanUtils;
+import org.apache.commons.beanutils.DynaBean;
 
 /**
  *
@@ -244,17 +247,25 @@ public class TemplateResult {
     //this acivate method extracts the data model from the request attributes
     public void activate(String tplname, HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         Map datamodel = getRequestDataModel(request);
-        if(SecurityLayer.checkSession(request) != null) {
-            datamodel.put("username", (String)request.getSession().getAttribute("username"));
-            datamodel.put("type", (String)request.getSession().getAttribute("type"));
-            datamodel.put("studente", request.getSession().getAttribute("studente"));
-            datamodel.put("azienda", request.getSession().getAttribute("azienda"));
+
+        //!!!! FIXME !!!!
+        if (SecurityLayer.checkSession(request) != null) {
+                //BeanUtils.populate(request.getSession().getAttribute("userRoleObject"), datamodel);
+
+                DynaBean userRoleObject = (DynaBean) request.getSession().getAttribute("userRoleObject");
+                datamodel.put("username", userRoleObject.get("username"));
+                datamodel.put("role", userRoleObject.get("role"));
+                if(userRoleObject.contains("studente", "studente"))
+                    datamodel.put("studente", userRoleObject.get("studente"));
+                else
+                    datamodel.put("azienda", userRoleObject.get("azienda"));
         }
-        
+
         //se la richiesta è dinamica non inviamo l'outline nella risposta
-        if(request.getParameter("dyn") != null)
-            datamodel.put("outline_tpl","");
-        
+        if (request.getParameter("dyn") != null) {
+            datamodel.put("outline_tpl", "");
+        }
+
         activate(tplname, datamodel, response);
     }
 

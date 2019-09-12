@@ -5,30 +5,29 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.controller.permissions.Roles;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.Password;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
+import java.lang.reflect.InvocationTargetException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.beanutils.DynaBean;
 
 /**
  *
  * @author carlo
  */
 public class Login extends TirociniBaseController {
-    
-    private static final List<String> adminAllowed = Arrays.asList("/Logout","/Admin","/DettagliAzienda");
-    private static final List<String> adminForbidden = Arrays.asList("/Profile");
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
@@ -58,6 +57,8 @@ public class Login extends TirociniBaseController {
         }
 
         int userid = 1;
+
+        DynaBean userRoleObject = null;
 
         String loginType = "";
         String passwordHash = null;
@@ -99,16 +100,35 @@ public class Login extends TirociniBaseController {
 
         //creiamo la sessione
         HttpSession session = SecurityLayer.createSession(request, username, userid, loginType);
-        if (loginType.equals("azienda")) {
-            session.setAttribute("azienda", a);
-        } else { //se studente o admin carichiamo lo studente
-            session.setAttribute("studente", s);
+        try {
+            switch (loginType) {
+                case "azienda": {
+                    userRoleObject = Roles.genAziendaBean(a);
+                }
+                break;
+
+                case "studente":
+                    //se studente o admin carichiamo lo studente
+                    userRoleObject = Roles.genStudenteBean(s);
+                    break;
+                case "admin":
+                    //se studente o admin carichiamo lo studente
+                    userRoleObject = Roles.genAdminBean(s);
+                    break;
+                default:
+                    request.setAttribute("exception", new Exception("Login error"));
+                    action_error(request, response);
+                    return;
+            }
+        } catch (Exception ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+            return;
         }
 
+        session.setAttribute("userRoleObject", userRoleObject);
+
         if (loginType.equals("admin")) {
-            session.setAttribute("AllowedPages", null);
-            session.setAttribute("DefaultPage", "Admin");
-            session.setAttribute("ForbiddenPages", adminForbidden);
             response.sendRedirect("Admin");
         } else {
             //se è stato trasmesso un URL di origine, torniamo a quell'indirizzo

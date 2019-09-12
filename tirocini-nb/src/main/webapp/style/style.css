@@ -132,7 +132,7 @@ footer{
 }
 
 .dropdown-menu >  a:hover, .dropdown-menu  > a:focus {
-    background-color: #0059b3;
+    background-color: #007bff;
     color:white;
 }
 
@@ -142,3 +142,4 @@ footer{
 .card:hover:not(.still) {
   transform: scale(1.02);
 }
+

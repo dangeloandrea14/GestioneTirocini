@@ -23,23 +23,22 @@ import java.util.List;
  * @author Andrea
  */
 public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
-    
-    
+
     //Nota: le lettere (s,i,u,d) che precedono i nomi stanno per Select, Insert, Update e Delete.
-    private PreparedStatement sAziendaByID,sAziendaByEmail;
-    private PreparedStatement sAziende,sPassword,sAziendeConvenzionate,sAziendeNonConvenzionate;
+    private PreparedStatement sAziendaByID, sAziendaByEmail;
+    private PreparedStatement sAziende, sPassword, sAziendeConvenzionate, sAziendeNonConvenzionate;
     private PreparedStatement sAziendaSearch;
     private PreparedStatement iAzienda, uAzienda, dAzienda;
 
     public AziendaDAO_MySQL(DataLayer d) {
         super(d);
     }
-    
+
     @Override
-    public void init() throws DataException{
-        try{
+    public void init() throws DataException {
+        try {
             super.init();
-            
+
             //Precompiliamo le select di Azienda
             sAziendaByID = connection.prepareStatement("SELECT * from Azienda where ID=?");
             sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
@@ -47,19 +46,19 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             sAziendeNonConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=0");
             sPassword = connection.prepareStatement("SELECT Password FROM Azienda where emailResponsabile=?");
             sAziendaByEmail = connection.prepareStatement("SELECT * FROM Azienda where emailResponsabile=?");
-            sAziendaSearch = connection.prepareStatement("SELECT * FROM Azienda WHERE MATCH (Nome,Descrizione,Sede,IVA,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile) AGAINST (\'?\');");
-            
+            sAziendaSearch = connection.prepareStatement("SELECT * FROM Azienda WHERE MATCH (Nome,Descrizione,Sede,IVA,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile) AGAINST (?);");
+
             //Precompiliamo le altre query
             iAzienda = connection.prepareStatement("INSERT INTO Azienda (Nome,Descrizione,Sede,IVA,ForoCompetenza,NomeResponsabile,CognomeResponsabile,TelefonoResponsabile,emailResponsabile,NomeCognomeLegale,Password,PathDocumento,Convenzionata,CorsoRiferimento) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             uAzienda = connection.prepareStatement("UPDATE Azienda SET Nome=?,Descrizione=?,Sede=?,IVA=?,ForoCompetenza=?,NomeResponsabile=?,CognomeResponsabile=?,TelefonoResponsabile=?,emailResponsabile=?,NomeCognomeLegale=?,Password=?,PathDocumento=?,Convenzionata=?,CorsoRiferimento=? WHERE ID=?");
             dAzienda = connection.prepareStatement("DELETE FROM Azienda WHERE ID=?");
-      
+
         } catch (SQLException ex) {
             throw new DataException("Error initializing newspaper data layer", ex);
         }
     }
-    
-     @Override
+
+    @Override
     public void destroy() throws DataException {
         //anche chiudere i PreparedStamenent è una buona pratica...
         //e noi seguiamo il consiglio
@@ -77,7 +76,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
         }
         super.destroy();
     }
-    
+
     @Override
     public AziendaProxy createAzienda() {
         return new AziendaProxy(getDataLayer());
@@ -103,13 +102,13 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             a.setPath(rs.getString("PathDocumento"));
             a.setConvenzionata(rs.getBoolean("Convenzionata"));
             a.setCorsoRiferimento(rs.getString("CorsoRiferimento"));
-            
+
         } catch (SQLException ex) {
             throw new DataException("Impossibile creare l'azienda da questo ResultSet.", ex);
         }
         return a;
     }
-    
+
     @Override
     public Azienda getAzienda(int azienda_key) throws DataException {
 
@@ -126,7 +125,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
         return null;
     }
-    
+
     @Override
     public List<Azienda> getAziende() throws DataException {
         List<Azienda> result = new ArrayList();
@@ -144,37 +143,37 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
     @Override
     public List<Azienda> getAziendeConvenzionate() throws DataException {
         List<Azienda> result = new ArrayList();
-        
-        try (ResultSet rs = sAziendeConvenzionate.executeQuery()){
+
+        try (ResultSet rs = sAziendeConvenzionate.executeQuery()) {
             while (rs.next()) {
-                result.add( (Azienda) getAzienda(rs.getInt("AziendaID")));
+                result.add((Azienda) getAzienda(rs.getInt("AziendaID")));
             }
         } catch (SQLException ex) {
             throw new DataException("Impossibile caricare le aziende convenzionate", ex);
         }
         return result;
-        
+
     }
-    
+
     @Override
     public List<Azienda> getAziendeNonConvenzionate() throws DataException {
         List<Azienda> result = new ArrayList();
-        
-        try (ResultSet rs = sAziendeNonConvenzionate.executeQuery()){
+
+        try (ResultSet rs = sAziendeNonConvenzionate.executeQuery()) {
             while (rs.next()) {
-                result.add( (Azienda) getAzienda(rs.getInt("AziendaID")));
+                result.add((Azienda) getAzienda(rs.getInt("AziendaID")));
             }
         } catch (SQLException ex) {
             throw new DataException("Impossibile caricare le aziende non convenzionate", ex);
         }
         return result;
-        
+
     }
-    
+
     @Override
-    public Azienda getAziendaFromEmail(String email) throws DataException{
-     
-    try {
+    public Azienda getAziendaFromEmail(String email) throws DataException {
+
+        try {
             sAziendaByEmail.setString(1, email);
             try (ResultSet rs = sAziendaByEmail.executeQuery()) {
                 if (rs.next()) {
@@ -187,100 +186,100 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
         return null;
     }
-    
+
     @Override
-    public String getPasswordFromEmail(String email) throws DataException{
-        try{ 
-        sPassword.setString(1,email);
-            try (ResultSet rs= sPassword.executeQuery()){
-                if(rs.next()){
+    public String getPasswordFromEmail(String email) throws DataException {
+        try {
+            sPassword.setString(1, email);
+            try (ResultSet rs = sPassword.executeQuery()) {
+                if (rs.next()) {
                     return rs.getString("Password");
                 }
             }
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             throw new DataException("Impossibile trovare l'azienda.", ex);
-    }
+        }
         return null;
     }
-    
+
     @Override
     public void storeAzienda(Azienda azienda) throws DataException {
         int key = azienda.getKey();
         try {
             if (azienda.getKey() > 0) { //update
                 //non facciamo nulla se l'oggetto è un proxy e indica di non aver subito modifiche
-                
+
                 if (azienda instanceof AziendaProxy && !((AziendaProxy) azienda).isDirty()) {
                     return;
                 }
-                
+
                 //Altrimenti aggiorniamo
                 uAzienda.setString(1, azienda.getNome());
-                
+
                 uAzienda.setString(2, azienda.getDescrizione());
-                
-                if(azienda.getSede() != null)
-                uAzienda.setString(3, azienda.getSede());
-                
+
+                if (azienda.getSede() != null) {
+                    uAzienda.setString(3, azienda.getSede());
+                }
+
                 uAzienda.setString(4, azienda.getIva().get());
-              
+
                 uAzienda.setString(5, azienda.getForoCompetenza());
-                
+
                 uAzienda.setString(6, azienda.getNomeResponsabile());
-                
+
                 uAzienda.setString(7, azienda.getCognomeResponsabile());
-                
+
                 uAzienda.setString(8, azienda.getTelefonoResponsabile());
 
                 uAzienda.setString(9, azienda.getEmailResponsabile());
-            
-                uAzienda.setString(10, azienda.getNomeCognomeLegale());  
-               
+
+                uAzienda.setString(10, azienda.getNomeCognomeLegale());
+
                 uAzienda.setString(11, azienda.getPassword());
-                
+
                 uAzienda.setString(12, azienda.getPath());
-                
-                if(azienda.isConvenzionata() != false)
+
+                if (azienda.isConvenzionata() != false) {
                     uAzienda.setBoolean(13, azienda.isConvenzionata());
-                
-                uAzienda.setString(14,azienda.getCorsoRiferimento());
-                   
+                }
+
+                uAzienda.setString(14, azienda.getCorsoRiferimento());
+
                 uAzienda.setInt(15, azienda.getKey());
-                
+
                 uAzienda.executeUpdate();
-                
-                
+
             } else { //facciamo la insert.
-                
+
                 iAzienda.setString(1, azienda.getNome());
-                
+
                 iAzienda.setString(2, azienda.getDescrizione());
-                
+
                 iAzienda.setString(3, azienda.getSede());
-                
+
                 iAzienda.setString(4, azienda.getIva().get());
-                
+
                 iAzienda.setString(5, azienda.getForoCompetenza());
-                
+
                 iAzienda.setString(6, azienda.getNomeResponsabile());
-                
+
                 iAzienda.setString(7, azienda.getCognomeResponsabile());
-                
+
                 iAzienda.setString(8, azienda.getTelefonoResponsabile());
 
                 iAzienda.setString(9, azienda.getEmailResponsabile());
-                  
-                iAzienda.setString(10, azienda.getNomeCognomeLegale());  
-                
+
+                iAzienda.setString(10, azienda.getNomeCognomeLegale());
+
                 iAzienda.setString(11, azienda.getPassword());
-                
+
                 iAzienda.setString(12, azienda.getPath());
-                
+
                 iAzienda.setBoolean(13, azienda.isConvenzionata());
-                
+
                 iAzienda.setString(14, azienda.getCorsoRiferimento());
-                   
+
                 if (iAzienda.executeUpdate() == 1) {
                     //per leggere la chiave generata dal database
                     //per il record appena inserito, usiamo il metodo
@@ -309,7 +308,6 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 //                article.copyFrom(getArticle(key));
 //            }
             //se abbiamo un proxy, resettiamo il suo attributo dirty
-            
             if (azienda instanceof AziendaProxy) {
                 ((AziendaProxy) azienda).setDirty(false);
             }
@@ -317,24 +315,23 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             throw new DataException("Impossibile memorizzare l'azienda.", ex);
         }
     }
-    
+
     @Override
     public List<Azienda> searchAzienda(String queryString) throws DataException {
         List<Azienda> risultato = new ArrayList<Azienda>();
-        
-         
-    try {
-            sAziendaByEmail.setString(1, queryString);
-            try (ResultSet rs = sAziendaByEmail.executeQuery()) {
+
+        try {
+            sAziendaSearch.setString(1, queryString);
+            try (ResultSet rs = sAziendaSearch.executeQuery()) {
                 while (rs.next()) {
                     risultato.add(createAzienda(rs));
                 }
             }
         } catch (SQLException ex) {
-            throw new DataException("Impossibile caricare l'azienda a partire dall'email.", ex);
+            throw new DataException("Impossibile eseguire la ricerca", ex);
         }
 
         return risultato;
     }
-    
+
 }

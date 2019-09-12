@@ -30,6 +30,11 @@ public class StreamResult {
     public StreamResult(ServletContext context) {
         this.context = context;
     }
+    
+    
+    public void activate(File file, String downloadFilename, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        activate(new FileInputStream(file), file.length(), downloadFilename, request, response);
+    }
 
     public void activate(File file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         activate(new FileInputStream(file), file.length(), file.getName(), request, response);

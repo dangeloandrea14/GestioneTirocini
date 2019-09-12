@@ -32,6 +32,10 @@
         <param-name>view.error_template</param-name>
         <param-value>error.ftl.html</param-value>
     </context-param>
+    <context-param>
+        <param-name>uploads.directory</param-name>
+        <param-value>uploads</param-value>
+    </context-param>
     <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.Home</servlet-class>

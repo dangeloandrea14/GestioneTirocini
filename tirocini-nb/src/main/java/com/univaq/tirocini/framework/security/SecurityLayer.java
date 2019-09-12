@@ -6,14 +6,14 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import org.apache.commons.beanutils.DynaBean;
 
 public class SecurityLayer {
 
     //--------- SESSION SECURITY ------------    
-     //questa funzione esegue una serie di controlli di sicurezza
+    //questa funzione esegue una serie di controlli di sicurezza
     //sulla sessione corrente. Se la sessione non è valida, la cancella
     //e ritorna null, altrimenti la aggiorna e la restituisce
-    
     //this method executed a set of standard chacks on the current session.
     //If the session exists and is valid, it is rerutned, otherwise
     //the session is invalidated and the method returns null
@@ -80,7 +80,7 @@ public class SecurityLayer {
         }
     }
 
-    public static HttpSession createSession(HttpServletRequest request, 
+    public static HttpSession createSession(HttpServletRequest request,
             String username, int userid, String type) {
         HttpSession s = request.getSession(true);
         s.setAttribute("username", username);
@@ -102,7 +102,6 @@ public class SecurityLayer {
     //questa funzione aggiunge un backslash davanti a
     //tutti i caratteri "pericolosi", usati per eseguire
     //SQL injection attraverso i parametri delle form
-    
     //this function adds backslashes in front of
     //all the "malicious" charcaters, usually exploited
     //to perform SQL injection through form parameters
@@ -154,7 +153,7 @@ public class SecurityLayer {
 
         //ricostruiamo la url cambiando il protocollo e la porta COME SPECIFICATO NELLA CONFIGURAZIONE DI TOMCAT
         //rebuild the url changing port and protocol AS SPECIFIED IN THE SERVER CONFIGURATION
-        String newUrl = "https://" + server + ":8443" +  context + path + (info != null ? info : "") + (query != null ? "?" + query : "");
+        String newUrl = "https://" + server + ":8443" + context + path + (info != null ? info : "") + (query != null ? "?" + query : "");
         try {
             //ridirigiamo il client
             //redirect
@@ -170,5 +169,17 @@ public class SecurityLayer {
                 throw new ServletException("Cannot redirect to https!");
             }
         }
+    }
+
+    public static boolean authorized(HttpServletRequest request) {
+
+        //per ora restituisci true se l'utente non ha effettuato l'accesso
+        if (request.getSession() == null
+                || (request.getSession().getAttribute("userRoleObject")) == null
+                || ((UserPermissions) ((DynaBean) request.getSession().getAttribute("userRoleObject")).get("permissions")) == null) {
+            return true;
+        }
+
+        return ((UserPermissions) ((DynaBean) request.getSession().getAttribute("userRoleObject")).get("permissions")).authorized(request);
     }
 }
