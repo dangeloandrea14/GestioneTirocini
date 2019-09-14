@@ -5,13 +5,16 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.controller.permissions.UserObject;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
+import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.result.Upload;
 import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.SecurityLayer;
+import java.io.File;
 import java.io.IOException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -40,7 +43,10 @@ public class Convenzione extends TirociniBaseController {
 
             int id = Integer.parseInt(param);
 
+            //salvo l'azienda anche come attributo della sessione per l'uso
+            //al momento del convenzionamento
             request.setAttribute("aziendac", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id));
+            request.getSession().setAttribute("aziendac", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id));
 
             Map<String, String> filling = new HashMap<String, String>();
             filling.put("ente", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getNome());
@@ -62,9 +68,21 @@ public class Convenzione extends TirociniBaseController {
     private void uploadConvenzione(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
         String username = ((UserRole) request.getSession().getAttribute("userRole")).getUsername();
         
-        Upload.uploadFile("Convenzione", "/" + username + "/Convenzione.pdf", request, response);
+        File uploaded = Upload.uploadFile("Convenzione", username, request, response);
 
-        response.sendRedirect("Admin");
+        //recupero azienda salvata nella sessione e aggiorno il database
+        Azienda azienda = (Azienda) request.getSession().getAttribute("aziendac");
+        azienda.setPath(uploaded.getName());
+        azienda.setConvenzionata(true);
+        
+        try {
+            ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(azienda);
+        } catch (DataException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+        }
+        
+        response.sendRedirect("Covenzione");
     }
 
     @Override

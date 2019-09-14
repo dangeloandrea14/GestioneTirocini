@@ -32,10 +32,12 @@
         <param-name>view.error_template</param-name>
         <param-value>error.ftl.html</param-value>
     </context-param>
+    <!--
     <context-param>
         <param-name>uploads.directory</param-name>
         <param-value>uploads</param-value>
     </context-param>
+    -->
     <servlet>
         <servlet-name>Home</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.Home</servlet-class>
@@ -111,6 +113,10 @@
     <servlet>
         <servlet-name>PdfGenerator</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.PdfGenerator</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConvenzioneOk</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.ConvenzioneOk</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
@@ -188,6 +194,10 @@
         <servlet-name>PdfGenerator</servlet-name>
         <url-pattern>/PdfGenerator</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConvenzioneOk</servlet-name>
+        <url-pattern>/ConvenzioneOk</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30
@@ -204,8 +214,7 @@
         <location>/NotFound</location>
     </error-page>
     <res-ref-name>jdbc/webdb2</res-ref-name>
-    
     <welcome-file-list>
-                <welcome-file>Home</welcome-file>
-        </welcome-file-list> 
+        <welcome-file>Home</welcome-file>
+    </welcome-file-list>
 </web-app>
