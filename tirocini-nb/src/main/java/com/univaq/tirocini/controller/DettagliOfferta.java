@@ -5,6 +5,7 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.controller.permissions.UserObject;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Candidatura;
 import com.univaq.tirocini.data.model.Offerta;
@@ -12,6 +13,7 @@ import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.result.UserRole;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -27,9 +29,9 @@ public class DettagliOfferta extends TirociniBaseController {
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException, DataException {
-        
+
         String p = request.getParameter("o"); //id offerta
-        
+
         if (p == null || !p.matches("\\d*")) { //restituiamo not found
             notFound(request, response);
             return;
@@ -43,22 +45,22 @@ public class DettagliOfferta extends TirociniBaseController {
             return;
         }
 
+        //Questo forse si potrebbe fare meglio ma per ora ce lo teniamo così
         //Controlliamo che l'utente non si sia già candidato
-        if(request.getSession().getAttribute("studente") != null){ 
-       List<Candidatura> list = ((TirocinioDataLayer)request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature((Studente) request.getSession().getAttribute("studente"));
-       Iterator it=list.iterator();
-       Boolean already=false;
-       request.setAttribute("already",false);
-       
-       //Controlliamo che non sia già presente
-         while(it.hasNext()){
-           if(( (Candidatura)it.next()).getOfferta().getKey() == offerta.getKey()){
-               already=true;
-               request.setAttribute("already",true);
-           }
-             }    
+        request.setAttribute("already", false);
+        if (request.getSession().getAttribute("userRole") != null
+                && ((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente() != null) {
+            List<Candidatura> list = ((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente());
+            Iterator it = list.iterator();
+
+            //Controlliamo che non sia già presente
+            while (it.hasNext()) {
+                if (((Candidatura) it.next()).getOfferta().getKey() == offerta.getKey()) {
+                    request.setAttribute("already", true);
+                }
+            }
         }
-        
+
         request.setAttribute("page_title", "Dettagli offerta tirocinio");
         request.setAttribute("offerta", offerta);
 
