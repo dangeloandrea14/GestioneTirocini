@@ -26,8 +26,8 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
     //Nota: le lettere (s,i,u,d) che precedono i nomi stanno per Select, Insert, Update e Delete.
     private PreparedStatement sAziendaByID, sAziendaByEmail;
-    private PreparedStatement sAziende, sPassword, sAziendeConvenzionate, sAziendeNonConvenzionate;
-    private PreparedStatement sAziendaSearch;
+    private PreparedStatement sAziende, sPassword, sAziendeConvenzionate, sAziendeNonConvenzionate, sPaginaAziendeConvenzionate;
+    private PreparedStatement sAziendaSearch, sAziendeConvenzionateCount;
     private PreparedStatement iAzienda, uAzienda, dAzienda;
 
     public AziendaDAO_MySQL(DataLayer d) {
@@ -43,6 +43,8 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             sAziendaByID = connection.prepareStatement("SELECT * from Azienda where ID=?");
             sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
             sAziendeConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=1");
+            sAziendeConvenzionateCount = connection.prepareStatement("SELECT COUNT(*) FROM Azienda where Convenzionata=1");
+            sPaginaAziendeConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=1 AND ID>? ORDER BY ID DESC LIMIT ?");
             sAziendeNonConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=0");
             sPassword = connection.prepareStatement("SELECT Password FROM Azienda where emailResponsabile=?");
             sAziendaByEmail = connection.prepareStatement("SELECT * FROM Azienda where emailResponsabile=?");
@@ -154,6 +156,46 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
         return result;
 
     }
+
+    @Override
+    public List<Azienda> getPaginaAziendeConvenzionate(int page, int itemNum) throws DataException {
+        List<Azienda> result = new ArrayList();
+        
+        if(page < 1)
+            page = 1;
+
+        try {
+            sPaginaAziendeConvenzionate.setInt(1, page*itemNum);
+            sPaginaAziendeConvenzionate.setInt(2, itemNum);
+            try (ResultSet rs = sPaginaAziendeConvenzionate.executeQuery()) {
+                while (rs.next()) {
+                    result.add((Azienda) getAzienda(rs.getInt("AziendaID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare le aziende convenzionate", ex);
+        }
+        return result;
+    }
+
+    @Override
+    public int getAziendeConvenzionateCount() throws DataException {
+        
+        int count = 0;
+        
+        try {
+            try (ResultSet rs = sAziendeConvenzionateCount.executeQuery()) {
+                if (rs.next()) {
+                    count = rs.getInt(1);
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare il numero delle aziende convenzionate", ex);
+        }
+
+        return count;
+    }
+
 
     @Override
     public List<Azienda> getAziendeNonConvenzionate() throws DataException {

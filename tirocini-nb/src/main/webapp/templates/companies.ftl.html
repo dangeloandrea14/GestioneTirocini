@@ -14,11 +14,15 @@
                     type="submit">Search</button>
         </form>
     </nav>
+    <small class="text-muted">
+        ${numAziende} aziende attualmente convenzionate
+    </small>
     <hr>
     
     <#if searchString??>
     <p class="text-secondary">
-        Aziende rilevanti per <span class="text-primary">"${searchString}"</span>
+        Aziende rilevanti per <span class="text-primary">"${searchString}"</span>: 
+        trovate <b>${aziende?size}</b> corrispondenze
     </p>
     </#if>
     
@@ -38,6 +42,23 @@
         </#if>
         </#list>
     </div>
+    
+    <nav aria-label="Page navigation example">
+    <ul class="pagination justify-content-center">
+        <li class="page-item <#if page==1> disabled </#if>">
+            <a class="page-link" href="?page=${page-1}" tabindex="-1">Previous</a>
+        </li>
+        <#list 1..pageCount+1 as pageNum>
+        <li class="page-item <#if pageNum==page> active </#if>">
+            <a class="page-link <#if page==1> disabled </#if> " href="?page=${pageNum}">${pageNum}</a>
+        </li>
+        </#list>
+        <li class="page-item <#if page==pageCount+1> disabled </#if>">
+            <a class="page-link" href="?page=${page+1}">Next</a>
+        </li>
+    </ul>
+</nav>
+    
     <#else>
     <#if searchString??>
     Nessuna azienda trovata
