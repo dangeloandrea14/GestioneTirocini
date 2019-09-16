@@ -5,6 +5,7 @@
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
     </form>
 </nav>
+numero offerte: ${numOfferte}, page count: ${pageCount}, page: ${page}
 <hr>
 
 <#assign x=0>
@@ -23,5 +24,11 @@
     </#if>
     </#list>
 </div>
+
+
+    <#include "fragments/pager.ftl.html">
+        
+</nav>
+
 <#else>Nessun tirocinio disponibile
 </#if>

@@ -44,7 +44,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
             sAziende = connection.prepareStatement("SELECT ID as AziendaID from Azienda");
             sAziendeConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=1");
             sAziendeConvenzionateCount = connection.prepareStatement("SELECT COUNT(*) FROM Azienda where Convenzionata=1");
-            sPaginaAziendeConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=1 AND ID>? ORDER BY ID DESC LIMIT ?");
+            sPaginaAziendeConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=1 ORDER BY ID DESC LIMIT ?,?");
             sAziendeNonConvenzionate = connection.prepareStatement("SELECT ID as AziendaID FROM Azienda where Convenzionata=0");
             sPassword = connection.prepareStatement("SELECT Password FROM Azienda where emailResponsabile=?");
             sAziendaByEmail = connection.prepareStatement("SELECT * FROM Azienda where emailResponsabile=?");
@@ -160,13 +160,23 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
     @Override
     public List<Azienda> getPaginaAziendeConvenzionate(int page, int itemNum) throws DataException {
         List<Azienda> result = new ArrayList();
-        
-        if(page < 1)
+
+        if (page < 1) {
             page = 1;
+        }
 
         try {
-            sPaginaAziendeConvenzionate.setInt(1, page*itemNum);
-            sPaginaAziendeConvenzionate.setInt(2, itemNum);
+            
+            //bruttissimo 'sto codice
+            if (page == 1) { //offset
+                //il primo offset dev'essere 0
+                sPaginaAziendeConvenzionate.setInt(1, 0);
+            } else {
+                sPaginaAziendeConvenzionate.setInt(1, page * itemNum - 1); 
+            }
+            
+            sPaginaAziendeConvenzionate.setInt(2, itemNum); //row_count
+            
             try (ResultSet rs = sPaginaAziendeConvenzionate.executeQuery()) {
                 while (rs.next()) {
                     result.add((Azienda) getAzienda(rs.getInt("AziendaID")));
@@ -180,9 +190,9 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
     @Override
     public int getAziendeConvenzionateCount() throws DataException {
-        
+
         int count = 0;
-        
+
         try {
             try (ResultSet rs = sAziendeConvenzionateCount.executeQuery()) {
                 if (rs.next()) {
@@ -195,7 +205,6 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
         return count;
     }
-
 
     @Override
     public List<Azienda> getAziendeNonConvenzionate() throws DataException {
@@ -360,7 +369,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
     @Override
     public List<Azienda> searchAzienda(String queryString) throws DataException {
-        List<Azienda> risultato = new ArrayList<Azienda>();
+        List<Azienda> risultato = new ArrayList();
 
         try {
             sAziendaSearch.setString(1, queryString);

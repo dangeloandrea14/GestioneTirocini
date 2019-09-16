@@ -2,7 +2,6 @@ package com.univaq.tirocini.data.DAO;
 
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Offerta;
-import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import java.sql.ResultSet;
 import java.util.List;
@@ -24,6 +23,10 @@ public interface OffertaDAO {
     List<Offerta> getOfferte() throws DataException;
     
     List<Offerta> getOfferteAttive() throws DataException;
+    
+    List<Offerta> getPaginaOfferteAttive(int page, int itemNum) throws DataException;
+
+    int getOfferteAttiveCount() throws DataException;
     
     void storeOfferta(Offerta offerta) throws DataException;
     

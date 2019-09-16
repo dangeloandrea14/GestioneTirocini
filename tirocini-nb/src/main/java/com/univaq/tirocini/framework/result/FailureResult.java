@@ -16,6 +16,7 @@
 package com.univaq.tirocini.framework.result;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletContext;
@@ -38,22 +39,30 @@ public class FailureResult {
 
     public void activate(Exception exception, HttpServletRequest request, HttpServletResponse response) {
         String message;
+        String details = null;
+        
+        if (exception != null && exception.getClass() == NullPointerException.class) {
+            details = Arrays.toString(exception.getStackTrace());
+        }
+        
         if (exception != null && exception.getMessage() != null && !exception.getMessage().isEmpty()) {
-            message = exception.getMessage() ;
+            message = exception.getMessage();
         } else if (exception != null) {
             message = exception.getClass().getName();
         } else {
             message = "Unknown Error";
         }
-        activate(message, request, response);
+        
+        activate(message, details, request, response);
     }
 
-    public void activate(String message, HttpServletRequest request, HttpServletResponse response) {
+    public void activate(String message, String details, HttpServletRequest request, HttpServletResponse response) {
         try {
             //se abbiamo registrato un template per i messaggi di errore, proviamo a usare quello
             //if an error template has been configured, try it
             if (context.getInitParameter("view.error_template") != null) {
                 request.setAttribute("error", message);
+                request.setAttribute("details", details);
                 request.setAttribute("outline_tpl", "");
                 template.activate(context.getInitParameter("view.error_template"), request, response);
             } else {

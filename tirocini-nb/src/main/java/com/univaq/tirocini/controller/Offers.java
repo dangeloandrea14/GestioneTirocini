@@ -5,6 +5,7 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.data.DAO.OffertaDAO;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -24,8 +25,29 @@ public class Offers extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
         
+        OffertaDAO offertaDAO = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO();
+        
+        int numeroAttive = offertaDAO.getOfferteAttiveCount();
+        int pageCount = numeroAttive / 20+1;
+        
+        int currentPage;
+        if (request.getParameter("page") != null) {
+            currentPage = Integer.parseInt(request.getParameter("page"));
+        } else {
+            currentPage = 1;
+        }
+        
+        if(currentPage > pageCount) {
+            currentPage=pageCount;
+        }
+     
+        request.setAttribute("page", currentPage);
+        
         request.setAttribute("page_title", "Offerte di tirocinio");
-        request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
+        request.setAttribute("offerte", offertaDAO.getPaginaOfferteAttive(currentPage, 20));
+        
+        request.setAttribute("numOfferte", numeroAttive);
+        request.setAttribute("pageCount", pageCount);
         
         TemplateResult res = new TemplateResult(getServletContext());
 
