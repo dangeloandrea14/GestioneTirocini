@@ -43,20 +43,8 @@
         </#list>
     </div>
     
-    <nav aria-label="Page navigation example">
-    <ul class="pagination justify-content-center">
-        <li class="page-item <#if page==1> disabled </#if>">
-            <a class="page-link" href="?page=${page-1}" tabindex="-1">Previous</a>
-        </li>
-        <#list 1..pageCount+1 as pageNum>
-        <li class="page-item <#if pageNum==page> active </#if>">
-            <a class="page-link <#if page==1> disabled </#if> " href="?page=${pageNum}">${pageNum}</a>
-        </li>
-        </#list>
-        <li class="page-item <#if page==pageCount+1> disabled </#if>">
-            <a class="page-link" href="?page=${page+1}">Next</a>
-        </li>
-    </ul>
+    <#include "fragments/pager.ftl.html">
+    
 </nav>
     
     <#else>

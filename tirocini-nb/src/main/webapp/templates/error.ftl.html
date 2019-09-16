@@ -1,9 +1,14 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-    
+
     <head>
-    <#include "fragments/htmlhead.ftl.html">
+        <#include "fragments/htmlhead.ftl.html">
+
+        <link rel="stylesheet" href="style/style.css">
+
+            <title>Intership Tutor - Error</title>
+
     </head>
 
     <body>
@@ -12,17 +17,34 @@
 
         <div class="body mx-auto my-auto" style="width: 720px;">
             <br/>
-                <div>
-            <h1 class='text-danger mx-auto mt-4' style="width: 240px;">
-                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-                Oops!
-                <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
-            </h1>
-            <hr>
-            <p class="text-secondary">The system encountered the following error while handling your request:</p>
-            <p class="text-danger"><b>${error!"Unknown error"}</b></p>
-            <br/><br/>
-            <div><a href="/tirocini">Return to homepage</a></div>
+            <div>
+                <h1 class='text-danger mx-auto mt-4' style="width: 240px;">
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                    Oops!
+                    <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
+                </h1>
+                <hr>
+                    <p class="text-secondary">The system encountered the following error while handling your request:</p>
+                    <p class="text-danger"><b>${error!"Unknown error"}</b></p>
+
+                    <#if details??>
+                    <button class="btn btn-outline-warning btn-block" type="button" 
+                            data-toggle="collapse" data-target="#collapseExample" 
+                            aria-expanded="false" aria-controls="collapseExample">
+                        Show details
+                    </button>
+                    <div class="collapse" id="collapseExample">
+                        <div class="card card-body still text-danger">
+                            <b>
+                                ${details}
+                            </b>
+                        </div>
+                    </div>
+                    </#if>
+                    <br/><br/>
+                    <a href="/tirocini" class="btn btn-warning btn-block">
+                            Return to homepage
+                    </a>
             </div>
         </div>
 

@@ -27,12 +27,20 @@ public class Companies extends TirociniBaseController {
 
         AziendaDAO aziendaDAO = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO();
         
+        int numeroConvenzionate = aziendaDAO.getAziendeConvenzionateCount();
+        int pageCount = numeroConvenzionate / 20 + 1;
+        
         int currentPage;
         if (request.getParameter("page") != null) {
             currentPage = Integer.parseInt(request.getParameter("page"));
         } else {
             currentPage = 1;
         }
+        
+        if(currentPage > pageCount) {
+            currentPage=pageCount;
+        }
+        
         request.setAttribute("page", currentPage);
 
         String searchString = request.getParameter("q");
@@ -45,9 +53,8 @@ public class Companies extends TirociniBaseController {
             request.setAttribute("aziende", (aziendaDAO.getPaginaAziendeConvenzionate(currentPage, 20)));
         }
 
-        int numeroConvenzionate = aziendaDAO.getAziendeConvenzionateCount();
         request.setAttribute("numAziende", numeroConvenzionate);
-        request.setAttribute("pageCount", numeroConvenzionate / 20);
+        request.setAttribute("pageCount", pageCount);
 
         TemplateResult res = new TemplateResult(getServletContext());
 

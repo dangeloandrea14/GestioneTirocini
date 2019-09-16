@@ -1,0 +1,16 @@
+<#if pageCount != 1>
+    <nav aria-label="Page navigation">
+    <ul class="pagination justify-content-center">
+        <li class="page-item <#if page lte 1> disabled </#if>">
+            <a class="page-link" href="?page=${page-1}" tabindex="-1">Previous</a>
+        </li>
+        <#list 1..pageCount as pageNum>
+        <li class="page-item <#if pageNum==page> active </#if>">
+            <a class="page-link <#if page==1> disabled </#if> " href="?page=${pageNum}">${pageNum}</a>
+        </li>
+        </#list>
+        <li class="page-item <#if page gte pageCount> disabled </#if>">
+            <a class="page-link" href="?page=${page+1}">Next</a>
+        </li>
+    </ul>
+</#if>

@@ -36,7 +36,7 @@ public abstract class TirociniBaseController extends HttpServlet {
         if (request.getAttribute("exception") != null) {
             (new FailureResult(getServletContext())).activate((Exception) request.getAttribute("exception"), request, response);
         } else {
-            (new FailureResult(getServletContext())).activate((String) request.getAttribute("message"), request, response);
+            (new FailureResult(getServletContext())).activate((String) request.getAttribute("message"), (String) request.getAttribute("details"),request, response);
         }
     }
 
@@ -58,7 +58,7 @@ public abstract class TirociniBaseController extends HttpServlet {
         } catch (IOException ex) {
             ex.printStackTrace(); //for debugging only
             (new FailureResult(getServletContext())).activate(
-                    (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
+                    (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), null, request, response);
         }
     }
 
@@ -76,7 +76,7 @@ public abstract class TirociniBaseController extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace(); //for debugging only
             (new FailureResult(getServletContext())).activate(
-                    (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
+                    (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), null, request, response);
         }
     }
 
@@ -87,7 +87,7 @@ public abstract class TirociniBaseController extends HttpServlet {
         } catch (Exception ex) {
             ex.printStackTrace(); //for debugging only
             (new FailureResult(getServletContext())).activate(
-                    (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), request, response);
+                    (ex.getMessage() != null || ex.getCause() == null) ? ex.getMessage() : ex.getCause().getMessage(), null, request, response);
         }
     }
 
