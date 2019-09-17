@@ -26,20 +26,12 @@
     </p>
     </#if>
     
-    <#assign x=0>
-
-    <div class="row">
+    <div class="card-columns mb-4">
         <#if aziende?? && aziende?size != 0>
         <#list aziende as azienda>
         
         <#include "fragments/companyCard.ftl.html">
         
-        <#assign x++>
-        <#if x==3>
-    </div>
-    <div class="row">
-        <#assign x=0>
-        </#if>
         </#list>
     </div>
     
