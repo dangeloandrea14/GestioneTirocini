@@ -33,7 +33,7 @@ public class Login extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         if (SecurityLayer.checkSession(request) == null) {
             request.setAttribute("page_title", "Login");
-            request.setAttribute("outline_tpl", "outline_alt.ftl.html");
+            request.setAttribute("outline_tpl", "outline_login.ftl.html");
 
             TemplateResult res = new TemplateResult(getServletContext());
 

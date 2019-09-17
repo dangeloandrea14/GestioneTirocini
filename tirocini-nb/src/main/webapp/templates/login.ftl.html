@@ -1,36 +1,41 @@
-<div id="loginForm" class="">
+<div class="container-fluid d-flex h-100">
+<div class="container w-auto my-auto h-100 mt-4">
+    
+     <h1 class="text-center my-5">Accedi a Internship Tutor</h1>
+
    
-    <div>
-        <h1 class="h2">Accedi</h1>
+    <div class="container p-5 border border-primary shadow bg-white">
+       
         <form method="POST">
             <div class="form-group mb-4">
-                <label for="inputEmail" class="inputarea">Email</label>
+                <label for="inputEmail" class="text-dark">Email</label>
                 <input name="u" type="text" class="form-control" 
                        placeholder="john@domain.com" autofocus required>
             </div>
             <div class="form-group">
-                <label for="inputPassword" class="inputarea">Password</label>
-
-                <input name="p" type="password" class="form-control" 
-                       placeholder="Password"  autocomplete="off" required>
-                <a class="float-right mt-2" href="#">
+                <div >
+                <label for="inputPassword" class="text-dark">Password</label>
+                 <a class="float-right mb-2" href="#">
                     <small>
                     Password dimenticata?
                     </small>
                 </a>
-                <small id="signInError" class="form-text text-danger d-none"></small>
-                <small id="signInNotification" class="form-text text-success d-none"></small>
-
-            <button type="submit" class="btn btn-block btn-primary mt-5 text-uppercase ">Accedi</button>
+                </div>
+                <input name="p" type="password" class="form-control" placeholder="Password"  autocomplete="off" required>
+               
             </div>
-
+            <button type="submit" class="btn btn-block btn-success mt-5 text-uppercase ">Accedi</button>
         </form>
-        <div class="row text-secondary">
-            <span> 
-                Non hai un'account?
-                <a href="Registration" class="btn btn-outline-primary">Registrati</a>
-            </span>
-        </div>
+
     </div>
 
+
+        <div class="container-fluid mt-5 p-3 border border-primary shadow d-flex">
+           <div class=" mx-auto"> 
+           
+           <label class="mt-2 ">Non hai un account?</label>
+           <a href="Registration" class="ml-2">Registrati</a>
+           </div>
+        </div>
+</div>
 </div>
