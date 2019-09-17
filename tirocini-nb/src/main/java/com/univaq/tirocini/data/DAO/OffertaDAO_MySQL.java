@@ -159,13 +159,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
 
         try {
             
-            //bruttissimo 'sto codice
-            if (page == 1) { //offset
-                //il primo offset dev'essere 0
-                sPaginaOfferteAttive.setInt(1, 0);
-            } else { 
-                sPaginaOfferteAttive.setInt(1, (page - 1) * itemNum - 1);
-            }
+            sPaginaOfferteAttive.setInt(1, (page - 1) * itemNum); //offset
             
             sPaginaOfferteAttive.setInt(2, itemNum); //row_count
             

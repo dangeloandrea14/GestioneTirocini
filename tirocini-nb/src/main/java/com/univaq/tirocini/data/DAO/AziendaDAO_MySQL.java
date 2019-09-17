@@ -167,13 +167,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
         try {
             
-            //bruttissimo 'sto codice
-            if (page == 1) { //offset
-                //il primo offset dev'essere 0
-                sPaginaAziendeConvenzionate.setInt(1, 0);
-            } else {
-                sPaginaAziendeConvenzionate.setInt(1, page * itemNum - 1); 
-            }
+            sPaginaAziendeConvenzionate.setInt(1, (page-1) * itemNum); //offset
             
             sPaginaAziendeConvenzionate.setInt(2, itemNum); //row_count
             
