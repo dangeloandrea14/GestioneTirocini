@@ -31,7 +31,7 @@ public class Registration extends TirociniBaseController {
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         request.setAttribute("page_title", "Registration");
-        request.setAttribute("outline_tpl", "outline_alt.ftl.html");
+        request.setAttribute("outline_tpl", "outline.ftl.html");
 
         TemplateResult res = new TemplateResult(getServletContext());
 
