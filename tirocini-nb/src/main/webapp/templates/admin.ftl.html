@@ -1,4 +1,36 @@
 <#ftl encoding='UTF-8'>
+<h1 class="text-secondary">Aziende da convezionare:</h1>
+<hr>
+ 
+   <div class="container-fluid bg-white  h-100 my-0 p-0">
+        <div class="accordion" id="accordionExample">
+        <#if aziende?? && aziende?size != 0>
+        <#assign x=1>
+        <#list aziende as azienda>
+           
+                <div class="card shadow " role="accordionElement" type="button" data-toggle="collapse" data-target="#collapse${x}" aria-expanded="false" aria-controls="collapseOne" >
+                  <div class="card-header  hover d-flex px-4" id="headingOne">
+                     <h4 class="my-auto mr-auto">${azienda.nome} </h4>
+                    <a href="Convenzione?a=${azienda.key}" class="btn btn-success my-auto">Convenziona</a>
+                  </div>
+                  
+                  <div id="collapse${x}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                    <div class="card-body p-4">
+                             <p class="card-text">${azienda.descrizione}</p>
+                                <p class="card-text">${azienda.sede}</p></div>
+                  </div>
+                </div>
+           <#assign x++>
+                </#list>
+        </div>
+    <#else>
+    nessuna azienda convenzionata
+    </#if>
+   
+     
+          </div>
+<!--
+<#ftl encoding='UTF-8'>
 <div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-3">
     Bella, zì <br>
     Devi da convenzionà 'ste aziende:
@@ -10,9 +42,7 @@
 
         <div class="col-md col-sm-12">
             <div class="card text-secondary bg-light mb-3">
-                <!--<div class="card-header bg-altro">
-                    <h2 class="card-title">Tirocinio</h2>
-                </div>-->
+               
                 <div class="card-body">
                     <h3 class="card-title">${azienda.nome}</h3>
                     <p class="card-text">${azienda.descrizione}</p>
@@ -32,4 +62,4 @@
     </div>
     <#else>Nessuna azienda convenzionata
     </#if>
-</div>
+</div>-->

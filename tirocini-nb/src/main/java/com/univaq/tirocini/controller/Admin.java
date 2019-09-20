@@ -5,6 +5,8 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.data.DAO.AziendaDAO;
+import com.univaq.tirocini.data.DAO.OffertaDAO;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.SecurityLayer;
@@ -26,10 +28,14 @@ public class Admin extends TirociniBaseController {
             return;
         }
         request.setAttribute("page_title", "Admin panel");
-
-        //request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
+       
+       // request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
         request.setAttribute("aziende", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendeNonConvenzionate());
+        // OffertaDAO offertaDAO = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO();
+        AziendaDAO aziendaDAO=((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO(); 
+        int numeroAttive= aziendaDAO.getAziendeConvenzionateCount();
         
+        request.setAttribute("numOfferte", numeroAttive);
         TemplateResult res = new TemplateResult(getServletContext());
 
         res.activate("admin.ftl.html", request, response);

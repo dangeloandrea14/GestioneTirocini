@@ -6,7 +6,17 @@
     --danger:#d9364f;
     --warning:#a66300;
 }
+.hover:hover{
+  background-color:#007bff;
+  color:white;
+}
 
+/*
+.accordion .card{
+  border: rgb(144, 144, 144) solid 1px;
+  border-bottom: rgb(144, 144, 144) solid 1px;
+}
+*/
 
 .bg-primary{
     background-color: var(--primary);
