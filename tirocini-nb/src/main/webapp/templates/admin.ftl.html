@@ -2,22 +2,24 @@
 <h1 class="text-secondary">Aziende da convezionare:</h1>
 <hr>
  
-   <div class="container-fluid bg-white  h-100 my-0 p-0">
+   <div class="container-fluid bg-white  h-100 p-0">
         <div class="accordion" id="accordionExample">
         <#if aziende?? && aziende?size != 0>
         <#assign x=1>
         <#list aziende as azienda>
            
-                <div class="card shadow " role="accordionElement" type="button" data-toggle="collapse" data-target="#collapse${x}" aria-expanded="false" aria-controls="collapseOne" >
-                  <div class="card-header  hover d-flex px-4" id="headingOne">
+                <div class="card shadow still" role="accordionElement" type="button" data-toggle="collapse" data-target="#collapse${x}" aria-expanded="false" aria-controls="collapseOne" >
+                  <div class="card-header hover d-flex px-4 py-3" id="headingOne">
                      <h4 class="my-auto mr-auto">${azienda.nome} </h4>
-                    <a href="Convenzione?a=${azienda.key}" class="btn btn-success my-auto">Convenziona</a>
+                     <a href="Convenzione?a=${azienda.key}" class="btn btn-success my-auto">Convenziona</a>
+                    
                   </div>
                   
-                  <div id="collapse${x}" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
+                  <div id="collapse${x}" class="collapse collapsed" aria-labelledby="headingOne" data-parent="#accordionExample">
                     <div class="card-body p-4">
-                             <p class="card-text">${azienda.descrizione}</p>
-                                <p class="card-text">${azienda.sede}</p></div>
+                             <p class="card-text text-secondary">${azienda.descrizione}</p>
+                                <p class="card-text">${azienda.sede}</p>
+                    </div>
                   </div>
                 </div>
            <#assign x++>
