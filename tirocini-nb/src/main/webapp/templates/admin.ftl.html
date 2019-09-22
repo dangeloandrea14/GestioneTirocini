@@ -7,9 +7,10 @@
         <#if aziende?? && aziende?size != 0>
         <#assign x=1>
         <#list aziende as azienda>
-           
-                <div class="card shadow still" role="accordionElement" type="button" data-toggle="collapse" data-target="#collapse${x}" aria-expanded="false" aria-controls="collapseOne" >
-                  <div class="card-header hover d-flex px-4 py-3" id="headingOne">
+        
+                <div class="card shadow still " role="accordionElement" type="button" data-toggle="collapse" data-target="#collapse${x}" aria-expanded="false" aria-controls="collapseOne" >
+                  
+                    <div class="card-header hover d-flex px-4 py-3"  id="headingOne">
                      <h4 class="my-auto mr-auto">${azienda.nome} </h4>
                      <a href="Convenzione?a=${azienda.key}" class="btn btn-success my-auto">Convenziona</a>
                     
@@ -31,3 +32,17 @@
    
      
           </div>
+
+<script>
+    $(document).ready(function() {
+
+    $('.collapse').on("shown.bs.collapse", function () {
+        $(this).parent().children(".card-header").addClass('text-white bg-primary' );
+    });
+
+    $('.collapse').on('hidden.bs.collapse', function () {
+        $(this).parent().children(".card-header").removeClass('bg-primary text-white');
+    });
+
+});
+</script>
