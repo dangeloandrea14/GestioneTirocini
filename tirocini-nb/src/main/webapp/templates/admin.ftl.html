@@ -36,12 +36,12 @@
 <script>
     $(document).ready(function() {
 
-    $('.collapse').on('shown.bs.collapse', function () {
-        $(this).parent().children(".card-header").addClass('bg-primary');
+    $('.collapse').on("shown.bs.collapse", function () {
+        $(this).parent().children(".card-header").addClass('text-white bg-primary' );
     });
 
     $('.collapse').on('hidden.bs.collapse', function () {
-        $(this).parent().children(".card-header").removeClass('bg-primary');
+        $(this).parent().children(".card-header").removeClass('bg-primary text-white');
     });
 
 });
