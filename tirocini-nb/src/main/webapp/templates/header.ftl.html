@@ -1,12 +1,12 @@
 <header class="fixed-top  m-0 p-0">
-    <nav class=" navbar navbar-expand-lg navbar-expand-md navbar-dark bg-altro p-1 shadow">
-        <a href="Home" class="navbar-brand text-light p-0 ml-2 dynalink">
-            <img class="navbar-brand" id="logo" src="img/logo.png" width="50" height="50"
+    <nav class=" navbar navbar-expand-lg navbar-expand-md bg-white p-1 shadow border-bottom border-primary">
+        <a href="Home" class="navbar-brand p-0 ml-2 dynalink text-primary">
+            <img class="navbar-brand mr-0" id="logo" src="img/logo blu.png" width="50" height="50"
                  alt="logo">
             Internship Tutor
         </a>
 
-        <button class="navbar-toggler  m-0 p-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        <button class="navbar-toggler m-0 p-0" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
         </button>
@@ -14,17 +14,17 @@
         <div class="collapse navbar-collapse m-0 p-0" id="navbarSupportedContent"> 
             <ul class="navbar-nav navbar-collapse mr-auto p-2">
                 <li class="nav-item <#if class == 'Offers'>active</#if>">
-                    <a class="nav-link dynalink" href="Offers">Offerte</a>      
+                    <a class="nav-link dynalink text-secondary" href="Offers">Offerte</a>      
                 </li>
 
                 <li class="nav-item <#if class == 'Companies'>active</#if>">
-                    <a class="nav-link dynalink" href="Companies">Aziende</a>
+                    <a class="nav-link dynalink text-secondary" href="Companies">Aziende</a>
                 </li>
             </ul>
             <#if username??>
             <ul class="navbar-nav ml-auto m-0 p-0">
                 <li class="dropdown navbar-nav ml-auto m-0 p-0">
-                    <a class="btn border-white dropdown-toggle btn-altro text-white"  href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <a class="btn border-secondary dropdown-toggle btn-white"  href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         <img class="mr-1" alt="impostazioni" src="img/settings.png" >
 
                     </a> 
@@ -48,10 +48,10 @@
             <#else>
             <ul class="navbar-nav ml-auto ">
                 <li class="nav-item mx-2 text-center">
-                    <a href="Registration" class="nav-link text-light">Iscriviti</a>
+                    <a href="Registration" class="nav-link text-secondary">Iscriviti</a>
                 </li>
                 <li class="nav-item mx-2 text-center">
-                    <a href="Login" class="nav-link text-light">Accedi</a>
+                    <a href="Login" class="nav-link text-secondary">Accedi</a>
                 </li>
             </ul>
             </#if>
