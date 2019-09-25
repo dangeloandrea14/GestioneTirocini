@@ -162,7 +162,6 @@ footer{
 }
 
 .card {
-  border-radius: 12px;
   transition: transform .2s ease;
 }
 .card:hover:not(.still) {

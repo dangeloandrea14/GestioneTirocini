@@ -1,32 +1,19 @@
-<div class="card m-3 shadow-sm">
-    <!--<div class="card-header bg-altro">
-        <h2 class="card-title">Tirocinio</h2>
-    </div>-->
-    <div class="card-body">
-        <h5 class="card-title">
-            <!--
-            <small class="text-secondary">presso</small><br>
-            -->
-            <a class="text-dark"
-               href="DettagliAzienda?a=${offerta.azienda.key}">
-                <strong>        
-                ${offerta.azienda.nome}
-                </strong>
-            </a></h5>
-        <p class="cardtext text-secondary">${offerta.obiettivi}</p>
-        <div class="card-text text-secondary" style="opacity:0.8;">
-            <i class="fas fa-clock"></i>
-            ${offerta.orari}
-            <span class="float-right text-success">
-
-                <i class="fa fa-map-marker " aria-hidden="true"></i>
-                ${offerta.luogo}</span>
+    <div class="card m-3 border border-primary shadow">
+        <!--<div class="card-header bg-altro">
+            <h2 class="card-title">Tirocinio</h2>
+        </div>-->
+        <div class="card-body">
+            <h5 class="card-title">
+                <small class="text-secondary">presso</small>
+                <a class="text-dark"
+                   href="DettagliAzienda?a=${offerta.azienda.key}">
+                    ${offerta.azienda.nome}</a></h5>
+            <p class="card-text">
+                ${offerta.orari}, 
+                <strong>${offerta.luogo}</strong></p>
+            <hr>
+            <p class="cardtext">${offerta.obiettivi}</p>
         </div>
-    </div>
-
-    <div class="card-footer p-1">
-
-        <a class="text-secondary cardtext btn btn-light bnt-outline-primary btn-block details"
+        <a class="card-footer text-white cardtext btn bg-primary details"
            href="DettagliOfferta?o=${offerta.key}">Mostra dettagli</a>
     </div>
-</div>
