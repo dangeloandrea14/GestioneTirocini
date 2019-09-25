@@ -28,7 +28,9 @@ public class Companies extends TirociniBaseController {
         AziendaDAO aziendaDAO = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO();
         
         int numeroConvenzionate = aziendaDAO.getAziendeConvenzionateCount();
-        int pageCount = numeroConvenzionate / 20 + 1;
+        // Se divisibile per 20 usiamo valore esatto, altrimenti aggiungiamo una pagina
+        // (c'è l'ultima pagina incompleta da visualizzare)
+        int pageCount = (numeroConvenzionate%20 != 0) ? numeroConvenzionate/20 + 1 : numeroConvenzionate/20;
         
         int currentPage;
         if (request.getParameter("page") != null) {

@@ -28,7 +28,9 @@ public class Offers extends TirociniBaseController {
         OffertaDAO offertaDAO = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO();
         
         int numeroAttive = offertaDAO.getOfferteAttiveCount();
-        int pageCount = numeroAttive / 20+1;
+        // Se divisibile per 20 usiamo valore esatto, altrimenti aggiungiamo una pagina
+        // (c'è l'ultima pagina incompleta da visualizzare)
+        int pageCount = (numeroAttive%20 != 0) ? numeroAttive/20 + 1 : numeroAttive/20;
         
         int currentPage;
         if (request.getParameter("page") != null) {
