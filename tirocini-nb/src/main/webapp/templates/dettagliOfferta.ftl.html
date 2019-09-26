@@ -1,13 +1,15 @@
 <#ftl encoding='UTF-8'>
 <div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-3">
     <#if offerta??>
-    <h1 class="text-dark" id="details-title">
+    <div class="text-dark" id="details-title">
         <small class="text-muted">offerta di tirocinio presso <br></small>
+        <h1>
         <a href='DettagliAzienda?a=${offerta.azienda.key}'
            class="text-decoration-none">
             ${offerta.azienda.nome}
         </a>
-    </h1>
+        </h1>
+    </div>
 
     <hr id='hr1'>
 
