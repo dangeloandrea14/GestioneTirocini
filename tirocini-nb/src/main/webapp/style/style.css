@@ -7,14 +7,14 @@
     --warning:#a66300;
 }
 .hover:hover{
-  background-color:#007bff;
-  color:white;
+    background-color:#007bff;
+    color:white;
 }
 a:hover .logo{
     fill:#6c757d;
 }
 
- .contacts:hover{
+.contacts:hover{
     color:#6c757d;
 }
 
@@ -162,10 +162,18 @@ footer{
 }
 
 .card {
-  border-radius: 12px;
-  transition: transform .2s ease;
+    border-radius: 12px;
+    transition: transform .2s ease;
 }
 .card:hover:not(.still) {
-  transform: scale(1.02);
+    transform: scale(1.02);
 }
 
+.c-det {
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+
+.still {
+    border-radius: 0px;
+}

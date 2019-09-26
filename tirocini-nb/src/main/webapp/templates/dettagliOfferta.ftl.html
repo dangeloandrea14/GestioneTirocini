@@ -8,16 +8,50 @@
             ${offerta.azienda.nome}
         </a>
     </h1>
-<hr id='hr1'>
-<div>
-    ${offerta.luogo} <br>
-    ${offerta.obiettivi} <br>
-    <hr>
-    ${offerta.modalità}  <br>
-    ${offerta.durata}  <br>
-    ${offerta.orari}  <br>
 
-    <br>
+    <hr id='hr1'>
+
+    <div class="p-0 m-0 mb-4 p-4">
+        <dl class="row p-0 m-0">
+            <dt class="col-sm-3 p-0 m-0 text-primary">
+                <i class="fas fa-angle-right"></i>
+                Obiettivi
+            </dt>
+            <dd class="col-sm-9 p-0 m-0">
+                <p>
+                    
+                ${offerta.obiettivi}
+                </p>
+            </dd>
+
+            <dt class="col-sm-3 p-0 m-0 text-primary">
+                <i class="fas fa-angle-right"></i>
+                Modalità
+            </dt>
+            <dd class="col-sm-9 p-0 m-0">
+                <p>
+                    ${offerta.modalità}
+                </p>
+            </dd>
+        </dl>
+
+        <br>
+
+        <div class="card-text text-secondary" style="opacity:0.8;">
+            <i class="fas fa-clock"></i>
+            ${offerta.orari}<br>
+            <i class="far fa-calendar-alt"></i>
+            ${offerta.durata}  
+            <span class="float-right text-success">
+
+                <i class="fa fa-map-marker " aria-hidden="true"></i>
+                ${offerta.luogo}</span>
+
+            <br>
+        </div>
+
+
+    </div>
 
     <div class="card still">
         <div class="card-body text-center bg-light">
@@ -28,13 +62,13 @@
                 <button form="candidatura" type="submit" class="btn btn-primary btn-block">
                     Candidati </button> <br>
             </form>
-                <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
+            <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
             <small>
-                    <!--
-                    <b>
-                Attenzione: 
-                    </b>
-                    -->
+                <!--
+                <b>
+            Attenzione: 
+                </b>
+                -->
                 Ti ricordiamo che la tua candidatura verrà segnalata all'azienda
                 <b class="text-nowrap">${offerta.azienda.nome}. </b>
                 <br>
@@ -66,4 +100,5 @@
         Quale offerta?
     </p>
     </#if>
+
 </div>
