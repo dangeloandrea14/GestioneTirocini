@@ -1,5 +1,7 @@
 {
-    "elements": {},
+    "elements": {
+        "title": {}
+    },
     "attributes": {
         "type": {
             "context": "div"

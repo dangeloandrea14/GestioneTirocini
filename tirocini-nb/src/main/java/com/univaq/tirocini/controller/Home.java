@@ -23,7 +23,7 @@ public class Home extends TirociniBaseController {
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
-        
+        request.setAttribute("outline_tpl", "outline1.ftl.html");
         request.setAttribute("page_title", "Home");
         request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
         request.setAttribute("aziende", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getPaginaAziendeConvenzionate(1, 3));
