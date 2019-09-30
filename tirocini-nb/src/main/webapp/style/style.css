@@ -4,15 +4,16 @@
   color:white;
 }
 a:hover .logo{
-    fill:#6c757d;
+    fill:#0044cc;
 }
 .contacts{
-    color:#ffffff;
-}
- .contacts:hover{
     color:#6c757d;
 }
-
+/*
+ .contacts:hover{
+    color:;
+}
+*/
 #brand{
     font-size: 2.2rem;
 }
@@ -141,12 +142,12 @@ background-size: cover;
 }
 
 footer{
-    color: white;
+  
     padding: 10px;
     margin:0;
     padding:0;
  }
-
+/*
  footer .row:first-child{
      background-color:#666666;
  }
@@ -157,6 +158,12 @@ footer .row:nth-child(2){
 
 footer .row:nth-child(3){
     background-color:#333333;
+}*/
+
+
+footer .row{
+    background-color:#e8e8e8;
+      color: #6c757d;
 }
 .dropdown-menu >  a:hover, .dropdown-menu  > a:focus {
     background-color: #007bff;
