@@ -27,7 +27,8 @@ a:hover .logo{
     border: solid 3px white;
     background-color:#0000ff ;
     border-radius: 20%;
-    padding: 3%;
+    height: 140px;
+    width:  140px;
 }
 
 #home .row label span{
