@@ -60,9 +60,7 @@ background-attachment: fixed;
 background-size: cover;
 }
 
-.infos{
-    height:300px;
-}
+
 
  .wrapper p,h3{
     font-family: 'Ubuntu', sans-serif;
@@ -134,9 +132,7 @@ background-size: cover;
     margin: 0rem, 3rem, 0rem , 3rem;
 }
 
-.row{
-    padding:20px;
-}
+
 .offerte{
     max-width: 25rem;
 }
@@ -185,6 +181,3 @@ footer .row{
   
 }
 
-#student_infos,#factory_infos{
-    width: 75vw;
-}
