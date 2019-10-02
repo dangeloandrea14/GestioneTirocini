@@ -32,6 +32,26 @@
         <param-name>view.error_template</param-name>
         <param-value>error.ftl.html</param-value>
     </context-param>
+    <context-param>
+        <param-name>mail.smtp.host</param-name>
+        <param-value>smtp-mail.outlook.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail.smtp.port</param-name>
+        <param-value>587</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail.user</param-name>
+        <param-value>pippofranco2019@outlook.com</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail.password</param-name>
+        <param-value>battaglianavalecapradimare9102</param-value>
+    </context-param>
+    <context-param>
+        <param-name>mail.default_sender</param-name>
+        <param-value>noreply@tirocini.univaq.it</param-value>
+    </context-param>
     <!--
     <context-param>
         <param-name>uploads.directory</param-name>
