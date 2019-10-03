@@ -188,4 +188,11 @@ public class AziendaImpl implements Azienda {
         this.corsoRiferimento = corso;
     }
     
+    @Override
+    public boolean equals(Azienda azienda){
+        if (this.key == azienda.getKey())
+            return true;
+        else return false;
+          }
+    
 }

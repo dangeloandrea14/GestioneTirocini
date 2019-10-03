@@ -76,4 +76,6 @@ public interface Azienda {
     public String getCorsoRiferimento();
     
     public void setCorsoRiferimento(String corso);
+    
+    public boolean equals(Azienda azienda);
 }

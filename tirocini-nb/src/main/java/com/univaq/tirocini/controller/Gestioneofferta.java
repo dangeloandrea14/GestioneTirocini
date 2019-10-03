@@ -93,7 +93,7 @@ public class Gestioneofferta extends TirociniBaseController {
 
         Offerta offerta = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
 
-        if (offerta.getAzienda().getKey() != azienda.getKey()) {
+        if ( offerta.getAzienda().getKey() != azienda.getKey()) {
             notFound(request, response);
             return;            
         }

@@ -81,4 +81,5 @@ public interface Studente {
    
    void setPassword(String pass);
     
+   boolean equals(Studente studente);
 }

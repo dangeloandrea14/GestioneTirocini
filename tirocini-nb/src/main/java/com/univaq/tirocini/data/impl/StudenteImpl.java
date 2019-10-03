@@ -1,5 +1,6 @@
 package com.univaq.tirocini.data.impl;
 
+import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import java.sql.Date;
 
@@ -196,5 +197,13 @@ public class StudenteImpl implements Studente {
    public void setPassword(String pass){
        this.password = pass;
    }
+   
+   @Override
+    public boolean equals(Studente studente){
+        if (this.key == studente.getKey())
+            return true;
+        else return false;
+          }
     
 }
+
