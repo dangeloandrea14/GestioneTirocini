@@ -362,9 +362,9 @@ public class TirocinioDAO_MySQL extends DAO implements TirocinioDAO {
                 iTirocinio.setString(11, tirocinio.getPathDocumento());
                 
                 if(tirocinio.getOfferta() != null)
-                uTirocinio.setInt(12, tirocinio.getOfferta().getKey());
+                iTirocinio.setInt(12, tirocinio.getOfferta().getKey());
                 else {
-                    uTirocinio.setNull(12, java.sql.Types.INTEGER);
+                    iTirocinio.setNull(12, java.sql.Types.INTEGER);
                 }
                 
                 if (iTirocinio.executeUpdate() == 1) {

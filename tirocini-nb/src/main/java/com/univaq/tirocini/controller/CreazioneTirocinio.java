@@ -40,7 +40,7 @@ public class CreazioneTirocinio extends TirociniBaseController {
     Studente studente = (Studente) ((TirocinioDataLayer)request.getAttribute("datalayer")).getStudenteDAO().getStudente(uid);
     Offerta offerta = (Offerta) ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
     Azienda azienda = offerta.getAzienda();
-    
+
     request.setAttribute("studenteT",studente);
     request.setAttribute("offerta",offerta);
     request.setAttribute("aziendaT",azienda);

@@ -3,15 +3,14 @@
 Studente: <a href="student?id=${studenteT.key}"> ${studenteT.nome} ${studenteT.cognome}</a> <br>
 Offerta: <a href="DettagliOfferta?o=${offerta.key}"> Offerta a ${offerta.luogo} </a>
 
-
-
-<form method="POST">
+<form method="POST" action="StartTirocinio">
     <input type="hidden" id="sid" name="sid" value="${studenteT.key}">
     <input type="hidden" id="aid" name="aid" value="${aziendaT.key}">
     <input type="hidden" id="oid" name="oid" value="${offerta.key}">
+    
 
             <div class="container pt-3 pb-3">
-                <h3 class="text-center">Crea nuovo tirocinio</h3>
+                <h3 class="text-center">Compilazione modulo tirocinio</h3>
                 <div class="form-group mt-4 ">
                     <label for="inizio"> Inizio </label>
                     <input id="inizio" name="inizio" type="date" class="form-control text-center" required="required" autofocus>
@@ -27,7 +26,7 @@ Offerta: <a href="DettagliOfferta?o=${offerta.key}"> Offerta a ${offerta.luogo} 
                 </div>
 
                 <div class="form-group">
-                    <input id="tempodiaccesso" name="tempodiaccecsso"  type="text" placeholder="Tempo di Accesso" class="form-control text-center" required="required">
+                    <input id="tempodiaccesso" name="tempodiaccesso"  type="text" placeholder="Tempo di Accesso" class="form-control text-center" required="required">
                 </div>
                 
                 <div class="form-group ">
@@ -43,17 +42,9 @@ Offerta: <a href="DettagliOfferta?o=${offerta.key}"> Offerta a ${offerta.luogo} 
                 </div>
                 
                 Nota: qui deve venire generato il pdf del tirocinio formativo con tutte le informazioni appena inserite.
-            <button type="submit" class="btn btn-block btn-primary text-uppercase">Crea Tirocinio </button>
+            <button type="submit" class="btn btn-block btn-primary text-uppercase">Genera File Tirocinio </button>
             </div>
 </form>
 
 <hr>
 
-<h1> Creazione Tirocinio </h1>
-
-<form name="uploadtirocinio" id="uploadtirocinio" action="" method="post">
-    <label for="utirocinio">Carica modulo firmato: </label> <br>
-    <input type="file" id="utirocinio" name="utirocinio" /> <br>
-    <button class="btn btn-block btn-primary text-uppercase" type="submit" form="uploadtirocinio"> Inizia Tirocinio </button>
-</form>
-<br>

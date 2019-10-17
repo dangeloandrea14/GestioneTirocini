@@ -1,0 +1,16 @@
+
+<h1> Ci siamo quasi...</h1>
+<br>
+
+<form name="uploadtirocinio" id="uploadtirocinio" action="TirocinioAttivato" method="post">
+    
+    <input type="hidden" id="sid" name="sid" value="${studenteT.key}">
+    <input type="hidden" id="aid" name="aid" value="${aziendaT.key}">
+    <input type="hidden" id="oid" name="oid" value="${offerta.key}">
+    <input type="hidden" id="tid" name="tid" value="${tirocinio.key}">
+    
+    <label for="utirocinio">Carica modulo firmato: </label> <br>
+    <input type="file" id="utirocinio" name="utirocinio" /> <br>
+    <button class="btn btn-block btn-primary text-uppercase" type="submit" form="uploadtirocinio"> Inizia Tirocinio </button>
+</form>
+<br>
