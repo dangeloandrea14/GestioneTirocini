@@ -6,15 +6,12 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
-import com.univaq.tirocini.data.model.Offerta;
 import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -22,24 +19,31 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Andrea
  */
-public class ConclusioneTirocinio extends TirociniBaseController {
+public class TirocinioFinito extends TirociniBaseController {
 
-    @Override
+
+  @Override
    protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
        
        try{
-    request.setAttribute("page_title", "Conclusione Tirocinio");
-    String param = request.getParameter("i");
+           
+    request.setAttribute("page_title", "Tirocinio Conclusione");
+    
+    String param = request.getParameter("tirocinio");
     
     int tid = Integer.parseInt(param);
    
     Tirocinio tirocinio = (Tirocinio) ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocinio(tid);
+    
+    tirocinio.setAttivo(false);
+    
+    ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().storeTirocinio(tirocinio);
        
-    request.setAttribute("tirocinio",tirocinio);
+    //Invia mail a studente con link per valutazione.
     
         TemplateResult res = new TemplateResult(getServletContext());
 
-        res.activate("conclusione.ftl.html", request, response); 
+        res.activate("home.ftl.html", request, response); 
         
        } catch (DataException ex) {
             request.setAttribute("message", "Data access exception: " + ex.getMessage());
@@ -47,5 +51,6 @@ public class ConclusioneTirocinio extends TirociniBaseController {
         }
     }
 
-   
+
+    
 }

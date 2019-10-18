@@ -39,7 +39,8 @@ public class Profile extends TirociniBaseController {
 
                 request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
                 request.setAttribute("candidature",((TirocinioDataLayer)request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
-
+                request.setAttribute("tirocinic", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniInattivi(((UserObject)((UserRole)request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
+                
                 }
                 
                 else if(request.getSession().getAttribute("type").equals("azienda")){

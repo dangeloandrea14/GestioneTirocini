@@ -1,0 +1,38 @@
+
+<#if already == false>
+
+
+<h3> Valuta la tua esperienza con ${azienda.nome}</h3>
+
+<form id="valutazione" name="valutazione" method="POST" action="ValutazioneCompletata">
+    <input type="hidden" id="azienda" form="valutazione" name="azienda" value="${azienda.key}">
+    <input type="hidden" id="studente" form="valutazione" name="studente" value="${studente.key}">
+    
+    <hr>
+<div>
+    <h6>Che voto daresti alla tua esperienza? (Inserisci un voto da 1 a 5)</h6>
+<input type="number" min="1" max="5" id="voto" name="voto" form="valutazione" required="required">
+</div>    
+    
+    <hr>
+    <div>
+        <h6> Puoi anche inserire un commento (opzionale) </h6>
+    <textarea form="valutazione" id="commento" name="commento" rows = "5" cols = "50">    
+   
+    </textarea>
+    </div>    
+    
+    <button type="submit" form="valutazione" id="send"> Invia Valutazione </button>    
+
+</form>
+
+
+
+
+
+
+
+<#else>
+
+<h5> Grazie per aver valutato questa azienda. </h5>
+</#if>

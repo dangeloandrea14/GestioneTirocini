@@ -1,4 +1,3 @@
-
 .hover:hover{
   background-color:#007bff;
   color:white;
@@ -38,6 +37,8 @@ a:hover .logo{
   border-bottom: rgb(144, 144, 144) solid 1px;
 }
 */
+
+
 
 #navbar{
 background-color: #066fee;
@@ -158,4 +159,3 @@ footer .row{
   transform: scale(1.5);
   
 }
-

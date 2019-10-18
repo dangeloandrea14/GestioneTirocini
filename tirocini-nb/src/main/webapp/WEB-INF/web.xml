@@ -146,6 +146,18 @@
         <servlet-name>TirocinioAttivato</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.TirocinioAttivato</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TirocinioFinito</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.TirocinioFinito</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>Valutazione</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.Valutazione</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ValutazioneCompletata</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.ValutazioneCompletata</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -233,6 +245,18 @@
     <servlet-mapping>
         <servlet-name>TirocinioAttivato</servlet-name>
         <url-pattern>/TirocinioAttivato</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TirocinioFinito</servlet-name>
+        <url-pattern>/TirocinioFinito</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Valutazione</servlet-name>
+        <url-pattern>/Valutazione</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ValutazioneCompletata</servlet-name>
+        <url-pattern>/ValutazioneCompletata</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
