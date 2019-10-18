@@ -1,0 +1,46 @@
+
+<ul id="grafico" class="bar-graph">
+  <li class="bar-graph-axis">
+    <div class="bar-graph-label">100%</div>
+    <div class="bar-graph-label">80%</div>
+    <div class="bar-graph-label">60%</div>
+    <div class="bar-graph-label">40%</div>
+    <div class="bar-graph-label">20%</div>
+    <div class="bar-graph-label">0%</div>
+  </li>
+  
+  <li class="bar primary" style="height: 95%;" title="95">
+    <div class="percent">${cinquestelle}</div>
+    <div class="description">Cinque Stelle</div>
+  </li>
+  <li class="bar secondary" style="height: 90%;" title="90">
+    <div class="percent">${quattrostelle}</div>
+    <div class="description">Quattro stelle</div>
+  </li>
+  <li class="bar success" style="height: 80%;" title="80">
+    <div class="percent">${trestelle}</div>
+    <div class="description">Tre Stelle</div>
+  </li>
+  <li class="bar warning" style="height: 75%;" title="75">
+    <div class="percent">${duestelle}</div>
+    <div class="description">Due Stelle</div>
+  </li>
+  <li class="bar alert" style="height: 40%;" title="40">
+    <div class="percent">${unastella}</div>
+    <div class="description">Una stella</div>
+  </li>
+</ul>
+
+<#if voti?? && voti?size != 0>
+
+<h4> Commenti </h4>
+<#list voti as voto>
+<#if voto.commento??>
+<h6> ${voto.studente.nome} ${voto.studente.cognome} dice: <br></h6>
+${voto.commento}
+<hr>
+</#if>
+
+</#list>
+
+</#if>

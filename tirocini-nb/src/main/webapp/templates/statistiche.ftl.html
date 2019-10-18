@@ -1,0 +1,37 @@
+<div id="resize" class="col-lg-10 p-auto mx-auto mt-0 pt-0 animated fadeIn duration-1s">
+<nav class="nav nav-underline m-0 p-0">
+    <h1 class="text-secondary" id="tirocini">
+        Aziende convenzionate
+    </h1>
+       
+</nav>
+
+    <hr>
+    
+   
+    
+    <div class="card-columns mb-4">
+        <#if aziende?? && aziende?size != 0>
+        <#list aziende as azienda>
+        
+         <div class="card ml-0 shadow">
+        <div class="card-body">
+            <h3 class="card-title text-primary">${azienda.nome}</h3>
+            <hr>
+            <p class="card-text text-secondary">${azienda.descrizione}</p>
+           
+        </div>
+        <div class="card-footer p-1">
+        <a class="text-secondary cardtext btn btn-light bnt-outline-primary btn-block" 
+           href="Statisticheazienda?a=${azienda.key}">Statistiche</a>
+            
+        </div>
+    </div>
+        
+        </#list>
+        </#if>
+    </div>
+    
+    <#include "fragments/pager.ftl.html">
+
+</div>

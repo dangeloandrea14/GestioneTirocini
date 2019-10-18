@@ -34,17 +34,18 @@
         <#include "fragments/companyCard.ftl.html">
         
         </#list>
+       
     </div>
     
     <#include "fragments/pager.ftl.html">
     
 </nav>
     
-    <#else>
+ <#else>
     <#if searchString??>
     Nessuna azienda trovata
     <#else>
     Nessuna azienda convenzionata
     </#if>
-    </#if>
+</#if>
 </div>
