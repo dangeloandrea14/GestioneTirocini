@@ -166,6 +166,10 @@
         <servlet-name>StatisticheAzienda</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.StatisticheAzienda</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>Updatecommenti</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.Updatecommenti</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -273,6 +277,10 @@
     <servlet-mapping>
         <servlet-name>StatisticheAzienda</servlet-name>
         <url-pattern>/Statisticheazienda</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>Updatecommenti</servlet-name>
+        <url-pattern>/updatecommenti</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

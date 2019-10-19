@@ -1,4 +1,3 @@
-
 <ul id="grafico" class="bar-graph">
   <li class="bar-graph-axis">
     <div class="bar-graph-label">100%</div>
@@ -11,7 +10,7 @@
   
   <li class="bar primary" style="height: 95%;" title="95">
     <div class="percent">${cinquestelle}</div>
-    <div class="description">Cinque Stelle</div>
+    <div class="description"><a id="cinquestelle"> Cinque Stelle</a></div>
   </li>
   <li class="bar secondary" style="height: 90%;" title="90">
     <div class="percent">${quattrostelle}</div>
@@ -33,14 +32,40 @@
 
 <#if voti?? && voti?size != 0>
 
+
 <h4> Commenti </h4>
+
+ <div id="commento">
+ 
 <#list voti as voto>
 <#if voto.commento??>
-<h6> ${voto.studente.nome} ${voto.studente.cognome} dice: <br></h6>
-${voto.commento}
-<hr>
+           
+ <ul id="commenti">
+            
+<li>
+    <h6> <a href="student?id=${voto.studente.key}">${voto.studente.nome} ${voto.studente.cognome}</a> ha commentato: <br></h6>
+        ${voto.commento} <br>
+        La valutazione data &egrave; ${voto.stelle}/5.
+        <hr>
+</li>
+
+ </ul>
 </#if>
 
 </#list>
-
+        
+ </div>
 </#if>
+
+
+ <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+        <script>
+           $(document).on("click", "#cinquestelle", function() {  // When HTML DOM "click" event is invoked on element with ID "somebutton", execute the following function...
+            $.get("updatecommenti", function(responseJson) {    // Execute Ajax GET request on URL of "someservlet" and execute the following function with Ajax response JSON...
+            var $ul = $("<ul>").appendTo($("#commento")); // Create HTML <ul> element and append it to HTML DOM element with ID "somediv".
+            $.each(responseJson, function(index, item) { // Iterate over the JSON array.
+            $("<li>").text(item).appendTo($ul);      // Create HTML <li> element, set its text content with currently iterated item and append it to the <ul>.
+        });
+    });
+});
+        </script>
