@@ -62,4 +62,11 @@ public class Companies extends TirociniBaseController {
 
         res.activate("companies.ftl.html", request, response);
     }
+    
+    @Override
+    public String getServletInfo() {
+        return "Carica la lista delle aziende. ";
+    }
+    
+    
 }

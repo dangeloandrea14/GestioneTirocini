@@ -78,5 +78,9 @@ public class TirocinioAttivato extends TirociniBaseController {
     
    }                
     
+    @Override
+    public String getServletInfo() {
+        return "Attiva il tirocinio nel DB dopo che il documento firmato è stata caricato.";
+    }
     
 }

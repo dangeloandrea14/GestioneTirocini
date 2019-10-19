@@ -51,6 +51,9 @@ public class TirocinioFinito extends TirociniBaseController {
         }
     }
 
-
+ @Override
+    public String getServletInfo() {
+        return "Servlet per la conclusione del tirocinio.";
+    }
     
 }

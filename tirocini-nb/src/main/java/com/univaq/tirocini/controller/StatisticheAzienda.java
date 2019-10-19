@@ -87,5 +87,9 @@ public class StatisticheAzienda extends TirociniBaseController {
         res.activate("statisticheazienda.ftl.html", request, response);
     }
     
+     @Override
+    public String getServletInfo() {
+        return "Carica le statistiche relative all'azienda selezionata.";
+    }
     
 }

@@ -23,4 +23,9 @@ public class Logout extends TirociniBaseController {
         SecurityLayer.disposeSession(request);
         goBack(request, response);
     }
+    
+     @Override
+    public String getServletInfo() {
+        return "Gestisce il Logout.";
+    }
 }

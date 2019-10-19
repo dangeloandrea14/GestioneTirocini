@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Shoken
+ * @author Andrea
  */
 public class Gestioneofferta extends TirociniBaseController {
 
@@ -121,7 +121,7 @@ public class Gestioneofferta extends TirociniBaseController {
         tirocino.setAttivo(false);
         tirocino.setNumeroOre(Integer.toString(offerta.getCFU()*25)); //oppure con la durata dell'offerta?
         
-            
+        ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().storeTirocinio(tirocino);    
         
         
     }
@@ -151,4 +151,10 @@ public class Gestioneofferta extends TirociniBaseController {
         }
     }
 
+    @Override
+    public String getServletInfo() {
+        return "Permette diversi tipi di gestione offerta dal profilo di una azienda.";
+    }
+    
+    
 }

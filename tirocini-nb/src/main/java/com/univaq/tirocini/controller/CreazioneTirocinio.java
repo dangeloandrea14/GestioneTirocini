@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Shoken
+ * @author Andrea
  */
 public class CreazioneTirocinio extends TirociniBaseController {
 
@@ -56,6 +56,12 @@ public class CreazioneTirocinio extends TirociniBaseController {
     
    }                
 
+    
+   @Override
+    public String getServletInfo() {
+        return "Servlet per il form di creazione del tirocinio e upload del documento. ";
+    }
+    
     
     
 }

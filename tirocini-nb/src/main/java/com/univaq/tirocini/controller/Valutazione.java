@@ -84,7 +84,10 @@ protected void action_default(HttpServletRequest request, HttpServletResponse re
     }
 
 
-
+ @Override
+    public String getServletInfo() {
+        return "Permette allo studente di valutare l'azienda con la quale ha effettuato il tirocinio.";
+    }
 
 
 

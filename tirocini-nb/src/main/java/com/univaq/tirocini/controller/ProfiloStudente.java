@@ -17,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Shoken
+ * @author Andrea
  */
 public class ProfiloStudente extends TirociniBaseController {
     
@@ -42,5 +42,8 @@ public class ProfiloStudente extends TirociniBaseController {
         
     }
     
-    
+     @Override
+    public String getServletInfo() {
+        return "Carica il profilo pubblico dello studente selezionato.";
+    }
 }

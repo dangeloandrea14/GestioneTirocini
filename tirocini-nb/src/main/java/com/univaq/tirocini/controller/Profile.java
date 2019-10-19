@@ -56,4 +56,9 @@ public class Profile extends TirociniBaseController {
             
          
     }
+    
+     @Override
+    public String getServletInfo() {
+        return "Carica i profili di studente e di azienda.";
+    }
 }

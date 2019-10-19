@@ -91,4 +91,9 @@ public class newOffer extends TirociniBaseController {
             action_error(request, response);
         }
     }
+    
+     @Override
+    public String getServletInfo() {
+        return "Servlet per la creazione di una nuova offerta di tirocinio.";
+    }
 }

@@ -32,4 +32,10 @@ public class Home extends TirociniBaseController {
 
         res.activate("home.ftl.html", request, response);
     }
+    
+     @Override
+    public String getServletInfo() {
+        return "Carica la homepage.";
+    }
+    
 }

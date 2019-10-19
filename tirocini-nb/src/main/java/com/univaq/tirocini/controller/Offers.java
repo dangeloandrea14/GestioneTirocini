@@ -55,4 +55,9 @@ public class Offers extends TirociniBaseController {
 
         res.activate("offers.ftl.html", request, response);
     }
+    
+     @Override
+    public String getServletInfo() {
+        return "Carica la pagina delle offerte.";
+    }
 }

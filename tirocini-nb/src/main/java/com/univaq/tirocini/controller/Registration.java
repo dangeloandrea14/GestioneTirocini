@@ -157,5 +157,9 @@ public class Registration extends TirociniBaseController {
             action_error(request, response);
         }
     }
-    
+ 
+     @Override
+    public String getServletInfo() {
+        return "Gestisce la registrazione di studenti e aziende.";
+    }
 }

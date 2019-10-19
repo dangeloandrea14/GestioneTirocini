@@ -79,6 +79,13 @@ public class CandidaturaServlet extends TirociniBaseController {
     }
     
  
+    @Override
+    public String getServletInfo() {
+        return "Permette la candidatura ad una certa offerta da parte di uno studente.";
+    }
+    
+    
+    
 }
     
 

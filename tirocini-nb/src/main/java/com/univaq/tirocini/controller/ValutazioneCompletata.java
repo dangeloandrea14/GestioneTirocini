@@ -125,7 +125,10 @@ public class ValutazioneCompletata extends TirociniBaseController {
         }
     }
    
-   
+    @Override
+    public String getServletInfo() {
+        return "Memorizza la valutazione e calcola la nuova media per l'azienda giudicata.";
+    }
 
  
 }

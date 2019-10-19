@@ -51,4 +51,8 @@ public class PdfGenerator extends TirociniBaseController {
 
     }
 
+     @Override
+    public String getServletInfo() {
+        return "Si occupa della generazione e compilazione dei pdf.";
+    }
 }

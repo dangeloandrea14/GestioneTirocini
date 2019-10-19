@@ -82,9 +82,9 @@ public class StartTirocinio extends TirociniBaseController {
    }                
 
     
-    
-    
-    
-    
+     @Override
+    public String getServletInfo() {
+        return "Inserisce i dati del tirocinio nel DB una volta completato il form. ";
+    }
     
 }

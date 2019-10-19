@@ -43,6 +43,9 @@ public class Statistiche extends TirociniBaseController {
     }
     
     
-    
+     @Override
+    public String getServletInfo() {
+        return "Carica il pannello statistiche dell'amministratore.";
+    }
     
 }
