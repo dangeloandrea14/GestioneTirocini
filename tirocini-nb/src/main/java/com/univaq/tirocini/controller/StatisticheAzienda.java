@@ -7,6 +7,9 @@ package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Offerta;
+import com.univaq.tirocini.data.model.Studente;
+import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.data.DataLayer;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -71,8 +74,35 @@ public class StatisticheAzienda extends TirociniBaseController {
          
         }
         
+        int percentuale5=0,percentuale4=0,percentuale3=0,percentuale2=0,percentuale1=0;
+        //Calcoliamo le percentuali
+        if(voti.size()>0){
+         percentuale5 = cinquestelle*100/voti.size();
+         percentuale4 = quattrostelle*100/voti.size();
+         percentuale3 = trestelle*100/voti.size();
+         percentuale2 = duestelle*100/voti.size();
+         percentuale1 = unastella*100/voti.size();
+        }
         
         
+        //Costruiamo la lista degli studenti impiegata in tirocini con questa azienda.
+        List<Tirocinio> listatirocini = datalayer.getTirocinioDAO().getTirocini(azienda);
+        int numerotirocini = listatirocini.size();
+
+        //Costruiamo la lista delle offerte pubblicate
+        List<Offerta> listaofferte = datalayer.getOffertaDAO().getOfferte(azienda);
+        int numeroofferte = listaofferte.size();
+        
+        
+        
+        request.setAttribute("percentuale5",percentuale5);
+        request.setAttribute("percentuale4",percentuale4);
+        request.setAttribute("percentuale3",percentuale3);
+        request.setAttribute("percentuale2",percentuale2);
+        request.setAttribute("percentuale1",percentuale1);
+        request.setAttribute("numerotirocini",numerotirocini);
+        request.setAttribute("listatirocini", listatirocini);
+        request.setAttribute("numeroofferte",numeroofferte);
         request.setAttribute("voti",voti);
         request.setAttribute("unastella",unastella);
         request.setAttribute("duestelle",duestelle);

@@ -8,28 +8,29 @@
     <div class="bar-graph-label">0%</div>
   </li>
   
-  <li class="bar primary" style="height: 95%;" title="95">
-    <div class="percent">${cinquestelle}</div>
+  <li class="bar primary" style="height: ${percentuale5}%;" title="95">
+    <div class="percent">${cinquestelle} </div>
     <div class="description"><a id="cinquestelle"> Cinque Stelle</a></div>
   </li>
-  <li class="bar secondary" style="height: 90%;" title="90">
+  <li class="bar secondary" style="height: ${percentuale4}%;" title="90">
     <div class="percent">${quattrostelle}</div>
     <div class="description">Quattro stelle</div>
   </li>
-  <li class="bar success" style="height: 80%;" title="80">
+  <li class="bar success" style="height: ${percentuale3}%;" title="80">
     <div class="percent">${trestelle}</div>
     <div class="description">Tre Stelle</div>
   </li>
-  <li class="bar warning" style="height: 75%;" title="75">
+  <li class="bar warning" style="height: ${percentuale2}%;" title="75">
     <div class="percent">${duestelle}</div>
     <div class="description">Due Stelle</div>
   </li>
-  <li class="bar alert" style="height: 40%;" title="40">
+  <li class="bar alert" style="height: ${percentuale1}%;" title="40">
     <div class="percent">${unastella}</div>
     <div class="description">Una stella</div>
   </li>
 </ul>
 
+<br>
 <#if voti?? && voti?size != 0>
 
 
@@ -57,6 +58,29 @@
  </div>
 </#if>
 
+<hr>
+
+<div>
+<h5> ${azienda.nome} </h5> ha pubblicato ${numeroofferte} offerte, e ospitato ${numerotirocini} tirocini.
+
+Gli studenti ospitati sono:
+
+<#if listatirocini?? && listatirocini?size != 0>
+<ul id="studenti">
+    
+    <#list listatirocini as ls>
+    
+    <li> <a href="student?id=${ls.studente.key}"> ${ls.studente.nome} ${ls.studente.cognome} </a> <br>
+        Da ${ls.inizio} a ${ls.fine} per ${ls.numeroOre} ore. <br>
+        Tutore Universitario: ${ls.tutoreUniversitario}.   Tutore Aziendale: ${ls.tutoreAziendale}.
+    </li>
+    
+    </#list>
+    
+</ul>
+
+</#if>
+</div>
 
  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
         <script>
