@@ -38,12 +38,15 @@
             <button type="submit" class="btn btn-block btn-primary text-uppercase">Genera Documento </button>
  </div>
 
-<div>
-    <form name="Uploadconvenzione" action="" method="post">
-    <label for="Convenzione">Carica documento firmato: </label> <br>
-<input type="file" id="Convenzione" name="Convenzione" />
 
-<button type="submit" form="Uploadconvenzione"  class="btn btn-block btn-primary text-uppercase"> Concludi tirocinio </button>
+
+<div>
+    <form name="uploadfile" id="uploadfile" action="TirocinioFinito" method="post">
+    <input type="hidden" form="uploadfile" id="tirocinio" name="tirocinio" value="${tirocinio.key}">
+    <label for="Convenzione">Carica documento firmato: </label> <br>
+<input type="file" form="uploadfile" id="Convenzione" name="Convenzione" />
+
+<button type="submit" form="uploadfile" class="btn btn-block btn-primary text-uppercase"> Concludi tirocinio </button>
 </form>
 <br>
 </div>

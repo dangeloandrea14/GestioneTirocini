@@ -1,5 +1,6 @@
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.controller.permissions.UserObject;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Candidatura;
@@ -8,6 +9,7 @@ import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -36,8 +38,8 @@ public class CandidaturaServlet extends TirociniBaseController {
         
         int oid = Integer.parseInt(param);
         
-       if(request.getSession().getAttribute("studente") != null ){
-       Studente studente = (Studente) request.getSession().getAttribute("studente");
+       if(request.getSession().getAttribute("type").equals("studente")){
+       Studente studente = (((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente());
        Offerta offerta = (Offerta) ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
        Azienda azienda = offerta.getAzienda();
        List<Candidatura> list = ((TirocinioDataLayer)request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(studente);

@@ -18,6 +18,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -57,6 +59,17 @@ public class CandidaturaDAO_MySQL extends DAO implements CandidaturaDAO{
       }
     }
     
+    
+    @Override
+    public void deleteCandidatura(Candidatura c) throws DataException{
+        int cid = c.getKey();
+        try {
+            dCandidatura.setInt(1,cid);
+            dCandidatura.execute();
+        } catch (SQLException ex) {
+            Logger.getLogger(CandidaturaDAO_MySQL.class.getName()).log(Level.SEVERE, null, ex);
+        }  
+    }
     
      @Override
     public void destroy() throws DataException {

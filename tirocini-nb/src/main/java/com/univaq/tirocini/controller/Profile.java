@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.UserObject;
@@ -39,7 +34,8 @@ public class Profile extends TirociniBaseController {
 
                 request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
                 request.setAttribute("candidature",((TirocinioDataLayer)request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
-
+                request.setAttribute("tirocinic", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniInattivi(((UserObject)((UserRole)request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
+                
                 }
                 
                 else if(request.getSession().getAttribute("type").equals("azienda")){
@@ -54,5 +50,10 @@ public class Profile extends TirociniBaseController {
         }
             
          
+    }
+    
+     @Override
+    public String getServletInfo() {
+        return "Carica i profili di studente e di azienda.";
     }
 }

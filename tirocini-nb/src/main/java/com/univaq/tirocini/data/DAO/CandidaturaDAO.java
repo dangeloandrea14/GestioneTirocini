@@ -32,5 +32,6 @@ public interface CandidaturaDAO {
         
     void storeCandidatura(Candidatura candidatura) throws DataException;
     
+    void deleteCandidatura(Candidatura candidatura) throws DataException;
     
 }
