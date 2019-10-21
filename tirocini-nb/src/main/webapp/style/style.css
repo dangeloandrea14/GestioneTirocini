@@ -316,3 +316,15 @@ footer{
   border: 1px solid #cc4b37;
   background: linear-gradient(#d67060, #cc4b37 70%);
 }
+
+#home {
+  background: linear-gradient(to bottom right, #0073e6, #40dfff);
+}
+
+body {
+    background: linear-gradient(to bottom, #0066d9, #40dfff);   
+}
+
+html {
+    background-color: #40dfff;
+}
