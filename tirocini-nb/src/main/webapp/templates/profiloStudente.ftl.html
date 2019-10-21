@@ -1,66 +1,67 @@
-<div>
-    <h1> Profilo di ${studentep.nome} ${studentep.cognome}
-</div>
+<div class="card still-b shadow">
+    <div class="card-body">
+        <div>
+            <h1> Profilo di ${studentep.nome} ${studentep.cognome}
+        </div>
 
-<div>
-    <h2 class="text-dark" id="aziende">Informazioni</h2>
-    Data di Nascita: ${studentep.dataNascita} <br>
-    Luogo di Nascita: ${studentep.luogoNascita} <br>
-    email: ${studentep.email} <br>
-   
-</div>
-<hr>
+        <div>
+            <h2 class="text-dark" id="aziende">Informazioni</h2>
+            Data di Nascita: ${studentep.dataNascita} <br>
+            Luogo di Nascita: ${studentep.luogoNascita} <br>
+            email: ${studentep.email} <br>
+
+        </div>
+        <hr>
 
 
 
-<div>
-    
+        <div>
 
-    <#if tirocini?? && tirocini?size != 0>
-    <h2 class="text-dark" id="aziende">Tirocini attivi:</h2>
-    <hr>
-    <#list tirocini as tirocinio>
-     <div class="col-md col-sm-12 ">
-     <div class="card text-white  mb-3 bg-primary">
-         <div class="card-body">
-                    <h5 class="card-title">
-                        <small class="text-light">presso</small>
-                        ${tirocinio.azienda.nome}</h5>
-                    <p class="card-text">${tirocinio.offerta.orari}</p>
-                    <p class="card-text">${tirocinio.offerta.luogo}</p>
-                    <hr>
-                    <h3 class="card-title">Descrizione</h3>
-                    <p class="cardtext">${tirocinio.offerta.obiettivi}</p>
-                    <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${tirocinio.offerta.key}">Mostra dettagli</a>
-         </div>
-      </div>
-     </div>
-    </#list>
-    </#if>
-</div>
 
-<div>
-    
+            <#if tirocini?? && tirocini?size != 0>
+            <h2 class="text-dark" id="aziende">Tirocini attivi:</h2>
+            <#list tirocini as tirocinio>
+            <div class="col-md col-sm-12 ">
+                <div class="card mb-3">
+                    <div class="card-header">
+                        <h5 class="card-title">
+                            <small class="text-secondary">presso</small>
+                            ${tirocinio.azienda.nome}</h5>
+                    </div>
+                    <div class="card-body">
+                        <#assign offerta = tirocinio.offerta>
+                        <#include "fragments/offerDescription.ftl.html">
+                    </div>
+                </div>
+            </div>
+            </#list>
+            </#if>
+        </div>
 
-    <#if tirociniconclusi?? && tirociniconclusi?size != 0>
-    <h2 class="text-dark" id="aziende">Tirocini conclusi:</h2>
-    <hr>
-    <#list tirociniconclusi as tirocinioc>
-     <div class="col-md col-sm-12 ">
-     <div class="card text-white  mb-3 bg-primary">
-         <div class="card-body">
-                    <h5 class="card-title">
-                        <small class="text-light">presso</small>
-                        ${tirocinioc.azienda.nome}</h5>
-                    <p class="card-text">${tirocinioc.offerta.orari}</p>
-                    <p class="card-text">${tirocinioc.offerta.luogo}</p>
-                    <hr>
-                    <h3 class="card-title">Descrizione</h3>
-                    <p class="cardtext">${tirocinioc.offerta.obiettivi}</p>
-                    <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${tirocinioc.offerta.key}">Mostra dettagli</a>
-         </div>
-      </div>
-     </div>
-    </#list>
-    </#if>
+        <div>
+
+
+            <#if tirociniconclusi?? && tirociniconclusi?size != 0>
+            <h2 class="text-dark" id="aziende">Tirocini conclusi:</h2>
+            <hr>
+            <#list tirociniconclusi as tirocinioc>
+            <div class="col-md col-sm-12 ">
+                <div class="card text-white  mb-3 bg-primary">
+                    <div class="card-body">
+                        <h5 class="card-title">
+                            <small class="text-light">presso</small>
+                            ${tirocinioc.azienda.nome}</h5>
+                        <p class="card-text">${tirocinioc.offerta.orari}</p>
+                        <p class="card-text">${tirocinioc.offerta.luogo}</p>
+                        <hr>
+                        <h3 class="card-title">Descrizione</h3>
+                        <p class="cardtext">${tirocinioc.offerta.obiettivi}</p>
+                        <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${tirocinioc.offerta.key}">Mostra dettagli</a>
+                    </div>
+                </div>
+            </div>
+            </#list>
+            </#if>
+        </div>
+    </div>
 </div>

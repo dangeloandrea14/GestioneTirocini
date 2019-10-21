@@ -162,7 +162,7 @@ footer{
     border-radius: 12px;
     transition: transform .2s ease;
 }
-.card:hover:not(.still) {
+.card:hover:not(.still .still-b) {
     transform: scale(1.02);
 }
 
@@ -187,3 +187,14 @@ footer{
     border-top-right-radius: 24px;  
 }
 
+#home {
+  background: linear-gradient(to bottom right, #0073e6, #40dfff);
+}
+
+body {
+    background: linear-gradient(to bottom, #0066d9, #40dfff);   
+}
+
+html {
+    background-color: #40dfff;
+}

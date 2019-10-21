@@ -1,4 +1,6 @@
-    <nav class="nav nav-underline m-0 p-0">
+<div class="card still-b shadow">
+<div class="card-body">
+<nav class="nav nav-underline m-0 p-0">
     <h1 class="text-secondary" id="tirocini">
         Aziende convenzionate
     </h1>
@@ -19,7 +21,8 @@
     <small class="text-muted">
         ${numAziende} aziende attualmente convenzionate
     </small>
-    <hr>
+</div>
+    <div class="card-footer">
     
     <#if searchString??>
     <p class="text-secondary">
@@ -39,8 +42,6 @@
     
     <#include "fragments/pager.ftl.html">
     
-</nav>
-    
     <#else>
     <#if searchString??>
     Nessuna azienda trovata
@@ -48,3 +49,6 @@
     Nessuna azienda convenzionata
     </#if>
     </#if>
+    
+</div>
+</div>
