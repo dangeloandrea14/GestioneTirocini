@@ -1,3 +1,4 @@
+<#ftl encoding='UTF-8'>
 <div>
     <h2 class="text-dark" id="dettagli"> Informazioni </h2>
     <#if userObject.studente??>
@@ -11,57 +12,71 @@
 
 
 <div>
-    <h2 class="text-dark" id="aziende">Tirocini Attivi</h2>
-    <hr>
 
     <#if tirocini?? && tirocini?size != 0>
+    <h2 class="text-dark" id="aziende">Tirocini Attivi</h2>
+    <hr>
     <#list tirocini as tirocinio>
     <div class="col-md col-sm-12 ">
-     <div class="card text-white  mb-3 bg-primary">
-         <div class="card-body">
-                    <h5 class="card-title">
-                        <small class="text-light">presso</small>
-                        ${tirocinio.azienda.nome}</h5>
-                    <p class="card-text">${tirocinio.offerta.orari}</p>
-                    <p class="card-text">${tirocinio.offerta.luogo}</p>
-                    <hr>
-                    <h3 class="card-title">Descrizione</h3>
-                    <p class="cardtext">${tirocinio.offerta.obiettivi}</p>
-                    <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${tirocinio.offerta.key}">Mostra dettagli</a>
-         </div>
-      </div>
-    </div>
-    </#list>
-    </#if>
-    
-    <h2 class="text-dark" id="aziende">Candidature in attesa di risposta</h2>
-    <hr>
-    
-     <#if candidature?? && candidature?size != 0>
-      <#list candidature as candidatura>
-        <div class="col-md col-sm-12 ">
-             <div class="card text-white  mb-3 bg-primary">
-                 <div class="card-body">
-                    <h5 class="card-title">
-                        <small class="text-light">presso</small>
-                        ${candidatura.offerta.azienda.nome}</h5>
-                    <p class="card-text">${candidatura.offerta.orari}</p>
-                    <p class="card-text">${candidatura.offerta.luogo}</p>
-                    <hr>
-                    <h3 class="card-title">Descrizione</h3>
-                    <p class="cardtext">${candidatura.offerta.obiettivi}</p>
-                    <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${candidatura.offerta.key}">Mostra dettagli</a>
-                 </div>
+        <div class="card text-white  mb-3 bg-primary">
+            <div class="card-body">
+                <h5 class="card-title">
+                    <small class="text-light">presso</small>
+                    ${tirocinio.azienda.nome}</h5>
+                <p class="card-text">${tirocinio.offerta.orari}</p>
+                <p class="card-text">${tirocinio.offerta.luogo}</p>
+                <hr>
+                <h3 class="card-title">Descrizione</h3>
+                <p class="cardtext">${tirocinio.offerta.obiettivi}</p>
+                <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${tirocinio.offerta.key}">Mostra dettagli</a>
             </div>
         </div>
-      </#list>
-     </#if>
-</div>
+    </div>
+    </#list>
+    <#else>
+    <p class="text-secondary">
+        <i class="fas fa-info-circle"></i>
+        Nessun tirocinio attualmente attivo.
+    </p>
+    </#if>
+
+
+    <#if candidature?? && candidature?size != 0>
+    <h2 class="text-dark" id="aziende">Candidature in attesa di risposta</h2>
+    <#list candidature as candidatura>
+    <div class="col-md col-sm-12 ">
+        <div class="card mb-3 still shadow-sm">
+            <a class="card-header bg-primary text-center text-decoration-none" 
+               href='DettagliAzienda?a=${candidatura.offerta.azienda.key}'>
+                <!--
+                <small class="text-light">presso</small>
+                -->
+                <b class="text-white">
+                    <i class="far fa-building"></i>
+                    ${candidatura.offerta.azienda.nome}
+                </b>
+            </a>
+            <div class="card-body">
+                <#assign offerta = candidatura.offerta>
+                <#include "fragments/offerDescription.ftl.html">
+                <!--
+                <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${candidatura.offerta.key}">Mostra dettagli</a>
+                -->
+            </div>
+        </div>
+    </div>
+    </#list>
+<#else>
+<p>
+    <i class="fas fa-info-circle"></i>
+    Nessuna candidatura in attesa di risposta
+</p>
 </#if>
 
+</div>
 
 
-<#if userObject.azienda??>
+<#elseif userObject.azienda??>
 <div>
     <p>
         Nome: ${userObject.azienda.nome}<br>
@@ -71,54 +86,66 @@
 
 <div>
     <h1 class="text-dark" id="aziende">Offerte attive 
-        <a href="newOffer" class="btn btn-primary">Nuova</a></h1>
+        <a href="newOffer" class="btn btn-primary">
+            <i class="fas fa-plus-circle"></i>
+            Nuova</a></h1>
     <#if offerte?? && offerte?size != 0>
     <#list offerte as offerta>
     <div class="col-md col-sm-12 ">
-             <div class="card text-white  mb-3 bg-primary">
-                 <div class="card-body">
-                    <h5 class="card-title">
-                        <small class="text-light">presso</small>
-                        ${offerta.azienda.nome}</h5>
-                    <p class="card-text">${offerta.orari}</p>
-                    <p class="card-text">${offerta.luogo}</p>
-                    <hr>
-                    <h3 class="card-title">Descrizione</h3>
-                    <p class="cardtext">${offerta.obiettivi}</p>
-                    <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${offerta.key}">Mostra dettagli</a>
-         <form action="Gestioneofferta" id="gestioneofferta">
-        <input type="hidden" id="oid" name="oid" value="${offerta.key}">
-        <button form="gestioneofferta" type="submit"> Gestisci </button> <br>
-        </form>
-                 </div>
-                 <hr>
+        <div class="card mb-3 still shadow-sm">
+            <div class="card-body">
+                <#include "fragments/offerDescription.ftl.html">
             </div>
+
+            <form class="card-footer"
+                  action="Gestioneofferta" id="gestioneofferta">
+                <!--
+                <a class="btn btn-outline-primary" 
+                   href="DettagliOfferta?o=${offerta.key}">
+                    Mostra dettagli</a>
+                -->
+                <input type="hidden" id="oid" name="oid" value="${offerta.key}">
+                <button class="btn btn-primary mx-auto" form="gestioneofferta" 
+                        type="submit">
+                    <i class="fas fa-cogs"></i>
+                    Gestisci </button> <br>
+            </form>
         </div>
+    </div>
     </#list>
     </#if>
 
     <h1 class="text-dark" id="aziende">Tirocini attivi</h1>    
     <#if tirociniazienda?? && tirociniazienda?size != 0>
     <#list tirociniazienda as tirocinio>
-     <div class="col-md col-sm-12 ">
-     <div class="card text-white  mb-3 bg-primary">
-         <div class="card-body">
-                    <h5 class="card-title">
-                        <small class="text-light">presso</small>
-                        ${tirocinio.azienda.nome}</h5>
-                    <h5 class="card-title">
-                        <small class="text-light">con lo studente</small>
-                                          <a class="card-footer text-light cardtext btn bg-altro" href="student?id=${tirocinio.studente.key}">
-                                              ${tirocinio.studente.nome} ${tirocinio.studente.cognome}</h5> </a>
-                    <p class="card-text">${tirocinio.offerta.orari}</p>
-                    <p class="card-text">${tirocinio.offerta.luogo}</p>
-                    <hr>
-                    <h3 class="card-title">Descrizione</h3>
-                    <p class="cardtext">${tirocinio.offerta.obiettivi}</p>
-                    <a class="card-footer text-light cardtext btn bg-altro" href="DettagliOfferta?o=${tirocinio.offerta.key}">Mostra dettagli</a>
-                    <a class="card-footer text-light cardtext btn bg-altro" href="Conclusione?i=${tirocinio.key}"> Concludi </a>
-         </div>
-      </div>
+    <div class="col-md col-sm-12 ">
+        <div class="card mb-3 still shadow-sm">
+            <a class="card-header bg-primary text-decoration-none text-center" 
+               href="student?id=${tirocinio.studente.key}">
+                <!--
+                <small class="text-light">con lo studente:</small>
+                -->
+                <b class="text-white">
+                    <i class="fas fa-user-graduate"></i>
+                    ${tirocinio.studente.nome} ${tirocinio.studente.cognome}
+                </b>
+            </a>
+            <div class="card-body">
+                <#assign offerta = tirocinio.offerta>
+                <#include "fragments/offerDescription.ftl.html">
+                <!--
+                <a class="btn btn-outline-primary" 
+                href="DettagliOfferta?o=${tirocinio.offerta.key}">
+                Mostra dettagli</a>
+                -->
+            </div>
+            <div class="card-footer">
+                <a class="btn btn-success" 
+                   href="Conclusione?i=${tirocinio.key}">
+                    <i class="fas fa-check"></i>
+                    Concludi</a>
+            </div>
+        </div>
     </div>
     </#list>
     </#if>

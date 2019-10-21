@@ -25,21 +25,27 @@
             <ul class="navbar-nav ml-auto m-0 p-0">
                 <li class="dropdown navbar-nav ml-auto m-0 p-0">
                     <a class="btn border-secondary dropdown-toggle btn-white"  href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <img class="mr-1" alt="impostazioni" src="img/settings.png" >
-
+                        <i class="fas fa-user-circle"></i>
                     </a> 
 
                     <div class="dropdown-menu bg-light dropdown-menu-right shadow" aria-labelledby="dropdownMenu">
-                        <h6 class="dropdown-header">Registrato come:
+                        <h6 class="dropdown-header">
                             <b>${username}</b>
                         </h6>
                         <div class="dropdown-divider">  </div>
-                        <a class="dropdown-item" href="Profile">Profilo</a>
+                        <a class="dropdown-item" href="Profile">
+                            <!--
+                            <i class="fas fa-user-alt"></i>
+                            -->
+                            <i class="fas fa-user-cog"></i>
+                            Profilo</a>
                         <#if role?? && role == "admin">
                         <a class="dropdown-item" href="Admin">Pannello amministratore</a>
                         </#if>
                         <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Logout">Logout</a>
+                        <a class="dropdown-item" href="Logout">
+                            <i class="fas fa-sign-out-alt"></i>
+                            Logout</a>
                     </div>
 
 

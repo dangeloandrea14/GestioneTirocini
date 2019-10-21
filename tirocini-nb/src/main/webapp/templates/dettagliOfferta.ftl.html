@@ -14,43 +14,7 @@
     <hr id='hr1'>
 
     <div class="p-0 m-0 mb-4 p-4">
-        <dl class="row p-0 m-0">
-            <dt class="col-sm-3 p-0 m-0 text-primary">
-                <i class="fas fa-angle-right"></i>
-                Obiettivi
-            </dt>
-            <dd class="col-sm-9 p-0 m-0">
-                <p>
-                    
-                ${offerta.obiettivi}
-                </p>
-            </dd>
-
-            <dt class="col-sm-3 p-0 m-0 text-primary">
-                <i class="fas fa-angle-right"></i>
-                Modalità
-            </dt>
-            <dd class="col-sm-9 p-0 m-0">
-                <p>
-                    ${offerta.modalità}
-                </p>
-            </dd>
-        </dl>
-
-        <br>
-
-        <div class="card-text text-secondary" style="opacity:0.8;">
-            <i class="fas fa-clock"></i>
-            ${offerta.orari}<br>
-            <i class="far fa-calendar-alt"></i>
-            ${offerta.durata}  
-            <span class="float-right text-success">
-
-                <i class="fa fa-map-marker " aria-hidden="true"></i>
-                ${offerta.luogo}</span>
-
-            <br>
-        </div>
+        <#include "fragments/offerDescription.ftl.html">
 
 
     </div>
