@@ -25,7 +25,6 @@ public class PdfGenerator extends TirociniBaseController {
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws Exception {
 
-        request.setAttribute("page_title", "Home");
         TemplateResult res = new TemplateResult(getServletContext());
 
         //res.activate("pdf.ftl.html", request, response);
