@@ -14,11 +14,15 @@
         <div class="collapse navbar-collapse m-0 p-0" id="navbarSupportedContent"> 
             <ul class="navbar-nav navbar-collapse mr-auto p-2">
                 <li class="nav-item <#if class == 'Offers'>active</#if>">
-                    <a class="nav-link dynalink text-secondary" href="Offers">Offerte</a>      
+                    <a class="nav-link dynalink text-secondary" href="Offers">
+                        <i class="fas fa-inbox ml-0"></i>
+                        Offerte</a>      
                 </li>
 
                 <li class="nav-item <#if class == 'Companies'>active</#if>">
-                    <a class="nav-link dynalink text-secondary" href="Companies">Aziende</a>
+                    <a class="nav-link dynalink text-secondary" href="Companies">
+                        <i class="far fa-building ml-0"></i>
+                        Aziende</a>
                 </li>
             </ul>
             <#if username??>

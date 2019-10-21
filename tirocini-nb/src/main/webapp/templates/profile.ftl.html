@@ -1,20 +1,30 @@
 <#ftl encoding='UTF-8'>
-<div>
-    <h2 class="text-dark" id="dettagli"> Informazioni </h2>
-    <#if userObject.studente??>
-    <p>
-        Nome: ${userObject.studente.nome} <br>
-        Cognome: ${userObject.studente.cognome}<br>
-        Data di Nascita: ${userObject.studente.dataNascita}<br>
+<#if userObject.studente??>
+<div class="col-sm-8 mx-auto">
+    <h2 class="text-dark text-center" id="dettagli">
+        <i class="fas fa-user-graduate text-primary"></i>
+        Informazioni </h2>
+    <p class="card-text text-center text-secondary">
+        <b class="text-primary">
+            ${userObject.studente.nome} ${userObject.studente.cognome}
+        </b><br><br>
+        Telefono: <b>${userObject.studente.telefono}</b><br>
+        Email: <b>${userObject.studente.email}</b><br>
     </p>
-
 </div>
+<hr>
 
 
 <div>
 
     <#if tirocini?? && tirocini?size != 0>
-    <h2 class="text-dark" id="aziende">Tirocini Attivi</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg">
+                <h1 class="text-secondary text-center" id="aziende">Tirocini attivi</h1>
+            </div>
+        </div>
+    </div>
     <hr>
     <#list tirocini as tirocinio>
     <div class="col-md col-sm-12 ">
@@ -34,7 +44,7 @@
     </div>
     </#list>
     <#else>
-    <p class="text-secondary">
+    <p class="text-secondary text-center">
         <i class="fas fa-info-circle"></i>
         Nessun tirocinio attualmente attivo.
     </p>
@@ -42,7 +52,13 @@
 
 
     <#if candidature?? && candidature?size != 0>
-    <h2 class="text-dark" id="aziende">Candidature in attesa di risposta</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col">
+                <h1 class="text-secondary text-center" id="aziende">Candidature in attesa di risposta</h1>
+            </div>
+        </div>
+    </div>
     <#list candidature as candidatura>
     <div class="col-md col-sm-12 ">
         <div class="card mb-3 still shadow-sm">
@@ -66,30 +82,48 @@
         </div>
     </div>
     </#list>
-<#else>
-<p>
-    <i class="fas fa-info-circle"></i>
-    Nessuna candidatura in attesa di risposta
-</p>
-</#if>
+    <#else>
+    <p>
+        <i class="fas fa-info-circle text-center"></i>
+        Nessuna candidatura in attesa di risposta.
+    </p>
+    </#if>
 
 </div>
 
 
 <#elseif userObject.azienda??>
 <div>
-    <p>
-        Nome: ${userObject.azienda.nome}<br>
-        Partita IVA: ${userObject.azienda.iva}<br>
-    <p>
+    <h2 class="text-dark text-center" id="dettagli">
+        <i class="far fa-building text-primary"></i>
+        Informazioni</h2>
+    <p class="text-secondary text-center mx-auto">
+        <b class="text-primary">${userObject.azienda.nome}</b><br><br>
+        Partita IVA: <b>${userObject.azienda.iva}</b><br>
+        Responsabile: <b class="text-primary">${userObject.azienda.nomeResponsabile} ${userObject.azienda.cognomeResponsabile}</b><br>
+        Telefono Responsabile: <b>${userObject.azienda.telefonoResponsabile}</b><br>
+        Email Responsabile: <b>${userObject.azienda.emailResponsabile}</b><br>
+        Legale: <b>${userObject.azienda.nomeCognomeLegale}</b><br>
+    </p>
+
+    <hr>
 </div>
 
 <div>
-    <h1 class="text-dark" id="aziende">Offerte attive 
-        <a href="newOffer" class="btn btn-primary">
-            <i class="fas fa-plus-circle"></i>
-            Nuova</a></h1>
     <#if offerte?? && offerte?size != 0>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <h1 class="text-secondary text-center" id="aziende">Offerte attive</h1>
+            </div>
+            <div class="col text-right my-auto">
+                <a href="newOffer" class="btn btn-primary">
+                    <i class="fas fa-plus-circle"></i>
+                    Nuova</a>
+            </div>
+        </div>
+    </div>
     <#list offerte as offerta>
     <div class="col-md col-sm-12 ">
         <div class="card mb-3 still shadow-sm">
@@ -113,10 +147,24 @@
         </div>
     </div>
     </#list>
+    <hr class="my-5">
+    <#else>
+    <p>
+        <i class="fas fa-info-circle text-center"></i>
+        Nessuna offerta attiva.
+    </p>
     </#if>
 
-    <h1 class="text-dark" id="aziende">Tirocini attivi</h1>    
     <#if tirociniazienda?? && tirociniazienda?size != 0>
+    <div class="container">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col">
+                <h1 class="text-secondary text-center" id="aziende">Tirocini attivi</h1>
+            </div>
+            <div class="col"></div>
+        </div>
+    </div>
     <#list tirociniazienda as tirocinio>
     <div class="col-md col-sm-12 ">
         <div class="card mb-3 still shadow-sm">
@@ -148,6 +196,11 @@
         </div>
     </div>
     </#list>
+    <#else>
+    <p>
+        <i class="fas fa-info-circle text-center"></i>
+        Nessun tirocinio attivo.
+    </p>
     </#if>
 
 

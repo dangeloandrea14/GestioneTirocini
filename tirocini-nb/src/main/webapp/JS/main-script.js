@@ -26,7 +26,7 @@ function setupModalsEvents() {
                 //$(".post_submitting").fadeOut(1000);
                 $("#detailsModalBody").html(response);
                 $('#detailsModal').modal('show');
-                
+
                 //Sposta il titolo nell'header ed elimina il primo <hr>
                 $('.modal-title').html($('#details-title').html());
                 $('#detailsModalLabel').addClass('col-lg-10 mx-auto mt-0 pt-0');
@@ -46,18 +46,18 @@ function setupModalsEvents() {
 function setupSearchEvents() {
     $('#search-aziende').on('keypress', function (e) {
         /*console.log(document.getElementById('search-aziende').value);
-        console.log($(this));
-        length = document.getElementById('search-aziende').textLength + 1;*/
+         console.log($(this));
+         length = document.getElementById('search-aziende').textLength + 1;*/
     });
 }
 
-function updateContent(id, dataURL,q) {
+function updateContent(id, dataURL, q) {
     history.pushState(undefined, '', dataURL);
     $.ajax({
         type: "GET",
         url: dataURL,
         data: {"dyn": "",
-                "q":q},
+            "q": q},
         beforeSend: function () {
             //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
             $(id).addClass('fadeOut faster');
