@@ -37,7 +37,21 @@ a:hover .logo{
   border-bottom: rgb(144, 144, 144) solid 1px;
 }
 */
+      .truncate-overflow {
+  height:4.2rem;
+  position: relative;
+  max-height: 4.2rem;
+  overflow: hidden;
+  padding-right: 1rem; /* space for ellipsis */
+}   
 
+
+ .card .card-header .a{
+    font-size:2rem;
+  }
+  .card .row{
+      opacity: 0.8;
+  }
 
 
 #navbar{

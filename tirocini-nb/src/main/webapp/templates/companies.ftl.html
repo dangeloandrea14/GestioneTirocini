@@ -1,51 +1,51 @@
-<div id="resize" class="col-lg-10 p-auto mx-auto mt-0 pt-0 animated fadeIn duration-1s">
-<nav class="nav nav-underline m-0 p-0">
-    <h1 class="text-secondary" id="tirocini">
-        Aziende convenzionate
-    </h1>
-        <form class="form-inline ml-auto my-2 my-lg-0" method="get">
-            <input id="search-aziende" class="form-control mr-sm-2"
-                   name="q" 
-                   <#if searchString??>
-                   value="${searchString}"
-                   autofocus
-                   </#if>
-                   type="text" placeholder="Search" aria-label="Search">
-            <button class="btn btn-outline-success my-2 my-sm-0" 
-                    type="submit">Search</button>
-        </form>
-    </nav>
-    <small class="text-muted">
-        ${numAziende} aziende attualmente convenzionate
-    </small>
-    <hr>
-    
-    <#if searchString??>
-    <p class="text-secondary">
-        Aziende rilevanti per <span class="text-primary">"${searchString}"</span>: 
-        trovate <b>${aziende?size}</b> corrispondenze
-    </p>
-    </#if>
-    
-    <div class="card-columns mb-4">
-        <#if aziende?? && aziende?size != 0>
-        <#list aziende as azienda>
-        
-        <#include "fragments/companyCard.ftl.html">
-        
-        </#list>
-       
-    </div>
-    
-    <#include "fragments/pager.ftl.html">
-    
-</nav>
-    
- <#else>
-    <#if searchString??>
-    Nessuna azienda trovata
-    <#else>
-    Nessuna azienda convenzionata
-    </#if>
-</#if>
-</div>
+   <div id="resize" class="col-lg-10 p-auto mx-auto mt-0 pt-0 animated fadeIn duration-1s">
+        <nav class="nav nav-underline m-0 p-0">
+            <h1 class="text-white" id="tirocini">
+                Aziende convenzionate
+            </h1>
+                <form class="form-inline ml-auto my-2 my-lg-0" method="get">
+                    <input id="search-aziende" class="form-control mr-sm-2"
+                           name="q" 
+                           <#if searchString??>
+                           value="${searchString}"
+                           autofocus
+                           </#if>
+                           type="text" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-success my-2 my-sm-0" 
+                            type="submit">Search</button>
+                </form>
+            </nav>
+            <small class="text-white">
+                ${numAziende} aziende attualmente convenzionate
+            </small>
+            <hr>
+            
+            <#if searchString??>
+            <p class="text-danger">
+                Aziende rilevanti per <span class="text-primary">"${searchString}"</span>: 
+                trovate <b>${aziende?size}</b> corrispondenze
+            </p>
+            </#if>
+            
+            <div class="card-columns mb-4">
+                <#if aziende?? && aziende?size != 0>
+                <#list aziende as azienda>
+                
+                <#include "fragments/companyCard.ftl.html">
+                
+                </#list>
+               
+            </div>
+            
+            <#include "fragments/pager.ftl.html">
+            
+        </nav>
+            
+         <#else>
+            <#if searchString??>
+            Nessuna azienda trovata
+            <#else>
+            Nessuna azienda convenzionata
+            </#if>
+        </#if>
+        </div>
