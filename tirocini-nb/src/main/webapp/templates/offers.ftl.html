@@ -1,44 +1,79 @@
 <div class="card still-b shadow">
-<div class="card-body">
-    <nav class="nav nav-underline m-0 p-0">
-    <h1 class="text-secondary" id="tirocini">Tirocini disponibili</h1>
-    <form class="form-inline ml-auto my-2 my-lg-0">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">
-            <i class="fas fa-filter"></i>
-            Filtra le offerte</button>
-    </form>
-</nav>
-<small class="text-muted">
-    ${numOfferte} offerte di tirocinio disponibili
-</small>
-</div>
-    
-<div class="card-footer">
+    <div class="card-body">
+        <nav class="nav nav-underline m-0 p-0">
+            <h1 class="text-secondary" id="tirocini">Tirocini disponibili</h1>
+            <form class="form-inline ml-auto my-2 my-lg-0">
+                <button class="btn btn-outline-success my-2 my-sm-0" 
+                        type="button" data-toggle="collapse" data-target="#collapseFilter" 
+                        aria-expanded="false" aria-controls="collapseFilter"
+                        type="submit">
+                    <i class="fas fa-filter"></i>
+                    Filtra le offerte</button>
+            </form>
+        </nav>
+        <div class="collapse" id="collapseFilter">
+            <div class="card card-body border-success bg-light still">
+                <form>
+                    <div class="form-row">
+                        <div class="col-md-4 mb-3">
+                            <label for="azienda">
+                                <i class="far fa-building text-success"></i>
+                                Azienda</label>
+                            <input type="text" class="form-control" id="azienda" placeholder="">
+                        </div>
+                        <div class="col-md-4 mb-3">
+                            <label for="luogo">
+                                <i class="fa fa-map-marker text-success"></i>
+                                Luogo</label>
+                            <input type="text" class="form-control" id="luogo" placeholder="">
+                        </div>
+                        <div class="col-sm mb-3">
+                            <label for="orari1">
+                                <i class="fas fa-clock text-success"></i>
+                                Dalle</label>
+                            <input type="time" class="form-control mx-auto" id="orari1" placeholder="">
+                        </div>
+                        <div class="col-sm mb-3">
+                            <label for="orari2">
+                                <i class="fas fa-clock text-success"></i>
+                                Alle</label>
+                            <input type="time" class="form-control" id="orari2" placeholder="">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <small class="text-muted">
+            ${numOfferte} offerte di tirocinio disponibili
+        </small>
+    </div>
 
-<#assign x=0>
+    <div class="card-footer">
 
-<div class="card-deck">
-    <#if offerte?? && offerte?size != 0>
-    <#list offerte as offerta>
+        <#assign x=0>
 
-    <#include "fragments/offerCard.ftl.html">
-    
-    <#assign x++>
-    <#if x==3>
-</div>
-<div class="card-deck">
-    <#assign x=0>
-    </#if>
-    </#list>
-</div>
+        <div class="card-deck">
+            <#if offerte?? && offerte?size != 0>
+            <#list offerte as offerta>
 
+            <#include "fragments/offerCard.ftl.html">
 
-    <#include "fragments/pager.ftl.html">
-        
-
-<#else>Nessun tirocinio disponibile
-</#if>
+            <#assign x++>
+            <#if x==3>
+        </div>
+        <div class="card-deck">
+            <#assign x=0>
+            </#if>
+            </#list>
+        </div>
 
 
-</div>
+        <#include "fragments/pager.ftl.html">
+
+
+        <#else>Nessun tirocinio disponibile
+        </#if>
+
+
+    </div>
 </div>

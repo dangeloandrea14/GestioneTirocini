@@ -24,7 +24,8 @@ function setupModalsEvents() {
             },
             success: function (response) {
                 //$(".post_submitting").fadeOut(1000);
-                $("#detailsModalBody").html(response);
+
+                $("#detailsModalBody").html($($.parseHTML(response)).find("#body"));
                 $('#detailsModal').modal('show');
 
                 //Sposta il titolo nell'header ed elimina il primo <hr>
