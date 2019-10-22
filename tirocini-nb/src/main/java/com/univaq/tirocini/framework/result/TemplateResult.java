@@ -244,6 +244,9 @@ public class TemplateResult {
     //this acivate method extracts the data model from the request attributes
     public void activate(String tplname, HttpServletRequest request, HttpServletResponse response) throws TemplateManagerException {
         Map datamodel = getRequestDataModel(request);
+        
+        //per accedere all'url richiesto dai template (può tornare utile?)
+        datamodel.put("url", request.getRequestURL());
 
         //!!!! FIXME !!!!
         if (SecurityLayer.checkSession(request) != null) {

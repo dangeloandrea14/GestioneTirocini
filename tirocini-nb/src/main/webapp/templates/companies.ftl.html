@@ -40,7 +40,9 @@
         </#list>
     </div>
     
-    <#include "fragments/pager.ftl.html">
+    <#if ! searchString??>
+        <#include "fragments/pager.ftl.html">
+    </#if>
     
     <#else>
     <#if searchString??>
