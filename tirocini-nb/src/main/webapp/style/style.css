@@ -336,3 +336,10 @@ html {
  height:100%;
  border-left:1px solid lightgray;
 }
+
+#footer-heart {
+    transition: color 1s;
+}
+#footer-heart:hover {
+    color:red;
+}

@@ -9,6 +9,36 @@ var baseURL = "http://localhost:8080/tirocini/";
 function setupEvents() {
     setupModalsEvents();
     setupSearchEvents();
+    
+    $('.dynalink').on('click', function (e) {
+        e.preventDefault();
+        var dataURL = baseURL + $(this).attr('href');
+        history.pushState(undefined, '', dataURL);
+        $.ajax({
+            type: "GET",
+            url: dataURL,
+            data: {"dyn": ""},
+            beforeSend: function () {
+                //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
+                $("#body").addClass('fadeOut faster');
+                $(this).parent('.nav-item').addClass('active');
+                
+                $('html, body').animate({ scrollTop: 0 }, 'fast');
+            },
+            success: function (response) {
+                $("#body").removeClass('fadeOut faster');
+                $("#body").html(response);
+                setupEvents();
+                //$(".post_submitting").fadeOut(1000);
+
+            },
+            error: function (jqXHR, exception) {
+                // Note: Often ie will give no error msg. Aren't they helpful?
+                console.log('ERROR: jqXHR, exception', jqXHR, exception);
+            }
+        });
+        e.preventDefault();
+    });
 }
 
 function setupModalsEvents() {
@@ -115,31 +145,5 @@ $(document).ready(function () {
      });
      */
 
-    $('.dynalink').on('click', function (e) {
-        e.preventDefault();
-        var dataURL = baseURL + $(this).attr('href');
-        history.pushState(undefined, '', dataURL);
-        $.ajax({
-            type: "GET",
-            url: dataURL,
-            data: {"dyn": ""},
-            beforeSend: function () {
-                //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
-                $("#body").addClass('fadeOut faster');
-                $(this).parent('.nav-item').addClass('active');
-            },
-            success: function (response) {
-                $("#body").removeClass('fadeOut faster');
-                $("#body").html(response);
-                setupEvents();
-                //$(".post_submitting").fadeOut(1000);
-
-            },
-            error: function (jqXHR, exception) {
-                // Note: Often ie will give no error msg. Aren't they helpful?
-                console.log('ERROR: jqXHR, exception', jqXHR, exception);
-            }
-        });
-        e.preventDefault();
-    });
+    
 });
