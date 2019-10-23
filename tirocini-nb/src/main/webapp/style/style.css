@@ -14,10 +14,6 @@ a:hover .logo{
     fill:#6c757d;
 }
 
-.contacts:hover{
-    color:#6c757d;
-}
-
 
 /*
 .accordion .card{
@@ -44,7 +40,7 @@ a:hover .logo{
     background-color:#0066d9;
 }
 .bg-footer{
-    background-color:#e8e8e8;
+    background: linear-gradient(to bottom, #e8e8e8, #c8c8c8);
 }
 
 html,body{
@@ -166,20 +162,20 @@ footer{
     transform: scale(1.02);
 }
 .truncate-overflow {
-  height:4.2rem;
-  position: relative;
-  max-height: 4.2rem;
-  overflow: hidden;
-  padding-right: 1rem; /* space for ellipsis */
+    height:4.2rem;
+    position: relative;
+    max-height: 4.2rem;
+    overflow: hidden;
+    padding-right: 1rem; /* space for ellipsis */
 }   
 
 
- .card .card-header .a{
+.card .card-header .a{
     font-size:2rem;
-  }
-  .card .row{
-      opacity: 0.8;
-  }
+}
+.card .row{
+    opacity: 0.8;
+}
 
 .c-det {
     border-bottom-left-radius: 10px;
@@ -203,143 +199,143 @@ footer{
 }
 
 .bar-graph {
-  padding: 0;
-  width: 100%;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-align-items: flex-end;
-      -ms-flex-align: end;
-          align-items: flex-end;
-  height: 425px;
-  margin: 0;
+    padding: 0;
+    width: 100%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-align-items: flex-end;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    height: 425px;
+    margin: 0;
 }
 
 .bar-graph li {
-  display: block;
-  padding: 1.5625rem 0;
-  position: relative;
-  text-align: center;
-  vertical-align: bottom;
-  border-radius: 4px 4px 0 0;
-  max-width: 20%;
-  height: 100%;
-  margin: 0 1.8% 0 0;
-  -webkit-flex: 1 1 15%;
-      -ms-flex: 1 1 15%;
-          flex: 1 1 15%;
+    display: block;
+    padding: 1.5625rem 0;
+    position: relative;
+    text-align: center;
+    vertical-align: bottom;
+    border-radius: 4px 4px 0 0;
+    max-width: 20%;
+    height: 100%;
+    margin: 0 1.8% 0 0;
+    -webkit-flex: 1 1 15%;
+    -ms-flex: 1 1 15%;
+    flex: 1 1 15%;
 }
 
 .bar-graph .bar-graph-axis {
-  -webkit-flex: 1 1 8%;
-      -ms-flex: 1 1 8%;
-          flex: 1 1 8%;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  -webkit-justify-content: space-between;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+    -webkit-flex: 1 1 8%;
+    -ms-flex: 1 1 8%;
+    flex: 1 1 8%;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-justify-content: space-between;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
 }
 
 .bar-graph .bar-graph-label {
-  margin: 0;
-  background-color: none;
-  color: #8a8a8a;
-  position: relative;
+    margin: 0;
+    background-color: none;
+    color: #8a8a8a;
+    position: relative;
 }
 
 @media print, screen and (min-width: 40em) {
-  .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
-    content: "";
-    position: absolute;
-    border-bottom: 1px dashed #8a8a8a;
-    top: 0;
-    left: 0;
-    height: 50%;
-    width: 20%;
-  }
+    .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
+        content: "";
+        position: absolute;
+        border-bottom: 1px dashed #8a8a8a;
+        top: 0;
+        left: 0;
+        height: 50%;
+        width: 20%;
+    }
 }
 
 @media print, screen and (min-width: 40em) and (min-width: 64em) {
-  .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
-    width: 30%;
-  }
+    .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
+        width: 30%;
+    }
 }
 
 @media print, screen and (min-width: 40em) {
-  .bar-graph .bar-graph-label:after {
-    left: auto;
-    right: 0;
-  }
+    .bar-graph .bar-graph-label:after {
+        left: auto;
+        right: 0;
+    }
 }
 
 .bar-graph .percent {
-  letter-spacing: -3px;
-  opacity: 0.4;
-  width: 100%;
-  font-size: 1.875rem;
-  position: absolute;
+    letter-spacing: -3px;
+    opacity: 0.4;
+    width: 100%;
+    font-size: 1.875rem;
+    position: absolute;
 }
 
 @media print, screen and (min-width: 40em) {
-  .bar-graph .percent {
-    font-size: 3.875rem;
-  }
+    .bar-graph .percent {
+        font-size: 3.875rem;
+    }
 }
 
 .bar-graph .percent span {
-  font-size: 1.875rem;
+    font-size: 1.875rem;
 }
 
 .bar-graph .description {
-  font-weight: 800;
-  opacity: 0.5;
-  text-transform: uppercase;
-  width: 100%;
-  font-size: 14px;
-  bottom: 20px;
-  position: absolute;
-  font-size: 1rem;
-  overflow: hidden;
+    font-weight: 800;
+    opacity: 0.5;
+    text-transform: uppercase;
+    width: 100%;
+    font-size: 14px;
+    bottom: 20px;
+    position: absolute;
+    font-size: 1rem;
+    overflow: hidden;
 }
 
 .bar-graph .bar.primary {
-  border: 1px solid #1779ba;
-  background: linear-gradient(#2196e3, #1779ba 70%);
+    border: 1px solid #1779ba;
+    background: linear-gradient(#2196e3, #1779ba 70%);
 }
 
 .bar-graph .bar.secondary {
-  border: 1px solid #767676;
-  background: linear-gradient(#909090, #767676 70%);
+    border: 1px solid #767676;
+    background: linear-gradient(#909090, #767676 70%);
 }
 
 .bar-graph .bar.success {
-  border: 1px solid #3adb76;
-  background: linear-gradient(#65e394, #3adb76 70%);
+    border: 1px solid #3adb76;
+    background: linear-gradient(#65e394, #3adb76 70%);
 }
 
 .bar-graph .bar.warning {
-  border: 1px solid #ffae00;
-  background: linear-gradient(#ffbe33, #ffae00 70%);
+    border: 1px solid #ffae00;
+    background: linear-gradient(#ffbe33, #ffae00 70%);
 }
 
 .bar-graph .bar.alert {
-  border: 1px solid #cc4b37;
-  background: linear-gradient(#d67060, #cc4b37 70%);
+    border: 1px solid #cc4b37;
+    background: linear-gradient(#d67060, #cc4b37 70%);
 }
 
 #home {
-  background: linear-gradient(to bottom right, #0073e6, #40dfff);
-  border-top-left-radius: 12px; 
-  border-top-right-radius: 12px;
+    background: linear-gradient(to bottom right, #0073e6, #40dfff);
+    border-top-left-radius: 12px; 
+    border-top-right-radius: 12px;
 }
 
 body {
-    background: linear-gradient(to bottom, #0066d9, #40dfff);   
+    background: linear-gradient(to bottom, #0066d9, #40dfff);
 }
 
 html {
@@ -347,11 +343,11 @@ html {
 }
 
 .v-divider{
- margin-left:5px;
- margin-right:5px;
- width:1px;
- height:100%;
- border-left:1px solid lightgray;
+    margin-left:5px;
+    margin-right:5px;
+    width:1px;
+    height:100%;
+    border-left:1px solid lightgray;
 }
 
 #footer-heart {
@@ -359,4 +355,18 @@ html {
 }
 #footer-heart:hover {
     color:red;
+}
+
+#companies-header {
+    background-image: url("../img/blutie.svg");
+    background-size: 20%;
+    background-position: top left;
+    background-repeat: no-repeat;
+}
+
+#offers-header {
+    background-image: url("../img/pres.svg");
+    background-size: 14%;
+    background-position: top left;
+    background-repeat: no-repeat;
 }
