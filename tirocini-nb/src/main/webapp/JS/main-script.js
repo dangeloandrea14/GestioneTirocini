@@ -9,34 +9,18 @@ var baseURL = "http://localhost:8080/tirocini/";
 function setupEvents() {
     setupModalsEvents();
     setupSearchEvents();
-    
+    setupDynalinkEvents();
+}
+
+function setupDynalinkEvents() {
     $('.dynalink').on('click', function (e) {
         e.preventDefault();
         var dataURL = baseURL + $(this).attr('href');
+        
+        updatePage(dataURL);
+        
         history.pushState(undefined, '', dataURL);
-        $.ajax({
-            type: "GET",
-            url: dataURL,
-            data: {"dyn": ""},
-            beforeSend: function () {
-                //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
-                $("#body").addClass('fadeOut faster');
-                $(this).parent('.nav-item').addClass('active');
-                
-                $('html, body').animate({ scrollTop: 0 }, 'fast');
-            },
-            success: function (response) {
-                $("#body").removeClass('fadeOut faster');
-                $("#body").html(response);
-                setupEvents();
-                //$(".post_submitting").fadeOut(1000);
-
-            },
-            error: function (jqXHR, exception) {
-                // Note: Often ie will give no error msg. Aren't they helpful?
-                console.log('ERROR: jqXHR, exception', jqXHR, exception);
-            }
-        });
+        
         e.preventDefault();
     });
 }
@@ -82,6 +66,34 @@ function setupSearchEvents() {
     });
 }
 
+function updatePage(URL) {
+    $.ajax({
+            type: "GET",
+            url: URL,
+            data: {"dyn": ""},
+            beforeSend: function () {
+                $("#body").addClass('fadeOut faster');
+                
+                // non funziona
+                //$(this).parent('.nav-item').addClass('active');
+
+                //$('html,body').scrollTop(0);
+                $('html, body').animate({scrollTop: 0}, 'fast');
+            },
+            success: function (response) {
+                console.log(response);
+                $("#body").removeClass('fadeOut faster');
+                $("#body").html(response);
+                document.title = $("#body").find("#page_title").text();
+                setupEvents();
+
+            },
+            error: function (jqXHR, exception) {
+                console.log('ERROR: jqXHR, exception', jqXHR, exception);
+            }
+        });
+}
+
 function updateContent(id, dataURL, q) {
     history.pushState(undefined, '', dataURL);
     $.ajax({
@@ -90,7 +102,6 @@ function updateContent(id, dataURL, q) {
         data: {"dyn": "",
             "q": q},
         beforeSend: function () {
-            //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
             $(id).addClass('fadeOut faster');
         },
         success: function (response) {
@@ -101,7 +112,6 @@ function updateContent(id, dataURL, q) {
 
         },
         error: function (jqXHR, exception) {
-            // Note: Often ie will give no error msg. Aren't they helpful?
             console.log('ERROR: jqXHR, exception', jqXHR, exception);
         }
     });
@@ -112,38 +122,10 @@ $(document).ready(function () {
 
     setupEvents();
 
-    /*
-     $('.nav-link, .navbar-brand').on('click', function (e) {
-     e.preventDefault();
-     var dataURL = baseURL + $(this).attr('href');
-     history.pushState(undefined, '', dataURL);
-     $.ajax({
-     type: "GET",
-     url: dataURL,
-     data: {"dyn": ""},
-     beforeSend: function () {
-     //$(".post_submitting").show().html("<center><img src='images/loading.gif'/></center>");
-     $("#body").fadeOut(10);
-     $(".footer").fadeOut(10);
-     $('.nav-item').removeClass('active');
-     $(this).parent('.nav-item').addClass('active');
-     },
-     success: function (response) {
-     $("#body").html(response);
-     $("#body").fadeIn(500);
-     $(".footer").fadeIn(500);
-     setModalsEvents();
-     //$(".post_submitting").fadeOut(1000);
-     
-     },
-     error: function (jqXHR, exception) {
-     // Note: Often ie will give no error msg. Aren't they helpful?
-     console.log('ERROR: jqXHR, exception', jqXHR, exception);
-     }
-     });
-     e.preventDefault();
-     });
-     */
+    //refresh content on history change
+    window.addEventListener('popstate', (e) => {
+        //console.log("location: " + document.location + ", state: " + JSON.stringify(e.state));
+        updatePage(document.location);
+    });
 
-    
 });

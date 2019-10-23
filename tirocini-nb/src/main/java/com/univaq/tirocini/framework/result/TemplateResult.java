@@ -262,8 +262,11 @@ public class TemplateResult {
         }
 
         //se la richiesta è dinamica non inviamo l'outline nella risposta
+        //ma usiamo un outline specifico in cui includere il titolo dell pagina
+        //
         if (request.getParameter("dyn") != null) {
-            datamodel.put("outline_tpl", "");
+            //datamodel.put("outline_tpl", "");
+            datamodel.put("outline_tpl", context.getInitParameter("view.outline_template_dynamic"));
         }
 
         activate(tplname, datamodel, response);
