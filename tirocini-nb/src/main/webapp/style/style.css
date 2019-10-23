@@ -334,6 +334,8 @@ footer{
 
 #home {
   background: linear-gradient(to bottom right, #0073e6, #40dfff);
+  border-top-left-radius: 12px; 
+  border-top-right-radius: 12px;
 }
 
 body {
