@@ -1,29 +1,25 @@
 <div class="card m-3 shadow-sm">
-    <!--<div class="card-header bg-altro">
-        <h2 class="card-title">Tirocinio</h2>
-    </div>-->
-    <div class="card-body">
-        <h5 class="card-title">
-            <!--
-            <small class="text-secondary">presso</small><br>
-            -->
-            <a class="dynalink text-dark"
-               href="DettagliAzienda?a=${offerta.azienda.key}">
-                <strong>
-                ${offerta.azienda.nome}
-                </strong>
-            </a></h5>
-        <p class="cardtext text-secondary">${offerta.obiettivi}</p>
-        <div class="card-text text-secondary" style="opacity:0.8;">
-            <i class="fas fa-clock"></i>
-            ${offerta.orari}
-            <span class="float-right text-success">
-
-                <i class="fa fa-map-marker " aria-hidden="true"></i>
-                ${offerta.luogo}</span>
-        </div>
+    <div class="card-header bg-white">
+        <a class="text-dark"
+           href="DettagliAzienda?a=${offerta.azienda.key}">
+            <strong>        
+            ${offerta.azienda.nome}
+            </strong>
+            </a> 
     </div>
-
+     <div class="card-body">
+        <p class="card-text text-secondary truncate-overflow">${offerta.obiettivi}</p>
+        <div class="card-text row m-0 p-0" >
+            <div class="col-lg col-md col-sm text-secondary m-0 p-0">
+                     <i class="fas fa-clock"></i>
+                            ${offerta.orari}
+            </div>
+                <div class="col-lg col-md col-sm text-success  m-0 p-0">
+                     <i class="fa fa-map-marker " aria-hidden="true"></i>
+                                     ${offerta.luogo}
+                </div>
+            </div>
+    </div>
     <div class="card-footer p-1">
 
         <a class="text-secondary cardtext btn btn-light bnt-outline-primary btn-block details c-det"
