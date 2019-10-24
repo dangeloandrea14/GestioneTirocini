@@ -5,12 +5,15 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.controller.permissions.UserObject;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.OffertaImpl;
 import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -41,7 +44,7 @@ public class newOffer extends TirociniBaseController {
     }
 
     private void action_create(HttpServletRequest request, HttpServletResponse response) throws IOException, DataException, IllegalAccessException, InvocationTargetException {
-        if (SecurityLayer.checkSession(request) == null || request.getSession().getAttribute("azienda") == null) {
+        if (SecurityLayer.checkSession(request) == null || !request.getSession().getAttribute("type").equals("azienda")) {
             creation_failed(request, response);
             return;
         }
@@ -51,7 +54,8 @@ public class newOffer extends TirociniBaseController {
 
         BeanUtils.populate(o, request.getParameterMap());
 
-        o.setAzienda((Azienda) request.getSession().getAttribute("azienda"));
+      
+        o.setAzienda( ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda() );
         o.setAttiva(false);
         
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().storeOfferta(o);
