@@ -154,11 +154,11 @@ footer{
     color:white;
 }
 
-.card {
+.minicards{
     border-radius: 12px;
     transition: transform .2s ease;
 }
-.card:hover:not(.still .still-b) {
+.minicards:hover:not(.still) {
     transform: scale(1.02);
 }
 .truncate-overflow {
@@ -169,14 +169,23 @@ footer{
     padding-right: 1rem; /* space for ellipsis */
 }   
 
+.minicards .card-header{
+    border-top-left-radius:12px;
+    border-top-right-radius:12px;
+}
+
+.minicards .card-footer{
+    border-bottom-left-radius:12px;
+    border-bottom-right-radius:12px;
+}
 
 .card .card-header .a{
     font-size:2rem;
-}
-.card .row{
-    opacity: 0.8;
-}
-
+  }
+  .card .row{
+      opacity: 0.8;
+  }
+/*
 .c-det {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
@@ -184,7 +193,7 @@ footer{
 
 .still {
     border-radius: 0px;
-}
+}*/
 
 .modal-content {
     border-radius: 8px;  
