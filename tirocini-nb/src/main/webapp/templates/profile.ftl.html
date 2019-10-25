@@ -136,7 +136,7 @@
         </div>
 
         <div class="card-footer">
-            <#if offerte?? && offerte?size != 0>
+            
             <div class="container">
                 <div class="row">
                     <div class="col"></div>
@@ -144,12 +144,15 @@
                         <h1 class="text-secondary text-center" id="aziende">Offerte attive</h1>
                     </div>
                     <div class="col text-right my-auto">
+                        <#if conv>
                         <a href="newOffer" class="btn btn-primary">
                             <i class="fas fa-plus-circle"></i>
                             Nuova</a>
+                         </#if>
                     </div>
                 </div>
             </div>
+            <#if offerte?? && offerte?size != 0>
             <#list offerte as offerta>
             <div class="col-sm-8 mx-auto">
                 <div class="card mb-3 still shadow-sm">

@@ -14,7 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-/**
+/** 
  *
  * @author carlo
  */
@@ -24,7 +24,7 @@ public class Profile extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
             request.setAttribute("page_title", "Profile");
             if (SecurityLayer.checkSession(request) == null) {
-                response.sendRedirect("Home");
+                response.sendRedirect("Login");
             }
             
             TemplateResult res = new TemplateResult(getServletContext());
@@ -41,6 +41,7 @@ public class Profile extends TirociniBaseController {
                 else if(request.getSession().getAttribute("type").equals("azienda")){
                 request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferte(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
                 request.setAttribute("tirociniazienda", ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
+                request.setAttribute("conv", ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda().isConvenzionata());
                 }
                 
                 res.activate("profile.ftl.html", request, response);

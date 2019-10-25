@@ -31,6 +31,14 @@ public class newOffer extends TirociniBaseController {
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         if (SecurityLayer.checkSession(request) != null && request.getSession().getAttribute("type").equals("azienda")) {
+            
+            Azienda azienda = ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda();
+            
+            if (azienda.isConvenzionata() == false){
+                
+                response.sendRedirect("Profile");
+            }
+            
             request.setAttribute("page_title", "Nuova offerta tirocinio");
 
             TemplateResult res = new TemplateResult(getServletContext());

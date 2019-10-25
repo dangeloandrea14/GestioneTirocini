@@ -25,11 +25,11 @@ public class Statistiche extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
 
-       /*  HttpSession session = SecurityLayer.checkSession(request);
+        HttpSession session = SecurityLayer.checkSession(request);
         if (session == null || !session.getAttribute("type").equals("admin")) {
             notFound(request, response);
             return;
-        } */
+        } 
         
         
         List<Azienda> listaaziende = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendeConvenzionate();

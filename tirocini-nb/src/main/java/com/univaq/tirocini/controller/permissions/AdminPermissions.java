@@ -20,7 +20,7 @@ public class AdminPermissions extends BasePermissions {
                 "/Profile"
         ));
         AllowedPages = new HashSet<>(Arrays.asList(
-                "/Logout", "/Admin", "/DettagliAzienda", "/Convenzione", "/PdfGenerator"
+                "/Logout", "/Admin", "/DettagliAzienda", "/Convenzione", "/Statistiche", "/Statisticheazienda", "/PdfGenerator"
         ));
         DefaultPage = "Admin";
         

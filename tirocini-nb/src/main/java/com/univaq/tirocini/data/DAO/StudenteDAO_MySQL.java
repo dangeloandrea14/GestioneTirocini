@@ -110,7 +110,7 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
 
         try (ResultSet rs = sStudenti.executeQuery()) {
             while (rs.next()) {
-                result.add((Studente) getStudente(rs.getInt("articleID")));
+                result.add((Studente) getStudente(rs.getInt("studenteID")));
             }
         } catch (SQLException ex) {
             throw new DataException("Impossibile caricare la lista studenti.", ex);
