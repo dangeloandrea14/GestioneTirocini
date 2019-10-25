@@ -14,7 +14,13 @@ a:hover .logo{
     fill:#6c757d;
 }
 
+.contacts:hover{
+    color:#6c757d;
+}
 
+.login{
+    border-radius: 6px;
+}
 /*
 .accordion .card{
   border: rgb(144, 144, 144) solid 1px;
@@ -79,13 +85,6 @@ body{
     -ms-flex-pack: justify;
     justify-content: space-between;
     padding: 1rem 1rem;
-}
-#logo{
-    border:solid 1px;
-    border-color:white;
-    border-radius: 10%;
-    padding:4px;
-    font-size: 1.5rem;
 }
 
 #credits{
@@ -179,6 +178,11 @@ footer{
     border-bottom-right-radius:12px;
 }
 
+.minicards .card-footer{
+    border-bottom-left-radius:12px;
+    border-bottom-right-radius:12px;
+}
+
 .card .card-header .a{
     font-size:2rem;
   }
@@ -251,10 +255,10 @@ footer{
 }
 
 .bar-graph .bar-graph-label {
-    margin: 0;
-    background-color: none;
-    color: #8a8a8a;
-    position: relative;
+  margin: 0;
+  background-color: transparent;
+  color: #8a8a8a;
+  position: relative;
 }
 
 @media print, screen and (min-width: 40em) {

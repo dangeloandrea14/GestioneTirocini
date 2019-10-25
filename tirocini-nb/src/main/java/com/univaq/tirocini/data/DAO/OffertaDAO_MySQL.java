@@ -22,6 +22,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
     private PreparedStatement sOffertaByID;
     private PreparedStatement sOfferte, sOfferteAttive, sOfferteByAzienda, sPaginaOfferteAttive, sOfferteAttiveCount;
     private PreparedStatement iOfferta, uOfferta, dOfferta;
+    private PreparedStatement sOffertaSearch;
 
     public OffertaDAO_MySQL(DataLayer d) {
         super(d);
@@ -40,7 +41,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
 
             sOfferteAttiveCount = connection.prepareStatement("SELECT COUNT(*) FROM Offerta where Attiva=1");
             sPaginaOfferteAttive = connection.prepareStatement("SELECT ID as OffertaID FROM Offerta where Attiva=1 ORDER BY ID DESC LIMIT ?,?");
-
+            
             //Ora precompiliamo insert, update, delete
             iOfferta = connection.prepareStatement("INSERT INTO Offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese,CFU,Attiva) VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
             uOfferta = connection.prepareStatement("UPDATE Offerta SET IDAzienda=?,Luogo=?, Orari=?, Durata=?, Obiettivi=?, Modalità=?, RimborsoSpese=?, CFU=?, Attiva=? WHERE ID=?");

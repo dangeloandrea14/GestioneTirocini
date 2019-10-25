@@ -2,7 +2,7 @@
 
 Questa offerta &egrave; stata pubblicata il ${offerta.dataInserimento} da ${offerta.azienda.nomeResponsabile} ${offerta.azienda.cognomeResponsabile}. <br>
 La durata &egrave; di ${offerta.durata}, negli orari ${offerta.orari}.<br>
-Per controllare come questa offerta appare pubblicamente, <a href='/tirocini/DettagliOfferta?o=${offerta.key}'>clicca qui.</a>
+Per controllare come questa offerta appare pubblicamente, <a href='/tirocini/DettagliOfferta?o=${offerta.key}' style="color:black">clicca qui.</a>
 
 <hr>
 
@@ -10,7 +10,7 @@ Per controllare come questa offerta appare pubblicamente, <a href='/tirocini/Det
 
 <hr>
 
-<#if candidature??>
+<#if candidature?? && candidature?size != 0>
     
 <h5> Gli studenti che si sono candidati a questa offerta sono: </h5>
 
@@ -28,5 +28,8 @@ ${candidatura.studente.nome} ${candidatura.studente.cognome}
 
 </#list>
 
+<#else>
+
+<h5> Nessuno studente si &egrave; candidato finora. </h5>
 
 </#if>

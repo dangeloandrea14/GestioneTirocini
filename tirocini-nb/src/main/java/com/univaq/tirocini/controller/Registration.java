@@ -1,13 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.AziendaImpl;
 import com.univaq.tirocini.data.impl.StudenteImpl;
+import com.univaq.tirocini.data.model.Azienda;
+import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
@@ -16,6 +13,7 @@ import com.univaq.tirocini.vo.IVA;
 import com.univaq.tirocini.vo.IvaConverter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,6 +28,14 @@ public class Registration extends TirociniBaseController {
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
+        
+        if(request.getSession().getAttribute("type") != null){
+            
+            response.sendRedirect("Home");
+            
+        }
+        
+        
         request.setAttribute("page_title", "Registration");
         request.setAttribute("outline_tpl", "outline.ftl.html");
 
@@ -65,6 +71,33 @@ public class Registration extends TirociniBaseController {
         BeanUtils.populate(s, request.getParameterMap());
 
         s.setPassword(Password.hash(s.getPassword()));
+        
+        if(request.getParameter("specializzazione") == null || request.getParameter("specializzazione").isEmpty()){
+            s.setSpecializzazione("Nessuna");
+        }
+        
+        //Controlliamo che non ci sia una azienda con quella mail.
+        
+        Azienda aziendadup = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail( request.getParameter("email") );
+        
+        if((aziendadup != null)){
+            
+            action_error(request, response);
+            return;
+            
+        }
+        
+        /* List<Azienda> listaaziende =   ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziende();
+        for (Azienda az : listaaziende){
+            
+            if (az.getEmailResponsabile().equals(request.getParameter("email"))){
+              
+                 action_error(request, response);
+                 return;
+                
+            }
+            
+        } */
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
 
@@ -87,6 +120,18 @@ public class Registration extends TirociniBaseController {
         BeanUtils.populate(a, request.getParameterMap());
 
         a.setPassword(Password.hash(a.getPassword()));
+        
+        //Controlliamo che non ci sia uno studente con quella mail.
+        Studente studentedup = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenteFromEmail( request.getParameter("emailResponsabile") );
+        
+        if((studentedup != null)){
+            
+            action_error(request, response);
+            return;
+            
+        }
+        
+        
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(a);
 
@@ -115,12 +160,11 @@ public class Registration extends TirociniBaseController {
 
     private void registrationSuccess(HttpServletRequest request, HttpServletResponse response) {
         request.setAttribute("page_title", "Registration complete");
-        request.setAttribute("outline_tpl", "outline_alt.ftl.html");
 
         TemplateResult res = new TemplateResult(getServletContext());
 
         try {
-            res.activate("registrationCompleted.ftl.html", request, response);
+            res.activate("home.ftl.html", request, response);
         } catch (TemplateManagerException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);

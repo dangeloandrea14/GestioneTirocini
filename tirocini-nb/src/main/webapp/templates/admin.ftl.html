@@ -1,9 +1,7 @@
-
-<h1 class="text-secondary">Aziende da convezionare:</h1>
-<br>
- 
-   <div class="container-fluid bg-white  h-100 p-0">
-        <div class="accordion" id="accordionExample">
+ <div class="container-fluid bg-white  h-100 p-0 d-flex flex-column">
+       <h2 class="text-secondary mx-auto my-4 text-center">Aziende da convezionare:</h1>
+        
+       <div class="accordion" id="accordionExample">
         <#if aziende?? && aziende?size != 0>
         <#assign x=1>
         <#list aziende as azienda>
@@ -30,7 +28,12 @@
     nessuna azienda convenzionata
     </#if>
    
-     
+    <hr class="my-4">
+    <div class="row p-2 mb-5">
+    <form class="mx-auto" id="stats" name="stats" action="Statistiche">
+    <button type="submit" class="mx-auto btn btn-primary" >Controlla le Statistiche delle aziende </button>
+    </form>
+    </div>
           </div>
 
 <script>
