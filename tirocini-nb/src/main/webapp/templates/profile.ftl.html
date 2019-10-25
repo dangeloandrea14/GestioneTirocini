@@ -158,14 +158,14 @@
                     </div>
 
                     <form class="card-footer"
-                          action="Gestioneofferta" id="gestioneofferta">
+                          action="Gestioneofferta" id="gestioneofferta_${offerta.key}">
                         <!--
                         <a class="btn btn-outline-primary" 
                            href="DettagliOfferta?o=${offerta.key}">
                             Mostra dettagli</a>
                         -->
-                        <input type="hidden" id="oid" name="oid" value="${offerta.key}">
-                        <button class="btn btn-primary mx-auto" form="gestioneofferta" 
+                        <input type="hidden" id="oid" name="oid_${offerta.key}" value="${offerta.key}">
+                        <button class="btn btn-primary mx-auto" form="gestioneofferta_${offerta.key}" 
                                 type="submit">
                             <i class="fas fa-cogs"></i>
                             Gestisci </button> <br>
