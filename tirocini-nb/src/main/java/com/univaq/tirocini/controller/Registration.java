@@ -76,8 +76,18 @@ public class Registration extends TirociniBaseController {
             s.setSpecializzazione("Nessuna");
         }
         
-        //Controlliamo che non ci sia uno studente con quella mail.
-        List<Azienda> listaaziende =   ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziende();
+        //Controlliamo che non ci sia una azienda con quella mail.
+        
+        Azienda aziendadup = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail( request.getParameter("email") );
+        
+        if((aziendadup != null)){
+            
+            action_error(request, response);
+            return;
+            
+        }
+        
+        /* List<Azienda> listaaziende =   ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziende();
         for (Azienda az : listaaziende){
             
             if (az.getEmailResponsabile().equals(request.getParameter("email"))){
@@ -87,7 +97,7 @@ public class Registration extends TirociniBaseController {
                 
             }
             
-        }
+        } */
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
 
@@ -112,17 +122,16 @@ public class Registration extends TirociniBaseController {
         a.setPassword(Password.hash(a.getPassword()));
         
         //Controlliamo che non ci sia uno studente con quella mail.
-        List<Studente> listastudenti =   ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenti();
-        for (Studente stud : listastudenti){
+        Studente studentedup = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenteFromEmail( request.getParameter("emailResponsabile") );
+        
+        if((studentedup != null)){
             
-            if (stud.getEmail().equals(request.getParameter("emailResponsabile"))){
-              
-                 action_error(request, response);
-                 return;
-                
-            }
+            action_error(request, response);
+            return;
             
         }
+        
+        
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(a);
 
