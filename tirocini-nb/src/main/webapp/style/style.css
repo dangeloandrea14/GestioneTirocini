@@ -28,6 +28,28 @@ a:hover .logo{
 }
 */
 
+#regchoose{
+    height:30em;
+    background-color:red;
+}
+
+.bigcircle{
+     border:solid 3px black;
+     border-radius: 50%;
+     background-color: #e3f2fd; 
+}
+
+.circle{
+    border:solid 3px black;
+    border-radius: 50%;
+   
+}
+.bigcircle, .circle{
+    transition: transform .2s ease;
+}
+.bigcircle:hover:not(.still) {
+    transform: scale(1.30);
+}
 .bg-primary{
     background-color: var(--primary);
 }
@@ -62,7 +84,6 @@ section{
 body{
     padding-top:93px;
 }
-
 
 
 #showcase{
@@ -346,7 +367,9 @@ footer{
     border-top-left-radius: 12px; 
     border-top-right-radius: 12px;
 }
-
+#infos .col-lg .row .col-lg .row .col-lg{
+    height:200px !important;
+}
 body {
     background: linear-gradient(to bottom, #0066d9, #40dfff);
 }
