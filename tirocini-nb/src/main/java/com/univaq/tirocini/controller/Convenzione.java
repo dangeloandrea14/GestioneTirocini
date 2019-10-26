@@ -96,4 +96,11 @@ public class Convenzione extends TirociniBaseController {
             action_error(request, response);
         }
     }
+    
+      @Override
+    public String getServletInfo() {
+        return "Carica il form per la compilazione e il caricamento dei documenti di convenzione.";
+    }
+    
+    
 }

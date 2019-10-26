@@ -150,5 +150,10 @@ public class Gestioneofferta extends TirociniBaseController {
             action_error(request, response);
         }
     }
+      @Override
+    public String getServletInfo() {
+        return "Permette diversi tipi di gestione offerta dal profilo di una azienda.";
+    }
+    
 
 }

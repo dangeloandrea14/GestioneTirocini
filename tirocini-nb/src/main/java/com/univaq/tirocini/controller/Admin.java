@@ -36,4 +36,11 @@ public class Admin extends TirociniBaseController {
 
         res.activate("admin.ftl.html", request, response);
     }
+    
+        @Override
+    public String getServletInfo() {
+        return "Servlet per il caricamento del pannello di amministrazione. ";
+    }
+    
+    
 }

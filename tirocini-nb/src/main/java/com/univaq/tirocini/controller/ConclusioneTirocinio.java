@@ -52,5 +52,10 @@ public class ConclusioneTirocinio extends TirociniBaseController {
        
     }
 
+      @Override
+    public String getServletInfo() {
+        return "Carica la pagina di conclusione del tirocinio.";
+    }
+    
    
 }

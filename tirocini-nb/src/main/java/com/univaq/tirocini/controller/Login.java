@@ -167,4 +167,9 @@ public class Login extends TirociniBaseController {
         }
     }
 
+       @Override
+    public String getServletInfo() {
+        return "Gestisce il login di utenti e aziende.";
+    }
+
 }

@@ -32,4 +32,9 @@ public class NotFound extends TirociniBaseController {
 
         res.activate("notFound.ftl.html", request, response);
     }
+       @Override
+    public String getServletInfo() {
+        return "Gestisce l'errore 404 not found.";
+    }
+
 }
