@@ -46,4 +46,9 @@ public class DettagliAzienda extends TirociniBaseController {
 
         res.activate("dettagliAzienda.ftl.html", request, response);
     }
+      @Override
+    public String getServletInfo() {
+        return "Carica i dettagli dell'azienda scelta.";
+    }
+    
 }

@@ -67,4 +67,10 @@ public class DettagliOfferta extends TirociniBaseController {
 
         res.activate("dettagliOfferta.ftl.html", request, response);
     }
+        @Override
+    public String getServletInfo() {
+        return "Carica i dettagli dell'offerta scelta.";
+    }
+    
+    
 }

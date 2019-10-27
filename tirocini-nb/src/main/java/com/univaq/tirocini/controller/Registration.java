@@ -47,7 +47,7 @@ public class Registration extends TirociniBaseController {
         //il tipo di registrazione che si vuole effetturare
 
         if (p == null) {
-            res.activate("registrationChooser(versione da adattare).ftl.html", request, response);
+            res.activate("registrationChooser.ftl.html", request, response);
         } else if (p.equals("studente")) {
             res.activate("registrazioneStudente.ftl.html", request, response);
         } else if (p.equals("azienda")) {
@@ -202,4 +202,8 @@ public class Registration extends TirociniBaseController {
         }
     }
     
+      @Override
+    public String getServletInfo() {
+        return "Gestisce la registrazione di studenti e aziende.";
+    }
 }
