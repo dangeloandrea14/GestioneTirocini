@@ -65,6 +65,7 @@ public class StartTirocinio extends TirociniBaseController {
     ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().storeTirocinio(t);
     
     
+    
     request.setAttribute("studenteT",studente);
     request.setAttribute("offerta",offerta);
     request.setAttribute("aziendaT",azienda);
