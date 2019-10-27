@@ -6,6 +6,11 @@
     --danger:#d9364f;
     --warning:#a66300;
 }
+
+
+.text-black{
+    color:black;
+}
 .hover:hover{
     background-color:#007bff;
     color:white;
