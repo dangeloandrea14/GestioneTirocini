@@ -44,10 +44,9 @@ public class Login extends TirociniBaseController {
     }
 
     //controlla username e password e se validi crea una sessione
-    //  non pulitissimo ma per ora ci accontentiamo
     private void action_login(HttpServletRequest request, HttpServletResponse response) throws IOException, DataException {
-        String username = request.getParameter("u");
-        String password = request.getParameter("p");
+        String username = SecurityLayer.addSlashes(request.getParameter("u"));
+        String password = SecurityLayer.addSlashes(request.getParameter("p"));
 
         //... VALIDAZIONE IDENTITA'...
         //... IDENTITY CHECKS ...
