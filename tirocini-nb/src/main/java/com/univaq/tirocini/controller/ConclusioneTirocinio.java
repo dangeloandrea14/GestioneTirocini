@@ -11,6 +11,7 @@ import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -27,11 +28,11 @@ public class ConclusioneTirocinio extends TirociniBaseController {
     @Override
    protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
        
-       try{
+    try{
     request.setAttribute("page_title", "Conclusione Tirocinio");
-    String param = request.getParameter("i");
+    String param = SecurityLayer.addSlashes(request.getParameter("i"));
     
-    int tid = Integer.parseInt(param);
+    int tid = SecurityLayer.checkNumeric(param);
    
     Tirocinio tirocinio = (Tirocinio) ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocinio(tid);
 

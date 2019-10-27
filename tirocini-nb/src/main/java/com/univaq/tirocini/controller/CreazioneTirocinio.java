@@ -12,6 +12,7 @@ import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -31,11 +32,11 @@ public class CreazioneTirocinio extends TirociniBaseController {
     request.setAttribute("page_title", "Creazione Tirocinio");
    
     try{
-    String param = request.getParameter("uid");
-    String param2 = request.getParameter("oid");
+    String param = SecurityLayer.addSlashes(request.getParameter("uid"));
+    String param2 = SecurityLayer.addSlashes(request.getParameter("oid"));
         
-    int uid = Integer.parseInt(param);
-    int oid = Integer.parseInt(param2);
+    int uid = SecurityLayer.checkNumeric(param);
+    int oid = SecurityLayer.checkNumeric(param2);
     
     Studente studente = (Studente) ((TirocinioDataLayer)request.getAttribute("datalayer")).getStudenteDAO().getStudente(uid);
     Offerta offerta = (Offerta) ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);

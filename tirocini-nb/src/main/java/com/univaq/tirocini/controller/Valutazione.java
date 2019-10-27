@@ -32,7 +32,7 @@ protected void action_default(HttpServletRequest request, HttpServletResponse re
 
     request.setAttribute("page_title", "Valutazione");
     
-     String p = request.getParameter("a");
+     String p = SecurityLayer.addSlashes(request.getParameter("a"));
         if (p == null || !p.matches("\\d*")) {
             notFound(request, response);
             return;
@@ -40,7 +40,7 @@ protected void action_default(HttpServletRequest request, HttpServletResponse re
 
     Azienda azienda;
 
-    azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(Integer.parseInt(p));
+    azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
     
     Boolean already = false;
     Boolean okay = false;

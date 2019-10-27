@@ -39,9 +39,9 @@ public class Convenzione extends TirociniBaseController {
         TemplateResult res = new TemplateResult(getServletContext());
 
         try {
-            String param = request.getParameter("a");
+            String param = SecurityLayer.addSlashes(request.getParameter("a"));
 
-            int id = Integer.parseInt(param);
+            int id = SecurityLayer.checkNumeric(param);
 
             //salvo l'azienda anche come attributo della sessione per l'uso
             //al momento del convenzionamento

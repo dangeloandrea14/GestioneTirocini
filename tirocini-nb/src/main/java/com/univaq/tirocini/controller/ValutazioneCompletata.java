@@ -15,6 +15,7 @@ import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.result.UserRole;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.util.List;
 import javax.servlet.ServletException;
@@ -35,7 +36,7 @@ public class ValutazioneCompletata extends TirociniBaseController {
        
     request.setAttribute("page_title", "Valutazione");
     
-     String p = request.getParameter("azienda");
+     String p = SecurityLayer.addSlashes(request.getParameter("azienda"));
         if (p == null || !p.matches("\\d*")) {
             notFound(request, response);
             return;
@@ -43,7 +44,7 @@ public class ValutazioneCompletata extends TirociniBaseController {
 
     Azienda azienda;
 
-    azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(Integer.parseInt(p));  
+    azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));  
     
      String p2 = request.getParameter("studente");
         if (p2 == null || !p2.matches("\\d*")) {

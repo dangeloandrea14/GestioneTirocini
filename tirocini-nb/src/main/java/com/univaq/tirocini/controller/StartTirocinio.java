@@ -9,6 +9,7 @@ import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.sql.Date;
 import java.text.ParseException;
@@ -34,8 +35,8 @@ public class StartTirocinio extends TirociniBaseController {
     String param = request.getParameter("sid");
     String param2 = request.getParameter("oid");
         
-    int sid = Integer.parseInt(param);
-    int oid = Integer.parseInt(param2);
+    int sid = SecurityLayer.checkNumeric(param);
+    int oid = SecurityLayer.checkNumeric(param2);
     
     Studente studente = (Studente) ((TirocinioDataLayer)request.getAttribute("datalayer")).getStudenteDAO().getStudente(sid);
     Offerta offerta = (Offerta) ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);

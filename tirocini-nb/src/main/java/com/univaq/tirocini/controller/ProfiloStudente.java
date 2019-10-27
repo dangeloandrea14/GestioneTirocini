@@ -10,6 +10,7 @@ import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -25,9 +26,14 @@ public class ProfiloStudente extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
         
-        String param = request.getParameter("id");
+        String param = SecurityLayer.addSlashes(request.getParameter("id"));
+           if (param == null || !param.matches("\\d*")) {
+            notFound(request, response);
+            return;
+        }
+
         
-        int id = Integer.parseInt(param);
+        int id = SecurityLayer.checkNumeric(param);
 
         request.setAttribute("page_title", "Profilo test");
         
