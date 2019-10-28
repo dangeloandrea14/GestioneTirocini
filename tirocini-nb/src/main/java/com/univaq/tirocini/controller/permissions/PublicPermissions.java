@@ -33,7 +33,7 @@ public class PublicPermissions extends BasePermissions {
                 "/Offers", 
                 "/DettagliOfferta", 
                 "/DettagliAzienda", 
-                "/ProfiloStudente",
+                "/student",
                 "/Registration"
         ));
         defaultPage = "Home";
