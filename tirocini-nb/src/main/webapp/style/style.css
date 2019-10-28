@@ -32,7 +32,15 @@ a:hover .logo{
   border-bottom: rgb(144, 144, 144) solid 1px;
 }
 */
-
+#profileinfo{
+    background-color:#eaeffa;
+}
+ .profilecircle{
+   height:140px; 
+   width:140px;
+   background-color: #aec2ea;
+   border-radius: 50%; 
+}
 
 
 .bigcircle{
