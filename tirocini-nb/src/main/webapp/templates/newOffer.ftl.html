@@ -1,40 +1,61 @@
 <#ftl encoding='UTF-8'>
-<div class="card mx-auto col-6">
-    <div class="card-body text-center">
-        <h3 class="text-center">Crea nuova offerta</h3>
+<div class="col-lg-6 mx-auto">
+<div class="card shadow ">
+    
+    <div class='card-header m-0'>
+    <div class="card-title m-0">
+        <h3 class="text-center">Crea nuova offerta di tirocinio</h3>
     </div>
-    <div class="card-footer">
+    </div>
+        <div class="card-body p-5">
+            <div class="col-lg-10 m-0 p-0 mx-auto" >
         <form method="POST">
 
 
-            <div class="form-group mt-4 ">
-                <input name="luogo" type="text" placeholder="Luogo" class="form-control text-center" required="required" autofocus>
+            <div class="form-group ">
+                 <label for="luogo">Luogo:</label>
+                <input name="luogo" type="text"  class="form-control" required="required" autofocus>
             </div>
 
             <div class="form-group">
-                <input name="orari" type="text" placeholder="Orari" class="form-control text-center" required="required"/>
+                 <label for="luogo">Orari:</label>
+                <input name="orari" type="text"  class="form-control" required="required"/>
             </div>
             <div class="form-group">
-                <input name="durata" placeholder="Durata" class="form-control text-center" required="required">
+                 <label for="luogo">Durata:</label>
+                <input name="durata" class="form-control" required="required">
             </div>
 
             <div class="form-group">
-                <input name="obiettivi"  type="text" placeholder="Obiettivi" class="form-control text-center" required="required">
+                 <label for="luogo">Obiettivi:</label>
+                <input name="obiettivi"  type="text"  class="form-control" required="required">
             </div>
             <div class="form-group ">
-                <input name="modalità"  type="text" placeholder="Modalità" class="form-control text-center" required="required">
+                 <label for="luogo">Modalità:</label>
+                <input name="modalità"  type="text"  class="form-control" required="required">
             </div>
             <div class="form-group ">
-                <textarea name="descrizione" placeholder="Descrizione (dummy)" class="form-control text-center" required="required"></textarea>
+                 <label for="luogo">Descrizione:</label>
+                <textarea name="descrizione"  class="form-control" required="required"></textarea>
             </div>
             <div class="form-group ">
-                <input name="rimborsoSpese"  type="text" placeholder="Rimborso spese" class="form-control text-center" required="required">
+                 <label for="luogo">Rimborso spese:</label>
+                <input name="rimborsoSpese"  type="text"  class="form-control" required="required">
             </div>
-            <button type="submit" class="btn btn-block btn-primary text-uppercase">Crea offerta</button>
-
-
+             
+            <div class="row w-100 m-0 p-0">
+                <div class="ml-auto">
+            <button type="submit" class="btn btn-block btn-success "> <i class="far fa-check-circle"></i>   Crea offerta </button>
+                </div>
+                </div>
+            
 
         </form>
 
-    </div>
+        </div>
+            
+            
+</div>
+    
+          
 </div>
