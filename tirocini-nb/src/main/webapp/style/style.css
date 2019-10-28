@@ -41,7 +41,17 @@ a:hover .logo{
    background-color: #aec2ea;
    border-radius: 50%; 
 }
-
+   /*
+    .profiledetails{
+        background-color: #aec2ea;
+    }*/
+    .profiledetails a:hover{
+        opacity:0.5;
+    }
+   
+    .cardoffers{
+       width:180px;
+    }
 
 .bigcircle{
    background-color: #e3f2fd;     
