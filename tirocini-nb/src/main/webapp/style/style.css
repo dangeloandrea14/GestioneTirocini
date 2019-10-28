@@ -391,17 +391,3 @@ html {
 #footer-heart:hover {
     color:red;
 }
-
-#companies-header {
-    background-image: url("../img/blutie.svg");
-    background-size: 20%;
-    background-position: top left;
-    background-repeat: no-repeat;
-}
-
-#offers-header {
-    background-image: url("../img/pres.svg");
-    background-size: 14%;
-    background-position: top left;
-    background-repeat: no-repeat;
-}

@@ -15,9 +15,9 @@
 
         <#include "header.ftl.html">
 
-        <div class="card body mx-auto my-auto" style="width: 720px;">
+        <div class="card w-100 h-100 body" style="width: 720px;">
             <br/>
-            <div>
+            <div class="card-body">
                 <h1 class='text-danger mx-auto mt-4' style="width: 240px;">
                     <i class="fa fa-exclamation-circle" aria-hidden="true"></i>
                     Oops!
@@ -42,10 +42,12 @@
                     </div>
                     </#if>
                     <br/><br/>
-                    <a href="/tirocini" class="btn btn-warning btn-block">
-                            Return to homepage
-                    </a>
             </div>
+
+            <a href="/tirocini" class="card-footer btn btn-warning btn-block border-bottom-0 border-right-0 border-left-0">
+                Return to homepage
+            </a>
+
         </div>
 
     </body>

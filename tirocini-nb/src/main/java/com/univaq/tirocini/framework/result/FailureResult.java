@@ -44,6 +44,9 @@ public class FailureResult {
         if (exception != null && exception.getClass() == NullPointerException.class) {
             details = Arrays.toString(exception.getStackTrace());
         }
+        if (exception != null && exception.getClass() == java.lang.UnsupportedOperationException.class) {
+            details = Arrays.toString(exception.getStackTrace());
+        }
         
         if (exception != null && exception.getMessage() != null && !exception.getMessage().isEmpty()) {
             message = exception.getMessage();

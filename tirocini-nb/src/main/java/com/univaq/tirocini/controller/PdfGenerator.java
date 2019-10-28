@@ -7,8 +7,6 @@ package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
-import com.univaq.tirocini.data.model.Studente;
-import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.result.StreamResult;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import java.util.HashMap;
@@ -17,22 +15,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import static com.univaq.tirocini.pdf.Compile.compile;
 import java.io.File;
-import java.sql.Date;
-import java.time.LocalDate;
 
 /**
  *
  * @author Francesco Zappacosta
  */
 public class PdfGenerator extends TirociniBaseController {
-
-    ///FIXME
-    // da spostare (ma dove?)
-    private static String monthsBetweenIgnoreDays(Date start, Date end) {
-        LocalDate s = start.toLocalDate();
-        LocalDate e = end.toLocalDate();
-        return "N/A";
-    }
 
     public File prepareConvenzione(Azienda azienda) {
         Map<String, String> filling = new HashMap<>();
@@ -44,29 +32,6 @@ public class PdfGenerator extends TirociniBaseController {
         filling.put("rappresentante", azienda.getNomeResponsabile());
         filling.put("descrizioneAzienda", azienda.getDescrizione());
         filling.put("corsiStudio", azienda.getCorsoRiferimento());
-
-        return compile(new File(getServletContext().getRealPath("templates/pdf/Convenzione.pdf")), filling);
-    }
-
-    public File prepareFormativo1(Azienda azienda, Studente studente, Tirocinio tirocinio) {
-        Map<String, String> filling = new HashMap<>();
-
-        filling.put("nomeTirocinante", studente.getNome() + " " + studente.getCognome());
-        filling.put("luogoNascita", studente.getLuogoNascita());
-        filling.put("residenza", studente.getResidenza());
-        filling.put("telefono", studente.getTelefono());
-        if(studente.isHandicapped())
-
-        //BeanUtils.populate(azienda, filling);
-        filling.put("nomeAzienda", azienda.getNome());
-
-        filling.put("settoreInserimento", tirocinio.getSettoreInserimento());
-        filling.put("tutoreAziendale", tirocinio.getTutoreAziendale());
-        filling.put("tutoreTelefono", "");
-        filling.put("oreTirocinio", tirocinio.getNumeroOre());
-        filling.put("nMesiTirocinio", monthsBetweenIgnoreDays(tirocinio.getInizio(), tirocinio.getFine()));
-        filling.put("meseInizioTirocinio", tirocinio.getInizio().toString());
-        filling.put("meseFineTirocinio", tirocinio.getFine().toString());
 
         return compile(new File(getServletContext().getRealPath("templates/pdf/Convenzione.pdf")), filling);
     }
@@ -89,8 +54,11 @@ public class PdfGenerator extends TirociniBaseController {
             StreamResult sr = new StreamResult(getServletContext());
             sr.activate(toDownload, "Documento Convenzione.pdf", request, response);
             toDownload.delete();
-        } else if (target_file.equals("tirocinio")) {
+        } else if (target_file.equals("formativo")) {
 
+            request.setAttribute("message", "Not Implemented");
+            action_error(request, response);
+            /*
             String aId = request.getParameter("a");
             String sId = request.getParameter("s");
             int idAzienda = Integer.parseInt(aId);
@@ -98,7 +66,7 @@ public class PdfGenerator extends TirociniBaseController {
 
             Azienda azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(idAzienda);
 
-            Map<String, String> filling = new HashMap<String, String>();
+            Map<String, String> filling = new HashMap<>();
 
             //BeanUtils.populate(azienda, filling);
             filling.put("ente", azienda.getNome());
@@ -111,10 +79,11 @@ public class PdfGenerator extends TirociniBaseController {
             File toDownload = compile(new File(getServletContext().getRealPath("templates/pdf/Formativo.pdf")), filling);
             StreamResult sr = new StreamResult(getServletContext());
             sr.activate(toDownload, "Progetto Formativo.pdf", request, response);
-            toDownload.delete();
+            toDownload.delete();*/
         }
     }
-        @Override
+
+    @Override
     public String getServletInfo() {
         return "Si occupa della generazione e compilazione dei pdf.";
     }
