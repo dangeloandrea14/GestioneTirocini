@@ -5,11 +5,13 @@
  */
 package com.univaq.tirocini.controller;
 
+import com.univaq.tirocini.controller.permissions.PublicPermissions;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.FailureResult;
 import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.SecurityLayer;
+import com.univaq.tirocini.framework.security.UserPermissions;
 import java.io.IOException;
 import javax.annotation.Resource;
 import javax.servlet.RequestDispatcher;
@@ -28,6 +30,8 @@ public abstract class TirociniBaseController extends HttpServlet {
 
     @Resource(name = "jdbc/webdb2")
     private DataSource ds;
+    
+    private static UserPermissions publicPermissions = new PublicPermissions();
 
     protected abstract void action_default(HttpServletRequest request, HttpServletResponse response)
             throws Exception;
@@ -54,7 +58,7 @@ public abstract class TirociniBaseController extends HttpServlet {
 
     private void notAllowed(HttpServletRequest request, HttpServletResponse response) {
         try {
-            goToDefault(request, response);
+            goBack(request, response);
         } catch (IOException ex) {
             ex.printStackTrace(); //for debugging only
             (new FailureResult(getServletContext())).activate(
@@ -65,6 +69,10 @@ public abstract class TirociniBaseController extends HttpServlet {
     private void processBaseRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException {
 
         //first check if user can perform the request
+        //
+        //Astrae la gestione dei permessi dalle servlet.
+        //se impostati correttamente i permessi le servlet possono assumere
+        //che esista la sessione per l'utente
         if (!checkAllowed(request)) {
             notAllowed(request, response);
             return;
@@ -125,7 +133,7 @@ public abstract class TirociniBaseController extends HttpServlet {
         if (request.getParameter("referrer") != null) {
             response.sendRedirect(request.getParameter("referrer"));
         } else {
-            response.sendRedirect("Home");
+            goToDefault(request, response);
         }
     }
 
@@ -136,7 +144,7 @@ public abstract class TirociniBaseController extends HttpServlet {
             //potrebbe essere null. È necessario il controllo?
             response.sendRedirect(((UserRole) session.getAttribute("userRole")).getPermissions().getDefaultPage());
         } else {
-            response.sendRedirect("/Home");
+            response.sendRedirect(publicPermissions.getDefaultPage());
         }
     }
 
@@ -144,9 +152,8 @@ public abstract class TirociniBaseController extends HttpServlet {
      * Controlla che l'utente possa visualizzare la pagine
      *
      */
-    @Deprecated
     private boolean checkAllowed(HttpServletRequest request) {
-        return SecurityLayer.authorized(request);
+        return SecurityLayer.authorized(request, publicPermissions);
     }
 
     ////////////////////////////////////////////////////////////////////////////

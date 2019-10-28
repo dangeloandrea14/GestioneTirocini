@@ -143,8 +143,8 @@
         <servlet-class>com.univaq.tirocini.controller.CandidaturaServlet</servlet-class>
     </servlet>
     <servlet>
-        <servlet-name>Gestioneofferta</servlet-name>
-        <servlet-class>com.univaq.tirocini.controller.Gestioneofferta</servlet-class>
+        <servlet-name>GestioneOfferta</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.GestioneOfferta</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>CreazioneTirocinio</servlet-name>
@@ -259,8 +259,8 @@
         <url-pattern>/Candidatura</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>Gestioneofferta</servlet-name>
-        <url-pattern>/Gestioneofferta</url-pattern>
+        <servlet-name>GestioneOfferta</servlet-name>
+        <url-pattern>/GestioneOfferta</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>CreazioneTirocinio</servlet-name>

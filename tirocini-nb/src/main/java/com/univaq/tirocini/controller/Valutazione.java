@@ -25,79 +25,70 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Andrea
  */
-public class Valutazione extends TirociniBaseController{
-             
-     
-protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException, DataException {
+public class Valutazione extends TirociniBaseController {
 
-    request.setAttribute("page_title", "Valutazione");
-    
-     String p = SecurityLayer.addSlashes(request.getParameter("a"));
+    @Override
+    protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException, DataException {
+
+        request.setAttribute("page_title", "Valutazione");
+
+        String p = SecurityLayer.addSlashes(request.getParameter("a"));
         if (p == null || !p.matches("\\d*")) {
             notFound(request, response);
             return;
         }
 
-    Azienda azienda;
+        Azienda azienda;
 
-    azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
-    
-    Boolean already = false;
-    Boolean okay = false;
-    
-    
-    if (SecurityLayer.checkSession(request) == null){ 
+        azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
+
+        Boolean already = false;
+        Boolean okay = false;
+
+        if (SecurityLayer.checkSession(request) == null) {
             response.sendRedirect("Login");
-    }
-        
-    Studente studente = ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente();    
-            
-    List<Tirocinio> tirocini = ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirocini(studente);
-    
-    List<com.univaq.tirocini.data.model.Valutazione> valutazioni = ((TirocinioDataLayer) request.getAttribute("datalayer")).getValutazioneDAO().getValutazioni(studente);
-    
-    //Controlliamo se lo studente ha già valutato quella azienda.
-   
-    for (com.univaq.tirocini.data.model.Valutazione v: valutazioni){
-        if (v.getAzienda().getKey() == azienda.getKey())
-        {
-            already = true;
         }
-    }
-    
-    for (Tirocinio t: tirocini){
-    
-    if(t.getAzienda().getKey() == azienda.getKey()){
-        
-      okay = true;
-        
-    }
-    }
-    
-    if(okay == false){
-        
-        response.sendRedirect("Home");
-    }
-    
-    
-    request.setAttribute("already",already);
-    request.setAttribute("azienda", azienda);
-    request.setAttribute("studente", studente);
-    
-    TemplateResult res = new TemplateResult(getServletContext());
 
-    res.activate("valutazione.ftl.html", request, response);
-    
-    
-        
+        Studente studente = ((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente();
+
+        List<Tirocinio> tirocini = ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirocini(studente);
+
+        List<com.univaq.tirocini.data.model.Valutazione> valutazioni = ((TirocinioDataLayer) request.getAttribute("datalayer")).getValutazioneDAO().getValutazioni(studente);
+
+        //Controlliamo se lo studente ha già valutato quella azienda.
+        for (com.univaq.tirocini.data.model.Valutazione v : valutazioni) {
+            if (v.getAzienda().getKey() == azienda.getKey()) {
+                already = true;
+            }
+        }
+
+        for (Tirocinio t : tirocini) {
+
+            if (t.getAzienda().getKey() == azienda.getKey()) {
+
+                okay = true;
+
+            }
+        }
+
+        if (okay == false) {
+
+            response.sendRedirect("Home");
+        }
+
+        request.setAttribute("already", already);
+        request.setAttribute("azienda", azienda);
+        request.setAttribute("studente", studente);
+
+        TemplateResult res = new TemplateResult(getServletContext());
+
+        res.activate("valutazione.ftl.html", request, response);
+
     }
 
-
- @Override
+    @Override
     public String getServletInfo() {
         return "Permette allo studente di valutare l'azienda con la quale ha effettuato il tirocinio.";
     }
-
-
 
 }

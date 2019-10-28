@@ -5,6 +5,9 @@
  */
 package com.univaq.tirocini.controller.permissions;
 
+import java.util.Arrays;
+import java.util.HashSet;
+
 /**
  *
  * @author carlo
@@ -13,9 +16,14 @@ public class StudentePermissions extends BasePermissions{
   
     public StudentePermissions() {
         
-        ForbiddenPages = null;
-        AllowedPages = null;
-        DefaultPage = null;
+        forbiddenPages = null;allowedPages = (HashSet<String>) new PublicPermissions().getAllowedPages();
+        allowedPages.addAll(new HashSet<>(Arrays.asList(
+                "/Profile",
+                "/Logout",
+                "/Valutazione",
+                "/ValutazioneCompletata"
+        )));
+        defaultPage = "Home";
         
     }
 }

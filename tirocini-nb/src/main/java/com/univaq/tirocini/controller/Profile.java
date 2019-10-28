@@ -2,14 +2,11 @@ package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.UserObject;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
-import com.univaq.tirocini.data.model.Azienda;
-import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.result.UserRole;
-import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -26,10 +23,7 @@ public class Profile extends TirociniBaseController {
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException, DataException {
             request.setAttribute("page_title", "Profile");
-            if (SecurityLayer.checkSession(request) == null) {
-                response.sendRedirect("Login");
-            }
-            
+
             TemplateResult res = new TemplateResult(getServletContext());
             
             try {        

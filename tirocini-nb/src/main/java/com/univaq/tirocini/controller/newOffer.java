@@ -9,7 +9,6 @@ import com.univaq.tirocini.controller.permissions.UserObject;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.OffertaImpl;
 import com.univaq.tirocini.data.model.Azienda;
-import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
@@ -30,25 +29,19 @@ public class newOffer extends TirociniBaseController {
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
-        if (SecurityLayer.checkSession(request) != null && request.getSession().getAttribute("type").equals("azienda")) {
-            
-            Azienda azienda = ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda();
-            
-            if (azienda.isConvenzionata() == false){
-                
-                response.sendRedirect("Profile");
-            }
-            
-            request.setAttribute("page_title", "Nuova offerta tirocinio");
 
-            TemplateResult res = new TemplateResult(getServletContext());
+        Azienda azienda = ((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda();
 
-            res.activate("newOffer.ftl.html", request, response);
-        } else if (SecurityLayer.checkSession(request) != null) {
-            response.sendRedirect("Home");
-        } else {
-            response.sendRedirect("Login");
+        if (azienda.isConvenzionata() == false) {
+            goBack(request, response);
+            return;
         }
+
+        request.setAttribute("page_title", "Nuova offerta tirocinio");
+
+        TemplateResult res = new TemplateResult(getServletContext());
+
+        res.activate("newOffer.ftl.html", request, response);
     }
 
     private void action_create(HttpServletRequest request, HttpServletResponse response) throws IOException, DataException, IllegalAccessException, InvocationTargetException {
@@ -57,18 +50,15 @@ public class newOffer extends TirociniBaseController {
             return;
         }
 
-        
         OffertaImpl o = new OffertaImpl();
 
         BeanUtils.populate(o, request.getParameterMap());
 
-      
-        o.setAzienda( ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda() );
+        o.setAzienda(((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda());
         o.setAttiva(false);
-        
+
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().storeOfferta(o);
-        
-        
+
         response.sendRedirect("Profile");
     }
 
@@ -76,31 +66,32 @@ public class newOffer extends TirociniBaseController {
         request.setAttribute("exception", new Exception("Creation failed"));
         action_error(request, response);
     }
-    
+
     @Override
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-                action_default(request, response);
+            action_default(request, response);
 
-        } catch (Exception  ex) {
+        } catch (Exception ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
 
         }
     }
-    
+
     @Override
     protected void processPostRequest(HttpServletRequest request, HttpServletResponse response) {
 
         try {
-                action_create(request, response);
+            action_create(request, response);
 
         } catch (Exception ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);
         }
     }
+
     @Override
     public String getServletInfo() {
         return "Servlet per la creazione di una nuova offerta di tirocinio.";

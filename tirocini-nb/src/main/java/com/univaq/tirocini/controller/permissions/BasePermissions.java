@@ -14,68 +14,68 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author carlo
  */
-public class BasePermissions implements UserPermissions {
+public abstract class BasePermissions implements UserPermissions {
         
-    HashSet<String> ForbiddenPages;
-    HashSet<String> AllowedPages;    
-    String DefaultPage;
+    HashSet<String> forbiddenPages;
+    HashSet<String> allowedPages;    
+    String defaultPage;
 
     @Override
     public Set<String> getForbiddenPages() {
-        return ForbiddenPages;
+        return forbiddenPages;
     }
 
     public void setForbiddenPages(HashSet<String> ForbiddenPages) {
-        this.ForbiddenPages = ForbiddenPages;
+        this.forbiddenPages = ForbiddenPages;
     }
 
     @Override
     public Set<String> getAllowedPages() {
-        return AllowedPages;
+        return allowedPages;
     }
 
     public void setAllowedPages(HashSet<String> AllowedPages) {
-        this.AllowedPages = AllowedPages;
+        this.allowedPages = AllowedPages;
     }
 
     @Override
     public String getDefaultPage() {
-        return DefaultPage;
+        return defaultPage;
     }
 
     public void setDefaultPage(String DefaultPage) {
-        this.DefaultPage = DefaultPage;
+        this.defaultPage = DefaultPage;
     }
 
     @Override
     public void allowPage(String page) {
-        ForbiddenPages.remove(page);
-        AllowedPages.add(page);
+        forbiddenPages.remove(page);
+        allowedPages.add(page);
     }
 
     @Override
     public void disAllowPage(String page) {
-        AllowedPages.remove(page);
+        allowedPages.remove(page);
     }
 
     @Override
     public void ForbidPage(String page) {
-        ForbiddenPages.add(page);
+        forbiddenPages.add(page);
     }
     
     @Override
     public boolean authorized(HttpServletRequest request) {
         String requested = request.getServletPath();
-        if (request.getSession() == null)
+        /* (request.getSession() == null)
         {
             return true;
-        }
+        }*/
 
-        if (ForbiddenPages != null && ForbiddenPages.contains(requested)) {
+        if (forbiddenPages != null && forbiddenPages.contains(requested)) {
             return false;
         }
 
         //se non impostato AllowedPages permettiamo tutto
-        return (AllowedPages == null || AllowedPages.contains(requested));
+        return (allowedPages == null || allowedPages.contains(requested));
     } 
 }

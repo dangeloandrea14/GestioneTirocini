@@ -19,10 +19,8 @@ import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.List;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -30,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Andrea
  */
-public class Gestioneofferta extends TirociniBaseController {
+public class GestioneOfferta extends TirociniBaseController {
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
@@ -54,7 +52,7 @@ public class Gestioneofferta extends TirociniBaseController {
                 request.setAttribute("offerta", offerta);
                 request.setAttribute("candidature", list);
 
-                res.activate("gestioneofferta.ftl.html", request, response);
+                res.activate("gestioneOfferta.ftl.html", request, response);
             } else {
                 response.sendRedirect("Home");
             }
@@ -67,12 +65,6 @@ public class Gestioneofferta extends TirociniBaseController {
     }
 
     protected void accettaStudente(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, DataException {
-        if (SecurityLayer.checkSession(request) == null
-                || !request.getSession().getAttribute("type").equals("azienda")) {
-            notFound(request, response);
-            return;
-        }
-
         Azienda azienda = (((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda());
 
         if (request.getParameter("oid") == null || request.getParameter("uid") == null) {

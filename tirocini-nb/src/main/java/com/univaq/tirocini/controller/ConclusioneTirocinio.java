@@ -6,16 +6,13 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
-import com.univaq.tirocini.data.model.Offerta;
 import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;

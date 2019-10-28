@@ -5,7 +5,6 @@
  */
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.controller.permissions.UserObject;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataException;
@@ -32,9 +31,6 @@ public class Convenzione extends TirociniBaseController {
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         request.setAttribute("page_title", "Convenzione");
-        if (SecurityLayer.checkSession(request) == null) {
-            response.sendRedirect("Home");
-        }
 
         TemplateResult res = new TemplateResult(getServletContext());
 

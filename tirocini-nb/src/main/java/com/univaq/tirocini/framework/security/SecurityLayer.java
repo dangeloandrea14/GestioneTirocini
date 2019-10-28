@@ -171,15 +171,37 @@ public class SecurityLayer {
         }
     }
 
+    @Deprecated
     public static boolean authorized(HttpServletRequest request) {
+        HttpSession session = checkSession(request);
 
         //per ora restituisci true se l'utente non ha effettuato l'accesso
-        if (request.getSession() == null
-                || (request.getSession().getAttribute("userRole")) == null
-                || ((UserPermissions) ((UserRole) request.getSession().getAttribute("userRole")).getPermissions()) == null) {
-            return true;
+        if (session == null
+                || (session.getAttribute("userRole")) == null
+                || ((UserPermissions) ((UserRole) session.getAttribute("userRole")).getPermissions()) == null) {
+            return false;
         }
-
+        
         return ((UserPermissions) ((UserRole) request.getSession().getAttribute("userRole")).getPermissions()).authorized(request);
+    }
+    
+    public static boolean authorized(HttpServletRequest request, UserPermissions publicPermissions) {
+
+        HttpSession session = checkSession(request);
+        
+        
+        // usa i permessi pubblici se non esiste la sessione o non abbiamo
+        // un oggetto utente valido
+        UserPermissions p;
+        if (session == null
+                || (session.getAttribute("userRole")) == null
+                || ((UserPermissions) ((UserRole) session.getAttribute("userRole")).getPermissions()) == null) {
+            p = publicPermissions;
+        }
+        else {
+            p = (UserPermissions) ((UserRole) session.getAttribute("userRole")).getPermissions();
+        }
+        
+        return p.authorized(request);
     }
 }

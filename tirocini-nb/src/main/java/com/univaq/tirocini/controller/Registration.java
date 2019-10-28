@@ -13,7 +13,6 @@ import com.univaq.tirocini.vo.IVA;
 import com.univaq.tirocini.vo.IvaConverter;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -135,14 +134,18 @@ public class Registration extends TirociniBaseController {
     private void registerNewUser(HttpServletRequest request, HttpServletResponse response) 
             throws IllegalAccessException, InvocationTargetException, DataException {
         String p = request.getParameter("s");
-        if (p == null) {
+        if (null == p) {
             registrationFailure(request, response);
-        } else if (p.equals("studente")) {
-            registerNewStudent(request, response);
-        } else if (p.equals("azienda")) {
-            registerNewCompany(request, response);
-        } else {
-            registrationFailure(request, response);
+        } else switch (p) {
+            case "studente":
+                registerNewStudent(request, response);
+                break;
+            case "azienda":
+                registerNewCompany(request, response);
+                break;
+            default:
+                registrationFailure(request, response);
+                break;
         }
     }
 
