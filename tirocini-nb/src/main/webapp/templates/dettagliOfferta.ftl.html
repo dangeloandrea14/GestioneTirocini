@@ -1,53 +1,55 @@
 <#ftl encoding='UTF-8'>
 <div class="card still-b shadow">
-<div class="card-body">
-<div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-3">
-    <#if offerta??>
-    <div class="text-dark" id="details-title">
-        <small class="text-muted">offerta di tirocinio presso <br></small>
-        <h1>
-        <a href='DettagliAzienda?a=${offerta.azienda.key}'
-           class="text-decoration-none">
-            ${offerta.azienda.nome}
-        </a>
-        </h1>
-    </div>
+    <div class="card-body">
+        <div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-3">
+            <#if offerta??>
+            <div class="text-dark" id="details-title">
+                <small class="text-muted">offerta di tirocinio presso <br></small>
+                <h1>
+                    <a href='DettagliAzienda?a=${offerta.azienda.key}'
+                       class="text-decoration-none">
+                        ${offerta.azienda.nome}
+                    </a>
+                </h1>
+            </div>
 
-    <hr id='hr1'>
+            <hr id='hr1'>
 
-    <div class="p-0 m-0 mb-4 p-4">
-        <#include "fragments/offerDescription.ftl.html">
+            <div class="p-0 m-0 mb-4 p-4">
+                <#include "fragments/offerDescription.ftl.html">
 
 
-    </div>
+            </div>
 
-    <div class="card still">
-        <div class="card-body text-center bg-light">
             <#if userObject.studente??>
-            <#if already==false>
-            <form action="Candidatura" id="candidatura">
-                <input type="hidden" id="oid" name="oid" value="${offerta.key}">
-                <button form="candidatura" type="submit" class="btn btn-primary btn-block">
-                    Candidati </button> <br>
-            </form>
-            <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
-            <small>
-                <!--
-                <b>
-            Attenzione: 
-                </b>
-                -->
-                Ti ricordiamo che la tua candidatura verrà segnalata all'azienda
-                <b class="text-nowrap">${offerta.azienda.nome}. </b>
-                <br>
-                L'esito ti verrà comunicato dal sistema.
-            </small>
-            <#else>
-            <p class="card-text text-muted">
-                <i class="fa fa-check-circle text-success" aria-hidden="true"></i> 
-                Ti sei già candidato per questa offerta.
-            </p>
-            </#if>
+            <div class="card still">
+                <div class="card-body text-center bg-light">
+                    <#if already==false>
+                    <form action="Candidatura" id="candidatura">
+                        <input type="hidden" id="oid" name="oid" value="${offerta.key}">
+                        <button form="candidatura" type="submit" class="btn btn-primary btn-block">
+                            Candidati </button> <br>
+                    </form>
+                    <i class="fa fa-info-circle text-info" aria-hidden="true"></i>
+                    <small>
+                        <!--
+                        <b>
+                    Attenzione: 
+                        </b>
+                        -->
+                        Ti ricordiamo che la tua candidatura verrà segnalata all'azienda
+                        <b class="text-nowrap">${offerta.azienda.nome}. </b>
+                        <br>
+                        L'esito ti verrà comunicato dal sistema.
+                    </small>
+                    <#else>
+                    <p class="card-text text-muted">
+                        <i class="fa fa-check-circle text-success" aria-hidden="true"></i> 
+                        Ti sei già candidato per questa offerta.
+                    </p>
+                    </#if>
+                </div>
+            </div>
             <#elseif !userObject.azienda??>
             <!--    
                     Non mostriamo nulla se è un'azienda 
@@ -61,14 +63,12 @@
             </div>
             </#if>
 
+            <#else>
+            <p>
+                Quale offerta?
+            </p>
+            </#if>
+
         </div>
     </div>
-    <#else>
-    <p>
-        Quale offerta?
-    </p>
-    </#if>
-
-</div>
-</div>
 </div>

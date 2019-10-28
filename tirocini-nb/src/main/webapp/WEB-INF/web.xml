@@ -174,6 +174,10 @@
         <servlet-name>Updatecommenti</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.Updatecommenti</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>TestError</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.TestError</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -285,6 +289,10 @@
     <servlet-mapping>
         <servlet-name>Updatecommenti</servlet-name>
         <url-pattern>/updatecommenti</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>TestError</servlet-name>
+        <url-pattern>/TestError</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

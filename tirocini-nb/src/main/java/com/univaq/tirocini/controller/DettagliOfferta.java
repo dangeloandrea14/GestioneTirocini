@@ -13,6 +13,7 @@ import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.result.UserRole;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.List;
@@ -29,7 +30,7 @@ public class DettagliOfferta extends TirociniBaseController {
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException, DataException {
 
-        String p = request.getParameter("o"); //id offerta
+        String p = SecurityLayer.addSlashes(request.getParameter("o")); //id offerta
 
         if (p == null || !p.matches("\\d*")) { //restituiamo not found
             notFound(request, response);
@@ -37,7 +38,7 @@ public class DettagliOfferta extends TirociniBaseController {
         }
 
         Offerta offerta;
-        offerta = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(Integer.parseInt(p));
+        offerta = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(SecurityLayer.checkNumeric(p));
 
         if (offerta == null) { //restituiamo not found
             notFound(request, response);

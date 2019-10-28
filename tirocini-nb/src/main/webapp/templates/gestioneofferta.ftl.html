@@ -1,35 +1,50 @@
-<h2> Informazioni sull'offerta </h2>
+<div class="card still-b shadow">
+    <div class="card-body text-secondary">
+        <h2 class="text-center"> Informazioni sull'offerta </h2>
 
-Questa offerta &egrave; stata pubblicata il ${offerta.dataInserimento} da ${offerta.azienda.nomeResponsabile} ${offerta.azienda.cognomeResponsabile}. <br>
-La durata &egrave; di ${offerta.durata}, negli orari ${offerta.orari}.<br>
-Per controllare come questa offerta appare pubblicamente, <a href='/tirocini/DettagliOfferta?o=${offerta.key}' style="color:black">clicca qui.</a>
+        Questa offerta &egrave; stata pubblicata il ${offerta.dataInserimento} da ${offerta.azienda.nomeResponsabile} ${offerta.azienda.cognomeResponsabile}. <br>
+        La durata &egrave; di ${offerta.durata}, negli orari ${offerta.orari}.<br>
+        Per controllare come questa offerta appare pubblicamente, <a href='/tirocini/DettagliOfferta?o=${offerta.key}' style="color:black">clicca qui.</a>
 
-<hr>
+        <hr>
 
-<strong>Rimborso spese: </strong> ${offerta.rimborsoSpese} <br>
+        <strong>Rimborso spese: </strong> ${offerta.rimborsoSpese} <br>
 
-<hr>
+        <hr>
 
-<#if candidature?? && candidature?size != 0>
-    
-<h5> Gli studenti che si sono candidati a questa offerta sono: </h5>
+        <#if candidature?? && candidature?size != 0>
 
-<#list candidature as candidatura>
+        <h5 class="text-center"> Gli studenti che si sono candidati a questa offerta sono: </h5>
 
-${candidatura.studente.nome} ${candidatura.studente.cognome} 
-<a href='/tirocini/student?id=${candidatura.studente.key}'> Vedi Profilo </a>
-<form action="CreazioneTirocinio" id="creazionetirocinio" method="post">
-    <input type="hidden" id="uid" name="uid" value="${candidatura.studente.key}">
-    <input type="hidden" id="oid" name="oid" value="${candidatura.offerta.key}">
-    <button form="creazionetirocinio" type="submit" class="btn btn-outline-success">Accetta</button>
-</form>
+        <#list candidature as candidatura>
+
+        <div class="col-sm-8 mx-auto">
+            <div class="card mb-3 still shadow-sm">
+                <a class="card-header bg-primary text-decoration-none text-center" 
+                   href="student?id=${candidatura.studente.key}">
+                    <b class="text-white">
+                        <i class="fas fa-user-graduate"></i>
+                        ${candidatura.studente.nome} ${candidatura.studente.cognome}
+                    </b>
+                </a>
+                <div class="card-body">
+                    <form action="CreazioneTirocinio" id="creazionetirocinio" method="post">
+                        <input type="hidden" id="uid" name="uid" value="${candidatura.studente.key}">
+                        <input type="hidden" id="oid" name="oid" value="${candidatura.offerta.key}">
+                        <button form="creazionetirocinio" type="submit" class="btn btn-outline-success btn-block">Accetta</button>
+                    </form>
+                </div>
+            </div>
+        </div>
 
 
 
-</#list>
+        </#list>
 
-<#else>
+        <#else>
 
-<h5> Nessuno studente si &egrave; candidato finora. </h5>
+        <h5> Nessuno studente si &egrave; candidato finora. </h5>
 
-</#if>
+        </#if>
+    </div>
+</div>

@@ -10,6 +10,7 @@ import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +24,7 @@ public class DettagliAzienda extends TirociniBaseController {
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException, DataException {
-        String p = request.getParameter("a");
+        String p = SecurityLayer.addSlashes(request.getParameter("a"));
         if (p == null || !p.matches("\\d*")) {
             notFound(request, response);
             return;
@@ -31,7 +32,7 @@ public class DettagliAzienda extends TirociniBaseController {
 
         Azienda azienda;
 
-        azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(Integer.parseInt(p));
+        azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
 
         if (azienda == null) {
             notFound(request, response);

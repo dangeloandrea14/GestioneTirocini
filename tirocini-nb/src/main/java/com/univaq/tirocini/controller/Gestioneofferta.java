@@ -42,7 +42,7 @@ public class Gestioneofferta extends TirociniBaseController {
 
             String param = request.getParameter("oid");
 
-            int id = Integer.parseInt(param);
+            int id = SecurityLayer.checkNumeric(param);
 
             Offerta offerta = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(id);
 

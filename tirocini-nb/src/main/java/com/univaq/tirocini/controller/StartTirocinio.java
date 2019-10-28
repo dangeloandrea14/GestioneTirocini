@@ -11,7 +11,7 @@ import com.univaq.tirocini.framework.result.StreamResult;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.SecurityLayer;
-import static com.univaq.tirocini.pdf.Compile.compile;
+import com.univaq.tirocini.pdf.Compile;
 import com.univaq.tirocini.utility.DateUtils;
 import java.io.File;
 import java.io.IOException;
@@ -43,10 +43,12 @@ public class StartTirocinio extends TirociniBaseController {
 
         filling.put("nomeTirocinante", studente.getNome() + " " + studente.getCognome());
         filling.put("luogoNascita", studente.getLuogoNascita());
+        filling.put("provincia", provinciaNascita);
         filling.put("giorno", DateUtils.getDay(studente.getDataNascita()).toString());
         filling.put("mese", DateUtils.getMonth(studente.getDataNascita()).toString());
         filling.put("anno", DateUtils.getYear(studente.getDataNascita()).toString());
         filling.put("residenza", studente.getResidenza());
+        filling.put("residenzaProvincia", provinciaResidenza);
         filling.put("telefono", studente.getTelefono());
         if (studente.isHandicapped()) {
             filling.put("HandicapTrue", "x");
@@ -70,7 +72,7 @@ public class StartTirocinio extends TirociniBaseController {
         filling.put("meseInizioTirocinio", tirocinio.getInizio().toString());
         filling.put("meseFineTirocinio", tirocinio.getFine().toString());
 
-        return compile(new File(getServletContext().getRealPath("templates/pdf/Formativo.pdf")), filling);
+        return Compile.compile(new File(getServletContext().getRealPath("templates/pdf/Formativo.pdf")), filling);
     }
 
     @Override

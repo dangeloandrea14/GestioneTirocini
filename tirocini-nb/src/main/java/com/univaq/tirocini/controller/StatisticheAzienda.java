@@ -14,12 +14,14 @@ import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.data.DataLayer;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -31,18 +33,18 @@ public class StatisticheAzienda extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
 
-       /*  HttpSession session = SecurityLayer.checkSession(request);
+         HttpSession session = SecurityLayer.checkSession(request);
         if (session == null || !session.getAttribute("type").equals("admin")) {
             notFound(request, response);
             return;
-        } */
+        } 
         
         
        TirocinioDataLayer datalayer = ((TirocinioDataLayer) request.getAttribute("datalayer"));
        //Vediamo quale azienda è stata scelta
        //Non inseriamo validazione perché, se l'azienda viene cambiata... non succede nulla. 
        //Vorrebbe dire che l'admin ha cambiato il parametro, ma... ok?
-        String p = request.getParameter("a");
+        String p = SecurityLayer.addSlashes(request.getParameter("a"));
         if (p == null || !p.matches("\\d*")) {
             notFound(request, response);
             return;
@@ -50,7 +52,7 @@ public class StatisticheAzienda extends TirociniBaseController {
 
         Azienda azienda;
 
-        azienda = datalayer.getAziendaDAO().getAzienda(Integer.parseInt(p));
+        azienda = datalayer.getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
        
         List<com.univaq.tirocini.data.model.Valutazione> voti = datalayer.getValutazioneDAO().getValutazioni(azienda);
         

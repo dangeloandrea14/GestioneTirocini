@@ -34,9 +34,9 @@ public class CandidaturaServlet extends TirociniBaseController {
        
         
       
-        String param = request.getParameter("oid");
+       String param = SecurityLayer.addSlashes(request.getParameter("oid"));
         
-        int oid = Integer.parseInt(param);
+       int oid = SecurityLayer.checkNumeric(param);
         
        if(request.getSession().getAttribute("type").equals("studente")){
        Studente studente = (((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente());

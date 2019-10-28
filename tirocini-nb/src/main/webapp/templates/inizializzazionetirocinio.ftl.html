@@ -1,21 +1,40 @@
+<#ftl encoding='UTF-8'>
+<div class="card mb-3 mx-auto" style="max-width: 840px;">
+    <div class="row no-gutters">
+        <div class="col-md-4 p-4">
+            <a href="StartTirocinio?download" class="btn btn-primary mt-4 w-100">
+                <i class="fas fa-file-download"></i>
+                Scarica Documento Progetto Formativo
+            </a>
+            <br>
+            <br>
+            <p class="card-text text-secondary">
+                Una email con una copia è stata inviata al responsabile dell'azienda.
+            </p>
+            <p class="card-text"><small class="text-muted">${aziendaT.emailResponsabile}</small></p>
+        </div>
+        <div class="col-md-8">
+            <div class="card-body">
+                <h5 class="card-title">Ci siamo quasi...</h5>
+                <p class="card-text text-secondary">
+                    <i class="fas fa-hand-point-left"></i>
+                    Scarica qui il documento del progetto formativo. Il documento deve essere poi caricato debitamente firmato e timbrato per poter avviare il tirocinio.</p>
+                <p class="card-text"><small class="text-muted">Quando sei pronto puoi attivare il tirocinio.</small></p>
+                <form name="uploadtirocinio" id="uploadtirocinio" action="TirocinioAttivato" method="post">
 
-<h1> Ci siamo quasi...</h1>
-<br>
+                    <input type="hidden" id="sid" name="sid" value="${studenteT.key}">
+                    <input type="hidden" id="aid" name="aid" value="${aziendaT.key}">
+                    <input type="hidden" id="oid" name="oid" value="${offerta.key}">
+                    <input type="hidden" id="tid" name="tid" value="${tirocinio.key}">
 
-<a href="StartTirocinio?download">
-    <i class="fas fa-file-download"></i>
-    Scarica Documento Progetto Formativo
-</a>
-
-<form name="uploadtirocinio" id="uploadtirocinio" action="TirocinioAttivato" method="post">
-
-    <input type="hidden" id="sid" name="sid" value="${studenteT.key}">
-    <input type="hidden" id="aid" name="aid" value="${aziendaT.key}">
-    <input type="hidden" id="oid" name="oid" value="${offerta.key}">
-    <input type="hidden" id="tid" name="tid" value="${tirocinio.key}">
-
-    <label for="utirocinio">Carica modulo firmato: </label> <br>
-    <input type="file" id="utirocinio" name="utirocinio" /> <br>
-    <button class="btn btn-block btn-primary text-uppercase" type="submit" form="uploadtirocinio"> Inizia Tirocinio </button>
-</form>
-<br>
+                    <label for="utirocinio">Carica modulo firmato: </label> <br>
+                    <input type="file" id="utirocinio" name="utirocinio" /> <br><br>
+                    <button class="btn btn-block btn-success" 
+                            type="submit" form="uploadtirocinio">
+                        <i class="fas fa-check"></i>
+                        Inizia Tirocinio </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
