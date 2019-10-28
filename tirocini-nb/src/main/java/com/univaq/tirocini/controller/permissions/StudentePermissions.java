@@ -21,6 +21,7 @@ public class StudentePermissions extends BasePermissions{
                 "/Profile",
                 "/Logout",
                 "/Valutazione",
+                "/Candidatura",
                 "/ValutazioneCompletata"
         )));
         defaultPage = "Home";
