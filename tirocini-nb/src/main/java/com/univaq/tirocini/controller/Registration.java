@@ -40,7 +40,7 @@ public class Registration extends TirociniBaseController {
             
         }
         
-        
+        else{
         request.setAttribute("page_title", "Registration");
         request.setAttribute("outline_tpl", "outline.ftl.html");
 
@@ -59,6 +59,7 @@ public class Registration extends TirociniBaseController {
             res.activate("registrazioneAzienda.ftl.html", request, response);
         } else {
             res.activate("registrationChooser(versione da adattare).ftl.html", request, response);
+        }
         }
     }
 
