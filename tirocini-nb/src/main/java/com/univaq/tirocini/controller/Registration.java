@@ -63,8 +63,7 @@ public class Registration extends TirociniBaseController {
         }
     }
 
-    //TODO
-    //Mancano controlli sui campi (lunghezza password, validità part. Iva, ecc.)
+    
     private void registerNewStudent(HttpServletRequest request, HttpServletResponse response) throws IllegalAccessException, InvocationTargetException, DataException {
         if (!checkParameter(request, "s", "studente")) {
             registrationFailure(request, response);
@@ -92,18 +91,7 @@ public class Registration extends TirociniBaseController {
             return;
             
         }
-        
-        /* List<Azienda> listaaziende =   ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziende();
-        for (Azienda az : listaaziende){
-            
-            if (az.getEmailResponsabile().equals(request.getParameter("email"))){
-              
-                 action_error(request, response);
-                 return;
-                
-            }
-            
-        } */
+     
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
 

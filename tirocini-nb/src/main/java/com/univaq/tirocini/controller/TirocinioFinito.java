@@ -15,6 +15,7 @@ import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -33,7 +34,17 @@ public class TirocinioFinito extends TirociniBaseController {
     String param = request.getParameter("tirocinio");
     
     int tid = SecurityLayer.checkNumeric(param);
+    
+    HttpSession sess = request.getSession();
    
+    if (tid != (int) sess.getAttribute("tirocinioid")){
+        
+        String ex = "Tirocinio errato";
+        throw new DataException(ex);
+        
+    }
+    sess.removeAttribute("tirocinioid");
+    
     Tirocinio tirocinio = (Tirocinio) ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocinio(tid);
     
     tirocinio.setAttivo(false);

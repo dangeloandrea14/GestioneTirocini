@@ -18,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -36,7 +37,9 @@ public class ConclusioneTirocinio extends TirociniBaseController {
    
     Tirocinio tirocinio = (Tirocinio) ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocinio(tid);
 
-            
+    HttpSession sess = request.getSession();
+    sess.setAttribute("tirocinioid", tid);
+    
     request.setAttribute("tirocinio",tirocinio);
      
      
