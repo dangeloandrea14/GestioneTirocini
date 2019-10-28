@@ -41,6 +41,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
 
             sOfferteAttiveCount = connection.prepareStatement("SELECT COUNT(*) FROM Offerta where Attiva=1");
             sPaginaOfferteAttive = connection.prepareStatement("SELECT ID as OffertaID FROM Offerta where Attiva=1 ORDER BY ID DESC LIMIT ?,?");
+            sOffertaSearch = connection.prepareStatement("SELECT * FROM Offerta WHERE Luogo LIKE \"% ? %\" ");
             
             //Ora precompiliamo insert, update, delete
             iOfferta = connection.prepareStatement("INSERT INTO Offerta (IDAzienda,Luogo,Orari,Durata,Obiettivi,Modalità,RimborsoSpese,CFU,Attiva) VALUES(?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
@@ -207,6 +208,27 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
         return result;
     }
 
+    
+    
+    @Override
+    public List<Offerta> searchOffertaByPlace(String queryString) throws DataException {
+        List<Offerta> risultato = new ArrayList();
+
+        try {
+            sOffertaSearch.setString(1, queryString);
+            try (ResultSet rs = sOffertaSearch.executeQuery()) {
+                while (rs.next()) {
+                    risultato.add(createOfferta(rs));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile eseguire la ricerca", ex);
+        }
+
+        return risultato;
+    }
+    
+    
     @Override
     public void storeOfferta(Offerta offerta) throws DataException {
         int key = offerta.getKey();

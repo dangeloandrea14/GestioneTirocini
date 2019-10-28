@@ -30,4 +30,5 @@ public interface OffertaDAO {
     
     void storeOfferta(Offerta offerta) throws DataException;
     
+    List<Offerta> searchOffertaByPlace(String queryString) throws DataException;
 }
