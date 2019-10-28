@@ -31,7 +31,12 @@ public class Registration extends TirociniBaseController {
         
         if(request.getSession().getAttribute("type") != null){
             
-            response.sendRedirect("Home");
+            request.setAttribute("message","Hai già effettuato il login");
+            request.setAttribute("color", "red");
+            request.setAttribute("page_title", "Home");
+            request.setAttribute("outline_tpl", "outline.ftl.html");
+            TemplateResult res = new TemplateResult(getServletContext());
+            res.activate("home.ftl.html", request, response);
             
         }
         
@@ -164,6 +169,12 @@ public class Registration extends TirociniBaseController {
         TemplateResult res = new TemplateResult(getServletContext());
 
         try {
+            
+            request.setAttribute("message","Registrazione effettuata.");
+            request.setAttribute("color", "green");
+            request.setAttribute("page_title", "Home");
+            request.setAttribute("outline_tpl", "outline.ftl.html");
+            
             res.activate("home.ftl.html", request, response);
         } catch (TemplateManagerException ex) {
             request.setAttribute("exception", ex);
