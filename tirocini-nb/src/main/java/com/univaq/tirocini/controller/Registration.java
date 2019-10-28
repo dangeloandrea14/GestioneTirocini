@@ -31,7 +31,7 @@ public class Registration extends TirociniBaseController {
         if(request.getSession().getAttribute("type") != null){
             
             request.setAttribute("message","Hai già effettuato il login");
-            request.setAttribute("color", "red");
+            request.setAttribute("color", "danger");
             request.setAttribute("page_title", "Home");
             request.setAttribute("outline_tpl", "outline.ftl.html");
             TemplateResult res = new TemplateResult(getServletContext());
