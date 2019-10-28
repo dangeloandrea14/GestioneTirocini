@@ -100,12 +100,23 @@ public class StartTirocinio extends TirociniBaseController {
             String param = request.getParameter("sid");
             String param2 = request.getParameter("oid");
 
-            int sid = Integer.parseInt(param);
-            int oid = Integer.parseInt(param2);
+            int sid = SecurityLayer.checkNumeric(param);
+            int oid = SecurityLayer.checkNumeric(param2);
 
             Studente studente = (Studente) ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudente(sid);
             Offerta offerta = (Offerta) ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
             Azienda azienda = offerta.getAzienda();
+            
+            //Controlliamo che l'utente non abbia manomesso i dati
+            if((studente.getKey() != (int) request.getSession(false).getAttribute("studenteid"))){
+                String ex = "Utente errato" + studente.getKey() + " " + request.getSession(false).getAttribute("studenteid");
+                throw new DataException(ex);
+            }
+            if((offerta.getKey() != (int) request.getSession(false).getAttribute("offertaid"))){
+                String ex = "Offerta errata";
+                throw new DataException(ex);
+            }
+            
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date inizioj = format.parse(request.getParameter("inizio"));
             java.util.Date finej = format.parse(request.getParameter("fine"));

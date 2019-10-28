@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Shoken
+ * @author Andrea
  */
 public class ProfiloStudente extends TirociniBaseController {
     

@@ -28,7 +28,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Shoken
+ * @author Andrea
  */
 public class Gestioneofferta extends TirociniBaseController {
 
