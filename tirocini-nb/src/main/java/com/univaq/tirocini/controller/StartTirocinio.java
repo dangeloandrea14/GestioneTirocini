@@ -106,17 +106,17 @@ public class StartTirocinio extends TirociniBaseController {
             Studente studente = (Studente) ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudente(sid);
             Offerta offerta = (Offerta) ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
             Azienda azienda = offerta.getAzienda();
-            
+
             //Controlliamo che l'utente non abbia manomesso i dati
-            if((studente.getKey() != (int) request.getSession(false).getAttribute("studenteid"))){
+            if ((studente.getKey() != (int) request.getSession(false).getAttribute("studenteid"))) {
                 String ex = "Utente errato" + studente.getKey() + " " + request.getSession(false).getAttribute("studenteid");
                 throw new DataException(ex);
             }
-            if((offerta.getKey() != (int) request.getSession(false).getAttribute("offertaid"))){
+            if ((offerta.getKey() != (int) request.getSession(false).getAttribute("offertaid"))) {
                 String ex = "Offerta errata";
                 throw new DataException(ex);
             }
-            
+
             SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
             java.util.Date inizioj = format.parse(request.getParameter("inizio"));
             java.util.Date finej = format.parse(request.getParameter("fine"));
@@ -138,7 +138,19 @@ public class StartTirocinio extends TirociniBaseController {
             t.setAttivo(false);
             t.setOfferta(offerta);
 
-            ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().storeTirocinio(t);
+            //FIXME
+            //Inseriamo il tirocinio nel db solo se non esite ancora
+            //Brutto e per nulla elegante ma necessario.
+            Boolean ins = true;
+            for (Tirocinio t2 : ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirociniInattivi(azienda)) {
+                if (t2.getStudente().equals(studente) && t2.getInizio().equals(t.getInizio()) && t2.getSettoreInserimento().equals(t.getSettoreInserimento())) {
+                    ins = false;
+                }
+            }
+
+            if (ins) {
+                ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().storeTirocinio(t);
+            }
 
             File toDownload = prepareFormativo1(azienda, studente, t,
                     request.getParameter("proviNstudente"),
