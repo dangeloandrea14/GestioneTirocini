@@ -16,6 +16,8 @@ import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.Password;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -135,8 +137,17 @@ public class Login extends TirociniBaseController {
     }
 
     private void login_failed(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("exception", new Exception("Login failed"));
-        action_error(request, response);
+        try {
+            request.setAttribute("message", "Credenziali non valide");
+            request.setAttribute("color", "danger");
+            request.setAttribute("page_title", "Login");
+            request.setAttribute("username", request.getParameter("u"));
+            request.setAttribute("outline_tpl", "outline_login.ftl.html");
+            TemplateResult res = new TemplateResult(getServletContext());
+            res.activate("login.ftl.html", request, response);
+        } catch (TemplateManagerException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override
@@ -164,7 +175,7 @@ public class Login extends TirociniBaseController {
         }
     }
 
-       @Override
+    @Override
     public String getServletInfo() {
         return "Gestisce il login di utenti e aziende.";
     }
