@@ -6,6 +6,8 @@ import com.univaq.tirocini.data.impl.StudenteImpl;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
+import com.univaq.tirocini.framework.email.Mail;
+import com.univaq.tirocini.framework.email.SendEmail;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.security.Password;
@@ -91,7 +93,17 @@ public class Registration extends TirociniBaseController {
      
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
-
+        
+              
+        //Mandiamo la mail
+        Mail mail = new Mail();
+        mail.setRecipient("dangeloandrea14@gmail.com");
+        mail.setSubject("Registrazione effettuata");
+        mail.setBody("Registrazione effettuata!");
+       
+        SendEmail sendemail = new SendEmail(getServletContext());
+        sendemail.SendEmail(mail);
+                
         registrationSuccess(request, response);
     }
 
