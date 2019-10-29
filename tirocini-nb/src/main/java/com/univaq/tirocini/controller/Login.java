@@ -16,8 +16,6 @@ import com.univaq.tirocini.framework.result.UserRole;
 import com.univaq.tirocini.framework.security.Password;
 import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -33,7 +31,7 @@ public class Login extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
         if (SecurityLayer.checkSession(request) == null) {
             request.setAttribute("page_title", "Login");
-            request.setAttribute("outline_tpl", "outline_login.ftl.html");
+            request.setAttribute("outline_tpl", "/common/outline_login.ftl.html");
 
             TemplateResult res = new TemplateResult(getServletContext());
 
@@ -142,11 +140,12 @@ public class Login extends TirociniBaseController {
             request.setAttribute("color", "danger");
             request.setAttribute("page_title", "Login");
             request.setAttribute("username", request.getParameter("u"));
-            request.setAttribute("outline_tpl", "outline_login.ftl.html");
+            request.setAttribute("outline_tpl", "/common/outline_login.ftl.html");
             TemplateResult res = new TemplateResult(getServletContext());
             res.activate("login.ftl.html", request, response);
         } catch (TemplateManagerException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
+            request.setAttribute("exception", ex);
+            action_error(request, response);
         }
     }
 

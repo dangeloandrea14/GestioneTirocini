@@ -27,7 +27,7 @@ public class NotFound extends TirociniBaseController {
 
         TemplateResult res = new TemplateResult(getServletContext());
 
-        res.activate("notFound.ftl.html", request, response);
+        res.activate("common/notFound.ftl.html", request, response);
     }
        @Override
     public String getServletInfo() {
