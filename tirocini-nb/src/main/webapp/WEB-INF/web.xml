@@ -45,36 +45,16 @@
         <param-value>587</param-value>
     </context-param>
     <context-param>
-        <param-name>mail.user</param-name>
+        <param-name>mail.smtp.user</param-name>
         <param-value>pippofranco2019@outlook.com</param-value>
     </context-param>
     <context-param>
-        <param-name>mail.password</param-name>
+        <param-name>mail.smtp.password</param-name>
         <param-value>battaglianavalecapradimare9102</param-value>
     </context-param>
     <context-param>
         <param-name>mail.default_sender</param-name>
-        <param-value>noreply@tirocini.univaq.it</param-value>
-    </context-param>
-    <context-param>
-        <param-name>mail.smtp.host</param-name>
-        <param-value>smtp-mail.outlook.com</param-value>
-    </context-param>
-    <context-param>
-        <param-name>mail.smtp.port</param-name>
-        <param-value>587</param-value>
-    </context-param>
-    <context-param>
-        <param-name>mail.user</param-name>
         <param-value>pippofranco2019@outlook.com</param-value>
-    </context-param>
-    <context-param>
-        <param-name>mail.password</param-name>
-        <param-value>battaglianavalecapradimare9102</param-value>
-    </context-param>
-    <context-param>
-        <param-name>mail.default_sender</param-name>
-        <param-value>noreply@tirocini.univaq.it</param-value>
     </context-param>
     <!--
     <context-param>
@@ -198,6 +178,10 @@
         <servlet-name>TestError</servlet-name>
         <servlet-class>com.univaq.tirocini.controller.TestError</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>PasswordRecover</servlet-name>
+        <servlet-class>com.univaq.tirocini.controller.PasswordRecover</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Home</servlet-name>
         <url-pattern>/Home</url-pattern>
@@ -313,6 +297,10 @@
     <servlet-mapping>
         <servlet-name>TestError</servlet-name>
         <url-pattern>/TestError</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PasswordRecover</servlet-name>
+        <url-pattern>/PasswordRecover</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

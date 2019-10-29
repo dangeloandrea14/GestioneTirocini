@@ -94,10 +94,9 @@ public class Registration extends TirociniBaseController {
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
         
-              
         //Mandiamo la mail
         Mail mail = new Mail();
-        mail.setRecipient("dangeloandrea14@gmail.com");
+        mail.setRecipient(s.getEmail());
         mail.setSubject("Registrazione effettuata");
         mail.setBody("Registrazione effettuata!");
        

@@ -24,7 +24,7 @@ public class SendEmail {
         InitSendEmail();
     }
 
-    public final void InitSendEmail() {
+    private void InitSendEmail() {
         // Get system properties and setup mail server
 
         properties = System.getProperties();
@@ -33,8 +33,9 @@ public class SendEmail {
         List<String> configs = Arrays.asList(
                 "mail.smtp.host",
                 "mail.smtp.port",
-                "mail.user",
-                "mail.password",
+                "mail.smtp.starttls.enable",
+                "mail.smtp.user",
+                "mail.smtp.password",
                 "mail.smtps.auth",
                 "mail.default_sender"
         );
@@ -45,12 +46,16 @@ public class SendEmail {
                 properties.setProperty(cfg, context.getInitParameter(cfg));
             }
         }
+
+        properties.put("mail.smtp.starttls.enable", "true");
+        properties.put("mail.smtp.auth", "true");
+
     }
 
     public void SendEmail(Mail mail) {
         SendEmail(mail.getRecipient(), mail.getSubject(), mail.getBody());
     }
-    
+
     public void SendEmail(String to, String subject, String htmlEmailBody) {
         String[] rec = new String[]{to};
         SendEmail(rec, subject, htmlEmailBody);
@@ -67,10 +72,12 @@ public class SendEmail {
 
             // Set From: header field of the header.
             message.setFrom(new InternetAddress(properties.getProperty("mail.default_sender")));
+            message.setSender(new InternetAddress(properties.getProperty("mail.default_sender")));
 
             // Set To: header field of the header.
-            for (String a : to)
+            for (String a : to) {
                 message.addRecipient(Message.RecipientType.TO, new InternetAddress(a));
+            }
 
             // Set Subject: header field
             message.setSubject(subject);
@@ -79,7 +86,11 @@ public class SendEmail {
             message.setContent(htmlEmailBody, "text/html");
 
             // Send message
-            Transport.send(message);
+            //Transport.send(message);
+            
+            send(message, session);
+            
+            
         } catch (MessagingException mex) {
             Logger.getLogger("mail").log(Level.SEVERE, null, mex);
         }
@@ -96,6 +107,7 @@ public class SendEmail {
 
             // Set From: header field of the header.
             message.setFrom(new InternetAddress(properties.getProperty("mail.default_sender")));
+            message.setSender(new InternetAddress(properties.getProperty("mail.default_sender")));
 
             // Set To: header field of the header.
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
@@ -128,9 +140,26 @@ public class SendEmail {
             message.setContent(multipart);
 
             // Send message
-            Transport.send(message);
+            //Transport.send(message);
+            
+            send(message, session);
+            
+            
+            
         } catch (MessagingException mex) {
             Logger.getLogger("mail").log(Level.SEVERE, null, mex);
         }
+    }
+
+    private void send(Message message, Session session) throws NoSuchProviderException, MessagingException {
+            Transport tr;
+            tr = session.getTransport("smtp");
+            //va fatto manualmente perché non si può passsare la password tra le proprietà
+            tr.connect(properties.getProperty("mail.smtp.host"),
+                    properties.getProperty("mail.smtp.user"),
+                    properties.getProperty("mail.smtp.password"));
+            message.saveChanges();      // don't forget this
+            tr.sendMessage(message, message.getAllRecipients());
+            tr.close();
     }
 }

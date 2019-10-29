@@ -27,6 +27,7 @@ public class PublicPermissions extends BasePermissions {
         allowedPages = new HashSet<>(Arrays.asList(
                 "/Home",
                 "/Login",
+                "/PasswordRecover",
                 "/Logout",
                 "/NotFound",
                 "/Companies", 
