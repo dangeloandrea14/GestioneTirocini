@@ -43,8 +43,8 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
             sPassword = connection.prepareStatement("Select Password FROM Studente where email=?");
             sStudenteByEmail = connection.prepareStatement("SELECT * FROM Studente WHERE email=?");
 
-            iStudente = connection.prepareStatement("INSERT INTO Studente (Nome,Cognome,DataNascita,LuogoNascita,CF,Handicap,Email,Ruolo,Residenza,CorsoLaurea,NumeroCFU,Telefono,Diploma,Laurea,Specializzazione,Password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-            uStudente = connection.prepareStatement("UPDATE Studente SET Nome=?,Cognome=?,DataNascita=?,LuogoNascita=?, CF=?, Handicap=?, Email=?, Ruolo=?, Residenza=?, CorsoLaurea=?, NumeroCFU=?, Telefono=?, Diploma=?, Laurea=?, Specializzazione=?, Password=? WHERE ID=?");
+            iStudente = connection.prepareStatement("INSERT INTO Studente (Nome,Cognome,DataNascita,LuogoNascita,ProvinciaNascita,CF,Handicap,Email,Ruolo,Residenza,ProvinciaResidenza,CorsoLaurea,NumeroCFU,Telefono,Diploma,Laurea,Specializzazione,Password) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+            uStudente = connection.prepareStatement("UPDATE Studente SET Nome=?,Cognome=?,DataNascita=?,LuogoNascita=?,ProvinciaNascita=?, CF=?, Handicap=?, Email=?, Ruolo=?, Residenza=?, ProvinciaResidenza=?, CorsoLaurea=?, NumeroCFU=?, Telefono=?, Diploma=?, Laurea=?, Specializzazione=?, Password=? WHERE ID=?");
             dStudente = connection.prepareStatement("DELETE FROM Studente WHERE ID=?");
 
         } catch (SQLException ex) {
@@ -67,11 +67,13 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
             a.setCognome(rs.getString("Cognome"));
             a.setDataNascita(rs.getDate("DataNascita"));
             a.setLuogoNascita(rs.getString("LuogoNascita"));
+            a.setProvinciaNascita(rs.getString("ProvinciaNascita"));
             a.setCF(rs.getString("CF"));
             a.setHandicap(rs.getBoolean("Handicap"));
             a.setEmail(rs.getString("Email"));
             a.setRuolo(rs.getInt("Ruolo"));
             a.setResidenza(rs.getString("Residenza"));
+            a.setProvinciaResidenza(rs.getString("ProvinciaResidenza"));
             a.setCorsoLaurea(rs.getString("Laurea"));
             a.setCFU(rs.getInt("NumeroCFU"));
             a.setTelefono(rs.getString("Telefono"));
@@ -170,24 +172,26 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
                 uStudente.setString(2, studente.getCognome());
                 uStudente.setDate(3,studente.getDataNascita());
                 uStudente.setString(4,studente.getLuogoNascita());
-                uStudente.setString(5,studente.getCF());
+                uStudente.setString(5,studente.getProvinciaNascita());
+                uStudente.setString(6,studente.getCF());
                 
                 if (studente.isHandicapped() != null)
-                uStudente.setBoolean(6, studente.isHandicapped());
-                else uStudente.setBoolean(6, false);
+                uStudente.setBoolean(7, studente.isHandicapped());
+                else uStudente.setBoolean(7, false);
                 
-                uStudente.setString(7, studente.getEmail());
-                uStudente.setInt(8, studente.getRuolo());
-                uStudente.setString(9, studente.getResidenza());
-                uStudente.setString(10, studente.getCorsoLaurea());
-                uStudente.setInt(11, studente.getCFU());
-                uStudente.setString(12, studente.getTelefono());
-                uStudente.setString(13, studente.getDiploma());
-                uStudente.setString(14, studente.getLaurea());
-                uStudente.setString(15, studente.getSpecializzazione());
-                uStudente.setString(16, studente.getPassword());
+                uStudente.setString(8, studente.getEmail());
+                uStudente.setInt(9, studente.getRuolo());
+                uStudente.setString(10, studente.getResidenza());
+                uStudente.setString(11, studente.getProvinciaResidenza());
+                uStudente.setString(12, studente.getCorsoLaurea());
+                uStudente.setInt(13, studente.getCFU());
+                uStudente.setString(14, studente.getTelefono());
+                uStudente.setString(15, studente.getDiploma());
+                uStudente.setString(16, studente.getLaurea());
+                uStudente.setString(17, studente.getSpecializzazione());
+                uStudente.setString(18, studente.getPassword());
             
-                uStudente.setInt(17, studente.getKey());
+                uStudente.setInt(19, studente.getKey());
                 uStudente.executeUpdate();
                 
                 
@@ -197,22 +201,24 @@ public class StudenteDAO_MySQL extends DAO implements StudenteDAO {
                 iStudente.setString(2, studente.getCognome());
                 iStudente.setDate(3, studente.getDataNascita());
                 iStudente.setString(4, studente.getLuogoNascita());
-                iStudente.setString(5, studente.getCF());
+                iStudente.setString(5, studente.getProvinciaNascita());
+                iStudente.setString(6, studente.getCF());
                 
                 if (studente.isHandicapped() != null)
-                iStudente.setBoolean(6, studente.isHandicapped());
-                else iStudente.setBoolean(6, false);
+                iStudente.setBoolean(7, studente.isHandicapped());
+                else iStudente.setBoolean(7, false);
                 
-                iStudente.setString(7, studente.getEmail());
-                iStudente.setInt(8, studente.getRuolo());
-                iStudente.setString(9, studente.getResidenza());
-                iStudente.setString(10, studente.getCorsoLaurea());
-                iStudente.setInt(11, studente.getCFU());
-                iStudente.setString(12, studente.getTelefono());
-                iStudente.setString(13, studente.getDiploma());
-                iStudente.setString(14, studente.getLaurea());
-                iStudente.setString(15, studente.getSpecializzazione());
-                iStudente.setString(16, studente.getPassword());
+                iStudente.setString(8, studente.getEmail());
+                iStudente.setInt(9, studente.getRuolo());
+                iStudente.setString(10, studente.getResidenza());
+                iStudente.setString(11, studente.getProvinciaResidenza());
+                iStudente.setString(12, studente.getCorsoLaurea());
+                iStudente.setInt(13, studente.getCFU());
+                iStudente.setString(14, studente.getTelefono());
+                iStudente.setString(15, studente.getDiploma());
+                iStudente.setString(16, studente.getLaurea());
+                iStudente.setString(17, studente.getSpecializzazione());
+                iStudente.setString(18, studente.getPassword());
                 
                
                 if (iStudente.executeUpdate() == 1) {
