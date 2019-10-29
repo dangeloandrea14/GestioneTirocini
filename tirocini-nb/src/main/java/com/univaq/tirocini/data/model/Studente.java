@@ -33,6 +33,10 @@ public interface Studente {
    
    void setLuogoNascita(String luogo);
    
+   String getProvinciaNascita();
+   
+   void setProvinciaNascita(String provnas);
+   
    String getCF();
    
    void setCF(String CF);
@@ -52,6 +56,10 @@ public interface Studente {
    String getResidenza();
    
    void setResidenza(String residenza);
+   
+   String getProvinciaResidenza();
+   
+   void setProvinciaResidenza(String provres);
    
    String getCorsoLaurea();
    

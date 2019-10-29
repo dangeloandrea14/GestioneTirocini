@@ -52,6 +52,12 @@ public class StudenteProxy extends StudenteImpl {
       }
       
       @Override
+      public void setProvinciaNascita(String provnas){
+          super.setProvinciaNascita(provnas);
+          this.dirty = true;
+      }
+      
+      @Override
       public void setCF(String cf){
           super.setCF(cf);
           this.dirty = true;
@@ -78,6 +84,12 @@ public class StudenteProxy extends StudenteImpl {
       @Override
       public void setResidenza(String residenza){
           super.setResidenza(residenza);
+          this.dirty = true;
+      }
+      
+      @Override
+      public void setProvinciaResidenza(String provres){
+          super.setProvinciaResidenza(provres);
           this.dirty = true;
       }
       

@@ -14,11 +14,13 @@ public class StudenteImpl implements Studente {
     String cognome;
     Date dataDiNascita;
     String luogoDiNascita;
+    String provinciaNascita;
     String CF;
     Boolean handicap;
     String email;
     int ruolo;
     String residenza;
+    String provinciaResidenza;
     String corsoDiLaurea;
     int CFU;
     String telefono;
@@ -78,6 +80,16 @@ public class StudenteImpl implements Studente {
    }
    
    @Override
+   public String getProvinciaNascita(){
+       return this.provinciaNascita;
+   }
+   
+   @Override
+   public void setProvinciaNascita(String provnas){
+       this.provinciaNascita = provnas;
+   }
+   
+   @Override
    public String getCF(){
        return this.CF;
    }
@@ -125,6 +137,16 @@ public class StudenteImpl implements Studente {
    @Override
    public void setResidenza(String residenza){
        this.residenza = residenza;
+   }
+   
+   @Override
+   public String getProvinciaResidenza(){
+       return this.provinciaResidenza;
+   }
+   
+   @Override
+   public void setProvinciaResidenza(String provres){
+       this.provinciaResidenza = provres;
    }
    
    @Override
