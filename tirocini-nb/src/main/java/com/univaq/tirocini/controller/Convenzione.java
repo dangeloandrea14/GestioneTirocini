@@ -36,6 +36,8 @@ public class Convenzione extends TirociniBaseController {
 
         try {
             String param = SecurityLayer.addSlashes(request.getParameter("a"));
+            
+          
 
             int id = SecurityLayer.checkNumeric(param);
 
@@ -78,7 +80,7 @@ public class Convenzione extends TirociniBaseController {
             action_error(request, response);
         }
         
-        response.sendRedirect("Convenzione");
+        response.sendRedirect("Admin");
     }
 
     @Override
