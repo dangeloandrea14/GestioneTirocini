@@ -10,6 +10,7 @@ import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class Companies extends TirociniBaseController {
         
         int currentPage;
         if (request.getParameter("page") != null) {
-            currentPage = Integer.parseInt(request.getParameter("page"));
+            currentPage = SecurityLayer.checkNumeric(request.getParameter("page"));
         } else {
             currentPage = 1;
         }

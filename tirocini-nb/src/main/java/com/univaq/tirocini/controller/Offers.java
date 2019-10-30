@@ -10,6 +10,7 @@ import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
+import com.univaq.tirocini.framework.security.SecurityLayer;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -34,7 +35,7 @@ public class Offers extends TirociniBaseController {
         
         int currentPage;
         if (request.getParameter("page") != null) {
-            currentPage = Integer.parseInt(request.getParameter("page"));
+            currentPage = SecurityLayer.checkNumeric(request.getParameter("page"));
         } else {
             currentPage = 1;
         }
@@ -45,7 +46,25 @@ public class Offers extends TirociniBaseController {
      
         request.setAttribute("page", currentPage);
         
-        request.setAttribute("page_title", "Offerte di tirocinio");
+        String searchString = request.getParameter("luogo");
+        if (searchString != null) {
+            request.setAttribute("page_title", "Offerte" + " - " + "\"" + searchString + "\"");
+            request.setAttribute("offerte", (offertaDAO.searchOffertaByPlace(searchString)));
+            request.setAttribute("searchString", searchString);
+        } else {
+            request.setAttribute("page_title", "Aziende");
+            request.setAttribute("offerte", (offertaDAO.getPaginaOfferteAttive(currentPage, 20)));
+        }
+
+        request.setAttribute("numOfferte", numeroAttive);
+        request.setAttribute("pageCount", pageCount);
+
+        TemplateResult res = new TemplateResult(getServletContext());
+
+        res.activate("offers.ftl.html", request, response);
+            
+        
+       /* request.setAttribute("page_title", "Offerte di tirocinio");
         request.setAttribute("offerte", offertaDAO.getPaginaOfferteAttive(currentPage, 20));
         
         request.setAttribute("numOfferte", numeroAttive);
@@ -53,7 +72,7 @@ public class Offers extends TirociniBaseController {
         
         TemplateResult res = new TemplateResult(getServletContext());
 
-        res.activate("offers.ftl.html", request, response);
+        res.activate("offers.ftl.html", request, response); */
     }
     
       @Override

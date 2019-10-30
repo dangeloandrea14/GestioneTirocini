@@ -69,7 +69,7 @@
         </nav>
         <div class="collapse" id="collapseFilter">
             <div class="card card-body border-success bg-light still">
-                <form>
+                <form id="offsearch">
                     <div class="form-row">
                         <!-- <div class="col-md-4 mb-3">
                             <label for="azienda">
@@ -81,7 +81,7 @@
                             <label for="luogo">
                                 <i class="fa fa-map-marker text-success"></i>
                                 Luogo</label>
-                            <input type="text" class="form-control" id="luogo" placeholder="">
+                            <input type="text" form="offsearch" class="form-control" id="luogo" name="luogo" placeholder="">
                         </div>
                         <!--
                         <div class="col-sm mb-3">
@@ -99,7 +99,7 @@
                             <input type="time" class="form-control" id="orari2" placeholder="">
                         </div>
                         -->
-                            <button class="btn btn-success my-2 my-sm-0" 
+                            <button form="offsearch" class="btn btn-success my-2 my-sm-0" 
                                     type="submit">
                                 <i class="fas fa-search"></i>
                             </button>
