@@ -1,21 +1,21 @@
 <#ftl encoding='UTF-8'>
 <div class="card still-b shadow">
-    <div class="card-body">
-        <div id="body" class="col-lg-10 p-auto mx-auto mt-0 pt-3">
+    <div class="card-body p-4 px-lg-5">
+       
             <#if offerta??>
             <div class="text-dark" id="details-title">
                 <small class="text-muted">offerta di tirocinio presso <br></small>
                 <h1>
                     <a href='DettagliAzienda?a=${offerta.azienda.key}'
                        class="text-decoration-none">
-                        ${offerta.azienda.nome}
+                        <i class="far fa-building mr-3"></i>${offerta.azienda.nome}
                     </a>
                 </h1>
             </div>
 
             <hr id='hr1'>
 
-            <div class="p-0 m-0 mb-4 p-4">
+            <div class="p-0 m-0 p-4">
                 <#include "/fragments/offerDescription.ftl.html">
 
 
@@ -70,5 +70,5 @@
             </#if>
 
         </div>
-    </div>
+   
 </div>
