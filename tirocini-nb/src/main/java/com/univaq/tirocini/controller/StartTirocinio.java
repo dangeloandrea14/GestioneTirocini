@@ -23,6 +23,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.lang.Integer;
 
 /**
  *
@@ -44,10 +45,12 @@ public class StartTirocinio extends TirociniBaseController {
         filling.put("nomeTirocinante", studente.getNome() + " " + studente.getCognome());
         filling.put("luogoNascita", studente.getLuogoNascita());
         filling.put("provincia", provinciaNascita);
+        filling.put("cf", studente.getCF());
         filling.put("giorno", DateUtils.getDay(studente.getDataNascita()).toString());
         filling.put("mese", DateUtils.getMonth(studente.getDataNascita()).toString());
         filling.put("anno", DateUtils.getYear(studente.getDataNascita()).toString());
         filling.put("residenza", studente.getResidenza());
+          System.out.println(provinciaResidenza);
         filling.put("residenzaProvincia", provinciaResidenza);
         filling.put("telefono", studente.getTelefono());
         if (studente.isHandicapped()) {
@@ -55,23 +58,26 @@ public class StartTirocinio extends TirociniBaseController {
         } else {
             filling.put("HandicapFalse", "x");
         }
-
+            
         filling.put("checkCorsoLaureaStudente", "x");
         filling.put("corsoLaureaStudente", studente.getCorsoLaurea());
-
         //BeanUtils.populate(azienda, filling);
         filling.put("nomeAzienda", azienda.getNome());
-
-        filling.put("settoreInserimento", tirocinio.getSettoreInserimento());
+        filling.put("accessoLocaliAziendali",tirocinio.getTempoDiAccesso());
+        filling.put("settoreInserimento", tirocinio.getAzienda().getCorsoRiferimento());
         filling.put("tutoreAziendale", tirocinio.getTutoreAziendale());
-        filling.put("telefonoTutoreAziendale", telefonoTutoreAziendale);
+        filling.put("tutoreTelefono", telefonoTutoreAziendale);
         filling.put("tutoreUniversitario", tirocinio.getTutoreAziendale());
         filling.put("telefonoTutoreUniversitario", telefonoTutoreUniversitario);
         filling.put("oreTirocinio", tirocinio.getNumeroOre());
         filling.put("nMesiTirocinio", DateUtils.monthsBetweenIgnoreDays(tirocinio.getInizio(), tirocinio.getFine()).toString());
         filling.put("meseInizioTirocinio", tirocinio.getInizio().toString());
         filling.put("meseFineTirocinio", tirocinio.getFine().toString());
-
+        filling.put("effettuazioneTirocinio",tirocinio.getOfferta().getLuogo());  
+        filling.put("cfu",String.valueOf(tirocinio.getOfferta().getCFU()));
+        filling.put("modalitaTirocinio",tirocinio.getOfferta().getModalità());
+        filling.put("obiettiviTirocinio", tirocinio.getOfferta().getObiettivi());
+        filling.put("rimborsi",tirocinio.getOfferta().getRimborsoSpese());
         return Compile.compile(new File(getServletContext().getRealPath("templates/pdf/Formativo.pdf")), filling);
     }
 

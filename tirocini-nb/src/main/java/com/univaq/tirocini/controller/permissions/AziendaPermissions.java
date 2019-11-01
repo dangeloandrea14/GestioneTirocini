@@ -28,7 +28,7 @@ public class AziendaPermissions extends BasePermissions {
                 "/newOffer",
                 "/CreazioneTirocinio",
                 "/StartTirocinio",
-                "/ConclusioneTirocinio",
+                "/Conclusione",
                 "/TirocinioAttivato",
                 "/TirocinioFinito",
                 "/PdfGenerator"

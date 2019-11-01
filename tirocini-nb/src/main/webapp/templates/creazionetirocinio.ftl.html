@@ -1,98 +1,189 @@
-<div class="card  shadow">
-    <div class="card-body">
-        <h1> Generazione File Tirocinio </h1>
+<div class="card  shadow overflow-hidden">
+     <form  class=" p-0" method="POST" action="StartTirocinio">
+    <div class="card-header row bg-white px-5 pt-4">
+        <div class=" d-flex flex-column my-auto">
+        <h1> Progetto formativo </h1>
 
-        Studente: <a href="student?id=${studenteT.key}"> ${studenteT.nome} ${studenteT.cognome}</a> <br>
-        Offerta: <a href="DettagliOfferta?o=${offerta.key}"> Offerta a ${offerta.luogo} </a>
+        <p class="ml-3 my-1">Studente: <a href="student?id=${studenteT.key}"> ${studenteT.nome} ${studenteT.cognome}</a> </p>
+        <p class="ml-3 my-1">Offerta: <a href="DettagliOfferta?o=${offerta.key}"> Offerta a ${offerta.luogo} </a></p>
+        </div> 
+        <div class="mx-auto mr-lg-0 ml-lg-auto  my-3 my-lg-auto">
+        <button type="submit" class="my-auto bg-white border-0 choose p-2 d-flex flex-column text-secondary">
+            <svg class="mx-auto" height="60px" width="60px" id="Capa_1" enable-background="new 0 0 512 512" height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg" xmlns:x="http://ns.adobe.com/Extensibility/1.0/" xmlns:i="http://ns.adobe.com/AdobeIllustrator/10.0/" xmlns:graph="http://ns.adobe.com/Graphs/1.0/"><g><path d="m417.77 226.651v241.667c0 19.982-16.199 36.181-36.181 36.181h-297.235c-19.982 0-36.181-16.199-36.181-36.181v-378.578c0-19.988 16.203-36.181 36.181-36.181h160.32z" fill="#bed8fb"/><path d="m130.413 458.44c-19.982 0-36.181-16.199-36.181-36.181v-378.578c0-19.988 16.203-36.181 36.181-36.181h160.32c27.563 0 173.095 145.531 173.095 173.091v241.667c0 19.982-16.199 36.181-36.181 36.181h-297.234z" fill="#ddeafb"/><path d="m463.829 180.595v15.305c0-32.222-26.129-58.352-58.352-58.352h-35.515c-19.978 0-36.181-16.203-36.181-36.181v-35.515c0-32.222-26.129-58.352-58.352-58.352h15.305c27.559 0 53.997 10.95 73.483 30.436l69.176 69.176c19.486 19.486 30.436 45.925 30.436 73.483z" fill="#bed8fb"/><path d="m315.052 269.253v-105.782c0-4.563-3.699-8.262-8.262-8.262h-55.518c-4.563 0-8.262 3.699-8.262 8.262v105.782h-23.603c-7.361 0-11.047 8.9-5.842 14.105l52.74 52.74c7.029 7.029 18.426 7.029 25.455 0l52.739-52.74c5.205-5.205 1.519-14.105-5.842-14.105z" fill="#78d0b1"/><path d="m343.415 365.127h-128.769c-8.892 0-16.101 7.209-16.101 16.101v.442c0 8.892 7.209 16.101 16.101 16.101h128.769c8.892 0 16.101-7.209 16.101-16.101v-.442c0-8.892-7.208-16.101-16.101-16.101z" fill="#78d0b1"/><path d="m471.329 180.59c-.001-29.761-11.591-57.739-32.633-78.781l-69.176-69.176c-21.044-21.044-49.024-32.633-78.787-32.633h-15.305-145.014c-24.086 0-43.682 19.595-43.682 43.681v2.381h-2.382c-24.084 0-43.679 19.594-43.679 43.679v378.58c0 24.085 19.595 43.679 43.679 43.679h297.241c24.084 0 43.679-19.594 43.679-43.679v-2.382h2.378c24.086 0 43.681-19.595 43.681-43.681v-226.358-15.305-.004s0 0 0-.001zm-112.415-137.351 69.176 69.177c10.262 10.262 17.926 22.429 22.661 35.706-11.81-11.196-27.754-18.074-45.273-18.074h-35.515c-15.815 0-28.681-12.866-28.681-28.681v-35.515c0-17.519-6.877-33.463-18.074-45.273 13.276 4.735 25.443 12.398 35.706 22.66zm97.415 379.019c0 15.815-12.866 28.681-28.681 28.681h-80.713c-4.142 0-7.5 3.358-7.5 7.5s3.358 7.5 7.5 7.5h63.335v2.382c0 15.813-12.865 28.679-28.679 28.679h-297.241c-15.813 0-28.679-12.865-28.679-28.679v-378.58c0-15.814 12.865-28.679 28.679-28.679h2.382v361.196c0 24.086 19.596 43.681 43.682 43.681h186.521c4.142 0 7.5-3.358 7.5-7.5s-3.358-7.5-7.5-7.5h-186.521c-15.815 0-28.682-12.866-28.682-28.681v-378.577c0-15.815 12.867-28.681 28.682-28.681h145.015c28.04 0 50.852 22.812 50.852 50.852v35.515c0 24.086 19.595 43.681 43.681 43.681h35.515c28.04 0 50.852 22.812 50.852 50.852z"/><path d="m261 341.401c4.816 4.816 11.22 7.468 18.031 7.468 6.812 0 13.215-2.652 18.031-7.469l52.74-52.74c4.524-4.524 5.865-11.267 3.417-17.178s-8.165-9.73-14.563-9.73h-16.103v-98.282c0-8.691-7.071-15.762-15.763-15.762h-55.519c-8.691 0-15.762 7.071-15.762 15.762v38.817c0 4.142 3.358 7.5 7.5 7.5s7.5-3.358 7.5-7.5v-38.817c0-.42.342-.762.762-.762h55.519c.42 0 .763.342.763.762v105.782c0 4.142 3.358 7.5 7.5 7.5h23.603c.19 0 .509 0 .704.471s-.03.696-.165.831l-52.74 52.74c-1.983 1.983-4.62 3.075-7.424 3.075s-5.441-1.092-7.424-3.075l-52.739-52.74c-.135-.135-.36-.36-.165-.831s.514-.471.704-.471h23.603c4.142 0 7.5-3.358 7.5-7.5v-36.965c0-4.142-3.358-7.5-7.5-7.5s-7.5 3.358-7.5 7.5v29.465h-16.103c-6.398 0-12.114 3.819-14.563 9.73-2.448 5.911-1.107 12.654 3.417 17.178z"/><path d="m343.415 357.627h-128.77c-13.014 0-23.601 10.587-23.601 23.601v.442c0 13.014 10.587 23.601 23.601 23.601h128.77c13.014 0 23.601-10.587 23.601-23.601v-.442c0-13.013-10.587-23.601-23.601-23.601zm8.601 24.044c0 4.743-3.858 8.601-8.601 8.601h-128.77c-4.743 0-8.601-3.858-8.601-8.601v-.442c0-4.743 3.858-8.601 8.601-8.601h128.77c4.743 0 8.601 3.858 8.601 8.601z"/></g></svg>
+                Progetto Formativo </button>
+        </div>
+        </div>
+    <div class="card-body row m-0 p-0 ">
 
-    </div>
-    <div class="card-footer">
-
-        <form method="POST" action="StartTirocinio">
+       
             <input type="hidden" id="sid" name="sid" value="${studenteT.key}">
             <input type="hidden" id="aid" name="aid" value="${aziendaT.key}">
             <input type="hidden" id="oid" name="oid" value="${offerta.key}">
 
 
-            <div class="container pt-3 pb-3 col-sm-8">
-
-                <p class="text-center">
-                    Conferma dati studente:
-                </p>
-                <div class="form-group row p-0">
-                    <div class="col">
-                        <input class="form-control text-center" required="required" value="${studenteT.nome}" placeholder="Nome">
-                    </div>
-                    <div class="col">
-                        <input class="form-control text-center" required="required" value="${studenteT.cognome}" placeholder="Cognome">
-                    </div>
+     
+                <div class="col-lg bginfo m-0 p-5">
+                     <div class="container  d-flex m-0 p-0">
+                         <svg class="mx-3" id="Layer_5" enable-background="new 0 0 64 64" height="60px" width="60px" viewBox="0 0 64 64" width="512" xmlns="http://www.w3.org/2000/svg"><circle cx="13" cy="13" fill="#69d6f4" r="11"/><path d="m56 9.6c0 1.56-.48 3.09-1.37 4.36l-5.06 7.22c-.36.51-.94.82-1.57.82s-1.21-.31-1.57-.82l-5.06-7.22c-.89-1.27-1.37-2.8-1.37-4.36 0-4.2 3.4-7.6 7.6-7.6h.8c2.1 0 4 .85 5.38 2.22 1.37 1.38 2.22 3.28 2.22 5.38z" fill="#ff826e"/><circle cx="48" cy="10" fill="#e6e9ed" r="4"/><path d="m62 30v16c0 2.21-1.79 4-4 4h-10l-3.42 5.13c-.36.54-.97.87-1.63.87-1.08 0-1.95-.87-1.95-1.95v-4.05h-5.74c.48-1.58.74-3.26.74-5 0-5.19-2.33-9.84-6-12.95v-2.05c0-2.21 1.79-4 4-4h24c2.21 0 4 1.79 4 4z" fill="#fcd770"/><circle cx="46" cy="32" fill="#ff826e" r="2"/><circle cx="19" cy="45" fill="#e6e9ed" r="17"/><path d="m26.63 48.09c2.69 1.6 4.84 4.01 6.11 6.9h.01c-3.09 4.25-8.1 7.01-13.75 7.01s-10.66-2.76-13.75-7.01h.01c1.27-2.89 3.42-5.3 6.11-6.9l.01.01c.63 1.71 2.01 2.9 3.62 2.9 2.21 0 4-2.24 4-5 0 2.76 1.79 5 4 5 1.61 0 2.99-1.19 3.62-2.9z" fill="#fcd770"/><path d="m26.62 48.1c-.63 1.71-2.01 2.9-3.62 2.9-2.21 0-4-2.24-4-5 2.79 0 5.4.76 7.63 2.09z" fill="#5cd6b3"/><path d="m19 46c0 2.76-1.79 5-4 5-1.61 0-2.99-1.19-3.62-2.9l-.01-.01c2.24-1.33 4.84-2.09 7.63-2.09z" fill="#5cd6b3"/><circle cx="19" cy="39" fill="#f0d0b4" r="7"/><path d="m18 53h2v2h-2z"/><path d="m18 57h2v2h-2z"/><path d="m13 25c6.617 0 12-5.383 12-12s-5.383-12-12-12-12 5.383-12 12 5.383 12 12 12zm2.832-17c.544 1.216.975 2.571 1.117 4h-7.898c.142-1.429.573-2.784 1.117-4zm-4.61-2c.646-1.062 1.301-1.922 1.778-2.495.477.573 1.132 1.433 1.778 2.495zm11.727 6h-3.998c-.117-1.423-.474-2.768-.95-4h3.646c.697 1.2 1.158 2.553 1.302 4zm-12.781 6c-.544-1.216-.975-2.571-1.117-4h7.897c-.142 1.429-.573 2.784-1.117 4zm4.61 2c-.646 1.062-1.301 1.922-1.778 2.495-.477-.573-1.132-1.433-1.778-2.495zm4.173-6h3.998c-.144 1.447-.606 2.8-1.302 4h-3.646c.476-1.232.833-2.577.95-4zm-11.902-2h-3.998c.144-1.447.606-2.8 1.302-4h3.646c-.476 1.232-.833 2.577-.95 4zm0 2c.117 1.423.474 2.768.95 4h-3.646c-.697-1.2-1.158-2.553-1.302-4zm-1.178 6h3.043c.558 1.05 1.158 1.964 1.7 2.7-1.83-.45-3.464-1.397-4.743-2.7zm9.515 2.7c.543-.736 1.143-1.65 1.7-2.7h3.043c-1.279 1.303-2.913 2.25-4.743 2.7zm4.743-16.7h-3.043c-.558-1.05-1.158-1.964-1.7-2.7 1.83.45 3.464 1.397 4.743 2.7zm-9.515-2.7c-.543.736-1.143 1.65-1.7 2.7h-3.043c1.279-1.303 2.913-2.25 4.743-2.7z"/><path d="m46 29c-1.654 0-3 1.346-3 3s1.346 3 3 3 3-1.346 3-3-1.346-3-3-3zm0 4c-.551 0-1-.449-1-1s.449-1 1-1 1 .449 1 1-.449 1-1 1z"/><path d="m43 39h2v6h-2v2h6v-2h-2v-6h2v-2h-6z"/><path d="m58 25h-24c-2.757 0-5 2.243-5 5v.044c-2.862-1.92-6.302-3.044-10-3.044-9.925 0-18 8.075-18 18s8.075 18 18 18c7.819 0 14.471-5.02 16.95-12h4.05v3.046c0 1.629 1.325 2.954 2.954 2.954.99 0 1.909-.492 2.458-1.315l3.123-4.685h9.465c2.757 0 5-2.243 5-5v-16c0-2.757-2.243-5-5-5zm-39 36c-5.099 0-9.637-2.406-12.569-6.133 1.062-2.174 2.642-3.991 4.554-5.33.929 1.52 2.408 2.463 4.015 2.463 1.636 0 3.087-.953 4-2.415.913 1.462 2.364 2.415 4 2.415 1.607 0 3.086-.943 4.015-2.463 1.913 1.339 3.493 3.156 4.554 5.33-2.932 3.727-7.47 6.133-12.569 6.133zm-6-22c0-3.309 2.691-6 6-6s6 2.691 6 6-2.691 6-6 6-6-2.691-6-6zm-.304 9.513c1.597-.808 3.352-1.318 5.187-1.465-.348 1.695-1.502 2.952-2.883 2.952-.893 0-1.739-.567-2.304-1.487zm7.422-1.466c1.835.147 3.59.657 5.187 1.465-.566.921-1.412 1.488-2.305 1.488-1.381 0-2.535-1.257-2.882-2.953zm12.719 5.95c-2.081-3.597-5.457-6.217-9.379-7.358 2.135-1.438 3.542-3.877 3.542-6.639 0-4.411-3.589-8-8-8s-8 3.589-8 8c0 2.762 1.407 5.201 3.542 6.639-3.922 1.141-7.298 3.761-9.379 7.358-1.367-2.356-2.163-5.083-2.163-7.997 0-8.822 7.178-16 16-16s16 7.178 16 16c0 2.914-.796 5.641-2.163 7.997zm28.163-6.997c0 1.654-1.346 3-3 3h-10.535l-3.717 5.575c-.177.266-.474.425-.794.425-.526 0-.954-.428-.954-.954v-5.046h-5.464c.294-1.289.464-2.624.464-4 0-5.313-2.327-10.081-6-13.378v-1.622c0-1.654 1.346-3 3-3h24c1.654 0 3 1.346 3 3z"/><path d="m45.607 21.754c.546.78 1.441 1.246 2.393 1.246s1.847-.466 2.393-1.246l5.052-7.217c1.017-1.454 1.555-3.16 1.555-4.934 0-4.744-3.859-8.603-8.603-8.603h-.794c-4.744 0-8.603 3.859-8.603 8.603 0 1.774.538 3.48 1.555 4.933zm1.996-18.754h.794c3.641 0 6.603 2.962 6.603 6.604 0 1.361-.413 2.671-1.194 3.787l-5.052 7.217c-.344.491-1.164.491-1.508 0l-5.052-7.217c-.781-1.117-1.194-2.426-1.194-3.788 0-3.641 2.962-6.603 6.603-6.603z"/><path d="m48 15c2.757 0 5-2.243 5-5s-2.243-5-5-5-5 2.243-5 5 2.243 5 5 5zm0-8c1.654 0 3 1.346 3 3s-1.346 3-3 3-3-1.346-3-3 1.346-3 3-3z"/><path d="m57 45h-2v2h2c1.103 0 2-.897 2-2v-8h-2z"/><path d="m57 33h2v2h-2z"/></svg>
+                <h2 class="my-auto">
+                    Dati studente
+                </h2>
+                     </div>
+                    <hr>
+                    <div class="container  py-3 px-lg-5 ">
+                        
+                <div class="form-group p-0">
+                    <label for="nomeStudente">Nome:</label>
+                        <input class="form-control " required="required" value="${studenteT.nome}" placeholder="Nome">
+                </div>            
+                            <div class="form-group p-0">
+                        <label for="cognomeStudente">Cognome:</label>
+                        <input class="form-control " required="required" value="${studenteT.cognome}" placeholder="Cognome">
+                    
                 </div>
                 
-                <div class="form-group row p-0">
-                    <div class="col">
-                        <label> Nato a </label>
-                        <input class="form-control text-center" required="required" value="${studenteT.luogoNascita}">
-                    </div>
-                    <div class="col">
-                        <label> Provincia di nascita </label>
-                        <input id="proviNstudente" name="proviNstudente" class="form-control text-center" required="required" placeholder="Provincia di" autofocus>
-                    </div>
+                <div class="form-group p-0">
+                   
+                        <label for="luogoNascita">Luogo di nascita:</label>
+                        <input class="form-control " required="required" value="${studenteT.luogoNascita}">
+                    </div>            
+                            <div class="form-group p-0">
+                        <label for="provinciaNascita"> Provincia di nascita: </label>
+                        <input id="proviNstudente" name="proviNstudente" class="form-control " required="required" placeholder="Provincia di" autofocus value="${studenteT.provinciaNascita}">
+                    
                 </div>
                 
-                <div class="form-group row p-0">
-                    <div class="col">
-                        <label> Residente a </label>
-                        <input class="form-control text-center" required="required" value="${studenteT.residenza}">
-                    </div>
-                    <div class="col">
-                        <label> Provincia di residenza </label>
-                        <input id="proviRstudente" name="proviNstudente" class="form-control text-center" required="required" placeholder="Provincia di" autofocus>
+                <div class="form-group p-0">
+                 
+                        <label for="residenza"> Residenza:</label>
+                        <input class="form-control " required="required" value="${studenteT.residenza}">
+                     </div>            
+                            <div class="form-group p-0">
+                        <label  for="provinciaResidenza"> Provincia di residenza: </label>
+                        <input id="proviRstudente" name="proviRstudente" class="form-control " required="required" placeholder="Provincia di" autofocus value="${studenteT.provinciaResidenza}">
+                    
+                </div>
+                       <div class="form-group p-0">
+                        <label  for="corsoLaurea"> Corso di Laurea: </label>
+                        <input id="corsoLaurea" name="corsoLaurea" class="form-control " required="required" placeholder="Provincia di" autofocus value="${studenteT.corsoDiLaurea}">
+                    
+                </div>
+                        
+                       
                     </div>
                 </div>
+                <div class="col-lg p-5">
+                 <div class="container  d-flex m-0 p-0">
+                     <svg class="mx-3" height="60px" width="60px" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve">
+<path style="fill:#FFFFFF;" d="M394.007,502h-364c-11.046,0-20-8.954-20-20V30c0-11.046,8.954-20,20-20h364c11.046,0,20,8.954,20,20
+	v452C414.007,493.046,405.053,502,394.007,502z"/>
+<circle style="fill:#FE6663;" cx="212.01" cy="146" r="82"/>
+<path style="fill:#FFCDAC;" d="M238.007,135.5v6.5c0,14.359-11.641,26-26,26l0,0l0,0c-14.359,0-26-11.641-26-26v-6.5
+	c0-14.359,11.641-26,26-26l0,0C226.366,109.5,238.007,121.141,238.007,135.5z"/>
+<path style="fill:#A5DDFF;" d="M212.007,168L212.007,168c-25.38,0-47.064,15.767-55.832,38.033
+	C170.815,219.655,190.432,228,212.007,228s41.192-8.345,55.832-21.967C259.071,183.767,237.387,168,212.007,168z"/>
+<path style="fill:#FFBC53;" d="M436.574,160.59l5.714-9.897c8.837-15.305,28.407-20.549,43.713-11.713l0,0
+	c15.305,8.837,20.549,28.407,11.713,43.713L371.873,400.656l-55.426-32l54.282-94.02L436.574,160.59z"/>
+<path style="fill:#FE6663;" d="M486.002,138.98L486.002,138.98c-15.305-8.837-34.876-3.593-43.713,11.713l-14.857,25.733l55.426,32
+	l14.857-25.733C506.551,167.388,501.307,147.817,486.002,138.98z"/>
+<polygon style="fill:#9AD8FF;" points="371.873,400.656 307.589,448 316.447,368.656 "/>
+<path d="M414.007,398.328c-5.522,0-10,4.477-10,10V482c0,5.514-4.486,10-10,10h-364c-5.514,0-10-4.486-10-10V30
+	c0-5.514,4.486-10,10-10h364c5.514,0,10,4.486,10,10v108.75c0,5.523,4.478,10,10,10s10-4.477,10-10V30c0-16.542-13.458-30-30-30
+	h-364c-16.542,0-30,13.458-30,30v452c0,16.542,13.458,30,30,30h364c16.542,0,30-13.458,30-30v-73.672
+	C424.007,402.805,419.529,398.328,414.007,398.328z"/>
+<path d="M304.007,146c0-50.729-41.271-92-92-92s-92,41.271-92,92c0,26.317,11.11,50.085,28.882,66.869
+	c0.333,0.356,0.687,0.693,1.074,1c16.371,14.979,38.158,24.13,62.043,24.13s45.672-9.152,62.043-24.13
+	c0.387-0.307,0.741-0.645,1.074-1C292.897,196.085,304.007,172.317,304.007,146z M212.007,74c39.701,0,72,32.299,72,72
+	c0,15.967-5.231,30.73-14.06,42.683c-7.375-10.938-17.596-19.445-29.463-24.697c4.71-6.087,7.523-13.712,7.523-21.986v-6.5
+	c0-19.851-16.149-36-36-36s-36,16.149-36,36v6.5c0,8.274,2.813,15.899,7.523,21.986c-11.867,5.252-22.088,13.759-29.463,24.697
+	c-8.829-11.953-14.06-26.716-14.06-42.683C140.007,106.299,172.306,74,212.007,74z M196.007,142v-6.5c0-8.822,7.178-16,16-16
+	s16,7.178,16,16v6.5c0,8.822-7.178,16-16,16S196.007,150.822,196.007,142z M168.516,203.332
+	c8.789-15.585,25.19-25.332,43.491-25.332s34.702,9.747,43.491,25.332C243.405,212.528,228.336,218,212.007,218
+	S180.608,212.528,168.516,203.332z"/>
+<path d="M266.007,438h-54c-5.522,0-10,4.477-10,10s4.478,10,10,10h54c5.522,0,10-4.477,10-10S271.529,438,266.007,438z"/>
+<path d="M266.007,382h-142c-5.522,0-10,4.477-10,10s4.478,10,10,10h142c5.522,0,10-4.477,10-10S271.529,382,266.007,382z"/>
+<path d="M266.007,326h-142c-5.522,0-10,4.477-10,10s4.478,10,10,10h142c5.522,0,10-4.477,10-10S271.529,326,266.007,326z"/>
+<path d="M88.366,272.93c-1.859-1.86-4.439-2.93-7.079-2.93c-2.631,0-5.211,1.07-7.07,2.93c-1.86,1.86-2.93,4.44-2.93,7.07
+	s1.069,5.21,2.93,7.07c1.87,1.86,4.439,2.93,7.07,2.93c2.64,0,5.21-1.07,7.079-2.93c1.86-1.86,2.931-4.44,2.931-7.07
+	S90.227,274.79,88.366,272.93z"/>
+<path d="M88.366,328.93c-1.869-1.86-4.439-2.93-7.079-2.93c-2.631,0-5.2,1.07-7.07,2.93c-1.86,1.86-2.93,4.44-2.93,7.07
+	s1.069,5.21,2.93,7.07c1.87,1.86,4.439,2.93,7.07,2.93c2.64,0,5.21-1.07,7.079-2.93c1.86-1.86,2.931-4.44,2.931-7.07
+	S90.227,330.79,88.366,328.93z"/>
+<path d="M81.287,382c-2.631,0-5.2,1.07-7.07,2.93c-1.86,1.86-2.93,4.44-2.93,7.07s1.069,5.21,2.93,7.07
+	c1.859,1.86,4.439,2.93,7.07,2.93c2.64,0,5.22-1.07,7.079-2.93c1.86-1.86,2.931-4.44,2.931-7.07s-1.07-5.21-2.931-7.07
+	C86.497,383.07,83.927,382,81.287,382z"/>
+<path d="M266.007,270h-142c-5.522,0-10,4.477-10,10s4.478,10,10,10h142c5.522,0,10-4.477,10-10S271.529,270,266.007,270z"/>
+<path d="M491.002,130.32c-9.715-5.609-21.033-7.099-31.871-4.196c-10.836,2.904-19.894,9.854-25.502,19.569L307.787,363.656
+	c-0.689,1.195-1.125,2.52-1.278,3.891l-8.858,79.344c-0.44,3.948,1.498,7.783,4.938,9.77c1.553,0.896,3.278,1.34,4.999,1.34
+	c2.092,0,4.176-0.655,5.931-1.948l64.284-47.344c1.111-0.818,2.041-1.857,2.73-3.052l125.841-217.963
+	C517.954,167.638,511.058,141.9,491.002,130.32z M324.689,384.962l28.942,16.71l-33.568,24.722L324.689,384.962z M368.213,386.996
+	l-38.105-22l100.985-174.91l38.105,22L368.213,386.996z M489.054,177.693l-9.857,17.073l-38.105-22l9.857-17.073
+	c2.938-5.089,7.682-8.729,13.358-10.25c5.678-1.522,11.606-0.74,16.694,2.198c5.089,2.938,8.729,7.682,10.25,13.358
+	C492.772,166.675,491.992,172.604,489.054,177.693z"/>
+<g>
 
-                <h3 class="text-center">Compilazione modulo tirocinio</h3>
+</svg>
+                <h2 class="my-auto">Modulo tirocinio</h2>
+                  
+                 </div>
+                     <hr>
+                <div class="container py-3 px-lg-5">
                 <div class="form-group row p-0">
                     <div class="col">
-                        <label for="inizio"> Inizio </label>
-                        <input id="inizio" name="inizio" type="date" class="form-control text-center" required="required">
+                        <label for="inizio"> Inizio tirocinio: </label>
+                        <input id="inizio" name="inizio" type="date" class="form-control " required="required">
                     </div>
                     <div class="col">
-                        <label for="fine"> Fine </label>
-                        <input id="fine" name="fine" type="date" class="form-control text-center" required="required"/>
+                        <label for="fine"> Fine tirocinio: </label>
+                        <input id="fine" name="fine" type="date" class="form-control " required="required"/>
                     </div>
+                </div>
+                   <div class="form-group">
+                    <label for="durata">Durata:</label>
+                    <input id="durata" name="durata" placeholder="Settore Inserimento" class="form-control " required="required" value="${offerta.durata}">
                 </div>
 
                 <div class="form-group">
-                    <input id="settoreinserimento" name="settoreinserimento" placeholder="Settore Inserimento" class="form-control text-center" required="required">
+                    <label for="settoreinserimento">Settore:</label>
+                    <input id="settoreinserimento" name="settoreinserimento" placeholder="Settore Inserimento" class="form-control " required="required" value="${aziendaT.corsoRiferimento}">
                 </div>
-
                 <div class="form-group">
-                    <input id="tempodiaccesso" name="tempodiaccesso"  type="text" placeholder="Tempo di Accesso" class="form-control text-center" required="required">
+                    <label for="luogoTirocinio">Luogo tirocinio:</label>
+                    <input id="luogoTirocinio" name="luogoTirocinio" placeholder="Luogo di Tirocinio" class="form-control " required="required" value="${offerta.luogo}">
                 </div>
 
-                <div class="form-group ">
-                    <input id="numeroore" name="numeroore"  type="text" placeholder="Numero ore" class="form-control text-center" required="required">
+               
+                <div class="form-group">
+                    <label for="tempodiaccesso">Acceso in azienda:</label>
+                    <input id="tempodiaccesso" name="tempodiaccesso"  type="text" placeholder="Tempo di Accesso" class="form-control " required="required" value="${offerta.orari}">
                 </div>
-
-                <div class="form-group ">
-                    <input id="tutoreuniversitario" name="tutoreuniversitario" placeholder="Tutore Universitario" class="form-control text-center" required="required">
-                </div>
-                <div class="form-group ">
-                    <input id="telefonoTutoreUniv" name="telefonoTutoreUniv" placeholder="Telefono Tutore Universitario" class="form-control text-center" required="required">
-                </div>
-
-                <div class="form-group ">
-                    <input id="tutoreaziendale" name="tutoreaziendale"  type="text" placeholder="Tutore Aziendale" class="form-control text-center" required="required">
-                </div>
-                <div class="form-group ">
-                    <input id="telefonoTutoreAzien" name="telefonoTutoreAzien"  type="text" placeholder="Telefono Tutore Aziendale" class="form-control text-center" required="required">
-                </div>
-
                 
-                <button type="submit" class="btn btn-block btn-primary">
-                    Crea Progetto Formativo </button>
-            </div>
-        </form>
+                <div class="form-group ">
+                    <label for="numeroore">Numero ore:</label>
+                    <input id="numeroore" name="numeroore"  type="text" placeholder="Numero ore" class="form-control " required="required" >
+                </div>
 
+                <div class="form-group ">
+                    <label for="tutoreuniversitario">Tutore universitario:</label>
+                    <input id="tutoreuniversitario" name="tutoreuniversitario" placeholder="Tutore Universitario" class="form-control " required="required" >
+                </div>
+                <div class="form-group ">
+                    <label for="telefonoTutoreUniv">Telefono tutore universitario:</label>
+                    <input id="telefonoTutoreUniv" name="telefonoTutoreUniv" placeholder="Telefono Tutore Universitario" class="form-control " required="required">
+                </div>
+
+                <div class="form-group ">
+                    <label for="tutoreaziendale">Tutore aziendale:</label>
+                    <input id="tutoreaziendale" name="tutoreaziendale"  type="text" placeholder="Tutore Aziendale" class="form-control " required="required">
+                </div>
+                <div class="form-group ">
+                    <label for="telefonoTutoreAziendale">Telefono tutore aziendale:</label>
+                    <input id="telefonoTutoreAzien" name="telefonoTutoreAzien"  type="text" placeholder="Telefono Tutore Aziendale" class="form-control " required="required">
+                </div>
+
+                </div>
+                </div>
     </div>
+                 </form>
 </div>
