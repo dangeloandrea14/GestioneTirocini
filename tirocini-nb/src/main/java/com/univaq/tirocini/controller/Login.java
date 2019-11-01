@@ -78,12 +78,12 @@ public class Login extends TirociniBaseController {
 
             //se non trovo uno studente provo con un'azienda
             a = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail(username);
-
+           
             if (a == null) { //se ancora null, login invalido
                 login_failed(request, response);
                 return;
             }
-
+            boolean convenzionata=a.isConvenzionata();
             loginType = "azienda";
             userid = a.getKey();
             passwordHash = a.getPassword();
