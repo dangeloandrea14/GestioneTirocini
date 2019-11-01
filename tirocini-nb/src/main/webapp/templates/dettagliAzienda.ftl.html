@@ -2,8 +2,9 @@
 <div class="card-body row p-0 m-0">
 <div class="col-lg-4 p-lg-5 bginfo d-flex flex-column">
 <#if aziendap??>
-<div class="row m-0 p-0">
-     <svg class="mx-auto " version="1.1" id="Company1" xmlns="http://www.w3.org/2000/svg"
+<div class="row m-0 p-2">
+    <div class="d-flex">
+     <svg class="mx-4" version="1.1" id="Company1" xmlns="http://www.w3.org/2000/svg"
                                         xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
                                         style="enable-background:new 0 0 512 512;" xml:space="preserve" height="60px"
                                         width="60px">
@@ -104,10 +105,11 @@
                     
                                     </svg>
     
-<h2 class="text-dark my-4">${aziendap.nome}</h2>
-    <hr>
-</div>    
-<div class="mx-auto mt-2">
+<h2 class="text-dark my-4 my-auto">${aziendap.nome}</h2>
+  
+</div>
+  <hr>    
+</div>
     <h5>Descrizione azienda</h5>
     <span class="d-block"> <i class="far fa-building"></i> ${aziendap.descrizione}</span> 
     <hr>
@@ -116,16 +118,16 @@
     <span class="d-block"><i class="fas fa-user-tie mr-1"></i> ${aziendap.nomeResponsabile} ${aziendap.cognomeResponsabile} </span>
     <span class="d-block"><i class="fas fa-phone"></i>  ${aziendap.telefonoResponsabile}</span>
     <hr>
-</div>
+
     
 <hr>
 </div>
     
     <div class="col-lg-8 p-lg-5">
     <#if offerte?? && offerte?size != 0>
-    <div class="row">
-   
-        <svg class="my-auto ml-lg-5 mx-3"version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+    <div class="row m-0 p-0">
+   <div class="d-flex">
+        <svg class="my-auto  mx-3"version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" height="60px" width="60px">
 <path style="fill:#1E0478;" d="M512,264.941v155.401c0,19.161-15.589,34.749-34.749,34.749H34.749
 	C15.589,455.091,0,439.503,0,420.342V264.941c0-6.582,1.841-12.733,5.027-17.981l-0.154-0.077L79.277,99.772
@@ -169,8 +171,9 @@
  <h1 class=" my-auto text-black">
        Tirocini azienda
     </h1>
-        <div>   
+   </div>
     <hr>
+    </div>    
     <div class="col-lg-8 mx-auto">
     <#list offerte as offerta>
     <div class="container-fluid m-0 my-5 p-0 ">
@@ -189,6 +192,8 @@
     Quale azienda?
 </p>
 </#if>
-    </div>
+   
+</div>
+</div>
 </div>
 </div>
