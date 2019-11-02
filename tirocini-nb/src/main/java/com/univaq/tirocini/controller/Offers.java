@@ -46,7 +46,7 @@ public class Offers extends TirociniBaseController {
      
         request.setAttribute("page", currentPage);
         
-        String searchString = SecurityLayer.addSlashes(request.getParameter("luogo"));
+        String searchString = request.getParameter("luogo");
         if (searchString != null) {
             request.setAttribute("page_title", "Offerte" + " - " + "\"" + searchString + "\"");
             request.setAttribute("offerte", (offertaDAO.searchOffertaByPlace(searchString)));
