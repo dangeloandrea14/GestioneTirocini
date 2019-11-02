@@ -1,5 +1,5 @@
 :root{
-    --primary:#0073e6;
+    rimary:#0073e6--s;
     --secondary: #5c6f82;
     --background:#f4f4f4;
     --success: #008758;
@@ -26,30 +26,22 @@ a:hover .logo{
 .login{
     border-radius: 6px;
 }
-/*
-.accordion .card{
-  border: rgb(144, 144, 144) solid 1px;
-  border-bottom: rgb(144, 144, 144) solid 1px;
-}
-*/
+
 .bginfo{
     background-color:#eaeffa;
 }
- .profilecircle{
+.profilecircle{
    height:140px; 
    width:140px;
    background-color: #aec2ea;
    border-radius: 50%; 
 }
-   /*
-    .profiledetails{
-        background-color: #aec2ea;
-    }*/
-    .profiledetails a:hover{
+  
+.profiledetails a:hover{
         opacity:0.5;
     }
    
-    .cardoffers{
+.cardoffers{
        width:180px;
     }
 
@@ -221,26 +213,11 @@ footer{
     border-bottom-right-radius:12px;
 }
 
-.minicards .card-footer{
-    border-bottom-left-radius:12px;
-    border-bottom-right-radius:12px;
-}
 
 .card .card-header .a{
     font-size:2rem;
   }
-  .card .row{
-      opacity: 0.8;
-  }
-/*
-.c-det {
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-}
-
-.still {
-    border-radius: 0px;
-}*/
+ 
 
 .modal-content {
     border-radius: 8px;  
@@ -252,136 +229,6 @@ footer{
     border-radius: 0px;  
     border-top-left-radius: 24px;
     border-top-right-radius: 24px;  
-}
-
-.bar-graph {
-    padding: 0;
-    width: 100%;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-align-items: flex-end;
-    -ms-flex-align: end;
-    align-items: flex-end;
-    height: 425px;
-    margin: 0;
-}
-
-
-.bar-graph li {
-    display: block;
-    padding: 1.5625rem 0;
-    position: relative;
-    text-align: center;
-    vertical-align: bottom;
-    border-radius: 4px 4px 0 0;
-    max-width: 20%;
-    height: 100%;
-    margin: 0 1.8% 0 0;
-    -webkit-flex: 1 1 15%;
-    -ms-flex: 1 1 15%;
-    flex: 1 1 15%;
-}
-
-.bar-graph .bar-graph-axis {
-    -webkit-flex: 1 1 8%;
-    -ms-flex: 1 1 8%;
-    flex: 1 1 8%;
-    display: -webkit-flex;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-justify-content: space-between;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-}
-
-.bar-graph .bar-graph-label {
-  margin: 0;
-  background-color: transparent;
-  color: #8a8a8a;
-  position: relative;
-}
-@media print, screen and (min-width: 40em) {
-    .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
-        content: "";
-        position: absolute;
-        border-bottom: 1px dashed #8a8a8a;
-        top: 0;
-        left: 0;
-        height: 50%;
-        width: 20%;
-    }
-}
-
-@media print, screen and (min-width: 40em) and (min-width: 64em) {
-    .bar-graph .bar-graph-label:before, .bar-graph .bar-graph-label:after {
-        width: 30%;
-    }
-}
-
-@media print, screen and (min-width: 40em) {
-    .bar-graph .bar-graph-label:after {
-        left: auto;
-        right: 0;
-    }
-}
-
-.bar-graph .percent {
-    letter-spacing: -3px;
-    opacity: 0.4;
-    width: 100%;
-    font-size: 1.875rem;
-    position: absolute;
-}
-
-@media print, screen and (min-width: 40em) {
-    .bar-graph .percent {
-        font-size: 3.875rem;
-    }
-}
-
-.bar-graph .percent span {
-    font-size: 1.875rem;
-}
-
-.bar-graph .description {
-    font-weight: 800;
-    opacity: 0.5;
-    text-transform: uppercase;
-    width: 200px;
-    font-size: 14px;
-    bottom: 20px;
-    position: absolute;
-    font-size: 1rem;
-    overflow: hidden;
-}
-
-.bar-graph .bar.primary {
-    border: 1px solid #1779ba;
-    background: linear-gradient(#2196e3, #1779ba 70%);
-}
-
-.bar-graph .bar.secondary {
-    border: 1px solid #767676;
-    background: linear-gradient(#909090, #767676 70%);
-}
-
-.bar-graph .bar.success {
-    border: 1px solid #3adb76;
-    background: linear-gradient(#65e394, #3adb76 70%);
-}
-
-.bar-graph .bar.warning {
-    border: 1px solid #ffae00;
-    background: linear-gradient(#ffbe33, #ffae00 70%);
-}
-
-.bar-graph .bar.alert {
-    border: 1px solid #cc4b37;
-    background: linear-gradient(#d67060, #cc4b37 70%);
 }
 
 #home {
@@ -444,3 +291,43 @@ hr {
   background-color: #5c6f82;
   height: 1px;
 }
+
+
+
+
+
+
+/*----------SVG----------*/
+.svg90{
+    height:90px;
+    width:90px;
+}
+.svg80{
+    height:80px;
+    width:80px;
+}
+.svg60{
+    height:60px;
+    width:60px;
+}
+.svg120{
+    height:120px;
+    width:120px;
+}
+.svg100{
+    height:100px;
+    width:100px;
+}
+.svg100pe100{
+    width:100%;
+}
+.svg30{
+    height:30px;
+    width:30px; 
+}
+.svg150{
+    height:30px;
+    width:30px; 
+}
+
+

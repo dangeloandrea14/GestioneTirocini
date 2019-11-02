@@ -2,10 +2,10 @@
     <div class="container w-auto my-auto mt-1">
         <div class="container-fluid m-0 mt-5 p-0 d-flex flex-column">
             <a href="Home" class="mx-auto">
-                <svg class="m-auto" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                <svg class="m-auto svg80" version="1.1"  xmlns="http://www.w3.org/2000/svg"
                      xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 512 512"
                      style="enable-background:new 0 0 512 512;" xml:space="preserve" fill="#ffffff"
-                     height="80px" width="80px">
+                     >
                     <g>
                         <g>
                             <path
@@ -56,7 +56,7 @@
                     <label for="inputEmail" class="text-dark"><b>
                             Email
                         </b></label>
-                    <input name="u" type="text" class="form-control"
+                    <input id="inputEmail" name="u" type="text" class="form-control"
                            <#if username??>
                            value="${username}"
                            <#else>
@@ -75,7 +75,7 @@
                                 </b></small>
                         </a>
                     </div>
-                    <input name="p" type="password" class="form-control" 
+                    <input id="inputPassword" name="p" type="password" class="form-control" 
                            <#if username??>
                            autofocus
                            </#if>
