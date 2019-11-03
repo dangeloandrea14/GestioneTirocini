@@ -52,7 +52,7 @@ public class Offers extends TirociniBaseController {
             request.setAttribute("offerte", (offertaDAO.searchOffertaByPlace(searchString)));
             request.setAttribute("searchString", searchString);
         } else {
-            request.setAttribute("page_title", "Aziende");
+            request.setAttribute("page_title", "Offerte");
             request.setAttribute("offerte", (offertaDAO.getPaginaOfferteAttive(currentPage, 20)));
         }
 
