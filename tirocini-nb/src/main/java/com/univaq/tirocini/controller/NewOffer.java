@@ -25,7 +25,7 @@ import org.apache.commons.beanutils.BeanUtils;
  *
  * @author carlo
  */
-public class newOffer extends TirociniBaseController {
+public class NewOffer extends TirociniBaseController {
 
     @Override
     protected void action_default(HttpServletRequest request, HttpServletResponse response) throws IOException, ServletException, TemplateManagerException {
@@ -55,7 +55,7 @@ public class newOffer extends TirociniBaseController {
         BeanUtils.populate(o, request.getParameterMap());
 
         o.setAzienda(((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda());
-        o.setAttiva(false);
+        o.setAttiva(true);
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().storeOfferta(o);
 

@@ -4,8 +4,6 @@ import com.univaq.tirocini.controller.permissions.UserObject;
 import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
-import com.univaq.tirocini.framework.email.Mail;
-import com.univaq.tirocini.framework.email.SendEmail;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import com.univaq.tirocini.framework.result.UserRole;
@@ -48,7 +46,7 @@ public class Profile extends TirociniBaseController {
                 }
                 
                 else if(request.getSession().getAttribute("type").equals("azienda")){
-                request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferte(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
+                request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
                 request.setAttribute("tirociniazienda", ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
                 request.setAttribute("conv", ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda().isConvenzionata());
                 }

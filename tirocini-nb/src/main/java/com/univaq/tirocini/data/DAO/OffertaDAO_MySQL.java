@@ -20,7 +20,7 @@ import java.util.List;
 public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
 
     private PreparedStatement sOffertaByID;
-    private PreparedStatement sOfferte, sOfferteAttive, sOfferteByAzienda, sPaginaOfferteAttive, sOfferteAttiveCount;
+    private PreparedStatement sOfferte, sOfferteAttive, sOfferteByAzienda, sOfferteAttiveByAzienda, sPaginaOfferteAttive, sOfferteAttiveCount;
     private PreparedStatement iOfferta, uOfferta, dOfferta;
     private PreparedStatement sOffertaSearch;
 
@@ -36,6 +36,7 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
 
             sOffertaByID = connection.prepareStatement("SELECT * FROM Offerta WHERE ID=?");
             sOfferteByAzienda = connection.prepareStatement("SELECT ID AS OffertaID FROM Offerta WHERE IDAzienda=?");
+            sOfferteAttiveByAzienda = connection.prepareStatement("SELECT ID AS OffertaID FROM Offerta WHERE IDAzienda=? AND Attiva=1");
             sOfferte = connection.prepareStatement("SELECT ID AS OffertaID FROM Offerta");
             sOfferteAttive = connection.prepareStatement("SELECT ID AS OffertaID FROM Offerta WHERE Attiva=1");
 
@@ -123,6 +124,23 @@ public class OffertaDAO_MySQL extends DAO implements OffertaDAO {
 
     @Override
     public List<Offerta> getOfferte(Azienda azienda) throws DataException {
+        List<Offerta> result = new ArrayList();
+
+        try {
+            sOfferteByAzienda.setInt(1, azienda.getKey());
+            try (ResultSet rs = sOfferteByAzienda.executeQuery()) {
+                while (rs.next()) {
+                    result.add((Offerta) getOfferta(rs.getInt("OffertaID")));
+                }
+            }
+        } catch (SQLException ex) {
+            throw new DataException("Impossibile caricare le offerte.", ex);
+        }
+        return result;
+    }
+    
+    @Override
+    public List<Offerta> getOfferteAttive(Azienda azienda) throws DataException {
         List<Offerta> result = new ArrayList();
 
         try {

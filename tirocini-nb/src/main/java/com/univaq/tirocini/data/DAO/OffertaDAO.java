@@ -20,6 +20,8 @@ public interface OffertaDAO {
     
     List<Offerta> getOfferte(Azienda azienda) throws DataException;
     
+    List<Offerta> getOfferteAttive(Azienda azienda) throws DataException;
+    
     List<Offerta> getOfferte() throws DataException;
     
     List<Offerta> getOfferteAttive() throws DataException;

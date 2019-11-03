@@ -92,7 +92,7 @@
     </servlet>
     <servlet>
         <servlet-name>newOffer</servlet-name>
-        <servlet-class>com.univaq.tirocini.controller.newOffer</servlet-class>
+        <servlet-class>com.univaq.tirocini.controller.NewOffer</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Offers</servlet-name>
