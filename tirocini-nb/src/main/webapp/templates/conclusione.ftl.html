@@ -1,51 +1,61 @@
-  <div class="container pt-3 pb-3">
-      
-      //va messo il form
-                <h3 class="text-center">Genera Documento</h3>
-                
-                 <input type="hidden" id="nomeazienda" name="nomeazienda" value="${tirocinio.azienda.nome}">
-                 <input type="hidden" id="IVA" name="IVA" value="${tirocinio.azienda.iva}">
-                 <input type="hidden" id="IVA" name="cognomestudente" value="${tirocinio.studente.cognome}">
-                 <input type="hidden" id="IVA" name="nomestudente" value="${tirocinio.studente.nome}">
-                 <input type="hidden" id="IVA" name="inizio" value="${tirocinio.inizio}">
-                 <input type="hidden" id="IVA" name="fine" value="${tirocinio.fine}">
-                 
-                 
+<#ftl encoding='UTF-8'>
+<div class="card still-b shadow">
+    <div class="card-header">
+        <h3 class="text-center">Genera Documento</h3>
+    </div>
+
+    <div class="card-body container">
+        <div class="col col-sm-6 mx-auto">
+
+            <form name="conclusione" id="conclusione" action="#" method="post">
+
+                <input type="hidden" id="nomeazienda" name="nomeazienda" value="${tirocinio.azienda.nome}">
+                <input type="hidden" id="IVA" name="IVA" value="${tirocinio.azienda.iva}">
+                <input type="hidden" id="IVA" name="cognomestudente" value="${tirocinio.studente.cognome}">
+                <input type="hidden" id="IVA" name="nomestudente" value="${tirocinio.studente.nome}">
+                <input type="hidden" id="IVA" name="inizio" value="${tirocinio.inizio}">
+                <input type="hidden" id="IVA" name="fine" value="${tirocinio.fine}">
+                <input type="hidden" id="tirocinio" name="tirocinio" value="${tirocinio.key}">
+
+
                 <div class="form-group mt-4 ">
                     <label for="ore"> Ore effettive di tirocinio </label>
                     <input id="ore" name="ore" type="text" class="form-control text-center" required="required" autofocus>
                 </div>
 
                 <div class="form-group">
-                     <label for="sede"> Sede svolgimento tirocinio </label>
+                    <label for="sede"> Sede svolgimento tirocinio </label>
                     <input id="sede" name="sede" type="text" class="form-control text-center" required="required"/>
                 </div>
-                
+
                 <div class="form-group">
-                     <label for="sede"> Descrizione attivit&agrave; svolta </label>
-                    <input id="attività" name="attività" type="text" class="form-control text-center" required="required"/>
+                    <label for="sede"> Descrizione attivit&agrave; svolta </label>
+                    <textarea id="attività" name="descrizione" type="text" class="form-control text-center" required="required"></textarea>
                 </div>
-                
-                
-               <div class="form-group">
-                     <label for="sede"> Risultati ottenuti </label>
-                    <input id="risultato" name="risultato" type="text" class="form-control text-center" required="required"/>
+
+
+                <div class="form-group">
+                    <label for="sede"> Risultati ottenuti </label>
+                    <textarea id="risultato" name="risultato" type="text" class="form-control text-center" required="required"></textarea>
                 </div>
-                
-                
-                
-                Nota: qui deve venire generato il pdf del tirocinio formativo con tutte le informazioni appena inserite.
-            <button type="submit" class="btn btn-block btn-primary text-uppercase">Genera Documento </button>
-     
-  </div>
 
-<div>
-    <form name="uploadfile" id="uploadfile" action="TirocinioFinito" method="post">
-    <input type="hidden" form="uploadfile" id="tirocinio" name="tirocinio" value="${tirocinio.key}">
-    <label for="Convenzione">Carica documento firmato: </label> <br>
-<input type="file" form="uploadfile" id="Convenzione" name="Convenzione" />
+                <button type="submit" class="btn btn-block btn-primary">Genera Documento </button>
+            </form>
+        </div>
+    </div>
 
-<button type="submit" form="uploadfile" class="btn btn-block btn-primary text-uppercase"> Concludi tirocinio </button>
-</form>
-<br>
+    <div class="card-footer">
+
+        <div class="col col-sm-6 mx-auto">
+            <form name="uploadfile" id="uploadfile" action="TirocinioFinito" enctype="multipart/form-data" method="post">
+                <input type="hidden" form="uploadfile" id="tirocinio" name="tirocinio" value="${tirocinio.key}">
+                <label for="Convenzione">Carica documento firmato: </label> <br>
+                <input type="file" form="uploadfile" id="Convenzione" name="Convenzione" />
+
+                <button type="submit" form="uploadfile" class="btn btn-block btn-success"> Concludi tirocinio </button>
+            </form>
+            <br>
+        </div>
+    </div>
+
 </div>

@@ -148,6 +148,9 @@ public abstract class TirociniBaseController extends HttpServlet {
         }
     }
 
+    protected TirocinioDataLayer dataLayer(HttpServletRequest request) {
+        return (TirocinioDataLayer) request.getAttribute("datalayer");
+    }
     /**
      * Controlla che l'utente possa visualizzare la pagine
      *

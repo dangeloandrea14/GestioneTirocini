@@ -23,10 +23,6 @@
             <form class="card-footer d-flex"
                   action="GestioneOfferta" id="GestioneOfferta_${offerta.key}">
 
-                <a class="btn btn-outline-primary" 
-                   href="DettagliOfferta?o=${offerta.key}">
-                    Mostra dettagli</a>
-
                 <input type="hidden" id="oid" name="oid" value="${offerta.key}">
                 <button class="btn btn-primary ml-auto" form="GestioneOfferta_${offerta.key}" 
                         type="submit">
