@@ -78,13 +78,17 @@ public class Login extends TirociniBaseController {
 
             //se non trovo uno studente provo con un'azienda
             a = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail(username);
-           
+
             if (a == null) { //se ancora null, login invalido
                 login_failed(request, response);
                 return;
             }
-            boolean convenzionata=a.isConvenzionata();
-            loginType = "azienda";
+            
+            if (a.isConvenzionata()) {
+                loginType = "azienda";
+            } else {
+                loginType = "aziendaNonConvenzionata";
+            }
             userid = a.getKey();
             passwordHash = a.getPassword();
         }
@@ -99,18 +103,19 @@ public class Login extends TirociniBaseController {
         HttpSession session = SecurityLayer.createSession(request, username, userid, loginType);
         try {
             switch (loginType) {
-                case "azienda": {
-                    userRole = Roles.genAziendaBean(a);
-                }
-                break;
-
                 case "studente":
                     //se studente o admin carichiamo lo studente
-                    userRole = Roles.genStudenteBean(s);
+                    userRole = Roles.genStudenteRole(s);
+                    break;
+                case "azienda":
+                    userRole = Roles.genAziendaRole(a);
+                    break;
+                case "aziendaNonConvenzionata":
+                    userRole = Roles.genAziendaNonConvenzionataRole(a);
                     break;
                 case "admin":
                     //se studente o admin carichiamo lo studente
-                    userRole = Roles.genAdminBean(s);
+                    userRole = Roles.genAdminRole(s);
                     break;
                 default:
                     request.setAttribute("exception", new Exception("Login error"));

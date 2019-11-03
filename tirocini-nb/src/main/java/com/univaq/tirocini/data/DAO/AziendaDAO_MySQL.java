@@ -285,7 +285,7 @@ public class AziendaDAO_MySQL extends DAO implements AziendaDAO {
 
                 uAzienda.setString(12, azienda.getPath());
 
-                if (azienda.isConvenzionata() != false) {
+                if (azienda.isConvenzionata()) {
                     uAzienda.setBoolean(13, azienda.isConvenzionata());
                 }
 

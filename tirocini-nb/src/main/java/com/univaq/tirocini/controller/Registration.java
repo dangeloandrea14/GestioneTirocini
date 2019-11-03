@@ -137,7 +137,7 @@ public class Registration extends TirociniBaseController {
 
         ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(a);
 
-        registrationSuccess(request, response);
+        registrationSuccessCompany(request, response);
     }
 
     private void registerNewUser(HttpServletRequest request, HttpServletResponse response) 
@@ -176,6 +176,19 @@ public class Registration extends TirociniBaseController {
             request.setAttribute("page_title", "Home");
             
             res.activate("home.ftl.html", request, response);
+        } catch (TemplateManagerException ex) {
+            request.setAttribute("exception", ex);
+            action_error(request, response);
+        }
+    }
+
+    private void registrationSuccessCompany(HttpServletRequest request, HttpServletResponse response) {
+        request.setAttribute("page_title", "Registration complete");
+
+        TemplateResult res = new TemplateResult(getServletContext());
+
+        try {            
+            res.activate("fragments/registrationCompanySuccess.ftl.html", request, response);
         } catch (TemplateManagerException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);

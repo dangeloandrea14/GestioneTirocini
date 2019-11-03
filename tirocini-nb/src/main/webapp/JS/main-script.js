@@ -39,7 +39,7 @@ function setupModalsEvents() {
             success: function (response) {
                 //$(".post_submitting").fadeOut(1000);
 
-                $("#detailsModalBody").html($($.parseHTML(response)).find("#body"));
+                $("#detailsModalBody").html($($.parseHTML(response)).find("#detailsBody"));
                 $('#detailsModal').modal('show');
 
                 //Sposta il titolo nell'header ed elimina il primo <hr>

@@ -32,7 +32,7 @@ public class PublicPermissions extends BasePermissions {
                 "/NotFound",
                 "/Companies", 
                 "/Offers", 
-                "/DettagliOfferta", 
+                "/DettagliOfferta",
                 "/DettagliAzienda", 
                 "/student",
                 "/Registration"

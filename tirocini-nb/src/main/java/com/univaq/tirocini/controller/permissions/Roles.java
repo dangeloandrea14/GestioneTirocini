@@ -14,17 +14,22 @@ import com.univaq.tirocini.framework.result.UserRole;
  * @author carlo
  */
 public class Roles {
-    public static UserRole genStudenteBean (Studente studente) throws Exception {
+    public static UserRole genStudenteRole (Studente studente) throws Exception {
         return new UserRole(new StudentePermissions(), 
                 studente.getEmail(), "studente", new UserObject(studente));
     }
     
-    public static UserRole genAziendaBean (Azienda azienda) throws Exception {
+    public static UserRole genAziendaRole (Azienda azienda) throws Exception {
         return new UserRole(new AziendaPermissions(), 
                 azienda.getEmailResponsabile(), "azienda", new UserObject(azienda));
     }
     
-    public static UserRole genAdminBean (Studente studente) throws Exception {
+    public static UserRole genAziendaNonConvenzionataRole (Azienda azienda) throws Exception {
+        return new UserRole(new AziendaNonConvenzionataPermissions(), 
+                azienda.getEmailResponsabile(), "azienda", new UserObject(azienda));
+    }
+    
+    public static UserRole genAdminRole (Studente studente) throws Exception {
         return new UserRole(new AdminPermissions(), 
                 studente.getEmail(), "admin", new UserObject(studente));
     }
