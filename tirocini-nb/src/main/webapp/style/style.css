@@ -147,8 +147,8 @@ body{
 }
 
 .nav-link{
-    font-size:20px;
-    margin: 0rem, 3rem, 0rem , 3rem;
+    font-size:1.3rem;
+  
 }
 
 .nav-pills>li:hover>a:hover{
@@ -326,8 +326,22 @@ hr {
     width:30px; 
 }
 .svg150{
-    height:30px;
-    width:30px; 
+    height:150px;
+    width:150px; 
 }
 
-
+	.st0{fill:#52B8D9;}
+	.st1{fill:#63312D;}
+	.st2{fill:#82D9FF;}
+	.st3{fill:#CAF4FF;}
+	.st4{fill:#F8F3F3;}
+	.st5{fill:#F9DD9D;}
+	.st6{fill:#FFEECF;}
+	.st7{fill:#F9A287;}
+	.st8{fill:#FFC8BB;}
+	.st9{fill:#DB785A;}
+	.st10{fill:#D1D1D1;}
+	.st11{fill:#BCBCBC;}
+	.st12{fill:#EFC36A;}
+	.st13{fill:#84DBFF;}
+	.st14{fill:#E1DDDD;}
