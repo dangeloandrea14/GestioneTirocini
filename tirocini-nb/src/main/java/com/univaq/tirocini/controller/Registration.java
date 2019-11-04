@@ -70,7 +70,25 @@ public class Registration extends TirociniBaseController {
         }
 
         StudenteImpl s = new StudenteImpl();
-        //i paramentri corrispndono (si spera), quindi possiamo
+        
+        
+        //Validazione form
+        if(!((String)request.getParameter("email")).contains("@")){
+            request.setAttribute("exception", "Formato email errato.");
+            registrationFailure(request,response);    
+        }
+        if(((String)request.getParameter("password")).length() > 20){
+            request.setAttribute("exception", "Password troppo lunga.");
+            registrationFailure(request,response);
+        }
+        if(((String)request.getParameter("provinciaNascita")).length() > 3){
+            request.setAttribute("exception","Provincia di nascita non corretta");
+            registrationFailure(request,response);
+        }
+        
+        
+        
+        //i paramentri corrispondono (si spera), quindi possiamo
         //popolare gli oggetti automaticamente
         BeanUtils.populate(s, request.getParameterMap());
 
@@ -195,9 +213,16 @@ public class Registration extends TirociniBaseController {
         }
     }
 
-    private void registrationFailure(HttpServletRequest request, HttpServletResponse response) {
-        request.setAttribute("exception", "Registration failed.");
-        action_error(request, response);
+    private void registrationFailure(HttpServletRequest request, HttpServletResponse response) throws DataException {
+        String exception = (String) request.getAttribute("exception");
+        if(exception != null && !((String)request.getAttribute("exception")).isEmpty()){
+        request.setAttribute("exception", exception);}
+        else{
+            request.setAttribute("exception", "Registration failed");
+        }
+        
+        throw new DataException(exception);
+     
     }
 
     @Override
