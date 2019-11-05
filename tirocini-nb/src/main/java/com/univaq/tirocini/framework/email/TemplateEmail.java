@@ -34,7 +34,10 @@ public class TemplateEmail {
         // web page template
         String emailBody = null;
         TemplateResult res = new TemplateResult(request.getServletContext());
-               
+        
+        //salviamo l'outline e poi lo cambiamo per la mail
+        String outline = (String) request.getAttribute("outline_tpl");
+        request.setAttribute("outline_tpl","/mail/mailOutline.ftl.html");
         
         try {
             res.activate(template, request, htmlEmailBodyStream);
@@ -42,6 +45,8 @@ public class TemplateEmail {
         } catch (TemplateManagerException | UnsupportedEncodingException ex) {        
             Logger.getLogger(TemplateEmail.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        request.setAttribute("outline_tpl", outline);
         
         return emailBody;
     }

@@ -2,11 +2,11 @@
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <context-param>
         <param-name>view.outline_template</param-name>
-        <param-value>common/outline.ftl.html</param-value>
+        <param-value>/common/outline.ftl.html</param-value>
     </context-param>
     <context-param>
         <param-name>view.outline_template_dynamic</param-name>
-        <param-value>common/outline_dynamic.ftl.html</param-value>
+        <param-value>/common/outline_dynamic.ftl.html</param-value>
     </context-param>
     <context-param>
         <param-name>view.date_format</param-name>
