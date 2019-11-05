@@ -63,37 +63,26 @@
                 </li>
             </ul>
             <#if username??>
-            <ul class="navbar-nav ml-auto m-0 p-0">
-                <li class="dropdown navbar-nav ml-auto m-0 mr-5 p-0">
-                    <a class="btn dropdown-toggle btn-white text-dark"  href="#" role="button" id="dropdownMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fas fa-user-circle fa-lg"></i>
-                    </a> 
-
-                    <div class="dropdown-menu bg-light dropdown-menu-right shadow" aria-labelledby="dropdownMenu">
-                        <h6 class="dropdown-header">
-                            <b>${username}</b>
-                        </h6>
-                        <div class="dropdown-divider">  </div>
-                        <a class="dropdown-item" href="Profile">
-                            <!--
-                            <i class="fas fa-user-alt"></i>
-                            -->
-                            <i class="fas fa-user-cog"></i>
-                            Profilo</a>
-                        <#if role?? && role == "admin">
-                        <a class="dropdown-item" href="Admin">Pannello amministratore</a>
+            <ul class="navbar-nav ml-auto m-0 mr-lg-4 p-0">
+              <li class="nav-item">
+         
+                        <a class="nav-link text-secondary text-center" href="Profile"><i class="fas fa-user-cog"></i> Profilo</a>
+                        </li>
+                
+                
+                <#if role?? && role == "admin">
+                           <li class="nav-item">
+                        <a class="nav-link  text-secondary text-center" href="Admin">Pannello amministratore</a>
+                         </li>
                         </#if>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="Logout">
-                            <i class="fas fa-sign-out-alt"></i>
-                            Logout</a>
-                    </div>
-
+                          <li class="nav-item">
+                        <a class="nav-link  text-secondary text-center" href="Logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                 
 
                 </li>
             </ul>
             <#else>
-            <ul class="navbar-nav ml-auto ">
+            <ul class="navbar-nav ml-auto mr-lg-4">
                 <li class="nav-item mx-2 text-center">
                     <a href="Registration" class="nav-link text-secondary">Iscriviti</a>
                 </li>
