@@ -345,3 +345,8 @@ hr {
 	.st12{fill:#EFC36A;}
 	.st13{fill:#84DBFF;}
 	.st14{fill:#E1DDDD;}
+
+        .opacity:hover{
+            opacity:0.6;
+        }
+        

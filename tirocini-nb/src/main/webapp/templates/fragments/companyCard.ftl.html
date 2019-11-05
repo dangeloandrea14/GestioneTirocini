@@ -1,15 +1,16 @@
 
     <div class="minicards card shadow-sm ml-0 my-4">
         <div class="card-body">
-            <h3 class="card-title text-primary">${azienda.nome}</h3>
+            <h3 class="card-title text-primary"><i class="far fa-building"></i> ${azienda.nome}</h3>
             <hr>
+            <h5>Descrizione:</h5>
             <p class="card-text text-secondary">${azienda.descrizione}</p>
             <!--
             Non penso che la sede legale sia di alcuna rilevanza per gli studenti
             <p class="card-text">${azienda.sede}</p>
             -->
         </div>
-        <div class="card-footer p-1">
+        <div class="card-footer p-0">
         <a class="dynalink text-secondary cardtext btn btn-light bnt-outline-primary btn-block c-det" 
            href="DettagliAzienda?a=${azienda.key}">Mostra dettagli</a>
             
