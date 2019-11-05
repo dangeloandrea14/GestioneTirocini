@@ -6,7 +6,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.UserObject;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.TirocinioImpl;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Candidatura;
@@ -42,12 +41,12 @@ public class GestioneOfferta extends TirociniBaseController {
 
             int id = SecurityLayer.checkNumeric(param);
 
-            Offerta offerta = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(id);
+            Offerta offerta = dataLayer(request).getOffertaDAO().getOfferta(id);
 
             //Controlliamo che sia l'azienda a controllare le proprie offerte.
             if ((((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()).getKey() == offerta.getAzienda().getKey()) {
 
-                List<Candidatura> list = ((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(offerta);
+                List<Candidatura> list = dataLayer(request).getCandidaturaDAO().getCandidature(offerta);
 
                 request.setAttribute("offerta", offerta);
                 request.setAttribute("candidature", list);
@@ -83,14 +82,14 @@ public class GestioneOfferta extends TirociniBaseController {
             return;
         }
 
-        Offerta offerta = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
+        Offerta offerta = dataLayer(request).getOffertaDAO().getOfferta(oid);
 
         if (offerta.getAzienda().getKey() != azienda.getKey()) {
             notFound(request, response);
             return;            
         }
         
-        List<Candidatura> candidaturas = (((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(offerta));
+        List<Candidatura> candidaturas = (dataLayer(request).getCandidaturaDAO().getCandidature(offerta));
         
         boolean candidato = false;
         for (Candidatura c : candidaturas) {
@@ -103,7 +102,7 @@ public class GestioneOfferta extends TirociniBaseController {
             return;
         }
         
-        Studente studente = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudente(uid);
+        Studente studente = dataLayer(request).getStudenteDAO().getStudente(uid);
         
         Tirocinio tirocino = new TirocinioImpl();
         

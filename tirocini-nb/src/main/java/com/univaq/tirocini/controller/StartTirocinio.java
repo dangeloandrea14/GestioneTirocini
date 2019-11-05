@@ -1,6 +1,5 @@
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.TirocinioImpl;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Offerta;
@@ -109,8 +108,8 @@ public class StartTirocinio extends TirociniBaseController {
             int sid = SecurityLayer.checkNumeric(param);
             int oid = SecurityLayer.checkNumeric(param2);
 
-            Studente studente = (Studente) ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudente(sid);
-            Offerta offerta = (Offerta) ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
+            Studente studente = (Studente) dataLayer(request).getStudenteDAO().getStudente(sid);
+            Offerta offerta = (Offerta) dataLayer(request).getOffertaDAO().getOfferta(oid);
             Azienda azienda = offerta.getAzienda();
 
             //Controlliamo che l'utente non abbia manomesso i dati
@@ -148,14 +147,14 @@ public class StartTirocinio extends TirociniBaseController {
             //Inseriamo il tirocinio nel db solo se non esite ancora
             //Brutto e per nulla elegante ma necessario.
             Boolean ins = true;
-            for (Tirocinio t2 : ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirociniInattivi(azienda)) {
+            for (Tirocinio t2 : dataLayer(request).getTirocinioDAO().getTirociniInattivi(azienda)) {
                 if (t2.getStudente().equals(studente) && t2.getInizio().equals(t.getInizio()) && t2.getSettoreInserimento().equals(t.getSettoreInserimento())) {
                     ins = false;
                 }
             }
 
             if (ins) {
-                ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().storeTirocinio(t);
+                dataLayer(request).getTirocinioDAO().storeTirocinio(t);
             }
 
             File toDownload = prepareFormativo1(azienda, studente, t,

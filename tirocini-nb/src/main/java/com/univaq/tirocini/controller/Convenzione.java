@@ -5,7 +5,6 @@
  */
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -43,16 +42,16 @@ public class Convenzione extends TirociniBaseController {
 
             //salvo l'azienda anche come attributo della sessione per l'uso
             //al momento del convenzionamento
-            request.setAttribute("aziendac", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id));
-            request.getSession().setAttribute("aziendac", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id));
+            request.setAttribute("aziendac", dataLayer(request).getAziendaDAO().getAzienda(id));
+            request.getSession().setAttribute("aziendac", dataLayer(request).getAziendaDAO().getAzienda(id));
 
             Map<String, String> filling = new HashMap<String, String>();
-            filling.put("ente", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getNome());
-            filling.put("sedeLegale", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getSede());
-            filling.put("cf", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getIva().get());
-            filling.put("rappresentante", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getNomeResponsabile());
-            filling.put("descrizioneAzienda", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getDescrizione());
-            filling.put("corsiStudio", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id).getCorsoRiferimento());
+            filling.put("ente", dataLayer(request).getAziendaDAO().getAzienda(id).getNome());
+            filling.put("sedeLegale", dataLayer(request).getAziendaDAO().getAzienda(id).getSede());
+            filling.put("cf", dataLayer(request).getAziendaDAO().getAzienda(id).getIva().get());
+            filling.put("rappresentante", dataLayer(request).getAziendaDAO().getAzienda(id).getNomeResponsabile());
+            filling.put("descrizioneAzienda", dataLayer(request).getAziendaDAO().getAzienda(id).getDescrizione());
+            filling.put("corsiStudio", dataLayer(request).getAziendaDAO().getAzienda(id).getCorsoRiferimento());
 
             res.activate("convenzione.ftl.html", request, response);
 
@@ -74,7 +73,7 @@ public class Convenzione extends TirociniBaseController {
         azienda.setConvenzionata(true);
         
         try {
-            ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(azienda);
+            dataLayer(request).getAziendaDAO().storeAzienda(azienda);
         } catch (DataException ex) {
             request.setAttribute("exception", ex);
             action_error(request, response);

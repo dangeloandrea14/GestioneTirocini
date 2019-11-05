@@ -6,7 +6,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.UserObject;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.OffertaImpl;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataException;
@@ -57,7 +56,7 @@ public class NewOffer extends TirociniBaseController {
         o.setAzienda(((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda());
         o.setAttiva(true);
 
-        ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().storeOfferta(o);
+        dataLayer(request).getOffertaDAO().storeOfferta(o);
 
         response.sendRedirect("Profile");
     }

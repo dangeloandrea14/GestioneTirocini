@@ -6,7 +6,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.UserObject;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Candidatura;
 import com.univaq.tirocini.data.model.Offerta;
 import com.univaq.tirocini.framework.data.DataException;
@@ -38,7 +37,7 @@ public class DettagliOfferta extends TirociniBaseController {
         }
 
         Offerta offerta;
-        offerta = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(SecurityLayer.checkNumeric(p));
+        offerta = dataLayer(request).getOffertaDAO().getOfferta(SecurityLayer.checkNumeric(p));
 
         if (offerta == null) { //restituiamo not found
             notFound(request, response);
@@ -50,7 +49,7 @@ public class DettagliOfferta extends TirociniBaseController {
         request.setAttribute("already", false);
         if (request.getSession().getAttribute("userRole") != null
                 && ((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente() != null) {
-            List<Candidatura> list = ((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente());
+            List<Candidatura> list = dataLayer(request).getCandidaturaDAO().getCandidature(((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente());
             Iterator it = list.iterator();
 
             //Controlliamo che non sia già presente

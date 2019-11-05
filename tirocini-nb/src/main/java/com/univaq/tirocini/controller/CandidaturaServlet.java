@@ -2,7 +2,6 @@ package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.email.MailTirocini;
 import com.univaq.tirocini.controller.permissions.UserObject;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Candidatura;
 import com.univaq.tirocini.data.model.Offerta;
@@ -34,15 +33,15 @@ public class CandidaturaServlet extends TirociniBaseController {
 
         if (request.getSession().getAttribute("type").equals("studente")) {
             Studente studente = (((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente());
-            Offerta offerta = (Offerta) ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
+            Offerta offerta = (Offerta) dataLayer(request).getOffertaDAO().getOfferta(oid);
             Azienda azienda = offerta.getAzienda();
-            List<Candidatura> list = ((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(studente);
+            List<Candidatura> list = dataLayer(request).getCandidaturaDAO().getCandidature(studente);
             Iterator it = list.iterator();
             Boolean already = false;
             request.setAttribute("already", false);
 
             //Costruiamo la candidatura
-            Candidatura candidatura = ((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().createCandidatura();
+            Candidatura candidatura = dataLayer(request).getCandidaturaDAO().createCandidatura();
             candidatura.setStudente(studente);
             candidatura.setOfferta(offerta);
 
@@ -56,7 +55,7 @@ public class CandidaturaServlet extends TirociniBaseController {
 
             //Se non è presente la memorizziamo.
             if (already == false) {
-                ((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().storeCandidatura(candidatura);
+                dataLayer(request).getCandidaturaDAO().storeCandidatura(candidatura);
             }
 
             //Mandiamo la mail all'azienda            

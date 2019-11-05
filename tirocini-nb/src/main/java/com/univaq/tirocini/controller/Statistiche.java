@@ -1,6 +1,5 @@
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -21,7 +20,7 @@ public class Statistiche extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
 
-        List<Azienda> listaaziende = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendeConvenzionate();
+        List<Azienda> listaaziende = dataLayer(request).getAziendaDAO().getAziendeConvenzionate();
    
         request.setAttribute("aziende",listaaziende);
         request.setAttribute("page_title", "Statistiche");

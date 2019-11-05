@@ -6,7 +6,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.UserObject;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Tirocinio;
@@ -40,7 +39,7 @@ public class Valutazione extends TirociniBaseController {
 
         Azienda azienda;
 
-        azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
+        azienda = dataLayer(request).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
 
         Boolean already = false;
         Boolean okay = false;
@@ -51,9 +50,9 @@ public class Valutazione extends TirociniBaseController {
 
         Studente studente = ((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente();
 
-        List<Tirocinio> tirocini = ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirocini(studente);
+        List<Tirocinio> tirocini = dataLayer(request).getTirocinioDAO().getTirocini(studente);
 
-        List<com.univaq.tirocini.data.model.Valutazione> valutazioni = ((TirocinioDataLayer) request.getAttribute("datalayer")).getValutazioneDAO().getValutazioni(studente);
+        List<com.univaq.tirocini.data.model.Valutazione> valutazioni = dataLayer(request).getValutazioneDAO().getValutazioni(studente);
 
         //Controlliamo se lo studente ha già valutato quella azienda.
         for (com.univaq.tirocini.data.model.Valutazione v : valutazioni) {

@@ -6,7 +6,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.UserObject;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.ValutazioneImpl;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
@@ -42,7 +41,7 @@ public class ValutazioneCompletata extends TirociniBaseController {
 
             Azienda azienda;
 
-            azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
+            azienda = dataLayer(request).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
 
             String p2 = request.getParameter("studente");
             if (p2 == null || !p2.matches("\\d*")) {
@@ -50,7 +49,7 @@ public class ValutazioneCompletata extends TirociniBaseController {
                 return;
             }
 
-            Studente studente = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudente(Integer.parseInt(p2));
+            Studente studente = dataLayer(request).getStudenteDAO().getStudente(Integer.parseInt(p2));
 
             //Controlliamo che l'utente non abbia fatto casini
             if (!studente.equals(((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente())) {
@@ -88,10 +87,10 @@ public class ValutazioneCompletata extends TirociniBaseController {
 
             val.setCommento(commento);
 
-            ((TirocinioDataLayer) request.getAttribute("datalayer")).getValutazioneDAO().storeValutazione(val);
+            dataLayer(request).getValutazioneDAO().storeValutazione(val);
 
             //Calcoliamo la nuova media dell'azienda
-            List<com.univaq.tirocini.data.model.Valutazione> valutazioniazienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getValutazioneDAO().getValutazioni(azienda);
+            List<com.univaq.tirocini.data.model.Valutazione> valutazioniazienda = dataLayer(request).getValutazioneDAO().getValutazioni(azienda);
 
             int somma = 0;
             for (com.univaq.tirocini.data.model.Valutazione valaz : valutazioniazienda) {
@@ -104,7 +103,7 @@ public class ValutazioneCompletata extends TirociniBaseController {
 
             azienda.setVoto(media);
 
-            ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(azienda);
+            dataLayer(request).getAziendaDAO().storeAzienda(azienda);
 
             request.setAttribute("media", media);
             request.setAttribute("message", "Valutazione effettuata");

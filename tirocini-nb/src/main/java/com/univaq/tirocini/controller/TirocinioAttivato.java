@@ -1,6 +1,5 @@
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Candidatura;
 import com.univaq.tirocini.data.model.Offerta;
@@ -52,26 +51,26 @@ public class TirocinioAttivato extends TirociniBaseController {
     int oid = SecurityLayer.checkNumeric(param2);
     int tid = SecurityLayer.checkNumeric(param3);
     
-    Studente studente = (Studente) ((TirocinioDataLayer)request.getAttribute("datalayer")).getStudenteDAO().getStudente(sid);
-    Offerta offerta = (Offerta) ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
+    Studente studente = (Studente) dataLayer(request).getStudenteDAO().getStudente(sid);
+    Offerta offerta = (Offerta) dataLayer(request).getOffertaDAO().getOfferta(oid);
     Azienda azienda = offerta.getAzienda();
-    Tirocinio tirocinio = (Tirocinio) ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocinio(tid);
+    Tirocinio tirocinio = (Tirocinio) dataLayer(request).getTirocinioDAO().getTirocinio(tid);
     
     
     //Ora il tirocinio viene messo attivo e inizia davvero.
     tirocinio.setPathDocumento(uploadFormativo(request, response));
     tirocinio.setAttivo(true);
     
-    ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().storeTirocinio(tirocinio);
+    dataLayer(request).getTirocinioDAO().storeTirocinio(tirocinio);
     
     
     //Ora le candidature per quell'offerta andranno cancellate, e con esse disattivata l'offerta.
     offerta.setAttiva(false);
-    List<Candidatura> toDelete = ((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(offerta);
+    List<Candidatura> toDelete = dataLayer(request).getCandidaturaDAO().getCandidature(offerta);
     
     for (Candidatura c : toDelete ){
         
-        ((TirocinioDataLayer) request.getAttribute("datalayer")).getCandidaturaDAO().deleteCandidatura(c);    
+        dataLayer(request).getCandidaturaDAO().deleteCandidatura(c);    
     }
     
     //Qui andrebbero mandate le mail

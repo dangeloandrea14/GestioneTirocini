@@ -5,7 +5,6 @@
  */
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -32,7 +31,7 @@ public class DettagliAzienda extends TirociniBaseController {
 
         Azienda azienda;
 
-        azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
+        azienda = dataLayer(request).getAziendaDAO().getAzienda(SecurityLayer.checkNumeric(p));
 
         if (azienda == null) {
             notFound(request, response);
@@ -41,7 +40,7 @@ public class DettagliAzienda extends TirociniBaseController {
 
         request.setAttribute("page_title", "Dettagli " + azienda.getNome());
         request.setAttribute("aziendap", azienda);
-        request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferte(azienda));
+        request.setAttribute("offerte", dataLayer(request).getOffertaDAO().getOfferte(azienda));
 
         TemplateResult res = new TemplateResult(getServletContext());
 

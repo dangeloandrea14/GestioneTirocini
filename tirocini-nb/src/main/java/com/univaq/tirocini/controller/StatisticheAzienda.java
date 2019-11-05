@@ -29,7 +29,7 @@ public class StatisticheAzienda extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
         
-       TirocinioDataLayer datalayer = ((TirocinioDataLayer) request.getAttribute("datalayer"));
+       TirocinioDataLayer datalayer = dataLayer(request);
        //Vediamo quale azienda è stata scelta
        //Non inseriamo validazione perché, se l'azienda viene cambiata... non succede nulla. 
        //Vorrebbe dire che l'admin ha cambiato il parametro, ma... ok?

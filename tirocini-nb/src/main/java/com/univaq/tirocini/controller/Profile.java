@@ -1,7 +1,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.UserObject;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -29,10 +28,10 @@ public class Profile extends TirociniBaseController {
             try {        
                 if(request.getSession().getAttribute("type").equals("studente")){
 
-                request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
-                request.setAttribute("candidature",((TirocinioDataLayer)request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
+                request.setAttribute("tirocini", dataLayer(request).getTirocinioDAO().getTirociniAttivi(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
+                request.setAttribute("candidature",dataLayer(request).getCandidaturaDAO().getCandidature(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()));
                
-                List<Tirocinio> tirociniinattivi = ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniInattivi(((UserObject)((UserRole)request.getSession().getAttribute("userRole")).getUserObject()).getStudente());
+                List<Tirocinio> tirociniinattivi = dataLayer(request).getTirocinioDAO().getTirociniInattivi(((UserObject)((UserRole)request.getSession().getAttribute("userRole")).getUserObject()).getStudente());
                 List<Tirocinio> tirocinic = new ArrayList<>();
                 
                 for(Tirocinio t : tirociniinattivi){
@@ -46,8 +45,8 @@ public class Profile extends TirociniBaseController {
                 }
                 
                 else if(request.getSession().getAttribute("type").equals("azienda")){
-                request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
-                request.setAttribute("tirociniazienda", ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
+                request.setAttribute("offerte", dataLayer(request).getOffertaDAO().getOfferteAttive(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
+                request.setAttribute("tirociniazienda", dataLayer(request).getTirocinioDAO().getTirociniAttivi(((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda()));
                 request.setAttribute("conv", ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda().isConvenzionata());
                 }
                              

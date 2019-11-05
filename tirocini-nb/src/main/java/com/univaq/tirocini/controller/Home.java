@@ -5,7 +5,6 @@
  */
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
@@ -25,8 +24,8 @@ public class Home extends TirociniBaseController {
             throws IOException, ServletException, TemplateManagerException, DataException {
         
         request.setAttribute("page_title", "Home");
-        request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
-        request.setAttribute("aziende", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getPaginaAziendeConvenzionate(1, 3));
+        request.setAttribute("offerte", dataLayer(request).getOffertaDAO().getOfferteAttive());
+        request.setAttribute("aziende", dataLayer(request).getAziendaDAO().getPaginaAziendeConvenzionate(1, 3));
 
         TemplateResult res = new TemplateResult(getServletContext());
 

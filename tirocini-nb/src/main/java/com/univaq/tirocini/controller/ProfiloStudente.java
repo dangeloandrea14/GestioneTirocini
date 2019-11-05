@@ -5,7 +5,6 @@
  */
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -37,10 +36,10 @@ public class ProfiloStudente extends TirociniBaseController {
 
        
         
-        Studente studente = (Studente) ((TirocinioDataLayer)request.getAttribute("datalayer")).getStudenteDAO().getStudente(id);
-        request.setAttribute("tirocini", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniAttivi(studente));
+        Studente studente = (Studente) dataLayer(request).getStudenteDAO().getStudente(id);
+        request.setAttribute("tirocini", dataLayer(request).getTirocinioDAO().getTirociniAttivi(studente));
         request.setAttribute("studentep", studente);
-        request.setAttribute("tirociniconclusi", ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirociniInattivi(studente));
+        request.setAttribute("tirociniconclusi", dataLayer(request).getTirocinioDAO().getTirociniInattivi(studente));
         request.setAttribute("page_title", studente.getNome()+studente.getCognome());
      
          TemplateResult res = new TemplateResult(getServletContext());       

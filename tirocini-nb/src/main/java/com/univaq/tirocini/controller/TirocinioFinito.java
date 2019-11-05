@@ -5,7 +5,6 @@
  */
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Tirocinio;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
@@ -45,11 +44,11 @@ public class TirocinioFinito extends TirociniBaseController {
     }
     sess.removeAttribute("tirocinioid");
     
-    Tirocinio tirocinio = (Tirocinio) ((TirocinioDataLayer)request.getAttribute("datalayer")).getTirocinioDAO().getTirocinio(tid);
+    Tirocinio tirocinio = (Tirocinio) dataLayer(request).getTirocinioDAO().getTirocinio(tid);
     
     tirocinio.setAttivo(false);
     
-    ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().storeTirocinio(tirocinio);
+    dataLayer(request).getTirocinioDAO().storeTirocinio(tirocinio);
        
     //Invia mail a studente con link per valutazione.
     

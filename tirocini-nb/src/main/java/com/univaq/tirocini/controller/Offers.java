@@ -6,7 +6,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.OffertaDAO;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.data.DataException;
 import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
@@ -26,7 +25,7 @@ public class Offers extends TirociniBaseController {
     protected void action_default(HttpServletRequest request, HttpServletResponse response)
             throws IOException, ServletException, TemplateManagerException, DataException {
         
-        OffertaDAO offertaDAO = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO();
+        OffertaDAO offertaDAO = dataLayer(request).getOffertaDAO();
         
         int numeroAttive = offertaDAO.getOfferteAttiveCount();
         // Se divisibile per 20 usiamo valore esatto, altrimenti aggiungiamo una pagina

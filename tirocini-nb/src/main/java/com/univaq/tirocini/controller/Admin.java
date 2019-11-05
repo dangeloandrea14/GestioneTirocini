@@ -2,7 +2,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.data.DAO.AziendaDAO;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,10 +17,8 @@ public class Admin extends TirociniBaseController {
         
         request.setAttribute("page_title", "Admin panel");
        
-       // request.setAttribute("offerte", ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO().getOfferteAttive());
-        request.setAttribute("aziende", ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendeNonConvenzionate());
-        // OffertaDAO offertaDAO = ((TirocinioDataLayer) request.getAttribute("datalayer")).getOffertaDAO();
-        AziendaDAO aziendaDAO=((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO(); 
+        request.setAttribute("aziende", dataLayer(request).getAziendaDAO().getAziendeNonConvenzionate());
+        AziendaDAO aziendaDAO=dataLayer(request).getAziendaDAO(); 
         int numeroAttive= aziendaDAO.getAziendeConvenzionateCount();
         
         request.setAttribute("numOfferte", numeroAttive);

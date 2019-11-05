@@ -42,8 +42,8 @@ public class CreazioneTirocinio extends TirociniBaseController {
     int uid = SecurityLayer.checkNumeric(param);
     int oid = SecurityLayer.checkNumeric(param2);
     
-    Studente studente = (Studente) ((TirocinioDataLayer)request.getAttribute("datalayer")).getStudenteDAO().getStudente(uid);
-    Offerta offerta = (Offerta) ((TirocinioDataLayer)request.getAttribute("datalayer")).getOffertaDAO().getOfferta(oid);
+    Studente studente = (Studente) dataLayer(request).getStudenteDAO().getStudente(uid);
+    Offerta offerta = (Offerta) dataLayer(request).getOffertaDAO().getOfferta(oid);
     Azienda azienda = offerta.getAzienda();
     
     if(azienda.getKey() != ((UserObject)((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getAzienda().getKey()){
@@ -52,7 +52,7 @@ public class CreazioneTirocinio extends TirociniBaseController {
     }
     
     //Controlliamo che l'utente non abbia fatto casini.
-    List<Candidatura> liststud = ((TirocinioDataLayer)request.getAttribute("datalayer")).getCandidaturaDAO().getCandidature(offerta);
+    List<Candidatura> liststud = dataLayer(request).getCandidaturaDAO().getCandidature(offerta);
     Boolean ok = false;
     
     for (Candidatura c : liststud) {

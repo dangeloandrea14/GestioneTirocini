@@ -5,7 +5,6 @@
  */
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.data.model.Tirocinio;
@@ -65,7 +64,7 @@ public class ConclusioneTirocinio extends TirociniBaseController {
 
         int tid = SecurityLayer.checkNumeric(param);
 
-        Tirocinio tirocinio = (Tirocinio) ((TirocinioDataLayer) request.getAttribute("datalayer")).getTirocinioDAO().getTirocinio(tid);
+        Tirocinio tirocinio = (Tirocinio) dataLayer(request).getTirocinioDAO().getTirocinio(tid);
 
         HttpSession sess = request.getSession();
         sess.setAttribute("tirocinioid", tid);
@@ -82,7 +81,7 @@ public class ConclusioneTirocinio extends TirociniBaseController {
         String param = request.getParameter("tirocinio");
         int tid = SecurityLayer.checkNumeric(param);
 
-        Tirocinio tirocinio = (dataLayer(request)).getTirocinioDAO().getTirocinio(tid);
+        Tirocinio tirocinio = dataLayer(request).getTirocinioDAO().getTirocinio(tid);
         Azienda azienda = tirocinio.getAzienda();
         Studente studente = tirocinio.getStudente();
 

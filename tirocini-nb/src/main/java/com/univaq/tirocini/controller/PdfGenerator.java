@@ -5,7 +5,6 @@
  */
 package com.univaq.tirocini.controller;
 
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.framework.result.StreamResult;
 import com.univaq.tirocini.framework.result.TemplateResult;
@@ -47,7 +46,7 @@ public class PdfGenerator extends TirociniBaseController {
 
             String param = request.getParameter("a");
             int id = Integer.parseInt(param);
-            Azienda azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(id);
+            Azienda azienda = dataLayer(request).getAziendaDAO().getAzienda(id);
 
             File toDownload = prepareConvenzione(azienda);
 
@@ -64,7 +63,7 @@ public class PdfGenerator extends TirociniBaseController {
             int idAzienda = Integer.parseInt(aId);
             int idStudente = Integer.parseInt(sId);
 
-            Azienda azienda = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAzienda(idAzienda);
+            Azienda azienda = dataLayer(request).getAziendaDAO().getAzienda(idAzienda);
 
             Map<String, String> filling = new HashMap<>();
 

@@ -6,7 +6,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.permissions.Roles;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.model.Azienda;
 import com.univaq.tirocini.data.model.Studente;
 import com.univaq.tirocini.framework.data.DataException;
@@ -64,7 +63,7 @@ public class Login extends TirociniBaseController {
         Azienda a = null;
 
         //provo a caricare dagli studenti
-        s = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenteFromEmail(username);
+        s = dataLayer(request).getStudenteDAO().getStudenteFromEmail(username);
 
         if (s != null) { //trovato studenti
             userid = s.getKey();
@@ -77,7 +76,7 @@ public class Login extends TirociniBaseController {
         } else {
 
             //se non trovo uno studente provo con un'azienda
-            a = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail(username);
+            a = dataLayer(request).getAziendaDAO().getAziendaFromEmail(username);
 
             if (a == null) { //se ancora null, login invalido
                 login_failed(request, response);

@@ -1,7 +1,6 @@
 package com.univaq.tirocini.controller;
 
 import com.univaq.tirocini.controller.email.MailTirocini;
-import com.univaq.tirocini.data.DAO.TirocinioDataLayer;
 import com.univaq.tirocini.data.impl.AziendaImpl;
 import com.univaq.tirocini.data.impl.StudenteImpl;
 import com.univaq.tirocini.data.model.Azienda;
@@ -93,7 +92,7 @@ public class Registration extends TirociniBaseController {
         }
 
         //Controlliamo che non ci sia una azienda con quella mail.
-        Azienda aziendadup = ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().getAziendaFromEmail(request.getParameter("email"));
+        Azienda aziendadup = dataLayer(request).getAziendaDAO().getAziendaFromEmail(request.getParameter("email"));
 
         if ((aziendadup != null)) {
 
@@ -102,7 +101,7 @@ public class Registration extends TirociniBaseController {
 
         }
 
-        ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().storeStudente(s);
+        dataLayer(request).getStudenteDAO().storeStudente(s);
 
         //Mandiamo la mail al nuovo studente            
         MailTirocini.send(s,
@@ -131,7 +130,7 @@ public class Registration extends TirociniBaseController {
         a.setPassword(Password.hash(a.getPassword()));
 
         //Controlliamo che non ci sia uno studente con quella mail.
-        Studente studentedup = ((TirocinioDataLayer) request.getAttribute("datalayer")).getStudenteDAO().getStudenteFromEmail(request.getParameter("emailResponsabile"));
+        Studente studentedup = dataLayer(request).getStudenteDAO().getStudenteFromEmail(request.getParameter("emailResponsabile"));
 
         if ((studentedup != null)) {
 
@@ -140,7 +139,7 @@ public class Registration extends TirociniBaseController {
 
         }
 
-        ((TirocinioDataLayer) request.getAttribute("datalayer")).getAziendaDAO().storeAzienda(a);
+        dataLayer(request).getAziendaDAO().storeAzienda(a);
 
         //Mandiamo la mail alla nuova azienda           
         MailTirocini.send(a,
