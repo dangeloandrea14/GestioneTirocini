@@ -289,4 +289,28 @@ public class TemplateResult {
             throw new TemplateManagerException("Template error: " + ex.getMessage(), ex);
         }
     }
+    
+    //questa versione di activate pu� essere usata per generare output non diretto verso il browser, ad esempio
+    //su un file
+    //this activate method can be used to generate output and save it to a file
+    public void activate(String tplname, HttpServletRequest request, OutputStream out) throws TemplateManagerException {
+        Map datamodel = getRequestDataModel(request);
+        
+        //per accedere all'url richiesto dai template (può tornare utile?)
+        datamodel.put("url", request.getRequestURL());
+
+        
+        //impostiamo l'encoding, se specificato dall'utente, o usiamo il default
+        String encoding = (String) datamodel.get("encoding");
+        if (encoding == null) {
+            encoding = cfg.getOutputEncoding();
+        }
+        try {
+            //notare la gestione dell'encoding, che viene invece eseguita implicitamente tramite il setContentType nel contesto servlet
+            //note how we set the output encoding, which is usually handled via setContentType when the output is sent to a browser
+            process(tplname, datamodel, new OutputStreamWriter(out, encoding));
+        } catch (UnsupportedEncodingException ex) {
+            throw new TemplateManagerException("Template error: " + ex.getMessage(), ex);
+        }
+    }
 }

@@ -30,7 +30,7 @@ public abstract class TirociniBaseController extends HttpServlet {
 
     @Resource(name = "jdbc/webdb2")
     private DataSource ds;
-    
+
     private static UserPermissions publicPermissions = new PublicPermissions();
 
     protected abstract void action_default(HttpServletRequest request, HttpServletResponse response)
@@ -40,7 +40,7 @@ public abstract class TirociniBaseController extends HttpServlet {
         if (request.getAttribute("exception") != null) {
             (new FailureResult(getServletContext())).activate((Exception) request.getAttribute("exception"), request, response);
         } else {
-            (new FailureResult(getServletContext())).activate((String) request.getAttribute("message"), (String) request.getAttribute("details"),request, response);
+            (new FailureResult(getServletContext())).activate((String) request.getAttribute("message"), (String) request.getAttribute("details"), request, response);
         }
     }
 
@@ -151,6 +151,7 @@ public abstract class TirociniBaseController extends HttpServlet {
     protected TirocinioDataLayer dataLayer(HttpServletRequest request) {
         return (TirocinioDataLayer) request.getAttribute("datalayer");
     }
+    
     /**
      * Controlla che l'utente possa visualizzare la pagine
      *

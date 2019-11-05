@@ -9,7 +9,8 @@ import com.univaq.tirocini.framework.result.TemplateManagerException;
 import com.univaq.tirocini.framework.result.TemplateResult;
 import java.io.ByteArrayOutputStream;
 import java.io.UnsupportedEncodingException;
-import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -19,7 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 public class TemplateEmail {
 
     public static String CreateEmailFromTemplate(
-            HttpServletRequest request, String template, Map datamodel) throws TemplateManagerException, UnsupportedEncodingException {
+            HttpServletRequest request, String template) {
 
         // OutputStram containing the email body html
         ByteArrayOutputStream htmlEmailBodyStream = new ByteArrayOutputStream();
@@ -31,11 +32,16 @@ public class TemplateEmail {
         // exceptions from TemplateManager should be handled here to avoid them
         // being handled as if they were exception in the processing of the
         // web page template
+        String emailBody = null;
         TemplateResult res = new TemplateResult(request.getServletContext());
-        res.activate(template, datamodel, htmlEmailBodyStream);
+               
         
-        String emailBody = htmlEmailBodyStream.toString("UTF-8");
-        //String emailBody = htmlEmailBodyStream.toString();
+        try {
+            res.activate(template, request, htmlEmailBodyStream);
+            emailBody = htmlEmailBodyStream.toString("UTF-8");
+        } catch (TemplateManagerException | UnsupportedEncodingException ex) {        
+            Logger.getLogger(TemplateEmail.class.getName()).log(Level.SEVERE, null, ex);
+        }
         
         return emailBody;
     }
