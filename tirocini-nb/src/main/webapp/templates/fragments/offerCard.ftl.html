@@ -3,26 +3,24 @@
         <a class="text-dark"
            href="DettagliAzienda?a=${offerta.azienda.key}">
             <strong>        
-            ${offerta.azienda.nome}
+                ${offerta.azienda.nome}
             </strong>
-            </a> 
+        </a> 
     </div>
-     <div class="card-body">
+    <div class="card-body">
         <p class="card-text text-secondary truncate-overflow">${offerta.obiettivi}</p>
         <div class="card-text row m-0 p-0" >
             <div class="col-lg col-md col-sm text-secondary m-0 p-0">
-                     <i class="fas fa-clock"></i>
-                            ${offerta.orari}
+                <i class="fas fa-clock"></i>
+                ${offerta.orari}
             </div>
-                <div class="col-lg col-md col-sm text-success  m-0 p-0">
-                     <i class="fa fa-map-marker " aria-hidden="true"></i>
-                                     ${offerta.luogo}
-                </div>
+            <div class="col-lg col-md col-sm text-success  m-0 p-0">
+                <i class="fa fa-map-marker " aria-hidden="true"></i>
+                ${offerta.luogo}
             </div>
+        </div>
     </div>
-    <div class="card-footer p-1">
+    <a class="text-secondary cardtext btn btn-light btn-block details card-footer c-det"
+       href="DettagliOfferta?o=${offerta.key}">Mostra dettagli</a>
 
-        <a class="text-secondary cardtext btn btn-light btn-block details c-det"
-           href="DettagliOfferta?o=${offerta.key}">Mostra dettagli</a>
-    </div>
 </div>

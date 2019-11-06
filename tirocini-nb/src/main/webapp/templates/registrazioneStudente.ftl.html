@@ -1,111 +1,112 @@
-  <div class="container  w-100 h-100 p-0 pt-lg-5">
-     <#include "/fragments/reg_logo.ftl.html">
-  <form class=" m-auto p-lg-5 w-100  bg-white" style="border-radius: 12px;" method="POST">
-      <div class="conteiner p-4 p-lg-5 m-0 mx-lg-4 mb-4">
+<div class="container  w-100 h-100 p-0 pt-lg-5">
+    <#include "/fragments/reg_logo.ftl.html">
+    <form class=" m-auto p-lg-5 w-100  bg-white" style="border-radius: 12px;" method="POST">
+        <div class="conteiner p-4 p-lg-5 m-0 mx-lg-4 mb-4">
 
 
-      
-        <h2 class="mb-1 text-center text-primary">Credenziali di accesso:</h2>
-        <label class="mb-4 d-block text-center">Inserisci i dati necessari ai tuoi prossimi accessi nel sistema.</label>
-       
-        
-          <div class="form-group mb-5">
-              <label for="inputmail">Indirizzo Email:</label>
-              <input name="email"  type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email"
-                     required="required">
-          </div>
 
-      
-        <div class="form-group mb-5" >
-          <label>Password:</label>
-          <input name="password" placeholder="Password..." class="form-control" type="password" required="required">
+            <h2 class="mb-1 text-center text-primary">Credenziali di accesso:</h2>
+            <label class="mb-4 d-block text-center">Inserisci i dati necessari ai tuoi prossimi accessi nel sistema.</label>
+
+
+            <div class="form-group mb-5">
+                <label for="inputmail">Indirizzo Email:</label>
+                <input name="email"  type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email"
+                       required="required">
+            </div>
+
+
+            <div class="form-group mb-5" >
+                <label>Password:</label>
+                <input name="password" placeholder="Password..." class="form-control" type="password" required="required">
+            </div>
+
+
+            <hr class="mt-3 mb-5 w-50 bg-dark shadow">
+
+
+
+
+            <h2 class="mb-1 text-center text-primary">Anagrafica:</h2>
+            <label class="mb-4 d-block text-center">Inserisci le tue informazioni personali.</label>
+            <div class="form-group mb-5">
+                <label>Nome:</label>
+                <input name="nome" type="text" placeholder="Inserisci il tuo Nome..." class="form-control" required="required">
+            </div>
+            <div class="form-group mb-5">
+                <label>Cognome:</label>
+                <input name="cognome" type="text" placeholder="Inserisci il tuo Cognome..." class="form-control" required="required">
+            </div>
+            <div class="form-group mb-5">
+                <label>Data di nascita:</label>
+                <input name="dataNascita" type="date" class="form-control" min="1900-01-01" max="2020-12-31" required="required" />
+            </div>
+            <div class="form-group mb-5">
+                <label>Luogo di nascita:</label>
+                <input name="luogoNascita"  maxlength="15" placeholder="Inserisci il tuo Luogo di nascita..." class="form-control" required="required">
+            </div>
+            <div class="form-group mb-5">
+                <label>Provincia di nascita:</label>
+                <input name="provinciaNascita" maxlength="3" placeholder="Inserisci la tua Provincia di nascita..." class="form-control" required="required">
+            </div>
+            <div class="form-group mb-5">
+                <label>Codice Fiscale:</label>
+                <input name="CF" maxlength="16" placeholder="Inserisci Codice Fiscale..." class="form-control" required="required">
+
+            </div>
+            <div class="form-group mb-5">
+                <label>Residenza:</label>
+                <input name="residenza" placeholder="Inserisci la tua Residenza..." class="form-control" required="required">
+            </div>
+            <div class="form-group mb-5">
+                <label>Provincia di residenza:</label>
+                <input name="provinciaResidenza" maxlength="3" placeholder="Inserisci la tua Provincia di residenza..." class="form-control" required="required">
+            </div>
+            <div class="form-group mb-5">
+                <label>Numero di telefono:</label>
+                <input name="telefono" type="tel" maxlength="12" placeholder="Inserisci il tuo numero di telefono" class="form-control" required="required">
+            </div>
+
+            <div class="form-group row mb-5">
+                <div class="ml-3">Sei portatore di handicap?</div>
+                <div class="ml-3 custom-control custom-checkbox">
+                    <input name="handicap" type="checkbox" class="custom-control-input" id="customCheck1">
+                    <label class="custom-control-label" for="customCheck1"></label>
+                </div>
+            </div>
+
+
+            <hr class="mt-3 mb-5 w-50 bg-dark shadow">
+
+
+            <h2 class="mb-1 text-center text-primary">Dettagli studio:</h2>
+            <label class="mb-4 d-block text-center">Inserisci le informazioni relative al tuo percorso di studi.</label>
+            <div class="form-group  mb-5">
+                <label>Diploma:</label>
+                <input name="diploma" type="text" placeholder="Inserisci il tuo diploma" class="form-control" required="required">
+            </div>
+            <div class="form-group mb-5">
+                <label>Corso di Laurea:</label>
+                <input name="laurea" type="text" placeholder="Inserisci il tuo Corso di Laurea" class="form-control"
+                       required="required">
+            </div>
+            <div class="form-group mb-5">
+                <label>Specializzazione:</label>
+                <input name="specializzazione" type="text" placeholder="Inserisci la tua Specializzazione" class="form-control">
+            </div>
+            <div class="form-group mb-5">
+                <label>Numero cfu da acquisire: </label>
+                <input type="number" name="CFU" min="0" max="160" class="form-control" required="required" />
+            </div>
+
+            <button class="btn btn-primary float-right mt-2  " type="submit">
+                <b>             
+                    Registrati
+                </b>
+            </button>
+
         </div>
-     
-
-        <hr class="mt-3 mb-5 w-50 bg-dark shadow">
-
-
-
-
-        <h2 class="mb-1 text-center text-primary">Anagrafica:</h2>
-        <label class="mb-4 d-block text-center">Inserisci le tue informazioni personali.</label>
-        <div class="form-group mb-5">
-          <label>Nome:</label>
-          <input name="nome" type="text" placeholder="Inserisci il tuo Nome..." class="form-control" required="required">
-      </div>
-      <div class="form-group mb-5">
-          <label>Cognome:</label>
-          <input name="cognome" type="text" placeholder="Inserisci il tuo Cognome..." class="form-control" required="required">
-      </div>
-      <div class="form-group mb-5">
-          <label>Data di nascita:</label>
-          <input name="dataNascita" type="date" class="form-control" min="1900-01-01" max="2020-12-31" required="required" />
-      </div>
-      <div class="form-group mb-5">
-          <label>Luogo di nascita:</label>
-          <input name="luogoNascita"  maxlength="15" placeholder="Inserisci il tuo Luogo di nascita..." class="form-control" required="required">
-      </div>
-        <div class="form-group mb-5">
-          <label>Provincia di nascita:</label>
-          <input name="provinciaNascita" maxlength="3" placeholder="Inserisci la tua Provincia di nascita..." class="form-control" required="required">
-      </div>
-      <div class="form-group mb-5">
-          <label>Codice Fiscale:</label>
-          <input name="CF" maxlength="16" placeholder="Inserisci Codice Fiscale..." class="form-control" required="required">
-
-      </div>
-      <div class="form-group mb-5">
-          <label>Residenza:</label>
-          <input name="residenza" placeholder="Inserisci la tua Residenza..." class="form-control" required="required">
-      </div>
-        <div class="form-group mb-5">
-          <label>Provincia di residenza:</label>
-          <input name="provinciaResidenza" maxlength="3" placeholder="Inserisci la tua Provincia di residenza..." class="form-control" required="required">
-      </div>
-      <div class="form-group mb-5">
-          <label>Numero di telefono:</label>
-          <input name="telefono" type="tel" maxlength="12" placeholder="Inserisci il tuo numero di telefono" class="form-control" required="required">
-      </div>
-
-      <div class="form-group row mb-5">
-          <div class="ml-3">Sei portatore di handicap?</div>
-          <div class="ml-3 custom-control custom-checkbox">
-              <input name="handicap" type="checkbox" class="custom-control-input" id="customCheck1">
-              <label class="custom-control-label" for="customCheck1"></label>
-          </div>
-      </div>
-        
-      
-        <hr class="mt-3 mb-5 w-50 bg-dark shadow">
- 
-     
-        <h2 class="mb-1 text-center text-primary">Dettagli studio:</h2>
-        <label class="mb-4 d-block text-center">Inserisci le informazioni relative al tuo percorso di studi.</label>
-          <div class="form-group  mb-5">
-            <label>Diploma:</label>
-            <input name="diploma" type="text" placeholder="Inserisci il tuo diploma" class="form-control" required="required">
-        </div>
-        <div class="form-group mb-5">
-            <label>Corso di Laurea:</label>
-            <input name="laurea" type="text" placeholder="Inserisci il tuo Corso di Laurea" class="form-control"
-                   required="required">
-        </div>
-        <div class="form-group mb-5">
-            <label>Specializzazione:</label>
-            <input name="specializzazione" type="text" placeholder="Inserisci la tua Specializzazione" class="form-control">
-        </div>
-        <div class="form-group mb-5">
-            <label>Numero cfu da acquisire: </label>
-            <input type="number" name="CFU" min="0" max="160" class="form-control" required="required" />
-        </div>
-
-    
-      
-        <button class="btn btn-primary float-right" type="submit">Submit form</button>
-     
-      
-      </div>
-  </form>
+    </form>
 
 
 </div>
