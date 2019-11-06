@@ -52,7 +52,7 @@ public class ValutazioneCompletata extends TirociniBaseController {
             Studente studente = dataLayer(request).getStudenteDAO().getStudente(Integer.parseInt(p2));
 
             //Controlliamo che l'utente non abbia fatto casini
-            if (!studente.equals(((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente())) {
+            if (studente.getKey() != (((UserObject) ((UserRole) request.getSession().getAttribute("userRole")).getUserObject()).getStudente()).getKey()) {
                 request.setAttribute("message", "Utente errato");
                 action_error(request, response);
             }
@@ -107,6 +107,7 @@ public class ValutazioneCompletata extends TirociniBaseController {
 
             request.setAttribute("media", media);
             request.setAttribute("message", "Valutazione effettuata");
+            request.setAttribute("color","green");
             TemplateResult res = new TemplateResult(getServletContext());
 
             res.activate("home.ftl.html", request, response);
